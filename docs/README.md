@@ -1,2 +1,2 @@
-# Planejamento Experimental I
-Material da disciplina Planejamento Experimental I
+# Planejamento de Experimentos I
+Material da disciplina Planejamento de Experimentos I
