@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>PLANEJAMENTO DE EXPERIMENTOS I STA13827</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# PLANEJAMENTO DE EXPERIMENTOS I STA13827
+## Introdução
+### Nátaly A. Jiménez Monroy
+### LECON/DEST - UFES
+### Vitória. ES - 04/11/2021
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+class: animated, fadeIn
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+
+---
+class: inverse, hide-logo, center, middle, animated, bounceInDown
+
+# Objetivos de um Experimento
+
+
+---
+class: animated, slideInRight
+
+### Objetivos
+
+  - Determinar quais variáveis influenciam mais na resposta `\(Y\)`.
+  
+  - Determinar o nível de `\(X=(X_1,...,X_p)\)` que conduz ao `\(Y\)` mais próximo do valor desejado.
+  
+  - Determinar o nível de `\(X=(X_1,...,X_p)\)` que minimiza a variabilidade de `\(Y\)`.
+  
+  - Determinar o nível de `\(X=(X_1,...,X_p)\)` que minimiza os efeitos das variáveis não controladas `\(Z=(Z_1,...,Z_q)\)`.
+
+---
+
+class: inverse, hide-logo, center, middle, animated, bounceInDown
+
+# Algumas aplicações
+
+
+---
+class: animated, slideInRight
+
+### Aplicações da técnica do delineamento de experimentos
+
+* **Desenvolvimento de processos**
+  - Melhoramento da produtividade do processo.
+  
+  - Redução da variabilidade (resultados mais próximos do padrão/meta requerido).
+  
+  - Redução do tempo de desenvolvimento.
+  
+  - Redução geral de custos.
+  
+
+--
+  
+
+* **Desenvolvimento de produtos**
+  - Avaliação e comparação de configurações delineadas básicas (padrão).
+  
+  - Avaliação de materiais alternativos.
+  
+  - Seleção e delineamento de parâmetros de modo a tornar produtos mais robustos.
+  
+  - Determinação de parâmetros chaves que têm impacto na performance de produtos.
+  
+---
+
+class: inverse, hide-logo, center, middle, animated, bounceInDown
+
+# Fases do Planejamento de Experimentos
+
+
+---
+class: animated, slideInRight
+
+### Fases
+
+  - Reconhecimento e declaração do problema.
+  
+  - Escolha dos fatores e níveis.
+  
+  - Seleção das variáveis resposta (depende do objetivo do estudo).
+  
+  - Escolha do delineamento experimental (depende do objetivo do estudo, natureza do material experimental, etc).
+  
+  - Execução do experimento.
+  
+  - Análise dos dados.
+  
+  - Conclusões e recomendações.
+  
+---
+
+class: inverse, hide-logo, center, middle, animated, bounceInDown
+
+# Definições Básicas
+
+
+---
+
+### Definições - I
+
+* **Unidade experimental**: É a unidade &lt;span style="color:grey"&gt;física&lt;/span&gt; ou &lt;span style="color:grey"&gt;biológica&lt;/span&gt; para conduzir o experimento, também denominada de &lt;ins&gt; parcela &lt;/ins&gt;.
+
+--
+
+* **Variável (fator)**: É a condição ou característica medida ou observada no experimento.
+
+--
+
+* **Tratamento**: É o elemento que está em teste no experimento. Exemplo: um método de ensino, um fertilizante, uma droga terapêutica, etc.
+  - &lt;ins&gt;Qualitativos&lt;/ins&gt; Aqueles que possuem naturezas intrinsecamente diferentes. Ex.: comparar dois tipos de drogas terapêuticas para dor de cabeça (Paracetamol vs Dipirona Sódica), três tipos de fertilizantes (diferentes marcas), etc.
+  - &lt;ins&gt;Quantitativos&lt;/ins&gt; Aqueles que se distinguem pela quantidade (dose) que está sendo utilizada no experimento.
+
+--
+
+* **Grupo controle**: Quando se deseja estudar o efeito de um ou mais tratamentos em relação à situação sem nenhum tratamento, o grupo controle é o grupo de unidades experimentais que não recebe tratamento.
+
+--
+
+* **Repetição ou réplica**: São as unidades experimentais de um mesmo grupo. O objetivo da repetição é aumentar a confiabilidade da análise, pois ao comparar dois grupos com várias réplicas cada ao invés de comparar dois grupos com apenas um unidade experimental cada, iremos eliminar o efeito de outras variáveis indesejadas.
+
+---
+
+### Definições - II
+
+* **Casualização ou randomização**: É o processo de designar os tratamentos às unidades experimentais por processo aleatório. O objetivo é criar grupos o mais homogêneos possíveis.
+
+--
+
+* **Experimentação cega**: É a experimentação em que o pesquisador executa as medições sem saber a que grupo pertence a unidade experimental. O objetivo desta estratégia é evitar qualquer tendência (vício por parte do pesquisador).
+
+--
+
+* **Experimentação duplamente cega**: Ocorre quando as unidades experimentais são pessoas, neste caso a estratégia para eliminar vícios no experimento seria não informar ao pesquisador e nem à pessoa participante do experimento a qual grupo pertence.
+
+--
+
+* **Experimentação triplamente cega**: Nesta situação nem o pesquisador, nem a pessoa  participante do experimento e nem a pessoa que irá analisar os dados sabem a qual grupo pertence cada unidade experimental.
+
+---
+
+.center[### Em Resumo...]
+
+  - A &lt;ins&gt;Aleatorização&lt;/ins&gt; torna os testes estatísticos válidos.&lt;br&gt;&lt;/br&gt;
+  - A &lt;ins&gt;Repetição&lt;/ins&gt; faz os testes estatísticos possíveis.&lt;br&gt;&lt;/br&gt;
+  - O &lt;ins&gt;controle&lt;/ins&gt; local faz o experimento mais eficiente.
+
+
+--
+&lt;br&gt;
+  &gt; **Elementos de um delineamento experimental**
+- A unidade experimental. &lt;br&gt;&lt;/br&gt;
+- A variável em análise e a forma como será medida.&lt;br&gt;&lt;/br&gt;
+- Os tratamentos em comparação. &lt;br&gt;&lt;/br&gt;
+- A forma como os tratamentos serão designados àsunidades experimentais. &lt;br&gt;&lt;/br&gt;
+- O número de unidades experimentais em cada grupo.
+
+---
+class: inverse, hide-logo, center, middle, animated, bounceInDown
+
+# Delineamento estatístico de experimento
+
+
+---
+class: animated, slideInRight
+
+### Delineamento Estatístico do Experimento - I
+
+Refere-se ao processo de planejamento de um experimento de modo que possam ser obtidos e analisados dados apropriados, resultando em conclusões válidas e objetivas.
+
+* **Delineamento Interiamente ao Acaso**: O pesquisador dispõe de unidades similares para conduzir seu experimento, deve designar os tratamentos às unidades por puro e simples sorteio, sem qualquer restrição.
+
+&gt;&lt;span style="color:red"&gt;Exemplo&lt;/span&gt;: Para comparar três antiinflamatórios (A, B e C) sobre a inflamação produzida em ratos, um pesquisador dispunha de 12 ratos similares. Deste modo, sorteou e aplicou o antiflamatório A para quatro ratos, o antiflamatório B para quatro ratos e o aplicou o antiflamatório C para os quatro ratos restantes.
+
+&gt;&lt;span style="color:red"&gt;Observação&lt;/span&gt;: Do ponto de vista estatístico é recomendável que todos os tratamentos tenham o mesmo número de réplicas. Se não for possível, é recomendável que o grupo controle tenha o &lt;ins&gt;menor número de réplicas&lt;/ins&gt;.
+
+---
+
+---
+class: animated, slideInRight
+
+### Delineamento Estatístico de Experimento - II
+
+* **Delineamento em Blocos Casualizados (Aleatorizados)**: O pesquisador dispõe de pequenos grupos de unidades similares, mas nenhum deles com número suficiente de unidades para fazer um experimento inteiramente ao acaso. Isto é feito designando os tratamentos de modo aleatório dentro de cada bloco.
+
+&gt;&lt;span style="color:red"&gt;Exemplo&lt;/span&gt;: Para comparar o efeito de quatro rações (A, B, C e D) sobre o peso de animais, o pesquisador dispunha de 12 animais com pesos diferentes. Para sortear as rações o pesquisador organizou os animais com pesos próximos em três blocos para depois sortear os tratamentos às unidades de cada bloco.
+
+&gt;&lt;span style="color:red"&gt;Observação&lt;/span&gt;: Note que no exemplo acima em cada bloco aparecem todos os tratamentos, neste caso o delineamento é &lt;ins&gt;balanceado&lt;/ins&gt;.
+
+--
+
+* **Delineamento em Quadrados Latinos**: Exige a construção de blocos em duas direções. Note que neste caso teremos um arranjo quadrado de `\(p\)` tratamentos, que são usualmente denotados por letras
+latinas, daí o nome quadrados latinos. Neste delineamento têm-se &lt;ins&gt;duas restrições&lt;/ins&gt; na aleatorização.
+
+---
+class: animated, slideInRight
+
+### Delineamento estatístico de experimento - III
+
+* **Delineamento Fatorial**: Utilizado quando se deseja analizar a influência de dois ou mais fatores e suas &lt;ins&gt;possíveis interações&lt;/ins&gt;. O tipo mais simples de um experimento fatorial é o `\(2 \times 2\)`, em que temos dois fatores e dois níveis.
+
+&gt;De um modo geral temos os chamados fatoriais `\(k_1,\ldots,k_q\)`, em que `\(q\)` é número de fatores e `\(k_i\)` é o número de níveis do `\(i-\)`ésimo fator.
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
