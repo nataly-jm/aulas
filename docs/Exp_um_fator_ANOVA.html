@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>PLANEJAMENTO DE EXPERIMENTOS I STA13827</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# PLANEJAMENTO DE EXPERIMENTOS I STA13827
+## Experimentos com um Fator - ANOVA
+### Nátaly A. Jiménez Monroy
+### LECON/DEST - UFES
+### Vitória. ES - 09/11/2021
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+# Análise de variância (ANOVA) - I
+
+A análise de variância consiste em decompor a variação total das observações do experimento em partes que podem ser atribuídas a causas conhecidas (tratamentos, blocos, etc) e em partes atribuídas a causas não controladas e/ou não controláveis (erro experimental ou resíduo).
+  
+  
+Em resumo:
+
+$$
+\text{Variação Total}=\textrm{Variação Controlada}+\textrm{Variação não Controlada}.
+$$
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## # Análise de variância (ANOVA) - II
+
+Assume-se que há `\(a\)` tratamentos ou diferentes níveis de um único fator a serem comparados.
+
+ | Tratamento (Níveis)  |                          Observações          |  Total          |         Média         |
+ |:--------------------:|:---------------------------------------------:|:---------------:|:---------------------:| 
+ |          1           |  `\(y_{11}\quad y_{12}\quad \cdots\quad y_{1n}\)` |  `\(y_{1\cdot}\)`   |     `\(\bar{y}_{1\cdot}\)`|
+ |          2           |  `\(y_{21}\quad y_{22}\quad \cdots\quad y_{2n}\)` |  `\(y_{2\cdot}\)`   |     `\(\bar{y}_{2\cdot}\)`|
+ |          `\(\vdots\)`    | `\(\vdots\qquad \vdots\qquad \cdots\qquad \vdots\)`|      `\(\vdots\)`  |               `\(\vdots\)`|
+ |          `\(a\)`         |  `\(y_{a1}\quad y_{a2}\quad \cdots\quad y_{an}\)` |  `\(y_{a\cdot}\)`   |     `\(\bar{y}_{a\cdot}\)`|
+ |            Total     |                                               | `\(y_{\cdot\cdot}\)`| `\(\bar{y}_{\cdot\cdot}\)`|
+ 
+ -- 
+ 
+  * `\(y_{ij}\)` representa a `\(j-\)`ésima observação do nível ou do tratamento `\(i\)`.
+ 
+  * &lt;div class="math"&gt;
+  \begin{align*}
+y_{i\cdot}=\sum_{j=1}^n y_{ij},\quad \bar{y}_{i\cdot}=\sum_{j=1}^n \frac{y_{ij}}{n},\quad \bar{y}_{\cdot\cdot}=\sum_{i=1}^a\sum_{j=1}^n \frac{y_{ij}}{an}.
+\end{align*}
+ &lt;/div&gt;
+ 
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Exemplo - I
+
+Considere um experimento cujo objetivo é verificar se a inclusão de raízes e tubérculos, como suplementação de inverno na alimentação de vacas em lactação, aumenta a produção de leite. Consideram-se 24 animais, três tipos de suplementos e uma testemunha (placebo), que são:
+
+--
+
+ - Sem suplemento (S)
+ - Mandioca (M)
+ - Araruta (A)
+ - Batata doce (B).
+ 
+--
+
+Para definir o tipo de suplemento que será dado a cada animal, realiza-se um sorteio aleatório enumerando cada um dos 24 animais (parcelas) que participarão do estudo ( `\(1\)` a `\(24\)` ) e, em seguida, colocam-se os
+tratamentos em uma sequência, como a dado a seguir:
+
+--
+
+`$$S_1\,\, S_2\,\, S_3\,\, S_4\,\, S_5\,\, S_6\qquad M_1\,\, M_2\,\,M_3\,\, M_4\,\, M_5\,\, M_6$$` 
+`$$A_1\,\, A_2\,\, A_3\,\, A_4\,\, A_5\,\, A_6\qquad B_1\,\, B_2\,\, B_3\,\, B_4\,\, B_5\,\, B_6$$`
+---
+class: animated, fadeIn
+
+# Exemplo - II
+
+Utilizando um gerador de números aleatórios, aloca-se o animal a cada tipo de suplemento. Suponha que a sequência de números aleatórios sorteada, tenha sido
+$$
+  24\, 23\, 22\, 14\, 1\, 13\quad 6\, 20\, 8\, 7\, 9\, 4\quad 21\, 15\, 17\, 16\, 19\, 2\quad 11\, 5\, 10\, 3\, 18\, 12.
+$$
+Assim, tem-se a configuração do experimento:
+
+| Vaca  | Tratamento ||  Vaca|  Tratamento || Vaca | Tratamento || Vaca| Tratamento |
+|:-----:|:----------:||:----:|:-----------:||:----:|:----------:||:---:|:----------:|
+|  1    | `\(S_5\)`      ||  7   |     `\(M_4\)`   ||   13 |      `\(S_6\)` || 19  | `\(A_5\)`      |
+|  2    | `\(A_6\)`      ||  8   | `\(M_3\)`       || 14   | `\(S_4\)`      || 20  | `\(M_2\)`      |
+|  3    | `\(B_4\)`      || 9    | `\(M_5\)`       || 15   | `\(A_2\)`      || 21  | `\(A_1\)`      |
+|  4    | `\(M_6\)`      || 10   | `\(B_3\)`       || 16   | `\(A_4\)`      || 22  | `\(S_3\)`      |
+|  5    | `\(B_2\)`      || 11   | `\(B_1\)`       || 17   | `\(A_3\)`      || 23  | `\(S_2\)`      |
+|  6    | `\(M_1\)`      || 12   | `\(B_6\)`       || 18   | `\(B_5\)`      || 24  | `\(S_1\)`      |
+
+---
+class: animated, fadeIn
+
+# Exemplo - III
+
+Considerem-se as seguintes produções médias diárias (kg) de leite a 4% de gordura das vacas
+submetidas a administração de raízes e tubérculos, como suplementação de inverno na alimentação
+de vacas em lactação.
+
+
+|Id. | Prod.    || Id.   | Prod.     ||  Id.    | Prod.   || Id.   | Prod.|
+|:--:|:--------:||:-----:|:---------:||:-------:|:-------:||:-----:|:----:|
+|  1 | 22,81    ||  7    | 25,12     || 13      | 23,54   || 19    | 35,04|
+|  2 | 35,19    ||  8    | 24,36     || 14      | 25,42   || 20    | 22,37|
+|  3 | 20,37    ||  9    | 22,94     || 15      | 32,47   || 21    | 35,42|
+|  4 | 24,80    || 10    | 26,54     || 16      | 34,48   || 22    | 23,43|
+|  5 | 24,37    || 11    | 22,15     || 17      | 35,04   || 23    | 21,07|
+|  6 | 23,40    || 12    | 24,06     || 18      | 19,54   || 24    | 19,58|
+
+---
+class: animated, fadeIn
+
+# Exemplo - IV
+
+Seja `\(y_{ij}\)` o valor da produção de leite da `\(j-\)`ésima vaca que recebeu o `\(i-\)`ésimo tratamento. Os
+valores das produções (kg) de leite a 4% de gordura das vacas que participaram do estudo podem ser resumidos na forma:
+
+| Tratamento|   Observações   |  Média |
+|:---------:|:---------------:|:------:|
+|     S     | `\(19,58  \quad 21,07  \quad  23,43  \quad  25,42 \quad 22,81 \quad 23,54\)` | 22,64|
+|     M     | `\(23,40  \quad 22,37  \quad  24,36  \quad  25,12 \quad 22,94 \quad 21,56\)` | 23,29|
+|     A	    | `\(35,42  \quad 32,47  \quad  34,48  \quad  33,79 \quad 35,04 \quad 35,19\)` | 34,39|
+|     B     | `\(22,15  \quad 24,37  \quad 26,54   \quad 20,37  \quad 19,54 \quad 24,06\)` | 22,83|
+
+--
+
+&gt;**Objetivo**: Testar se há diferença na produção média de leite de acordo com o tipo de suplementação.
+
+---
+class: animated, fadeIn
+
+# Exemplo - V
+
+&lt;img src="images/Exemplo_prodleite.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+
+# Exemplo - VI
+
+Medidas descritivas:
+
+ | Tratamento| Média | Desvio padrão|
+ |:---------:|:-----:|:------------:|
+ | S  			 | 22,64 | 2,05|
+ | M  			 | 23,29 | 1,30|
+ | A		  	 | 34,40 | 1,11|
+ | B  			 | 22,84 | 2,65|
+  
+
+---
+class: animated, fadeIn
+
+# Exemplo - VII
+
+**Análise**
+
+Aplicar o teste `\(t\)` para amostras independentes e analisar todos os pares de médias.
+  * Hipóteses:
+  $$
+  \textrm{H}_0: \mu_1-\mu_2=0\quad \textrm{vs. } \textrm{H}_1: \mu_1-\mu_2\neq 0.
+  $$
+  * Estatística de teste:
+  $$
+  t_{0}=\dfrac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{S_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}},
+  $$
+  onde
+  $$
+  S_p^2=\sqrt{\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}}
+  $$
+
+---
+class: animated, fadeIn
+
+# Exemplo - VIII
+
+**Resultados**
+
+ |     |  S   |  M    |   A   |    B  |
+ |:---:|:----:|:-----:|:-----:|:-----:|
+ | S   | --   | ND    | **    | ND    |
+ | M   | --   | --    | **    | ND    | 
+ | A   | --   | --    | --    | **    |
+ | B   | --   | --    | --    | --    |
+  
+  
+  &gt; ND: Sem diferença significativa. **: Diferença significativa ao nível `\(5\%\)`.
+
+--
+
+**Observação**: Esta solução é **&lt;span style="color:orange"&gt;INCORRETA&lt;/span&gt;**, pois leva a uma distorção do Erro Tipo I.
+
+--
+
+Suponha que seja testada a igualdade das quatro médias usando comparações pareadas. Há 6 pares possíveis e, se a probabilidade de aceitar corretamente a hipótese nula para cada par testado é de `\((1-\alpha)=0,95\)`, então a probabilidade de aceitar corretamente a hipótese nula para todos os 6 pares é `\((0,95)^6=0,7359\)`, se os testes forem independentes.
+
+
+---
+class: animated, slideInRight
+
+#.
+
+.center[
+##Solução apropriada para testar 
+##a igualdade de várias médias:
+#**&lt;span style="color:orange"&gt;Análise de Variância&lt;/span&gt;**
+]
+
+---
+class: animated, fadeIn
+
+#Modelo estatístico
+
+O modelo para descrever os dados de um experimento pode ser escrito como
+
+`$$y_{ij}=\mu_i+\epsilon_{ij}, \quad i=1,\ldots,a,\quad j=1,\ldots,n,$$`
+--
+
+onde 
+
+ * `\(y_{ij}\)` representa a `\(ij-\)`ésima observação
+ * `\(\mu_i\)` é a média do `\(i-\)`ésimo nível do fator ou tratamento
+ * `\(\epsilon_{ij}\)` é o erro aleatório, que incorpora todas as outras fontes de variabilidade no experimento (medição, fatores não controlados, diferenças entre unidades experimentais, ruídos, etc). Assume-se que `\(\textrm{E}(\epsilon_{ij})=0\)`, de modo que `\(\textrm{E}(y_{ij})=\mu_{i}\)`.
+ 
+ --
+ 
+ &gt;**Observação**: O modelo anterior é chamado Modelo de médias.
+
+---
+class: animated, fadeIn
+
+#Forma alternativa
+Seja
+
+`$$\mu_i=\mu+\tau_i,\qquad i=1,2,\ldots,a.$$`
+--
+
+A Equação do slide anterior torna-se o **Modelo de efeitos**, escrito como
+
+`$$y_{ij}=\mu+\tau_i+\epsilon_{ij}, \qquad i=1,\ldots,a,\quad j=1,\ldots, n,$$`
+
+--
+
+onde
+  * `\(y_{ij}\)` é o valor observado na unidade `\(j\)` que recebeu o tratamento `\(i\)`
+  * `\(\mu\)` é um parâmetro constante, comum a todos os tratamentos, chamado média geral (quando os dados são balanceados)
+  *  `\(\tau_i\)` é um parâmetro único que representa o efeito do `\(i-\)`ésimo tratamento
+  * `\(\epsilon_{ij}\)` é um componente do erro aleatório, associado à `\(j-\)`ésima repetição do `\(i-\)`ésimo tratamento.
+
+
+---
+class: animated, bounceInDown
+## Objetivo
+
+  - Se os `\(a\)` tratamentos foram selecionados especificamente pelo experimentador, o interesse é testar hipóteses sobre as médias dos tratamentos e as conclusões aplicam apenas aos níveis do fator considerados na análise. Interessa também estimar os parâmetros do modelo `\((\mu, \tau_i,\sigma^2)\)` `\(\Longrightarrow\)` **&lt;span style="color:orange"&gt;Modelo de Efeitos Fixos&lt;/span&gt;**.
+  
+--
+
+  - Se os `\(a\)` tratamentos foram selecionados como uma amostra aleatória de uma população maior de tratamentos, o interesse é estender  as conclusões a todos os tratamentos na população. Nesse caso, os `\(\tau_i\)` são variáveis aleatórias e os testes de hipóteses recaem sobre a variabilidade de `\(\tau_i\)` tentando-se estimar essa variabilidade `\(\Longrightarrow\)` **&lt;span style="color:orange"&gt;Modelo de Efeitos Aleatórios&lt;/span&gt;** ou **&lt;span style="color:orange"&gt;Modelo de Componentes de Variância&lt;/span&gt;**.
+
+
+---
+class: animated, bounceInDown
+## Modelo de Efeitos Aleatórios - I
+
+`$$y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i=1,\ldots,a,\quad j=1,\ldots,n,$$`
+--
+
+onde
+
+  - `\(y_{ij}\)` é a observação do `\(i-\)`ésimo tratamento na `\(j-\)`ésima unidade experimental (variável resposta);
+  
+  - `\(\mu\)` é a média global;
+  
+  - `\(\tau_i\)` é o efeito do `\(i-\)`ésimo tratamento;
+  
+  - `\(\epsilon_{ij}\)` é o erro associado ao `\(i-\)`ésimo tratamento na `\(j-\)`ésima unidade experimental. Incorpora todas as fontes de variabilidade não controladas no experimento.
+  
+  - Tem-se que `\(\tau_i\)` e `\(\epsilon_{ij}\)` são variáveis aleatórias independentes entre si, com `\(\tau_i\sim N(0,\sigma_{\tau}^2)\)` e `\(\epsilon_{ij}\sim N(0,\sigma^2)\)`.
+  
+  
+---
+class: animated, fadeIn
+## Modelo de Efeitos Aleatórios - II
+
+  - A condição `\(E(\tau_i)=0\)` é similar à condição `\(\sum_{i=1}^a \tau_i=0\)`. Estabelece que o efeito esperado do `\(i-\)`ésimo nível como um desvio de `\(\mu\)` é zero.
+  - Se a variância dos efeitos dos tratamentos `\(\tau_i\)` é `\(\sigma_{\tau}^2\)`, a variância da resposta é dada por
+  
+    `$$\text{var}(y_{ij})=\sigma_{\tau}^2+\sigma^2.$$`
+    
+    As variâncias `\(\sigma_{\tau}^2\)` e `\(\sigma^2\)` são chamadas **&lt;span style="color:orange"&gt;Componentes de variância&lt;/span&gt;**.
+  - Nesse modelo, os efeitos têm interpretação diferente. As hipóteses testadas são:
+  
+&lt;div class="math"&gt;
+\[\begin{cases}
+ \text{H}_0:&amp; \sigma_{\tau}^2=0\\
+ \text{H}_1:&amp; \sigma_{\tau}^2&gt;0.
+ \end{cases}\]
+&lt;/div&gt;
+
+Se `\(\sigma_{\tau}^2=0\)`, todos os tratamentos são idênticos, mas se `\(\sigma_{\tau}&gt;0\)`, há variabilidade entre os tratamentos.
+
+---
+class: animated, fadeIn
+## Exemplos
+
+  * Para estudar o efeito de diferentes operadores sobre o tempo de execução de uma tarefa, em uma determinada máquina, seleciona-se uma amostra de cinco operadores de um grupo de `\(N\)` operadores possíveis.
+
+
+  * Para estudar o efeito dos trilhos usados nas estradas de ferro, sobre o tempo de percurso de certo tipo de onda resultante da pressão longitudinal dos trilhos, selecionaram-se aleatoriamente seis trilhos e são feitas três medições.
+  
+  
+---
+class: animated, bounceInDown
+## Modelo de Efeitos Fixos
+
+`$$y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i=1,\ldots,a,\quad j=1,\ldots,n,$$`
+--
+
+onde
+
+  - `\(y_{ij}\)` é a observação do `\(i-\)`ésimo tratamento na `\(j-\)`ésima unidade experimental (variável resposta);
+  - `\(\mu\)` é a média geral, comum a todos os tratamentos;
+  - `\(\tau_i\)` representa o efeito do `\(i-\)`ésimo tratamento;
+  - `\(\epsilon_{ij}\)` é o erro associado ao `\(i-\)`ésimo tratamento na `\(j-\)`ésima unidade experimental. Incorpora todas as fontes de variabilidade não controladas no experimento.
+
+---
+class: animated, fadeIn
+## Pressupostos da ANOVA
+
+--
+  * Os efeitos principais devem ser aditivos: Nos experimentos, cada observação segue um modelo linear aditivo `\(y_{ij}=\mu+\tau_i+\epsilon_{ij}\)`.
+  
+  * Os erros de observação são independentes:
+`$$\text{cov}(\epsilon_{ij},\epsilon_{ij}')=0.$$`
+  * Os erros são homoscedásticos: Cada tratamento deve ter aproximadamente a mesma variância.
+  
+  * Os erros são normalmente distribuídos: Para que a ANOVA seja válida, os erros devem ser originários da mesma população.
+
+--
+###Em resumo...
+`$$\epsilon_{ij}\sim N(0,\sigma^2).$$`
+
+---
+class: animated, fadeIn
+#Hipóteses
+
+O objetivo é, em geral, verificar se existe diferença significativa entre pelo menos duas médias de tratamentos. As hipóteses testadas são:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\textrm{H}_0&amp;: \mu_1=\mu_2=\cdots=\mu_a\\
+\textrm{H}_1&amp;: \mu_i\neq \mu_i' \quad \textrm{para pelo menos um } i\neq i'.
+\end{align*}
+\]
+&lt;/div&gt;
+
+--
+
+###Forma equivalente:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\textrm{H}_0&amp;: \tau_1=\tau_2=\cdots=\tau_a=0\\
+\textrm{H}_1&amp;: \tau_i\neq 0 \quad \textrm{para pelo menos um } i.
+\end{align*}
+\]
+&lt;/div&gt;
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
