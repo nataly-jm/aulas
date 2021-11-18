@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Experimentos com um Fator - ANOVA
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 09/11/2021
+### Vitória. ES - 18/11/2021
 
 ---
 
@@ -253,8 +253,7 @@ onde
  * `\(\mu_i\)` é a média do `\(i-\)`ésimo nível do fator ou tratamento
  * `\(\epsilon_{ij}\)` é o erro aleatório, que incorpora todas as outras fontes de variabilidade no experimento (medição, fatores não controlados, diferenças entre unidades experimentais, ruídos, etc). Assume-se que `\(\textrm{E}(\epsilon_{ij})=0\)`, de modo que `\(\textrm{E}(y_{ij})=\mu_{i}\)`.
  
- --
- 
+
  &gt;**Observação**: O modelo anterior é chamado Modelo de médias.
 
 ---
@@ -397,6 +396,319 @@ O objetivo é, em geral, verificar se existe diferença significativa entre pelo
 \end{align*}
 \]
 &lt;/div&gt;
+
+
+---
+class: animated, fadeIn
+#Estimação dos Parâmetros - MQO I
+
+###Funções de Parâmetros Completamente Estimáveis
+
+Uma função dos parâmetros de qualquer modelo linear é dita **&lt;span style="color:orange"&gt;estimável&lt;/span&gt;** se, e somente se, pode ser escrita como o valor esperado de uma combinação linear das variáveis resposta. Apenas funções estimáveis dos parâmetros têm estimativas lineares não-viesadas únicas. Para o modelo de análise de variância de uma via, cada função estimável tem a forma
+&lt;div class="math"&gt;
+\[\begin{align*}
+\mathbb{E}\left[\sum_{i=1}^a \sum_{j=1}^n a_{ij}y_{ij}\right]&amp;=\sum_{i=1}^a \sum_{j=1}^n a_{ij}\mathbb{E}[y_{ij}]\\
+&amp;=\sum_{i=1}^a \sum_{j=1}^n a_{ij} (\mu + \tau_i)=\sum_{i=1}^a b_i(\mu + \tau_i),
+\end{align*}
+\]
+&lt;/div&gt;
+
+onde `\(b_i=\sum_{j=1}^n a_{ij}\)` e os `\(a_{ij}\)` são números reais. Qualquer função diferente dessa forma não será estimável.
+
+--
+
+&gt; **Observação**: Claramente `\(\mu+\tau_1\)` é estimável, pois pode ser obtida fixando `\(b_1=1\)` e `\(b_2=b_3=\cdots=b_a=0\)`.  Da mesma forma, cada `\(\mu+\tau_i\)` é estimável.
+
+---
+class: animated, fadeIn
+#Estimação dos Parâmetros - MQO II
+
+###Obtenção das Estimativas
+
+`$$L(\mu,\tau_1,\ldots,\tau_a)=\sum_{i=1}^a\sum_{j=1}^n \epsilon_{ij}^2=\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\mu-\tau_i)^2$$`
+--
+
+Derivando-se `\(L\)` em relação a cada um dos parâmetros, tem-se
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\frac{\partial L(\mu,\tau_1,\ldots,\tau_a)}{\partial\mu}&amp;=-2\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\mu-\tau_i)\\
+\frac{\partial L(\mu,\tau_1,\ldots,\tau_a)}{\partial\tau_i}&amp;=-2\sum_{j=1}^n (y_{ij}-\mu-\tau_i)\\
+\end{align*}
+\]
+&lt;/div&gt;
+
+---
+class: animated, fadeIn
+#Estimação dos Parâmetros - MQO III
+
+Igualando-se os resultados a zero, tem-se:
+&lt;div class="math"&gt;
+\[\begin{align*}
+-2\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\hat{\mu}-\hat{\tau}_i)&amp;=0\\
+-2\sum_{j=1}^n (y_{ij}-\hat{\mu}-\hat{\tau}_i)&amp;=0\\
+\end{align*}
+\]
+&lt;/div&gt;
+
+--
+
+Aplicando os somatórios, obtem-se o sistema de equações normais:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\sum_{i=1}^a\sum_{j=1}^n y_{ij} &amp;=an\widehat{\mu}+n\sum_{i=1}^a \widehat{\tau}_i\\
+\sum_{j=1}^n y_{ij}&amp;= n\widehat{\mu}+n\widehat{\tau}_i
+\end{align*}
+\]
+&lt;/div&gt;
+
+---
+class: animated, fadeIn
+#Estimação dos Parâmetros - MQO IV
+
+&gt; **Problema**: O conjunto de equações normais não é linearmente independente. Não existe solução única para os parâmetros a serem estimados.
+
+--
+
+&gt;**Solução**: Impor a restrição:
+ `$$\sum_{i=1}^a \hat\tau_i=0$$`
+Nessas condições:
+&lt;div class="math"&gt;
+\[\begin{align*}
+  \hat\mu&amp;=\overline{y}_{\cdot\cdot}\\
+  \hat{\tau}_i&amp;=\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot}, \quad i=1,\ldots,a.
+\end{align*}
+\]
+&lt;/div&gt;
+
+---
+class: animated, bounceInDown
+#Decomposição das Somas de Quadrados - I
+
+A variabilidade total dos dados pode ser reescrita em função das médias de cada tratamento, assim
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\overline{y}_{\cdot\cdot})^2&amp;=\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\overline{y}_{i\cdot}+\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot})^2\\
+&amp;=\sum_{i=1}^a\sum_{j=1}^n [(y_{ij}-\overline{y}_{i\cdot})^2+(\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot})^2+2(y_{i\cdot}-\overline{y}_{\cdot\cdot})(y_{ij}-\overline{y}_{i\cdot})]\\
+&amp;=\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\overline{y}_{i\cdot})^2+\sum_{i=1}^a\sum_{j=1}^n (\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot})^2+2\sum_{i=1}^a\sum_{j=1}^n (y_{i\cdot}-\overline{y}_{\cdot\cdot})(y_{ij}-\overline{y}_{i\cdot})\\
+\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\overline{y}_{\cdot\cdot})^2&amp;=\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\overline{y}_{i\cdot})^2+\sum_{i=1}^a\sum_{j=1}^n (\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot})^2,
+\end{align*}
+\]
+&lt;/div&gt;
+
+--
+
+pois
+
+`$$\sum_{i=1}^a\sum_{j=1}^n (y_{i\cdot}-\overline{y}_{\cdot\cdot})(y_{ij}-\overline{y}_{i\cdot})=0.$$`
+---
+class: animated, fadeIn
+#Decomposição das Somas de Quadrados - II
+
+Logo,
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+ \sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\overline{y}_{\cdot\cdot})^2&amp;=\underbrace{\sum_{i=1}^a\sum_{j=1}^n (y_{ij}-\overline{y}_{i\cdot})^2}+\underbrace{\sum_{i=1}^a\sum_{j=1}^n (\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot})^2}\\
+ SQT &amp;= \phantom{****}\,SQE\qquad\quad + \phantom{****}SQTr
+\end{align*}
+\]
+&lt;/div&gt;
+
+--
+
+Desenvolvendo-se os quadrados, obtem-se
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+SQT&amp;=\sum_{i=1}^a\sum_{j=1}^n y_{ij}^2-\dfrac{y_{\cdot\cdot}^2}{an}\\
+SQTr&amp;=\sum_{i=1}^a \dfrac{y_{i\cdot}^2}{n}-\dfrac{y_{\cdot\cdot}^2}{an}\\
+SQE&amp;=SQT-SQTr
+\end{align*}
+\]
+&lt;/div&gt;
+
+
+---
+class: animated, fadeIn
+#Decomposição das Somas de Quadrados - III
+
+**Observações**
+
+  * Lembre-se que a variância é calculada como `\(\dfrac{SQ}{gl}\)`, onde `\(SQ\)` representa a soma de quadrados dos desvios com respeito à média e `\(gl\)` são os graus de liberdade.
+  
+  
+  --
+  
+  
+  * Na ANOVA têm-se quantidades semelhantes a variâncias, chamadas de &lt;span style="color:orange"&gt;**Quadrados Médios**&lt;/span&gt; (QM), calculados como
+`$$QMTr=\dfrac{SQTr}{gl_{Tr}}\qquad   QME=\dfrac{SQE}{gl}$$`
+Observe-se que não são exatamente médias porque o denominador não é `\(n\)`.
+
+---
+class: animated, fadeIn
+#Decomposição das Somas de Quadrados - IV
+
+**Observações - cont.**
+
+  * Há `\(N=an\)` observações totais, logo `\(SQT\)` tem `\(N-1\)` graus de liberdade.
+  
+--
+
+  * Há `\(a\)` tratamentos, logo `\(SQTr\)` tem `\(a-1\)` graus de liberdade.
+  
+--
+
+  * Há `\(n\)` réplicas que proporcionam `\(n-1\)` graus de liberdade para estimar o erro experimental. Dado que há `\(a\)` tratamentos, SQE tem `\(a(n-1)\)` graus de liberdade (ou `\(N-a\)` gl).
+  
+--
+
+Daí:
+`$$QMTr=\dfrac{SQTr}{a-1}\qquad   QME=\dfrac{SQE}{N-a}.$$`
+
+---
+class: animated, bounceInDown
+#Tabela de Análise de Variância - ANOVA
+
+|Fonte de Variação     | g.l.    || SQ   || QM     ||  F$_0$    |
+|:--------------------:|:-------:||:----:||:------:||:---------:|
+|  Tratamentos (Entre) | `\(a-1\)`    ||  `$$SQTr=\frac{1}{n}\sum_{i=1}^a y_{i\cdot}^2-\frac{y_{\cdot\cdot}^2}{N}$$`    || `$$QMTr=\frac{SQTr}{a-1}$$`     || `$$\frac{QMTr}{QME}$$`      |
+|  Erro (Dentro)       | `\(N-a\)`    ||  `$$SQE=SQT-SQTr$$`    || `$$QME=\frac{SQE}{N-a}$$`     ||       | 
+|  Total               | `\(N-1\)`    ||  `$$SQT=\sum_{i=1}^a\sum_{j=1}^n y_{ij}^2-\frac{y_{\cdot\cdot}^2}{N}$$`    ||  || | 
+
+---
+class: animated, bounceInDown
+#Exemplo - Continuação
+
+|Fonte de Variação     | g.l.    || SQ     || QM     ||  F$_0$    |
+|:-------------------- |:-------:||:------:||:------:||:---------:|
+|  Tratamentos (Entre) | 3       || 593,82 || 197,93 || 56,03     |
+|  Erro (Dentro)       | 20      || 70,65  || 3,53   ||           | 
+|  Total               | 23      || 664,46||         ||           | 
+
+
+---
+class: animated, bounceInDown
+#Verificação do Modelo
+
+Os resíduos são dados por
+
+`$$\hat{\epsilon}_{ij}=y_{ij}-\overline{y}_{i\cdot}$$`
+--
+
+Deve-se verificar:
+
+  * Presença de dados discrepantes.
+  
+  * Independência dos resíduos.
+  
+  * Homoscedasticidade.
+  
+  * Distribuição Normal dos resíduos.
+
+
+---
+class: animated, fadeIn
+#Verificação do Modelo - I
+
+**Dados discrepantes**
+
+Estimar os resíduos padronizados
+
+`$$z_{ij}=\frac{\hat{\epsilon}_{ij}}{\sqrt{QME}}.$$`
+
+Se a normalidade dos resíduos for satisfeita, aproximadamente 99,7\% deles devem estar no intervalo `\((-3;3)\)`. Assim, resíduos fora desse intervalo, são considerados discrepantes.
+
+--
+
+**Independência**
+  * Usa-se o gráfico dos resíduos padronizados versus a ordem de coleta dos dados.
+  
+  * Gráfico de resíduos versus valores preditos.
+  
+  * Pode-se aplicar o Teste de Durbin-Watson.
+
+---
+class: animated, fadeIn
+#Verificação do Modelo - II
+
+**Homoscendasticidade**
+  * Análise gráfica, por exemplo box-plot ou gráfico de dispersão para tratamentos vs. resíduos.
+  
+  * Teste de Hartley (Precisa ter igual número de réplicas em cada tratamento).
+  
+  * Teste de Bartlett (Diferente número de repetições. Sensível à não normalidade dos dados).
+  
+  * Teste de Cochran (Pode ser usado com diferente número de repetições por tratamento).
+  
+  * Teste de Goldfeld-Quandt.
+  
+---
+class: animated, fadeIn
+#Verificação do Modelo - III
+
+**Transformação de Box-Cox**
+
+`$$y^*=\begin{cases}
+     \frac{y^{\lambda}-1}{\lambda}&amp; \text{se }\lambda\neq 0\\
+     \ln{y}                       &amp; \text{se }\lambda = 0.
+    \end{cases}$$`
+    
+
+
+
+A utilização da transformação Box-Cox exige que todos os valores da sequência de entrada sejam positivos e diferentes de zero. Se a sequência de entrada não atende a esses requisitos, ela pode ser movida transformada para garantir os valores positivos.
+
+--
+
+Dependendo do valor de `\(\lambda\)`, a transformação de Box-Cox inclui os casos especiais:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\lambda&amp;=-1.0\quad y^*=\frac{1}{y}\\
+\lambda&amp;=-0.5\quad y^*=\frac{1}{\sqrt{y}}\\
+\lambda&amp;=-0.0\quad y^*=\ln{y}\\
+\lambda&amp;=0.5\quad y^*=\sqrt{y}\\
+\lambda&amp;=1.0\quad y^*=y^2\\
+\end{align*}
+\]
+&lt;/div&gt;
+    
+
+---
+class: animated, fadeIn
+#Verificação do Modelo - IV
+
+Para determinar o valor ideal do parâmetro `\(\lambda\)`, maximiza-se o logaritmo da função de verossimilhança
+&lt;div class="math"&gt;
+\[\begin{align*}
+  f(y,\lambda)&amp;=-\frac{N}{2}\ln\left[\sum_{i=0}^{N-1}  \frac{(y(\lambda)-\bar{y}(\lambda))^2}{N} \right]+(\lambda-1)\sum_{i=1}^{N-1} \ln(y)\\
+  \bar{y}(\lambda)&amp;=\frac{1}{N}\sum_{i=0}^{N-1} y(\lambda)
+\end{align*}
+\]
+&lt;/div&gt;
+
+
+-- 
+
+
+Isto implica que precisamos selecionar o valor de `\(\lambda\)` em que esta função atinge seu valor máximo.
+
+  * Alguns autores sugerem encontrar o valor ideal de `\(\lambda\)` com base na procura do maior valor do coeficiente de correlação entre os quantis da função de distribuição normal e a sequência transformada classificada.
+
+  
+---
+class: animated, fadeIn
+#Verificação do Modelo - V
+
+**Normalidade** 
+  * Histograma.
+  
+  * Gráfico quantil-quantil dos resíduos padronizados.
+  
+  * Testes de normalidade: Shapiro-Wilks, Anderson-Darling, Lilliefors, etc.
 
 ---
 class: animated, hide-logo, bounceInDown
