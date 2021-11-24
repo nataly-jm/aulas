@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Experimentos com um Fator - ANOVA
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 18/11/2021
+### Vitória. ES - 23/11/2021
 
 ---
 
@@ -572,7 +572,7 @@ Daí:
 class: animated, bounceInDown
 #Tabela de Análise de Variância - ANOVA
 
-|Fonte de Variação     | g.l.    || SQ   || QM     ||  F$_0$    |
+|Fonte de Variação     | g.l.    || SQ   || QM     ||  `\(F_0\)`    |
 |:--------------------:|:-------:||:----:||:------:||:---------:|
 |  Tratamentos (Entre) | `\(a-1\)`    ||  `$$SQTr=\frac{1}{n}\sum_{i=1}^a y_{i\cdot}^2-\frac{y_{\cdot\cdot}^2}{N}$$`    || `$$QMTr=\frac{SQTr}{a-1}$$`     || `$$\frac{QMTr}{QME}$$`      |
 |  Erro (Dentro)       | `\(N-a\)`    ||  `$$SQE=SQT-SQTr$$`    || `$$QME=\frac{SQE}{N-a}$$`     ||       | 
@@ -582,7 +582,7 @@ class: animated, bounceInDown
 class: animated, bounceInDown
 #Exemplo - Continuação
 
-|Fonte de Variação     | g.l.    || SQ     || QM     ||  F$_0$    |
+|Fonte de Variação     | g.l.    || SQ     || QM     ||  `\(F_0\)`    |
 |:-------------------- |:-------:||:------:||:------:||:---------:|
 |  Tratamentos (Entre) | 3       || 593,82 || 197,93 || 56,03     |
 |  Erro (Dentro)       | 20      || 70,65  || 3,53   ||           | 
@@ -710,6 +710,281 @@ class: animated, fadeIn
   
   * Testes de normalidade: Shapiro-Wilks, Anderson-Darling, Lilliefors, etc.
 
+---
+class: animated, bounceInDown
+#A hipótese nula foi rejeitada...e agora?
+
+--
+
+Precisamos determinar quais médias são diferentes.
+
+  - Comparação duas a duas;
+  
+  - Comparação das médias dos tratamentos com a média do grupo controle;
+  
+  - Comparações múltiplas.
+
+
+---
+class: animated, fadeIn
+#Contrastes
+
+Um contraste é uma combinação linear de parâmetros da forma
+
+`$$\Gamma=\sum_{i=1}^a c_i\mu_i \quad \text{ em que } \quad \sum_{i=1}^a c_i=0.$$`
+
+--
+
+  &gt;Lembrando da definição de função estimável, observamos que todos os contrastes são estimáveis na análise de variância a uma via. Por exemplo, fixando `\(b_1=1\)`, `\(b_2=-1\)`, `\(b_3,\ldots,b_a=0\)`, temos que `\(\mu_1-\mu_2\)` é uma função estimável. Da mesma forma, cada `\(\mu_i-\mu_k\)`, `\(i\neq k\)`, é estimável.  
+
+--
+
+**Exemplo:** No experimento da suplementação para vacas em lactação, poderia-se pensar que os suplementos 2 e 4 produzem a mesma quantidade de leite, implicando no teste das hipóteses
+`$$\textrm{H}_0: \mu_2=\mu_4\quad \textrm{ vs. }\quad \textrm{H}_1: \mu_2\neq \mu_4.$$`
+Se houver suspeitas de que a média dos tratamentos 1 e 2 não diferem da média dos tratamentos 3 e 4, temos as hipóteses:
+`$$\textrm{H}_0: \mu_1+\mu_2=\mu_3+\mu_4\quad \textrm{ vs. }\quad \textrm{H}_1: \mu_1+\mu_2\neq \mu_3+\mu_4.$$`
+
+
+
+
+
+---
+class: animated, fadeIn
+##Testes de hipóteses usando contrastes
+
+Temos duas formas básicas
+
+--
+
+  - Teste t;
+  - Teste F.
+
+
+Primeiro, devemos escrever o contraste de interesse em termos das médias dos tratamentos:
+`$$C=\sum_{i=1}^a c_i\overline{y}_{i\cdot}$$`
+
+A variância do contraste é dada por
+`$$\text{var}(C)=\sum_{i=1}^a \text{var}(c_i\overline{y}_{i\cdot})=\sum_{i=1}^a c_i^2\text{var}(\overline{y}_{i\cdot})=\frac{\sigma^2}{n}\sum_{i=1}^a c_i^2.$$`
+
+---
+class: animated, fadeIn
+##Testes de hipóteses usando contrastes - Teste t
+  
+  Dado que não conhecemos a variância do erro, usamos seu estimador. Daí
+  `$$\widehat{\text{var}}(C)=\frac{QME}{n}\sum_{i=1}^a c_i^2$$`
+  portanto, a estatística de teste é dada por
+  `$$t_0=\frac{\sum_{i=1}^a c_i\overline{y}_{i\cdot}}{\sqrt{\frac{QME}{n}\sum_{i=1}^a c_i^2}} \sim t_{(N-a)}.$$`
+
+  Rejeita-se a hipótese nula se `\(|t_0|&gt;t_{\alpha/2,N-a}\)`.
+
+
+
+---
+class: animated, fadeIn
+##Testes de hipóteses usando contrastes - Teste F
+  
+  Pode-se mostrar que 
+  
+  
+  `$$t_0^2=F_0=\frac{(\sum_{i=1}^a c_i\overline{y}_{i\cdot})^2}{\frac{QME}{n}\sum_{i=1}^a c_i^2} \sim F_{(\alpha, 1, N-a)}.$$`
+
+  Rejeita-se a hipótese nula se `\(F_0&gt;F_{(\alpha,1,N-a)}\)`.
+  
+
+---
+class: animated, fadeIn
+##Contrastes Ortogonais
+
+Dois contrastes com coeficientes `\(c_i\)` e `\(d_i\)` s\~ao ortogonais se
+`$$\sum_{i=1}^a c_id_i=0.$$`
+
+Para `\(a\)` tratamentos, o conjunto de `\(a-1\)` contrastes ortogonais particiona a soma dos quadrados dos tratamentos em `\(a-1\)` componentes com um grau de liberdade cada. Deste modo, os testes feitos usando contrastes ortogonais são independentes.
+
+--
+
+  &gt; **Observações:**
+  &gt; * Há várias formas de escolher os coeficientes dos contrastes ortogonais. Usualmente algo na natureza do experimento irá sugerir quais as comparações de interesse;
+  
+  &gt; * Em geral, o método de contrastes é útil quando temos comparações pré-planejadas, isto é, contrastes especificados antes de fazer o experimento e analisar os dados.
+
+---
+class: animated, fadeIn
+##Contrastes Ortogonais - Exemplo I
+
+Considere o experimento dos suplementos para vacas. Os contrastes ortogonais apropriados poderiam ser:
+
+|Tratamento       | `\(C_1\)`|| `\(C_2\)` || `\(C_3\)`|
+|:----------------|:----:||:-----:||:----:|
+|  Sem Suplemento |  3   ||  0    ||  0   |
+|  Mandioca       | -1   || -1    ||  1   | 
+|  Araruta        | -1   ||  2    ||  0   | 
+|  Batata doce    | -1   || -1    || -1   | 
+
+--
+
+  * O contraste `\(C_1\)` compara o efeito médio dos tratamentos com suplemento e sem suplemento. 
+  
+  * No contraste `\(C_2\)` são comparados os efeitos médios da Araruta com a Mandioca e Batata Doce. 
+  
+  * O contraste `\(C_3\)`  compara o efeito médio da Mandioca e da Batata Doce.
+  
+--
+
+  &gt;**Observação:** Os coeficientes dos contrastes devem ser escolhidos antes de executar o experimento e examinar os dados. A razão para isto é que, se as comparações são selecionadas após examinar os dados, muitos pesquisadores construiriam testes que corresponderiam a grandes diferenças observadas na média.
+
+---
+class: animated, fadeIn
+##Contrastes Ortogonais - Exemplo II
+
+Assumindo que as hipóteses de pesquisa foram elaboradas antes da realização do experimento temos:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+C_1&amp;=3\mu_1-(\mu_2+\mu_3+\mu_4)\\
+C_2&amp;=2\mu_3-(\mu_2+\mu_4)\\
+C_3&amp;= \mu_2-\mu_4\\
+\end{align*}
+\]
+&lt;/div&gt;
+
+--
+
+Uma estimativa para qualquer desses contrastes é obtida substituindo-se as médias por suas estimativas, dadas por `\(\overline{y}_{i}\)`, temos por exemplo
+
+`$$\widehat{C}_1=3\overline{y}_{1}-(\overline{y}_{2}+\overline{y}_{3}+\overline{y}_{4}).$$`
+
+---
+class: animated, fadeIn
+##Contrastes Ortogonais - Exemplo III
+
+A variância do contraste é dada por
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\text{var}(\widehat{C}_1)&amp;=9\text{var}(\overline{y}_{1})+\text{var}(\overline{y}_{2})+\text{var}(\overline{y}_{3})+\text{var}(\overline{y}_{4})\\
+&amp;=9\frac{\sigma_1^2}{n}+\frac{\sigma_2^2}{n}+\frac{\sigma_3^2}{n}+\frac{\sigma_4^2}{n}.
+\end{align*}
+\]
+&lt;/div&gt;
+
+Assumindo homoscedasticidade, temos que
+`$$\widehat{\text{var}}(\widehat{C}_1)=12\times \frac{\text{QME}}{n}$$`
+
+Dessa forma.
+`$$t_0=\frac{−12,6033}{\sqrt{12\times \frac{3,53}{6}}}=-4,74.$$`
+    
+
+
+---
+class: animated, fadeIn
+##Contrastes Ortogonais - ANOVA
+
+Para qualquer contraste temos:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+ F_0&amp;=\frac{(\sum_{i=1}^a c_i\overline{y}_{i\cdot})^2}{\frac{QME}{n}\sum_{i=1}^a c_i^2}\\
+    &amp;=\frac{\frac{n}{\sum_{i=1}^a c_i^2}(\sum_{i=1}^a c_i\overline{y}_{i\cdot})^2}{QME}\\
+    &amp;=\frac{\frac{(\sum_{i=1}^a c_i y_{i\cdot})^2}{n\sum_{i=1}^n c_i^2}}{QME}\\
+    &amp;=\frac{SQC_i}{\frac{SQE}{N-a}}.
+\end{align*}
+\]
+&lt;/div&gt;
+
+---
+class: animated, fadeIn
+##Contrastes Ortogonais - ANOVA Exemplo
+
+A análise dos contrastes ortogonais por meio da ANOVA é conhecido como &lt;span style="color:orange"&gt;**Desdobramento dos graus de liberdade dos Tratamentos**&lt;/span&gt; ou &lt;span style="color:orange"&gt;**Partição das Somas de Quadrados dos Tratamentos**&lt;/span&gt;.
+
+No caso do exemplo aqui analisado, temos
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+    SQC_1&amp;=\frac{(3\times 135,85 -139,75 - 206,39 - 137,03)^2}{6\times [3² +(-1)^2 + (-1)^2 + (-1)^2]}\\
+    &amp;=79,42.\\
+    SQC_2&amp;=\frac{(3\times 206,39 -139,75 - 137,03)^2}{6\times [2² +(-1)^2 + (-1)^2]}\\
+    &amp;=513,77.\\
+    SQC_3&amp;=\frac{(139,75 - 137,03)^2}{6\times [(-1)^2 + (-1)^2]}\\
+    &amp;=0,6165.
+\end{align*}
+\]
+&lt;/div&gt;
+
+
+---
+class: animated, fadeIn
+##Teste de Scheffé - Comparação sem conhecimento a priori
+
+O erro Tipo I é, no máximo, `\(\alpha\)` para qualquer uma das possíveis comparações.
+
+**Estatística de Teste**
+
+`$$F_{0j}=\left(\frac{C_j-E(C_j)}{\sqrt{(a-1)\widehat{\text{var}}(C_j)}}\right)^2=\frac{(\sum_{i=1}^a c_i \overline{y}_{i\cdot})^2}{(a-1)\frac{QME}{n}\sum_{i=1}^a c_i^2}\sim F_{\alpha,a-1,N-a}.$$`
+
+--
+
+**Margem de erro do Teste**
+`$$E_j=\sqrt{(a-1)F_{\alpha,a-1,N-a}\frac{QME}{n}\sum_{i=1}^a c_i^2}.$$`
+
+Se `\(F_{0j}&gt;F_{\alpha,a-1,N-a}\)` ou `\(|C_j|&gt;E_j\)` rejeita-se a hipótese `\(H_0: \sum_{i=1}^a c_i\mu_i=0\)`.
+
+--
+ 
+  &gt;**Observação:** Pode ser usado para construir intervalos de confiança simultâneos, `\(C_j-E_j&lt;\Gamma_j&lt;C_j+E_j\)`, em que a confiança simultânea de todos os intervalos é, no mínimo, `\(1-\alpha\)`.
+
+
+---
+class: animated, fadeIn
+##Teste de Bonferroni
+
+Para um erro experimental de `\(\alpha\)`, Bonferroni recomenda usar `\(\alpha/g\)` como nível de significância para cada teste.
+
+**Estatística de Teste**
+
+`$$b_{cal}=\frac{|\overline{y}_{i}-\overline{y}_{j}|}{\sqrt{QME\left(\frac{1}{n_{i}}+\frac{1}{n_{j}}\right)}}\sim t_{\left(\frac{\alpha}{2g},N-a\right)}.$$`
+
+Rejeita-se `\(H_0\)`, se
+`$$|\overline{y}_{i}-\overline{y}_{j}|\geq t_{\left(\frac{\alpha}{2g},N-a\right)}\sqrt{QME\left(\frac{1}{n_i}+\frac{1}{n_j}\right)}.$$`
+
+--
+
+  &gt;**Observações**
+  
+  &gt; * Adequado para comparações pré-planejadas, sendo pequeno o número de comparações planejadas.
+  
+  &gt; * Não é útil quando o número de comparações é grande.
+
+---
+class: animated, fadeIn
+##Teste de Tukey
+
+**Estatística de Teste**
+
+`$$q_{cal}=\frac{\overline{y}_{max}-\overline{y}_{min}}{\sqrt{\frac{QME}{2}\left(\frac{1}{n_{max}}+\frac{1}{n_{min}}\right)}}\sim q_{a,N-a}.$$`
+
+Quando `\(n_1=\ldots=n_a=n\)` rejeita-se `\(H_0\)`, se
+`$$|\overline{y}_{i\cdot}-\overline{y}_{j\cdot}|\geq q_{\alpha,a,N-a}\sqrt{\frac{QME}{n}}.$$`
+
+--
+
+  &gt;**Observação:**
+  &gt; * O nível de significância do teste é exatamente `\(\alpha\)` quando o número de réplicas é igual em todos os tratamentos, caso contrário é, no máximo, `\(\alpha\)`.
+
+
+---
+class: animated, fadeIn
+##Teste de Dunnet - Comparação dos tratamentos com um controle
+
+**Estatística de Teste**
+
+`$$d_{cal}=\frac{\overline{y}_{i\cdot}-\overline{y}_{c}}{\sqrt{QME\left(\frac{1}{n_{i}}+\frac{1}{n_{c}}\right)}}\sim d_{a-1,N-a}.$$`
+
+Quando `\(n_1=\ldots=n_a=n\)` rejeita-se `\(H_0\)`, se
+
+`$$|\overline{y}_{i\cdot}-\overline{y}_{c}|\geq d_{\alpha,a-1,N-a}\sqrt{\frac{2\times QME}{n}}.$$`
+
+  
 ---
 class: animated, hide-logo, bounceInDown
 ## Política de proteção aos direitos autorais
