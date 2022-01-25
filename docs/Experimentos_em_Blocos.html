@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>PLANEJAMENTO DE EXPERIMENTOS I STA13827</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="libs/jszip/jszip.min.js"></script>
+    <script src="libs/pdfmake/pdfmake.js"></script>
+    <script src="libs/pdfmake/vfs_fonts.js"></script>
+    <link href="libs/dt-ext-buttons/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="libs/dt-ext-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.html5.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.colVis.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.print.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <script src="libs/plotly-binding/plotly.js"></script>
+    <script src="libs/typedarray/typedarray.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main/plotly-latest.min.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# PLANEJAMENTO DE EXPERIMENTOS I STA13827
+## Delineamento em Blocos Aleatorizados
+### Nátaly A. Jiménez Monroy
+### LECON/DEST - UFES
+### Vitória. ES - 25/01/2022
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+#Introdução - I
+
+  * Utilizado quando as unidades experimentais não são homogêneas, mas podem ser agrupadas em grupos homogêneos chamados de **&lt;span style="color:orange"&gt;blocos&lt;/span&gt;**, contendo cada grupo normalmente uma repetição de cada tratamento.
+  
+  * Quando cada bloco contém pelo menos uma repetição de cada tratamento, diz-se que o experimento foi conduzido em um **&lt;span style="color:orange"&gt;Delineamento em Blocos Completos Casualizados (BCC)&lt;/span&gt;**.
+  
+--
+
+  &gt;**Exemplo 1:** Um agrônomo deseja comparar quatro variedades de milho, com o objetivo de verificar se possuem em média a mesma produtividade. O agrônomo possui uma grande área para realizar o experimento. Entretanto, ele sabe que o solo não é homegêneo em toda a área. Portanto, um experimento inteiramente aleatorizado não é possível. Desta maneira, ele divide a área total em áreas menores homogêneas, os blocos. Assim, dentro de cada bloco ele demarca quatro parcelas, uma para cada variedade de milho que deseja comparar.
+
+--
+
+  &gt;**Exemplo 2:** Um médico deseja comparar quatro drogas com o objetivo de verificar se possuem em média o mesmo efeito na redução de sinais e sintomas da artrite. O médico dispõe de um grande grupo de pacientes de onde poderá selecionar uma amostra. Entretanto, há uma suspeita de que a idade do paciente é um fator de variação de sinais e sintomas. Desta maneira, os pacientes são divididos por faixa etária (estratos ou blocos). Assim, dentro de cada bloco, quatro (ou multiplo de quatro - réplicas) pacientes são sorteados, um para cada droga a ser comparada.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Introdução - II
+
+###Observações
+
+  - O bloqueamento (ou blocagem) também é chamado de **&lt;span style="color:orange"&gt;controle local&lt;/span&gt;**, pois permite que se controle alguma causa de variação conhecida que afeta os resultados do experimento, diminuindo assim o erro experimental.
+  
+  - Os tratamentos agrupados em um bloco devem ter as condições experimentais homogêneas, ou seja, é permitido que se tenha variação entre blocos mas não dentro do bloco.
+  
+  - Para efeito de implantação do experimento, determina-se o bloco, sorteiam-se os tratamentos dentro de cada bloco e depois faz-se o sorteio da posição dos blocos.
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Delineamento em blocos aleatorizados
+
+Assume-se que há `\(a\)` tratamentos e `\(b\)` blocos.
+
+ |Tratamento (Níveis)   |                          Blocos               |  Total          |         Média         |
+ |:--------------------:|:---------------------------------------------:|:---------------:|:---------------------:| 
+ |               | `\(1\phantom{*}\quad \phantom{*}2\phantom{*}\quad \cdots\phantom{*} \quad b\phantom{*}\)` |  |     |
+ |          1           |  `\(y_{11}\quad y_{12}\quad \cdots\quad y_{1b}\)` |  `\(y_{1\cdot}\)`   |     `\(\bar{y}_{1\cdot}\)`|
+ |          2           |  `\(y_{21}\quad y_{22}\quad \cdots\quad y_{2b}\)` |  `\(y_{2\cdot}\)`   |     `\(\bar{y}_{2\cdot}\)`|
+ |          `\(\vdots\)`    | `\(\vdots\qquad \vdots\qquad \cdots\qquad \vdots\)`|      `\(\vdots\)`  |               `\(\vdots\)`|
+ |          `\(a\)`         |  `\(y_{a1}\quad y_{a2}\quad \cdots\quad y_{ab}\)` |  `\(y_{a\cdot}\)`   |     `\(\bar{y}_{a\cdot}\)`|
+ |            Total     | `\(y_{\cdot1}\quad y_{\cdot2}\quad \cdots\quad y_{\cdot}\)`  | `\(y_{\cdot\cdot}\)`|            |
+ |            Média     | `\(\bar{y}_{\cdot 1}\quad \bar{y}_{\cdot 2}\quad \cdots\quad \bar{y}_{\cdot b}\)`  | | `\(\bar{y}_{\cdot\cdot}\)`|
+ 
+ 
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Modelo - I
+`$$y_{ij}=\mu+\tau_i+\beta_j+\epsilon_{ij},\quad i=1,\ldots,a,\quad j=1,\ldots,b,$$`
+onde
+
+--
+
+  - `\(y_{ij}\)` é a observação do `\(i-\)`ésimo tratamento no `\(j-\)`ésimo bloco;
+  
+  - `\(\tau_i\)` representa o efeito do `\(i-\)`ésimo tratamento;
+  
+  - `\(\beta_j\)` representa o efeito do `\(j-\)`ésimo bloco;
+  
+  - `\(\epsilon_{ij}\)` é o erro experimental associado ao `\(i-\)`ésimo tratamento do `\(j-\)`ésimo bloco. Assume-se que `\(\epsilon_{ij}\sim N(0,\sigma^2)\)`.
+  
+--
+
+  &gt;**Observações:**
+    * Os tratamentos e blocos são definidos como desvios da média global, assim `\(\sum_{i=1}^a \tau_i=0\)` e `\(\sum_{j=1}^b \beta_j=0\)`.
+    
+  &gt; * Assume-se que **&lt;span style="color:orange"&gt;não há interação&lt;/span&gt;** entre tratamentos e blocos. 
+  
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Teste de hipóteses - I
+
+O interesse está em testar os efeitos dos tratamentos:
+
+&lt;div class="math"&gt;
+\[\begin{cases}
+  \text{H}_0:&amp; \tau_1=\tau_2=\cdots\tau_a=0\\
+  \text{H}_1:&amp; \tau_i\neq 0 \text{ para pelo menos um }i.
+  \end{cases}\]
+&lt;/div&gt;
+  
+  
+&gt; O teste dessa hipótese é equivalente ao teste da hipótese de que as médias dos tratamentos são iguais.
+
+--
+
+**Média do `\(i\)`-ésimo tratamento**
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\mu_i&amp;=E\left(\frac{\sum_{j=1}^b y_{ij}}{b}\right)\\
+     &amp;=\frac{1}{b}\sum_{j=1}^b E(y_{ij})=\frac{1}{b}\sum_{j=1}^b E(\mu+\tau_i+\beta_j+\epsilon_{ij})\\
+     &amp;=\frac{1}{b}\sum_{j=1}^b E(\mu+\tau_i+\beta_j)=\mu+\tau_i+\frac{1}{b} \sum_{j=1}^b \beta_j,
+\end{align*}\]
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Teste de hipóteses - II
+
+Dado que `\(\sum_{j=1}^b \beta_j=0\)`, tem-se a média do `\(i-\)`ésimo tratamento definida como
+`$$\mu_i=\mu+\tau_i, \qquad i=1,\ldots, a.$$`
+--
+
+**Valor Esperado dos Quadrados Médios**
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+E\left(QMTr\right)&amp;=\sigma^2+\frac{b\sum_{i=1}^a \tau_i^2}{a-1}\\
+E\left(QMB\right)&amp;=\sigma^2+\frac{a\sum_{j=1}^b \beta_j^2}{b-1}\\
+E(QME)&amp;=\sigma^2.
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+  &gt;**Observações:**
+  &gt;* Se `\(H_0\)` for verdadeira, `\(QMTr\)` é um estimador não viesado de `\(\sigma^2\)`. Se `\(H_0\)` for falsa, `\(QMTr\)` superestima `\(\sigma^2\)`.
+  
+  &gt;* O `\(QME\)` é sempre um estimador não viesado de `\(\sigma^2\)`.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Teste de hipóteses - III
+
+**Estatística de Teste:**
+
+`$$F_0=\frac{QMTr}{QME},$$`
+Temos que `\(F_0\sim F_{a-1,(a-1)(b-1)}\)` sob `\(H_0\)`. Rejeita-se `\(H_0\)` se `\(F_0&gt;F_{\alpha,a-1,(a-1)(b-1)}\)`.
+
+--
+
+**Avaliação dos efeitos dos blocos**
+
+  - Anderson &amp; McLean (1974): A falta de aleatorização nos blocos torna `\(F_0\)` uma estatística inadequada para compará-los. Essa estatística testa a igualdade dos blocos mais o erro de restrição.
+  
+  - Se os erros são `\(N(0,\sigma^2\)`), pode-se usar a estatística `\(F_0=\frac{QMB}{QME}\)` para comparar as médias dos blocos (Box, Hunter &amp; Hunter, 1978).
+  
+  &gt;**Solução prática:** Examinar apenas a razão `\(\frac{QMB}{QME}\)`.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Tabela de ANOVA
+
+ |Fonte de Variação  |      Gl      |             SQ                                                          |   QM  | `\(F_0\)`|
+ |:-----------------:|:------------:|:-----------------------------------------------------------------------:|:----------------------------------:|:----:| 
+ | Tratamentos       | `\(a-1\)`        | `\(\frac{1}{b}\sum_{i=1}^a y_{i\cdot}^2-\frac{y_{\cdot\cdot}^2}{ab}\)` | `\(\frac{SQTr}{a-1}\)`      | `\(\frac{QMTr}{QME}\)` |
+ |  Blocos           | `\(b-1\)`        | `\(\frac{1}{a}\sum_{i=1}^b y_{\cdot j}^2-\frac{y_{\cdot\cdot}^2}{ab}\)` | `\(\frac{SQB}{b-1}\)`        |                    |
+ |  Erro             | `\((a-1)(b-1)\)` | `\(SQT-SQTr-SQB\)`                                                      | `\(\frac{SQE}{(a-1)(b-1)}\)` |                    |
+ |  Total            | `\(ab-1\)`       | `\(\sum_{i=1}^a\sum_{j=1}^b y_{ij}^2-\frac{y_{\cdot\cdot}^2}{ab}\)`     |                                    |        `\(\phantom{.}\)` |
+ 
+ 
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Estimação dos Parâmetros
+
+###Equações Normais
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+y_{\cdot\cdot} &amp;= ab\widehat{\mu}+b\widehat{\tau_1}+b\widehat{\tau_2}+\cdots+b\widehat{\tau_a}+a\widehat{\beta}_1+a\widehat{\beta}_2+\cdots+a\widehat{\beta}_b\\
+y_{1\cdot}&amp;=\phantom{a}b\widehat{\mu}+b\widehat{\tau_1}\,\,\,\phantom{+b\widehat{\tau_2}+\cdots+b\widehat{\tau_a}}+\phantom{a}\widehat{\beta}_1+\phantom{a}\widehat{\beta}_2+\cdots+\phantom{a}\widehat{\beta}_b\\
+y_{2\cdot}&amp;=\phantom{a}b\widehat{\mu}+\phantom{b\widehat{\tau_1}}+b\widehat{\tau_2}\,\,\,\phantom{+\cdots+b\widehat{\tau_a}}+\phantom{a}\widehat{\beta}_1+\phantom{a}\widehat{\beta}_2+\cdots+\phantom{a}\widehat{\beta}_b\\
+\vdots\\
+y_{a\cdot}&amp;=\phantom{a}b\widehat{\mu}\,\,\,\phantom{+b\widehat{\tau_1}+b\widehat{\tau_2}+\cdots}+b\widehat{\tau_a}+\phantom{a}\widehat{\beta}_1+\phantom{a}\widehat{\beta}_2+\cdots+\phantom{a}\widehat{\beta}_b\\
+y_{\cdot 1}&amp;=\phantom{b}a\widehat{\mu}+\phantom{b}\widehat{\tau_1}+\phantom{b}\widehat{\tau_2}+\cdots+\phantom{b}\widehat{\tau_a}+a\widehat{\beta}_1\phantom{+\widehat{\beta}_2+\cdots+\widehat{\beta}_b}\\
+y_{\cdot 2}&amp;=\phantom{b}a\widehat{\mu}+\phantom{b}\widehat{\tau_1}+\phantom{b}\widehat{\tau_2}+\cdots+\phantom{b}\widehat{\tau_a}\,\,\,\phantom{+a\widehat{\beta}_1}+a\widehat{\beta}_2\phantom{+\cdots+\phantom{b}\widehat{\beta}_b}\\
+\vdots\\
+y_{\cdot b}&amp;=\phantom{b}a\widehat{\mu}+\phantom{b}\widehat{\tau_1}+\phantom{b}\widehat{\tau_2}+\cdots+\phantom{b}\widehat{\tau_a}\,\,\,\phantom{+a\widehat{\beta}_1+a\widehat{\beta}_2+\cdots}+a\widehat{\beta}_b
+\end{align*}\]
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Equações Normais - II
+
+As equações normais podem ser resumidas como
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+y_{\cdot\cdot} &amp;= ab\widehat{\mu}+b\sum_{i=1}^a\widehat{\tau_i}+a\sum_{j=1}^b \widehat{\beta}_j\\
+y_{i\cdot}&amp;=\phantom{a}b\widehat{\mu}+\phantom{\sum_{j=1}^b}b\,\,\widehat{\tau_i}+\phantom{a}\sum_{j=1}^b\widehat{\beta}_j\\
+y_{\cdot j}&amp;=\phantom{b}a\widehat{\mu}+\phantom{b}\sum_{i=1}^a \widehat{\tau_i}+\phantom{a}a\widehat{\beta}_j
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+Impondo as restrições `\(\sum_{i=1}^a \widehat{\tau_i}=0\)` e `\(\sum_{j=1}^b\widehat{\beta}_j=0\)` obtem-se os EMQ:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\widehat{\mu}&amp;=\overline{y}_{\cdot\cdot}\\
+\widehat{\tau_i}&amp;=\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot}, \qquad i=1,\ldots,a\\
+\widehat{\beta}_j&amp;=\overline{y}_{\cdot j}-\overline{y}_{\cdot\cdot}\qquad j=1,\ldots,b.
+\end{align*}\]
+&lt;/div&gt;
+
+---
+class: animated, fadeIn
+
+# Exemplo - I
+
+No exemplo trabalhado na ANOVA com um fator referente ao estudo dos efeitos da administração de raízes e tubérculos como suplementação de inverno na alimentação de vacas em lactação, assuma que foi considerado um experimento em blocos casualizados com 4 tipos de suplementos (tratamentos) e 5 raças (blocos). As produções médias diárias de leite (Kg) foram:
+
+| Tratamento|      |           | Bloco  |        |       |Total|
+|:---------:|:----:|:---------:|:------:|:------:|:-----:|:---:|
+|           |Gir   | Holandesa | Jersey | Nelore | Guzerá|     |
+|     S     | 6,4  |   6,2     |  6,2   |  7,1   | 6,6   | 32,5|
+|     M     | 10,9 |  11,6     |  11,4  |  10,4  | 12,4  | 56,7|
+|     A	    | 12,0 |  10,9     |  11,5  |  11,1  | 11,8  | 57,3|
+|     B     | 11,2 |  11,6     |  10,9  |  12,1  | 10,1  | 55,9|
+| Total     | 40,5 |  40,3     |  40,0  |  40,7  | 40,9  |202,4|
+
+
+---
+#Exemplo - II
+
+
+<div id="htmlwidget-6885743e8fe93322032b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6885743e8fe93322032b">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["S","S","S","S","S","M","M","M","M","M","A","A","A","A","A","B","B","B","B","B"],["Gir","Holandesa","Jersey","Nelore","Guzera","Gir","Holandesa","Jersey","Nelore","Guzera","Gir","Holandesa","Jersey","Nelore","Guzera","Gir","Holandesa","Jersey","Nelore","Guzera"],[6.4,6.2,6.2,7.1,6.6,10.9,11.6,11.4,10.4,12.4,12,10.9,11.5,11.1,11.8,11.2,11.6,10.9,12.1,10.1]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Suplemento<\/th>\n      <th>Raca<\/th>\n      <th>Producao<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"suplementos"},{"extend":"excel","filename":"suplementos"},{"extend":"pdf","filename":"suplementos"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+# Exemplo - II
+
+&lt;div align = 'center'&gt;
+<div id="htmlwidget-cc8f48a521eae94dfc7a" style="width:504px;height:504px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cc8f48a521eae94dfc7a">{"x":{"visdat":{"434244b8ac88d":["function () ","plotlyVisDat"]},"cur_data":"434244b8ac88d","attrs":{"434244b8ac88d":{"x":{},"y":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":80,"l":60,"t":80,"r":50,"pad":4},"xaxis":{"domain":[0,1],"automargin":true,"range":["S","M","A","B"],"title":"Tipo de Suplemento","type":"category","categoryorder":"array","categoryarray":["A","B","M","S"]},"boxmode":"group","autosize":true,"showlegend":false,"yaxis":{"domain":[0,1],"automargin":true,"title":"Producao"},"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(102,194,165,0.5)","x":["S","M","A","B"],"y":[6.4,10.9,12,11.2],"type":"box","name":"Gir","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"line":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(252,141,98,0.5)","x":["S","M","A","B"],"y":[6.6,12.4,11.8,10.1],"type":"box","name":"Guzera","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"line":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(141,160,203,0.5)","x":["S","M","A","B"],"y":[6.2,11.6,10.9,11.6],"type":"box","name":"Holandesa","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"line":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(231,138,195,0.5)","x":["S","M","A","B"],"y":[6.2,11.4,11.5,10.9],"type":"box","name":"Jersey","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"line":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(166,216,84,0.5)","x":["S","M","A","B"],"y":[7.1,10.4,11.1,12.1],"type":"box","name":"Nelore","marker":{"color":"rgba(166,216,84,1)","line":{"color":"rgba(166,216,84,1)"}},"line":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+&lt;/div&gt;
+
+---
+# Exemplo - III
+
+Medidas descritivas:
+
+
+
+```r
+modelsummary::datasummary(Producao*Suplemento~Raca*(Mean + SD), data=dados.b)
+```
+
+&lt;table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;border-bottom:hidden;" colspan="2"&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Gir&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Guzera&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Holandesa&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Jersey&lt;/div&gt;&lt;/th&gt;
+&lt;th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; "&gt;Nelore&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Suplemento &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SD &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SD  &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SD   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean    &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SD    &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean     &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SD     &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Producao &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; A &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; B &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.90 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; S &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.40 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+class: animated, fadeIn
+# Exemplo - IV
+
+|Fonte de Variação     | g.l.    || SQ     || QM     ||  `\(F_0\)`    |
+|:-------------------- |:-------:||:------:||:------:||:---------:|
+|  Tratamentos         | 3       || 87,560 || 29,187 || 60,075    |
+|  Blocos              | 4       || 0,122  || 0,030  ||           | 
+|  Erro                | 12      || 5,830  || 0,486  ||           | 
+|  Total               | 19      || 93,512 ||        ||           | 
+
+--
+
+**No R:**
+
+
+```r
+fit.b &lt;- aov(Producao ~ Suplemento + Raca, data = dados.b)
+summary(fit.b)
+```
+
+```
+##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Suplemento   3  87.56  29.187  60.075 1.69e-07 ***
+## Raca         4   0.12   0.030   0.063    0.992    
+## Residuals   12   5.83   0.486                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+class: animated, fadeIn
+# Exemplo 2 - I
+
+Rendimento de sementes de algodão:
+
+| Fertilizante  |     |       | Parcela  |      | `\(y_{i\cdot}\)` |
+|:-------------:|:---:|:-----:|:--------:|:----:|:------------:|
+|               | A   | B     | C        | D    |              |
+|     1         | 87  | 86    |  88      | 83   | 344          |
+|     2         | 85  |  87   |  95      |  85  | 352          |
+|     3	        | 90  |  92   |  95      |  90  | 367          |
+|     4         | 89  |  97   |  98      |  88  | 372          |
+|     5         | 99  |  96   |  91      |  90  | 376          |
+| `\(y_{\cdot j}\)` | 450 |  458  |  467     |  436 | 1811         |
+
+---
+class: animated, fadeIn
+# Exemplo 2 - II
+
+Tabela de ANOVA para o delineamento em blocos:
+
+|Fonte de Variação     | g.l.    || SQ     || QM     ||  `\(F_0\)`    |
+|:-------------------- |:-------:||:------:||:------:||:---------:|
+|  Tratamentos         | 4       || 186,20 || 46,55  || 4,26      |
+|  Blocos              | 3       || 103,75 || 34,58  || 3,17      | 
+|  Erro                | 12      || 131,00 || 10,92  ||           | 
+|  Total               | 19      || 420,95 ||        ||           | 
+
+--
+
+Tabela de ANOVA para o delineamento CA:
+
+|Fonte de Variação     | g.l.    || SQ     || QM     ||  `\(F_0\)`    |
+|:-------------------- |:-------:||:------:||:------:||:---------:|
+|  Tratamentos         | 4       || 186,20 || 46,55  || 2,97      |
+|  Erro                | 15      || 234,75 || 15,65  ||           | 
+|  Total               | 19      || 420,95 ||        ||           | 
+
+
+---
+class: animated, fadeIn
+# Exemplo 2 - III
+
+**Observações:**
+
+ * O teste para comparação de médias dos tratamentos sob o delineamento em blocos detecta diferenças significativas ao nível 5%.
+ 
+ * Quando realizado o mesmo teste sob o delineamento completamente aleatorizado, não se encontram diferenças significativas entre tratamentos ao nível 5%.
+ 
+ --
+ 
+ &gt; &lt;span style="color:orange"&gt;**Mesmo que os blocos não tenham um efeito significativo, nem sempre é conveniente prescindir deles.**&lt;/span&gt;
+
+
+---
+class: animated, fadeIn
+# Exemplo 3
+
+Uma franquia de comidas está testando três novos itens no cardápio. Para determinar se eles têm o mesmo sucesso, seis restaurantes da franquia foram aleatoriamente selecionados para participar do estudo. Cada restaurante testará os três itens do cardápio. Adicionalmente, cada restaurante testará apenas um item por semana, de forma que o teste terá duração de três semanas. A ordem do teste de cada item para cada restaurante é aleatorizada. As vendas dos itens após uma semana de teste foram:
+
+| Item 1 |  Item 2 | Item 3 |
+|:------:|:-------:|:------:|
+| 31     |   27    |   24   |
+| 31     |   28    |  31    |
+| 45	   |   29    |  46    |
+| 21     |   18    |  48    |
+| 42     |   36    |  46    |
+| 32     |   17    |  40    |
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
