@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>PLANEJAMENTO DE EXPERIMENTOS I STA13827</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# PLANEJAMENTO DE EXPERIMENTOS I STA13827
+## Delineamento Fatoriais
+### Nátaly A. Jiménez Monroy
+### LECON/DEST - UFES
+### Vitória. ES - 08/02/2022
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (https://cran.r-project.org/package=latticeExtra#1)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+#Introdução - I
+
+  * Usados quando se deseja analisar a influência de dois ou mais fatores e suas possíveis interações.
+  
+  * A classe mais simples de um experimento fatorial é a `\(2\times 2\)`, em que temos dois fatores e dois níveis.
+  
+  * De modo geral têm-se os experimentos fatoriais `\(p_1\times p_2\times \cdots \times p_q\)` em que `\(q\)` é o número de fatores e `\(p_i\)` é o número de níveis do `\(i−ésimo\)` fator `\((i=1,...,q)\)`.
+  
+  * Quando o número de níveis é igual para todos os fatores, isto é, `\(p_1=p_2=···=p_q=p\)`, têm-se os chamados experimentos fatoriais `\(p^q\)`.
+
+  
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Introdução - II
+
+###Exemplo - I
+
+Duas variedades (A) de cana-de-açúcar podem ser combinadas com dois diferentes herbicidas (B). Os níveis para variedades são dados por `\(A_1\)` e `\(A_2\)` e os níveis de herbicida dados por `\(B_1\)` e `\(B_2\)`, de forma que as combinações desses níveis geram os seguintes tratamentos: `\(A_1B_1\)`, `\(A_1B_2\)`, `\(A_2B_1\)` e `\(A_2B_2\)`.Os dados referentes à produção de uma cultura são
+
+| Variedade (A)        | Herbicida (B)  |           |
+|:--------------------:|:--------------:|:---------:|
+|                      |  `\(B_1\)`         |   `\(B_2\)`   |
+|     `\(A_1\)`            | 20             |  30       |
+|     `\(A_2\)`            | 40             |  52       |
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Introdução - III
+
+###Exemplo - II
+
+**Efeito principal de um fator**
+
+Mudança na resposta produzida por uma mudança no nível do fator.
+
+ &gt;**Efeito do fator A**: Diferença entre a resposta média no nível "inferior" de A e a resposta média no nível "superior" de A.
+ 
+ `$$A=\frac{40+52}{2}-\frac{20+30}{2}=21.$$`
+ &gt;**Efeito do fator B**: Diferença entre a resposta média no nível "inferior" de B e a resposta média no nível "superior" de B.
+ 
+ `$$B=\frac{30+52}{2}-\frac{20+40}{2}=11.$$`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Introdução - IV
+
+###Exemplo - III
+
+**Exemplo Montgomery `\(6^a\)` Ed., pg. 161.**
+
+&lt;img src="images/Exemplo_Fatorial.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+ 
+---
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Experimentos Fatoriais sem e com interação
+
+
+&lt;img src="images/Interacao.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Arranjo Geral para um Experimento Fatorial
+
+ |Fator A   |                          Fator B               |  Total          |         Média         |
+ |:--------------------:|:---------------------------------------------:|:---------------:|:---------------------:| 
+ |               | `\(\phantom{*****}1\phantom{****}\quad \phantom{****}2\phantom{****}\quad \cdots\phantom{****} \quad b\phantom{****}\)` |  |     |
+ |          1           |  `\(y_{111},\cdots,y_{11n}\quad y_{121},\cdots,y_{12n}\quad \cdots\quad y_{1b1},\cdots,y_{1bn}\)` |  `\(y_{1\cdot\cdot}\)`   |     `\(\bar{y}_{1\cdot\cdot}\)`|
+ |          2           |  `\(y_{211},\cdots,y_{21n}\quad y_{221},\cdots,y_{22n}\quad \cdots\quad y_{2b1},\cdots,y_{2bn}\)` |  `\(y_{2\cdot\cdot}\)`   |     `\(\bar{y}_{2\cdot\cdot}\)`|
+ |          `\(\vdots\)`    | `\(\vdots\qquad \vdots\qquad \cdots\qquad \vdots\)`|      `\(\vdots\)`  |               `\(\vdots\)`|
+ |          `\(a\)`         |  `\(y_{a11},\cdots,y_{a1n}\quad y_{a21},\cdots,y_{a2n}\quad \cdots\quad y_{ab1},\cdots,y_{abn}\)` |  `\(y_{a\cdot\cdot}\)`   |     `\(\bar{y}_{a\cdot\cdot}\)`|
+ |            Total     | `\(\phantom{*****}y_{\cdot1\cdot}\phantom{****}\quad \phantom{****}y_{\cdot2\cdot}\phantom{****}\quad \cdots\quad \phantom{****}y_{\cdot b\cdot}\phantom{****}\)`  | `\(y_{\cdot\cdot\cdot}\)`|            |
+ |            Média     | `\(\phantom{*****}\bar{y}_{\cdot 1\cdot}\phantom{****}\quad \phantom{****}\bar{y}_{\cdot 2\cdot}\phantom{****}\quad \cdots\quad \phantom{****}\bar{y}_{\cdot b\cdot}\phantom{****}\)`  | | `\(\bar{y}_{\cdot\cdot\cdot}\)`|
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Modelo - I
+
+`$$y_{ijk}=\mu+\tau_i+\beta_j+(\tau\beta)_{ij}+\epsilon_{ijk},\quad \left\{
+                                                                    \begin{array}{ll}
+                                                                      i=1,\ldots,a \\
+                                                                      j=1,\ldots,b \\
+                                                                      k=1,\ldots,n.
+                                                                    \end{array}
+                                                                  \right.$$`
+--
+
+onde
+
+* `\(y_{ijk}\)` é a resposta no `\(i-ésimo\)` nível do fator A, `\(j-ésimo\)` nível do fator B e `\(k-ésima\)` repetição;
+
+* `\(\tau_i\)` é o efeito do `\(i-ésimo\)` nível do fator A;
+
+* `\(\beta_j\)` é o efeito do `\(j-ésimo\)` nível do fator B;
+
+* `\((\tau\beta)_{ij}\)` é o efeito da interação do `\(i-ésimo\)` nível do fator A e o `\(j-ésimo\)` nível do fator B;
+
+* `\(\epsilon_{ijk}\)` é o erro experimental associado ao `\(i-ésimo\)` nível do fator A, `\(j-ésimo\)` nível do fator B e `\(k-ésima\)` repetição. Assume-se que `\(\epsilon_{ijk}\sim N(0,\sigma^2)\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Modelo - II
+
+**Observações:**
+
+ * Assume-se que ambos os fatores são fixos.
+ 
+* Os efeitos dos tratamentos são assumidos como desvios da média global, logo
+ `$$\sum_{i=1}^a \tau_i=0 \text{ e } \sum_{j=1}^b \beta_j=0.$$`
+
+ * Os efeitos de interação são assumidos fixos de forma que
+ `$$\sum_{i=1}^a (\tau\beta)_{ij}=\sum_{j=1}^b (\tau\beta)_{ij}=0.$$`
+ 
+ * Há `\(abn\)` observações em total.
+ 
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Hipóteses de interesse
+
+ * Ausência de efeito do fator A
+&lt;div class="math"&gt;
+\[\begin{align*}
+\text{H}_0:&amp; \tau_1=\tau_2=\cdots=\tau_a=0\\
+  \text{H}_1:&amp; \text{ pelo menos um } \tau_i\neq 0.
+\end{align*}\]
+&lt;/div&gt;
+  
+*  Ausência de efeito do fator B
+&lt;div class="math"&gt;
+\[\begin{align*}
+  \text{H}_0:&amp; \beta_1=\beta_2=\cdots=\beta_b=0\\
+  \text{H}_1:&amp; \text{ pelo menos um } \beta_j\neq 0.
+\end{align*}\]
+&lt;/div&gt;
+
+* Ausência de interação
+&lt;div class="math"&gt;
+\[\begin{align*}
+  \text{H}_0:&amp; (\tau\beta)_{11}=(\tau\beta)_{12}=\cdots=(\tau\beta)_{ab}=0\\
+  \text{H}_1:&amp; \text{ pelo menos um } (\tau\beta)_{ij}\neq 0.
+\end{align*}\]
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Decomposição das Somas de Quadrados
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+  \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n (y_{ijk}-\overline{y}_{\cdot\cdot\cdot})^2&amp;=bn\sum_{i=1}^a(\overline{y}_{i\cdot\cdot}-\overline{y}_{\cdot\cdot\cdot})^2+an\sum_{j=1}^b(\overline{y}_{\cdot j \cdot}-\overline{y}_{\cdot\cdot\cdot})^2\\
+&amp;+n\sum_{i=1}^a\sum_{j=1}^b(\overline{y}_{ij\cdot}-\overline{y}_{i\cdot\cdot}-\overline{y}_{\cdot j\cdot}+\overline{y}_{\cdot\cdot\cdot})^2\\
+&amp;+\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n(y_{ijk}-\overline{y}_{ij\cdot})^2
+\end{align*}\]
+&lt;/div&gt;
+
+Ou seja,
+
+`$$SQT=SQA+SQB+SQAB+SQE.$$`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Tabela de ANOVA
+
+|Fonte de Variação  |      Gl      |             SQ                                                          |   QM  | `\(F_0\)`|
+ |:-----------------:|:------:|:-----------------------------------------------------------------------:|:----------------------------------:|:----:| 
+ | Fator A       | `\(a-1\)`  | `\(\sum_{i=1}^a \frac{y_{i\cdot\cdot}^2}{bn}-\frac{y_{\cdot\cdot\cdot}^2}{abn}\)` | `\(\frac{SQA}{a-1}\)`      | `\(\frac{QMA}{QME}\)` |
+ |  Fator B           | `\(b-1\)`  | `\(\sum_{j=1}^b \frac{y_{\cdot j\cdot}^2}{an}-\frac{y_{\cdot\cdot\cdot}^2}{abn^2}\)` | `\(\frac{SQB}{b-1}\)`        |  `\(\frac{QMB}{QME}\)` |
+|  Interação           | `\((a-1)(b-1)\)`  | `\(\sum_{i=1}^a\sum_{j=1}^b \frac{y_{ij\cdot}^2}{n}-\frac{y_{\cdot\cdot\cdot}^2}{abn}-SQA-SQB\)` | `\(\frac{SQAB}{(a-1)(b-1)}\)`        |  `\(\frac{QMAB}{QME}\)`  |
+  |  Erro            | `\(ab(n-1)\)` | `\(SQE=SQT-SQA-SQB-SQAB\)` | `\(\frac{SQE}{ab(n-1)}\)` |  `\(\phantom{.}\)` |
+ |  Total            | `\(abn-1\)`| `\(\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n y_{ijk}^2-\frac{y_{\cdot\cdot\cdot}^2}{abn}\)`     |  `\(\phantom{.}\)` |        `\(\phantom{.}\)` |
+
+
+
+ 
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
