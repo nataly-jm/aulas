@@ -5,6 +5,23 @@
     <meta charset="utf-8" />
     <meta name="author" content="Nátaly A. Jiménez Monroy" />
     <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="libs/jszip/jszip.min.js"></script>
+    <script src="libs/pdfmake/pdfmake.js"></script>
+    <script src="libs/pdfmake/vfs_fonts.js"></script>
+    <link href="libs/dt-ext-buttons/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="libs/dt-ext-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.html5.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.colVis.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.print.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
   </head>
@@ -16,7 +33,7 @@ class: center, middle, inverse, title-slide
 ## Delineamento em Quadrados Latinos
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 01/02/2022
+### Vitória. ES - 08/02/2022
 
 ---
 
@@ -30,6 +47,7 @@ class: center, middle, inverse, title-slide
 [//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
 [//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
 [//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (https://cran.r-project.org/package=latticeExtra#1)
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight)
 
 class: animated, slideInRight
@@ -67,7 +85,7 @@ class: animated, fadeIn
 
 #Introdução - II
 
-###Exemplo
+###Exemplo 1 - I
 
 Um engenheiro industrial está pesquisando o efeito de quatro métodos (A, B, C, D) no tempo de ensamblagem de uma componente para TVs. Ele selecionou quatro operadores para o estudo. Ainda, o engenheiro sabe que cada método produz um certo cansaço, de forma que o tempo requerido para a última ensamblagem pode ser maior que o tempo requerido para a primeira, independente do método usado. Para considerar essas duas fontes de variabilidade (operador, ordem de ensamblagem) ele decide usar um delineamento em quadrado latino.
 
@@ -82,6 +100,69 @@ Um engenheiro industrial está pesquisando o efeito de quatro métodos (A, B, C,
 
 &gt;**Observação:** Primeiro se aleatoriza a ordem das linhas e depois se atribuem os tratamentos às colunas.
   
+  
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo 1 - II
+
+<div id="htmlwidget-b9c224452c0f5180e150" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b9c224452c0f5180e150">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4],[1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4],["C","D","A","B","B","C","D","A","A","B","C","D","D","A","B","C"],[10,14,7,8,7,18,11,8,5,10,11,9,10,10,12,14]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Ordem<\/th>\n      <th>Operador<\/th>\n      <th>Metodo<\/th>\n      <th>Tempo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"ensamblagem"},{"extend":"excel","filename":"ensamblagem"},{"extend":"pdf","filename":"ensamblagem"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo 1 - III
+
+
+```r
+library(reshape)
+
+dados.ql&lt;-transform(dados.ql, Ordem=factor(Ordem), Operador=factor(Operador), Metodo=factor(Metodo))
+
+cast(dados.ql, Ordem~Operador, value="Metodo")
+```
+
+```
+##   Ordem 1 2 3 4
+## 1     1 C D A B
+## 2     2 B C D A
+## 3     3 A B C D
+## 4     4 D A B C
+```
+
+```r
+cast(dados.ql, Ordem~Operador, value="Tempo")
+```
+
+```
+##   Ordem  1  2  3  4
+## 1     1 10 14  7  8
+## 2     2  7 18 11  8
+## 3     3  5 10 11  9
+## 4     4 10 10 12 14
+```
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo 1 - IV
+
+
+```r
+levelplot(Tempo~Ordem+Operador,
+          data=dados.ql, aspect="iso")+
+    layer(with(dados.ql,
+               panel.text(x=Operador, y=Ordem,
+                          label=paste(Metodo, Tempo))))
+```
+
+&lt;img src="Experimentos_em_Quadrado_Latino_files/figure-html/unnamed-chunk-3-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
@@ -124,7 +205,95 @@ class: animated, fadeIn
   |  Erro            | `\((p-1)(p-2)\)` | `\(SQE=SQT-SQTr-SQL-SQC\)` | `\(\frac{SQE}{(p-1)(p-2)}\)` |  `\(\phantom{.}\)` |
  |  Total            | `\(p^2-1\)`| `\(SQT=\sum_{i=1}^p\sum_{j=1}^p\sum_{k=1}^p y_{ijk}^2-\frac{y_{\cdot\cdot\cdot}^2}{p^2}\)`     |  `\(\phantom{.}\)` |        `\(\phantom{.}\)` |
 
-  
+
+
+---
+### Exemplo 1 - V
+
+**ANOVA**
+
+
+```r
+fit.ql &lt;- aov(Tempo ~ Metodo + Ordem + Operador, data = dados.ql)
+summary(fit.ql)
+```
+
+```
+##             Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## Metodo       3   72.5  24.167  13.810 0.00421 **
+## Ordem        3   18.5   6.167   3.524 0.08852 . 
+## Operador     3   51.5  17.167   9.810 0.00993 **
+## Residuals    6   10.5   1.750                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+### Exemplo 1 - VI
+
+**Verificação do Modelo**
+
+
+
+```r
+par(mfrow=c(2,2)); plot(fit.ql, which=1:3)
+```
+
+&lt;img src="Experimentos_em_Quadrado_Latino_files/figure-html/unnamed-chunk-5-1.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+---
+### Exemplo 1 - VII
+
+**Comparações Múltiplas - I**
+
+
+```r
+metodo.means &lt;- lsmeans(fit.ql, "Metodo")
+metodo.means
+```
+
+```
+##  Metodo lsmean    SE df lower.CL upper.CL
+##  A        7.50 0.661  6     5.88     9.12
+##  B        9.25 0.661  6     7.63    10.87
+##  C       13.25 0.661  6    11.63    14.87
+##  D       11.00 0.661  6     9.38    12.62
+## 
+## Results are averaged over the levels of: Ordem, Operador 
+## Confidence level used: 0.95
+```
+
+---
+### Exemplo 1 - VIII
+
+**Comparações Múltiplas - II**
+
+```r
+metodo.comp &lt;- summary(glht(fit.ql, linfct=mcp(Metodo="Tukey")), test=adjusted(type="fdr"));metodo.comp
+```
+
+```
+## 
+## 	 Simultaneous Tests for General Linear Hypotheses
+## 
+## Multiple Comparisons of Means: Tukey Contrasts
+## 
+## 
+## Fit: aov(formula = Tempo ~ Metodo + Ordem + Operador, data = dados.ql)
+## 
+## Linear Hypotheses:
+##            Estimate Std. Error t value Pr(&gt;|t|)   
+## B - A == 0   1.7500     0.9354   1.871   0.1106   
+## C - A == 0   5.7500     0.9354   6.147   0.0051 **
+## D - A == 0   3.5000     0.9354   3.742   0.0192 * 
+## C - B == 0   4.0000     0.9354   4.276   0.0157 * 
+## D - B == 0   1.7500     0.9354   1.871   0.1106   
+## D - C == 0  -2.2500     0.9354  -2.405   0.0794 . 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## (Adjusted p values reported -- fdr method)
+```
+
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
@@ -246,6 +415,360 @@ class: animated, fadeIn
 |     6      | B=120,7  | D=106,8         | A=95,4 | C=102,9  |
 |     7      | C=117,6  | A=112,4         | D=112,3| B=110,4  |
 |     8      | D=135,8  | C=126,3         | B=133,3| A=101,8  |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo - IV
+
+<div id="htmlwidget-2fbae5c793821335e21a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2fbae5c793821335e21a">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],[1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8],[1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4],["A","B","C","D","B","D","A","C","C","A","D","B","D","C","B","A","A","B","C","D","B","D","A","C","C","A","D","B","D","C","B","A"],[93,108.6,108.9,102,115.4,96.5,77.9,100.2,102.1,94.9,116.9,96,117.6,114.1,118.9,97.6,125.2,109.4,116.4,114.5,120.7,106.8,95.4,102.9,117.6,112.4,112.3,110.4,135.8,126.3,133.3,101.8]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Rep<\/th>\n      <th>Leitegada<\/th>\n      <th>Peso_ini<\/th>\n      <th>Castracao<\/th>\n      <th>Peso<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"suinos"},{"extend":"excel","filename":"suinos"},{"extend":"pdf","filename":"suinos"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo - V
+
+
+```r
+dados.qlrep1&lt;-transform(dados.qlrep[1:16,],Leitegada=factor(Leitegada),Peso_ini=factor(Peso_ini),Castracao=factor(Castracao),Rep=factor(Rep))
+dados.qlrep2&lt;-transform(dados.qlrep[17:32,],Leitegada=factor(Leitegada),Peso_ini=factor(Peso_ini),Castracao=factor(Castracao),Rep=factor(Rep))
+
+cbind(cast(dados.qlrep1, Leitegada~Peso_ini, value="Castracao"), cast(dados.qlrep2, Leitegada~Peso_ini, value="Castracao"))
+```
+
+```
+##   Leitegada 1 2 3 4 Leitegada 1 2 3 4
+## 1         1 A B C D         5 A B C D
+## 2         2 B D A C         6 B D A C
+## 3         3 C A D B         7 C A D B
+## 4         4 D C B A         8 D C B A
+```
+
+```r
+cbind(cast(dados.qlrep1, Leitegada~Peso_ini, value="Peso"), cast(dados.qlrep2, Leitegada~Peso_ini, value="Peso"))
+```
+
+```
+##   Leitegada     1     2     3     4 Leitegada     1     2     3     4
+## 1         1  93.0 108.6 108.9 102.0         5 125.2 109.4 116.4 114.5
+## 2         2 115.4  96.5  77.9 100.2         6 120.7 106.8  95.4 102.9
+## 3         3 102.1  94.9 116.9  96.0         7 117.6 112.4 112.3 110.4
+## 4         4 117.6 114.1 118.9  97.6         8 135.8 126.3 133.3 101.8
+```
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo - VI
+ **Réplica 1**
+ 
+&lt;img src="Experimentos_em_Quadrado_Latino_files/figure-html/unnamed-chunk-10-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo - VII
+ **Réplica 2**
+ 
+&lt;img src="Experimentos_em_Quadrado_Latino_files/figure-html/unnamed-chunk-11-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+
+---
+### Exemplo - VIII
+
+**ANOVA**
+
+
+```r
+fit.qlrep &lt;- aov(Peso ~ Castracao + Leitegada + Peso_ini + Rep*Leitegada, data = dados.qlrep)
+summary(fit.qlrep)
+```
+
+```
+##               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Castracao      3 1031.5   343.8   4.499 0.012171 *  
+## Leitegada      1 1404.2  1404.2  18.373 0.000255 ***
+## Peso_ini       1  543.9   543.9   7.117 0.013466 *  
+## Rep            1    2.6     2.6   0.034 0.855931    
+## Leitegada:Rep  1    0.2     0.2   0.002 0.964310    
+## Residuals     24 1834.3    76.4                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+### Exemplo - IX
+
+**Verificação do Modelo**
+
+
+
+```r
+par(mfrow=c(2,2)); plot(fit.qlrep, which=1:3)
+```
+
+&lt;img src="Experimentos_em_Quadrado_Latino_files/figure-html/unnamed-chunk-13-1.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Observações Faltantes
+
+Estima-se a observação faltante como:
+`$$y_{ijk}=\frac{p(y_{i\cdot\cdot}'+y_{\cdot j\cdot}'-y_{\cdot\cdot k}')-2y_{\cdot\cdot\cdot}'}{(p-2)(p-1)}$$`
+onde `\(y_{i\cdot\cdot}'\)` indica o total para a linha com a observação faltante, `\(y_{\cdot j\cdot}'\)` é o total para a coluna com a observação faltante, `\(y_{\cdot\cdot k}'\)` é o total para o tratamento com a observação faltante e `\(y_{\cdot\cdot\cdot}'\)` representa o total geral com a observação faltante.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Delineamento em Quadrado Greco-Latino
+
+ * Usado quando contamos com três variáveis para controle da variabilidade.
+ 
+ * Usam-se letras gregas para representar o controle na terceira direção.
+ 
+ * Cada tratamento aparece apenas uma vez em cada linha, em cada coluna e com cada letra grega.
+ 
+ * Há quadrados greco-latinos para qualquer `\(p\geq 3\)`, com exceção de `\(p=6\)`.
+ 
+ * Um delineamento greco latino são dois delineamentos de quadrado latino ortogonais sobrepostos.
+ 
+ 
+ --
+ 
+ &gt; Dois quadrados latinos de tamanho `\(p\)` são ditos **&lt;span style="color:orange"&gt;ortogonais&lt;/span&gt;** se cada par ordenado de símbolos ocorre exatamente uma vez entre os `\(p^2\)` pares possíveis.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo
+
+**Quadrado greco-latino para `\(p=4\)`**
+
+| Linhas |           |    Colunas   |             |             |
+|:------:|:---------:|:------------:|:-----------:|:-----------:|
+|        |  1        |   2          |       3     |      4      |
+|     1  | A `\(\beta\)` |  B `\(\alpha\)`  |  C `\(\delta\)` |  D `\(\gamma\)` |
+|     2  | B `\(\alpha\)`|  C `\(\beta\)`   |  D `\(\gamma\)` |  A `\(\delta\)` |
+|     3	 | C `\(\gamma\)`|  D `\(\delta\)`  |  A `\(\alpha\)` |  B `\(\beta\)`  |
+|     4  | D `\(\delta\)`|  A `\(\gamma\)`  |  B `\(\beta\)`  |  C `\(\alpha\)` |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Modelo
+
+`$$y_{ijkl}=\mu+\theta_i+\tau_j+\omega_k+\Psi_l+\epsilon_{ijkl}, i=1,\ldots,p, j=1,\ldots,p, k=1,\ldots, p, l=1,\ldots,p.$$`
+--
+
+onde
+
+* `\(y_{ijkl}\)` é a observação na `\(i-\)`ésima linha e `\(l-\)`ésima coluna correspondente ao `\(j-\)`ésimo tratamento (letra Latina) e `\(k-\)`ésima letra grega;
+
+* `\(\mu\)` é a média global;
+
+* `\(\theta_i\)` é o efeito da `\(i-\)`ésima linha;
+
+* `\(\tau_j\)` é o efeito do `\(j-\)`ésimo Tratamento (letra Latina);
+
+* `\(\omega_k\)` é o efeito da `\(k-\)`ésima letra grega;
+
+* `\(\Psi_l\)` é o efeito da `\(l-\)`ésima coluna;
+
+* `\(\epsilon_{ijkl}\)` é o erro aleatório. Assume-se que `\(\epsilon_{ijkl}\sim N(0,\sigma^2)\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Anova
+
+|Fonte de Variação  |      Gl      |             SQ                                                          |   QM  | `\(F_0\)`|
+ |:-----------------:|:------:|:-----------------------------------------------------------------------:|:--------------------------------:|:----:| 
+ | Tratamentos       | `\(p-1\)`  | `\(SQTr=\frac{1}{p}\sum_{j=1}^p y_{\cdot j\cdot\cdot}^2-\frac{y_{\cdot\cdot\cdot\cdot}^2}{N}\)` | `\(\frac{SQTr}{p-1}\)`      | `\(\frac{QMTr}{QME}\)` |
+|  Letras Gregas     | `\(p-1\)`  | `\(SQG=\frac{1}{p}\sum_{k=1}^p y_{\cdot\cdot k\cdot}^2-\frac{y_{\cdot\cdot\cdot\cdot}^2}{N}\)` | `\(\frac{SQG}{p-1}\)`        |                    |
+|     Linhas         | `\(p-1\)`  | `\(SQL=\frac{1}{p}\sum_{i=1}^p y_{i\cdot\cdot\cdot}^2-\frac{y_{\cdot\cdot\cdot\cdot}^2}{N}\)` | `\(\frac{SQL}{p-1}\)`        |                    |
+|  Colunas           | `\(p-1\)`  | `\(SQC=\frac{1}{p}\sum_{l=1}^n y_{\cdot\cdot\cdot l}^2-\frac{y_{\cdot\cdot\cdot\cdot}^2}{N}\)` | `\(\frac{SQC}{p-1}\)`        |                    |
+|  Erro              | `\((p-3)(p-1)\)` | `\(SQE=SQT-SQTr-SQG-SQL-SQC\)` | `\(\frac{SQE}{(p-3)(p-1)}\)` |  `\(\phantom{.}\)` |
+|  Total             | `\(p^2-1\)`| `\(SQT=\sum_{i=1}^p\sum_{j=1}^p\sum_{k=1}^p\sum_{l=1}^p y_{ijkl}^2-\frac{y_{\cdot\cdot\cdot\cdot}^2}{p^2}\)`     |  `\(\phantom{.}\)` |        `\(\phantom{.}\)` |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo - I
+
+Um fabricante de certo alimento quer determinar a influência do design das suas caixas nas vendas do produto. Ele tem cinco designs para testar: A, B, C, D e E. Entre as fontes de variação ele sabe que estão: dia da semana, diferenças nas vendas de diferentes lojas e o efeito da altura das prateleiras. Decide-se realizar o experimento usando um delineamento em quadrado greco-latino onde:
+
+* Linhas: cinco dias úteis da semana.
+
+* Colunas: cinco lojas diferentes.
+
+* Letras Gregas: cinco alturas de prateleiras.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo - II
+
+As vendas (em dólares) do alimento testado foram
+
+| Dia |                   |                 |   Loja            |                   |                 |
+|:---:|:-----------------:|:---------------:|:-----------------:|:-----------------:|:---------------:|
+|     |  1                |   2             |       3           |      4            |     5           |
+| 2ª  | E `\(\alpha=238\)`    |  C `\(\delta=228\)`  |  B `\(\gamma=158\)`  |  D `\(\epsilon=188\)` | A `\(\beta=74\)`     |
+| 3ª  | D `\(\delta=149\)`    |  B `\(\beta=220\)`   |  A `\(\alpha=92\)`   |  C `\(\gamma=169\)`   | E `\(\epsilon=282\)` |
+| 4ª  | B `\(\epsilon=222\)`  |  E `\(\gamma=295\)`  |  D `\(\beta=104\)`   |  A `\(\delta=54\)`    | C `\(\alpha=213\)`   |
+| 5ª  | C `\(\beta=187\)`     |  A `\(\epsilon=66\)` |  E `\(\delta=242\)`  |  B `\(\alpha=122\)`   | D `\(\gamma=90\)`    |
+| 6ª  | A `\(\gamma=65\)`     |  D `\(\alpha=118\)`  |  C `\(\epsilon=279\)`|  E `\(\beta=278\)`    | B `\(\delta=176\)`   |
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo - III
+
+<div id="htmlwidget-9c4a4b1a05b55582c8bd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9c4a4b1a05b55582c8bd">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5,5,5,6,6,6,6,6],[1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5],["E","C","B","D","A","D","B","A","C","E","B","E","D","A","C","C","A","E","B","D","A","D","C","E","B"],["alpha","delta","gamma","epsilon","beta","delta","beta","alpha","gamma","epsilon","epsilon","gamma","beta","delta","alpha","beta","epsilon","delta","alpha","gamma","gamma","alpha","epsilon","beta","delta"],[238,228,158,188,74,149,220,92,169,282,222,295,104,54,213,187,66,242,122,90,65,118,279,278,176]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Dia<\/th>\n      <th>Loja<\/th>\n      <th>Design<\/th>\n      <th>Altura_prat<\/th>\n      <th>Vendas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"design"},{"extend":"excel","filename":"design"},{"extend":"pdf","filename":"design"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo - IV
+
+ANOVA
+
+|Fonte de Variação | Gl |  SQ       |    QM    | `\(F_0\)`|
+|:-----------------|:--:|----------:|---------:|-----:| 
+| Tratamentos      | 4  | 115462,16 | 28865,54 | 31,21|
+|  Letras Gregas   | 4  | 8852,16   | 2213,04  | 2,39 |
+|     Linhas       | 4  | 6138,56   | 1534,64  | 1,66 |
+|  Colunas         | 4  | 1544,96   | 386,24   | 0,42 |
+|  Erro            | 8  | 7397,92   | 924,74   |  `\(\phantom{.}\)` |
+|  Total           | 24 | 139395,76 | `\(\phantom{.}\)` | `\(\phantom{.}\)` |
+
+
+---
+# Exemplo - V
+
+**ANOVA**
+
+
+```r
+dados.qgl&lt;-transform(dados.qgl,Dia=factor(Dia),Loja=factor(Loja),Design=factor(Design),Altura_prat=factor(Altura_prat))
+
+fit.qgl &lt;- aov(Vendas ~ Dia + Loja + Design + Altura_prat, data = dados.qgl)
+summary(fit.qgl)
+```
+
+```
+##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Dia          4   6139    1535   1.660    0.251    
+## Loja         4   1545     386   0.418    0.792    
+## Design       4 115462   28866  31.215 6.26e-05 ***
+## Altura_prat  4   8852    2213   2.393    0.137    
+## Residuals    8   7398     925                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+# Exemplo - VI
+
+**Verificação do Modelo**
+
+
+
+```r
+par(mfrow=c(2,2)); plot(fit.qgl, which=1:3)
+```
+
+&lt;img src="Experimentos_em_Quadrado_Latino_files/figure-html/unnamed-chunk-16-1.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+---
+# Exemplo - VII
+
+**Comparações Múltiplas - I**
+
+
+```r
+design.means &lt;- lsmeans(fit.qgl, "Design")
+design.means
+```
+
+```
+##  Design lsmean   SE df lower.CL upper.CL
+##  A        70.2 13.6  8     38.8      102
+##  B       179.6 13.6  8    148.2      211
+##  C       215.2 13.6  8    183.8      247
+##  D       129.8 13.6  8     98.4      161
+##  E       267.0 13.6  8    235.6      298
+## 
+## Results are averaged over the levels of: Dia, Loja, Altura_prat 
+## Confidence level used: 0.95
+```
+
+---
+#Exemplo - VIII
+
+**Comparações Múltiplas - II**
+
+```
+## 
+## 	 Simultaneous Tests for General Linear Hypotheses
+## 
+## Multiple Comparisons of Means: Tukey Contrasts
+## 
+## 
+## Fit: aov(formula = Vendas ~ Dia + Loja + Design + Altura_prat, data = dados.qgl)
+## 
+## Linear Hypotheses:
+##            Estimate Std. Error t value Pr(&gt;|t|)    
+## B - A == 0   109.40      19.23   5.688 0.001151 ** 
+## C - A == 0   145.00      19.23   7.539 0.000329 ***
+## D - A == 0    59.60      19.23   3.099 0.020986 *  
+## E - A == 0   196.80      19.23  10.233 7.15e-05 ***
+## C - B == 0    35.60      19.23   1.851 0.101319    
+## D - B == 0   -49.80      19.23  -2.589 0.035718 *  
+## E - B == 0    87.40      19.23   4.544 0.003612 ** 
+## D - C == 0   -85.40      19.23  -4.440 0.003612 ** 
+## E - C == 0    51.80      19.23   2.693 0.034194 *  
+## E - D == 0   137.20      19.23   7.134 0.000329 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## (Adjusted p values reported -- fdr method)
+```
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Hiperquadrados
+
+Um Hiperquadrado `\(p\times p\)` é um delineamento no qual três ou mais quadrados Latinos ortogonais `\(p\times p\)` são superpostos. 
+
+Para um conjunto completo de `\(p−1\)` quadrados Latinos, podem ser estudados até `\(p+1\)` fatores. Esse delineamento utilizaria todos os `\(p^2−1\)` graus de liberdade, tornando necessária uma estimativa independente da variância do erro.
 
 
 
