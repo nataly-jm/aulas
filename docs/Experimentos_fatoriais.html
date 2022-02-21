@@ -5,6 +5,23 @@
     <meta charset="utf-8" />
     <meta name="author" content="Nátaly A. Jiménez Monroy" />
     <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="libs/jszip/jszip.min.js"></script>
+    <script src="libs/pdfmake/pdfmake.js"></script>
+    <script src="libs/pdfmake/vfs_fonts.js"></script>
+    <link href="libs/dt-ext-buttons/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="libs/dt-ext-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.html5.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.colVis.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.print.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
   </head>
@@ -13,10 +30,10 @@
 class: center, middle, inverse, title-slide
 
 # PLANEJAMENTO DE EXPERIMENTOS I STA13827
-## Delineamento Fatoriais
+## Delineamentos Fatoriais
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 08/02/2022
+### Vitória. ES - 21/02/2022
 
 ---
 
@@ -113,9 +130,9 @@ class: animated, fadeIn
 
 #Arranjo Geral para um Experimento Fatorial
 
- |Fator A   |                          Fator B               |  Total          |         Média         |
+ |    Fator A           |              Fator B                          |  Total          |         Média         |
  |:--------------------:|:---------------------------------------------:|:---------------:|:---------------------:| 
- |               | `\(\phantom{*****}1\phantom{****}\quad \phantom{****}2\phantom{****}\quad \cdots\phantom{****} \quad b\phantom{****}\)` |  |     |
+ |                      | `\(\phantom{*****}1\phantom{****}\quad \phantom{****}2\phantom{****}\quad \cdots\phantom{****} \quad b\phantom{****}\)` |  |     |
  |          1           |  `\(y_{111},\cdots,y_{11n}\quad y_{121},\cdots,y_{12n}\quad \cdots\quad y_{1b1},\cdots,y_{1bn}\)` |  `\(y_{1\cdot\cdot}\)`   |     `\(\bar{y}_{1\cdot\cdot}\)`|
  |          2           |  `\(y_{211},\cdots,y_{21n}\quad y_{221},\cdots,y_{22n}\quad \cdots\quad y_{2b1},\cdots,y_{2bn}\)` |  `\(y_{2\cdot\cdot}\)`   |     `\(\bar{y}_{2\cdot\cdot}\)`|
  |          `\(\vdots\)`    | `\(\vdots\qquad \vdots\qquad \cdots\qquad \vdots\)`|      `\(\vdots\)`  |               `\(\vdots\)`|
@@ -233,8 +250,648 @@ class: animated, fadeIn
  |  Total            | `\(abn-1\)`| `\(\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n y_{ijk}^2-\frac{y_{\cdot\cdot\cdot}^2}{abn}\)`     |  `\(\phantom{.}\)` |        `\(\phantom{.}\)` |
 
 
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
 
- 
+#Exemplo - I
+
+Tempo de vida (horas) para um experimento de design de uma bateria - Montgomery, Pg. 181.
+
+| Material  |               |Temperatura ( `\(^oF\)` )|                  |
+|:---------:|:---------------:|:----------------:|:-----------------:|
+|           |       15        |       70         |      125          | 
+|     1     | `\(130\quad 155\)`  |   `\(34 \quad 40\)`  |  `\(20 \quad  70\)`   |
+|           |  `\(74\quad 180\)`  |  `\(80 \quad  75\)`  |  `\(82 \quad  58\)`   |
+|     2     | `\(150\quad 188\)`  | `\(136 \quad 122\)`  |  `\(25 \quad  70\)`   |
+|           | `\(159\quad 126\)`  | `\(106 \quad 115\)`  |  `\(58 \quad  45\)`   |
+|     3     | `\(138\quad 110\)`  | `\(174 \quad 120\)`  |  `\(96 \quad 104\)`   |
+|           | `\(168\quad 160\)`  | `\(150 \quad 139\)`  |  `\(82 \quad  60\)`   |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo - II
+
+<div id="htmlwidget-1f72dc0b18b99ba19ba8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1f72dc0b18b99ba19ba8">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3],[15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125],[130,155,74,180,34,40,80,75,20,70,82,58,150,188,159,126,136,122,106,115,25,70,58,45,138,110,168,160,174,120,150,139,96,104,82,60]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Material<\/th>\n      <th>Temperatura<\/th>\n      <th>Tempo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"baterias"},{"extend":"excel","filename":"baterias"},{"extend":"pdf","filename":"baterias"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo - III
+
+
+```r
+dados.fator&lt;-transform(dados.fator, Material=factor(Material), Temperatura=factor(Temperatura))
+
+g.means&lt;-with(dados.fator, tapply(Tempo, list(Material,Temperatura), mean))
+g.means
+```
+
+```
+##       15     70  125
+## 1 134.75  57.25 57.5
+## 2 155.75 119.75 49.5
+## 3 144.00 145.75 85.5
+```
+
+```r
+means.material&lt;-with(dados.fator, tapply(Tempo, Material, mean))
+means.material
+```
+
+```
+##         1         2         3 
+##  83.16667 108.33333 125.08333
+```
+
+```r
+means.temperatura&lt;-with(dados.fator, tapply(Tempo, Temperatura, mean))
+means.temperatura
+```
+
+```
+##        15        70       125 
+## 144.83333 107.58333  64.16667
+```
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo - IV
+
+
+
+
+```r
+par(mfrow=c(1,2))
+interaction.plot(Material, Temperatura, Tempo,legend=T,xlab="Material",trace.label="Temperatura",col=2:4,lwd=2)
+
+interaction.plot(Temperatura, Material, Tempo,legend=T,xlab="Temperatura",trace.label="Material",col=2:4,lwd=2)
+```
+
+&lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-6-1.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo - V
+
+**ANOVA**
+
+
+```r
+fit.fator &lt;- aov(Tempo ~ Material*Temperatura, data = dados.fator)
+summary(fit.fator)
+```
+
+```
+##                      Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Material              2  10684    5342   7.911  0.00198 ** 
+## Temperatura           2  39119   19559  28.968 1.91e-07 ***
+## Material:Temperatura  4   9614    2403   3.560  0.01861 *  
+## Residuals            27  18231     675                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+###Exemplo - VI
+
+**Alternativa para visualização das médias**
+
+
+```r
+fit.fator.multcomp&lt;-lsmeans::lsmeans(fit.fator, ~Material:Temperatura)
+summary(fit.fator.multcomp,infer=T)
+```
+
+```
+##  Material Temperatura lsmean SE df lower.CL upper.CL t.ratio p.value
+##  1        15           134.8 13 27    108.1    161.4  10.371  &lt;.0001
+##  2        15           155.8 13 27    129.1    182.4  11.988  &lt;.0001
+##  3        15           144.0 13 27    117.3    170.7  11.083  &lt;.0001
+##  1        70            57.2 13 27     30.6     83.9   4.406  0.0001
+##  2        70           119.8 13 27     93.1    146.4   9.217  &lt;.0001
+##  3        70           145.8 13 27    119.1    172.4  11.218  &lt;.0001
+##  1        125           57.5 13 27     30.8     84.2   4.426  0.0001
+##  2        125           49.5 13 27     22.8     76.2   3.810  0.0007
+##  3        125           85.5 13 27     58.8    112.2   6.581  &lt;.0001
+## 
+## Confidence level used: 0.95
+```
+
+---
+###Exemplo - VII
+
+**Comparações Múltiplas para o efeito do material por temperatura**
+
+
+```r
+fit.fator.mat.temp&lt;-lsmeans::lsmeans(fit.fator, ~Material|Temperatura)
+summary(fit.fator.mat.temp,infer=T)
+```
+
+```
+## Temperatura = 15:
+##  Material lsmean SE df lower.CL upper.CL t.ratio p.value
+##  1         134.8 13 27    108.1    161.4  10.371  &lt;.0001
+##  2         155.8 13 27    129.1    182.4  11.988  &lt;.0001
+##  3         144.0 13 27    117.3    170.7  11.083  &lt;.0001
+## 
+## Temperatura = 70:
+##  Material lsmean SE df lower.CL upper.CL t.ratio p.value
+##  1          57.2 13 27     30.6     83.9   4.406  0.0001
+##  2         119.8 13 27     93.1    146.4   9.217  &lt;.0001
+##  3         145.8 13 27    119.1    172.4  11.218  &lt;.0001
+## 
+## Temperatura = 125:
+##  Material lsmean SE df lower.CL upper.CL t.ratio p.value
+##  1          57.5 13 27     30.8     84.2   4.426  0.0001
+##  2          49.5 13 27     22.8     76.2   3.810  0.0007
+##  3          85.5 13 27     58.8    112.2   6.581  &lt;.0001
+## 
+## Confidence level used: 0.95
+```
+
+---
+###Exemplo - VIII
+
+**Comparações das diferenças por pares**
+
+
+```r
+pairs(fit.fator.mat.temp)
+```
+
+```
+## Temperatura = 15:
+##  contrast estimate   SE df t.ratio p.value
+##  1 - 2      -21.00 18.4 27  -1.143  0.4967
+##  1 - 3       -9.25 18.4 27  -0.503  0.8703
+##  2 - 3       11.75 18.4 27   0.639  0.7998
+## 
+## Temperatura = 70:
+##  contrast estimate   SE df t.ratio p.value
+##  1 - 2      -62.50 18.4 27  -3.402  0.0058
+##  1 - 3      -88.50 18.4 27  -4.817  0.0001
+##  2 - 3      -26.00 18.4 27  -1.415  0.3475
+## 
+## Temperatura = 125:
+##  contrast estimate   SE df t.ratio p.value
+##  1 - 2        8.00 18.4 27   0.435  0.9012
+##  1 - 3      -28.00 18.4 27  -1.524  0.2959
+##  2 - 3      -36.00 18.4 27  -1.959  0.1419
+## 
+## P value adjustment: tukey method for comparing a family of 3 estimates
+```
+
+```r
+confint(pairs(fit.fator.mat.temp))
+```
+
+```
+## Temperatura = 15:
+##  contrast estimate   SE df lower.CL upper.CL
+##  1 - 2      -21.00 18.4 27    -66.6    24.56
+##  1 - 3       -9.25 18.4 27    -54.8    36.31
+##  2 - 3       11.75 18.4 27    -33.8    57.31
+## 
+## Temperatura = 70:
+##  contrast estimate   SE df lower.CL upper.CL
+##  1 - 2      -62.50 18.4 27   -108.1   -16.94
+##  1 - 3      -88.50 18.4 27   -134.1   -42.94
+##  2 - 3      -26.00 18.4 27    -71.6    19.56
+## 
+## Temperatura = 125:
+##  contrast estimate   SE df lower.CL upper.CL
+##  1 - 2        8.00 18.4 27    -37.6    53.56
+##  1 - 3      -28.00 18.4 27    -73.6    17.56
+##  2 - 3      -36.00 18.4 27    -81.6     9.56
+## 
+## Confidence level used: 0.95 
+## Conf-level adjustment: tukey method for comparing a family of 3 estimates
+```
+
+---
+###Exemplo - IX
+
+**Comparações Múltiplas para o efeito do material por temperatura**
+
+
+```r
+fit.fator.temp.mat&lt;-lsmeans::lsmeans(fit.fator, ~Temperatura|Material)
+summary(fit.fator.temp.mat,infer=T)
+```
+
+```
+## Material = 1:
+##  Temperatura lsmean SE df lower.CL upper.CL t.ratio p.value
+##  15           134.8 13 27    108.1    161.4  10.371  &lt;.0001
+##  70            57.2 13 27     30.6     83.9   4.406  0.0001
+##  125           57.5 13 27     30.8     84.2   4.426  0.0001
+## 
+## Material = 2:
+##  Temperatura lsmean SE df lower.CL upper.CL t.ratio p.value
+##  15           155.8 13 27    129.1    182.4  11.988  &lt;.0001
+##  70           119.8 13 27     93.1    146.4   9.217  &lt;.0001
+##  125           49.5 13 27     22.8     76.2   3.810  0.0007
+## 
+## Material = 3:
+##  Temperatura lsmean SE df lower.CL upper.CL t.ratio p.value
+##  15           144.0 13 27    117.3    170.7  11.083  &lt;.0001
+##  70           145.8 13 27    119.1    172.4  11.218  &lt;.0001
+##  125           85.5 13 27     58.8    112.2   6.581  &lt;.0001
+## 
+## Confidence level used: 0.95
+```
+
+---
+###Exemplo - X
+
+**Comparações das diferenças por pares**
+
+
+```r
+pairs(fit.fator.temp.mat)
+```
+
+```
+## Material = 1:
+##  contrast estimate   SE df t.ratio p.value
+##  15 - 70     77.50 18.4 27   4.218  0.0007
+##  15 - 125    77.25 18.4 27   4.204  0.0007
+##  70 - 125    -0.25 18.4 27  -0.014  0.9999
+## 
+## Material = 2:
+##  contrast estimate   SE df t.ratio p.value
+##  15 - 70     36.00 18.4 27   1.959  0.1419
+##  15 - 125   106.25 18.4 27   5.783  &lt;.0001
+##  70 - 125    70.25 18.4 27   3.823  0.0020
+## 
+## Material = 3:
+##  contrast estimate   SE df t.ratio p.value
+##  15 - 70     -1.75 18.4 27  -0.095  0.9950
+##  15 - 125    58.50 18.4 27   3.184  0.0099
+##  70 - 125    60.25 18.4 27   3.279  0.0078
+## 
+## P value adjustment: tukey method for comparing a family of 3 estimates
+```
+
+```r
+confint(pairs(fit.fator.temp.mat))
+```
+
+```
+## Material = 1:
+##  contrast estimate   SE df lower.CL upper.CL
+##  15 - 70     77.50 18.4 27    31.94    123.1
+##  15 - 125    77.25 18.4 27    31.69    122.8
+##  70 - 125    -0.25 18.4 27   -45.81     45.3
+## 
+## Material = 2:
+##  contrast estimate   SE df lower.CL upper.CL
+##  15 - 70     36.00 18.4 27    -9.56     81.6
+##  15 - 125   106.25 18.4 27    60.69    151.8
+##  70 - 125    70.25 18.4 27    24.69    115.8
+## 
+## Material = 3:
+##  contrast estimate   SE df lower.CL upper.CL
+##  15 - 70     -1.75 18.4 27   -47.31     43.8
+##  15 - 125    58.50 18.4 27    12.94    104.1
+##  70 - 125    60.25 18.4 27    14.69    105.8
+## 
+## Confidence level used: 0.95 
+## Conf-level adjustment: tukey method for comparing a family of 3 estimates
+```
+
+---
+###Exemplo - XI
+
+**Análise de resíduos**
+
+
+```r
+par(mfrow=c(2,2))
+plot(fit.fator)
+```
+
+&lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-13-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+###Exemplo - XII
+
+**Desdobramento das interações**
+
+Quando a interação entre os fatores é significativa, podemos desdobrar os graus de liberdade de um fator dentro dos níveis do outro
+
+ * Efeito da temperatura para cada material
+
+
+```r
+fit.fator.m &lt;- aov(Tempo ~ Material/Temperatura, data = dados.fator)
+names(coef(fit.fator.m))
+```
+
+```
+## [1] "(Intercept)"              "Material2"               
+## [3] "Material3"                "Material1:Temperatura70" 
+## [5] "Material2:Temperatura70"  "Material3:Temperatura70" 
+## [7] "Material1:Temperatura125" "Material2:Temperatura125"
+## [9] "Material3:Temperatura125"
+```
+
+```r
+grep("Material1:", names(coef(fit.fator.m)[4:9]))
+```
+
+```
+## [1] 1 4
+```
+
+---
+###Exemplo - XIII
+
+
+```r
+summary(fit.fator.m, split=list("Material:Temperatura"=list("M1"=c(1,4), "M2"=c(2,5), "M3"=c(3,6))))
+```
+
+```
+##                            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Material                    2  10684    5342   7.911 0.001976 ** 
+## Material:Temperatura        6  48733    8122  12.029 1.48e-06 ***
+##   Material:Temperatura: M1  2  15965    7983  11.822 0.000205 ***
+##   Material:Temperatura: M2  2  23360   11680  17.298 1.46e-05 ***
+##   Material:Temperatura: M3  2   9407    4704   6.966 0.003635 ** 
+## Residuals                  27  18231     675                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+---
+###Exemplo - XIV
+
+ * Efeito do material em cada temperatura
+
+
+```r
+fit.fator.t &lt;- aov(Tempo ~ Temperatura/Material, data = dados.fator)
+names(coef(fit.fator.t))
+```
+
+```
+## [1] "(Intercept)"              "Temperatura70"           
+## [3] "Temperatura125"           "Temperatura15:Material2" 
+## [5] "Temperatura70:Material2"  "Temperatura125:Material2"
+## [7] "Temperatura15:Material3"  "Temperatura70:Material3" 
+## [9] "Temperatura125:Material3"
+```
+
+```r
+grep("Temperatura15:", names(coef(fit.fator.t)[4:9]))
+```
+
+```
+## [1] 1 4
+```
+
+```r
+grep("Temperatura70:", names(coef(fit.fator.t)[4:9]))
+```
+
+```
+## [1] 2 5
+```
+
+```r
+grep("Temperatura125:", names(coef(fit.fator.t)[4:9]))
+```
+
+```
+## [1] 3 6
+```
+
+---
+###Exemplo - XV
+
+
+```r
+summary(fit.fator.t, split=list("Temperatura:Material"=list("T15"=c(1,4), "T70"=c(2,5), "T125"=c(3,6))))
+```
+
+```
+##                              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## Temperatura                   2  39119   19559  28.968 1.91e-07 ***
+## Temperatura:Material          6  20298    3383   5.010 0.001447 ** 
+##   Temperatura:Material: T15   2    886     443   0.656 0.526890    
+##   Temperatura:Material: T70   2  16553    8276  12.257 0.000163 ***
+##   Temperatura:Material: T125  2   2859    1429   2.117 0.139955    
+## Residuals                    27  18231     675                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+###Exemplo - XVI
+
+**Comparações de Tukey**
+
+
+```r
+fit.fator.multcomp&lt;-TukeyHSD(fit.fator, "Material:Temperatura")
+plot(fit.fator.multcomp)
+```
+
+&lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-18-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+###Exemplo - XVII
+
+**Comparações de Tukey**
+
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Tempo ~ Material * Temperatura, data = dados.fator)
+## 
+## $`Material:Temperatura`
+##                diff         lwr        upr     p adj
+## 2:15-1:15     21.00  -40.823184  82.823184 0.9616404
+## 3:15-1:15      9.25  -52.573184  71.073184 0.9998527
+## 1:70-1:15    -77.50 -139.323184 -15.676816 0.0065212
+## 2:70-1:15    -15.00  -76.823184  46.823184 0.9953182
+## 3:70-1:15     11.00  -50.823184  72.823184 0.9994703
+## 1:125-1:15   -77.25 -139.073184 -15.426816 0.0067471
+## 2:125-1:15   -85.25 -147.073184 -23.426816 0.0022351
+## 3:125-1:15   -49.25 -111.073184  12.573184 0.2016535
+## 3:15-2:15    -11.75  -73.573184  50.073184 0.9991463
+## 1:70-2:15    -98.50 -160.323184 -36.676816 0.0003449
+## 2:70-2:15    -36.00  -97.823184  25.823184 0.5819453
+## 3:70-2:15    -10.00  -71.823184  51.823184 0.9997369
+## 1:125-2:15   -98.25 -160.073184 -36.426816 0.0003574
+## 2:125-2:15  -106.25 -168.073184 -44.426816 0.0001152
+## 3:125-2:15   -70.25 -132.073184  -8.426816 0.0172076
+## 1:70-3:15    -86.75 -148.573184 -24.926816 0.0018119
+## 2:70-3:15    -24.25  -86.073184  37.573184 0.9165175
+## 3:70-3:15      1.75  -60.073184  63.573184 1.0000000
+## 1:125-3:15   -86.50 -148.323184 -24.676816 0.0018765
+## 2:125-3:15   -94.50 -156.323184 -32.676816 0.0006078
+## 3:125-3:15   -58.50 -120.323184   3.323184 0.0742711
+## 2:70-1:70     62.50    0.676816 124.323184 0.0460388
+## 3:70-1:70     88.50   26.676816 150.323184 0.0014173
+## 1:125-1:70     0.25  -61.573184  62.073184 1.0000000
+## 2:125-1:70    -7.75  -69.573184  54.073184 0.9999614
+## 3:125-1:70    28.25  -33.573184  90.073184 0.8281938
+## 3:70-2:70     26.00  -35.823184  87.823184 0.8822881
+## 1:125-2:70   -62.25 -124.073184  -0.426816 0.0474675
+## 2:125-2:70   -70.25 -132.073184  -8.426816 0.0172076
+## 3:125-2:70   -34.25  -96.073184  27.573184 0.6420441
+## 1:125-3:70   -88.25 -150.073184 -26.426816 0.0014679
+## 2:125-3:70   -96.25 -158.073184 -34.426816 0.0004744
+## 3:125-3:70   -60.25 -122.073184   1.573184 0.0604247
+## 2:125-1:125   -8.00  -69.823184  53.823184 0.9999508
+## 3:125-1:125   28.00  -33.823184  89.823184 0.8347331
+## 3:125-2:125   36.00  -25.823184  97.823184 0.5819453
+```
+
+---
+###Exemplo - XVIII
+
+**Comparações de Tukey**
+
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Tempo ~ Material/Temperatura, data = dados.fator)
+## 
+## $Material
+##         diff       lwr      upr     p adj
+## 2-1 25.16667 -1.135677 51.46901 0.0627571
+## 3-1 41.91667 15.614323 68.21901 0.0014162
+## 3-2 16.75000 -9.552344 43.05234 0.2717815
+## 
+## $`Material:Temperatura`
+##                diff         lwr        upr     p adj
+## 2:15-1:15     21.00  -40.823184  82.823184 0.9616404
+## 3:15-1:15      9.25  -52.573184  71.073184 0.9998527
+## 1:70-1:15    -77.50 -139.323184 -15.676816 0.0065212
+## 2:70-1:15    -15.00  -76.823184  46.823184 0.9953182
+## 3:70-1:15     11.00  -50.823184  72.823184 0.9994703
+## 1:125-1:15   -77.25 -139.073184 -15.426816 0.0067471
+## 2:125-1:15   -85.25 -147.073184 -23.426816 0.0022351
+## 3:125-1:15   -49.25 -111.073184  12.573184 0.2016535
+## 3:15-2:15    -11.75  -73.573184  50.073184 0.9991463
+## 1:70-2:15    -98.50 -160.323184 -36.676816 0.0003449
+## 2:70-2:15    -36.00  -97.823184  25.823184 0.5819453
+## 3:70-2:15    -10.00  -71.823184  51.823184 0.9997369
+## 1:125-2:15   -98.25 -160.073184 -36.426816 0.0003574
+## 2:125-2:15  -106.25 -168.073184 -44.426816 0.0001152
+## 3:125-2:15   -70.25 -132.073184  -8.426816 0.0172076
+## 1:70-3:15    -86.75 -148.573184 -24.926816 0.0018119
+## 2:70-3:15    -24.25  -86.073184  37.573184 0.9165175
+## 3:70-3:15      1.75  -60.073184  63.573184 1.0000000
+## 1:125-3:15   -86.50 -148.323184 -24.676816 0.0018765
+## 2:125-3:15   -94.50 -156.323184 -32.676816 0.0006078
+## 3:125-3:15   -58.50 -120.323184   3.323184 0.0742711
+## 2:70-1:70     62.50    0.676816 124.323184 0.0460388
+## 3:70-1:70     88.50   26.676816 150.323184 0.0014173
+## 1:125-1:70     0.25  -61.573184  62.073184 1.0000000
+## 2:125-1:70    -7.75  -69.573184  54.073184 0.9999614
+## 3:125-1:70    28.25  -33.573184  90.073184 0.8281938
+## 3:70-2:70     26.00  -35.823184  87.823184 0.8822881
+## 1:125-2:70   -62.25 -124.073184  -0.426816 0.0474675
+## 2:125-2:70   -70.25 -132.073184  -8.426816 0.0172076
+## 3:125-2:70   -34.25  -96.073184  27.573184 0.6420441
+## 1:125-3:70   -88.25 -150.073184 -26.426816 0.0014679
+## 2:125-3:70   -96.25 -158.073184 -34.426816 0.0004744
+## 3:125-3:70   -60.25 -122.073184   1.573184 0.0604247
+## 2:125-1:125   -8.00  -69.823184  53.823184 0.9999508
+## 3:125-1:125   28.00  -33.823184  89.823184 0.8347331
+## 3:125-2:125   36.00  -25.823184  97.823184 0.5819453
+```
+
+---
+###Exemplo - XIX
+
+**Comparações de Tukey**
+
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Tempo ~ Temperatura/Material, data = dados.fator)
+## 
+## $Temperatura
+##             diff        lwr       upr     p adj
+## 70-15  -37.25000  -63.55234 -10.94766 0.0043788
+## 125-15 -80.66667 -106.96901 -54.36432 0.0000001
+## 125-70 -43.41667  -69.71901 -17.11432 0.0009787
+## 
+## $`Temperatura:Material`
+##                diff         lwr        upr     p adj
+## 70:1-15:1    -77.50 -139.323184 -15.676816 0.0065212
+## 125:1-15:1   -77.25 -139.073184 -15.426816 0.0067471
+## 15:2-15:1     21.00  -40.823184  82.823184 0.9616404
+## 70:2-15:1    -15.00  -76.823184  46.823184 0.9953182
+## 125:2-15:1   -85.25 -147.073184 -23.426816 0.0022351
+## 15:3-15:1      9.25  -52.573184  71.073184 0.9998527
+## 70:3-15:1     11.00  -50.823184  72.823184 0.9994703
+## 125:3-15:1   -49.25 -111.073184  12.573184 0.2016535
+## 125:1-70:1     0.25  -61.573184  62.073184 1.0000000
+## 15:2-70:1     98.50   36.676816 160.323184 0.0003449
+## 70:2-70:1     62.50    0.676816 124.323184 0.0460388
+## 125:2-70:1    -7.75  -69.573184  54.073184 0.9999614
+## 15:3-70:1     86.75   24.926816 148.573184 0.0018119
+## 70:3-70:1     88.50   26.676816 150.323184 0.0014173
+## 125:3-70:1    28.25  -33.573184  90.073184 0.8281938
+## 15:2-125:1    98.25   36.426816 160.073184 0.0003574
+## 70:2-125:1    62.25    0.426816 124.073184 0.0474675
+## 125:2-125:1   -8.00  -69.823184  53.823184 0.9999508
+## 15:3-125:1    86.50   24.676816 148.323184 0.0018765
+## 70:3-125:1    88.25   26.426816 150.073184 0.0014679
+## 125:3-125:1   28.00  -33.823184  89.823184 0.8347331
+## 70:2-15:2    -36.00  -97.823184  25.823184 0.5819453
+## 125:2-15:2  -106.25 -168.073184 -44.426816 0.0001152
+## 15:3-15:2    -11.75  -73.573184  50.073184 0.9991463
+## 70:3-15:2    -10.00  -71.823184  51.823184 0.9997369
+## 125:3-15:2   -70.25 -132.073184  -8.426816 0.0172076
+## 125:2-70:2   -70.25 -132.073184  -8.426816 0.0172076
+## 15:3-70:2     24.25  -37.573184  86.073184 0.9165175
+## 70:3-70:2     26.00  -35.823184  87.823184 0.8822881
+## 125:3-70:2   -34.25  -96.073184  27.573184 0.6420441
+## 15:3-125:2    94.50   32.676816 156.323184 0.0006078
+## 70:3-125:2    96.25   34.426816 158.073184 0.0004744
+## 125:3-125:2   36.00  -25.823184  97.823184 0.5819453
+## 70:3-15:3      1.75  -60.073184  63.573184 1.0000000
+## 125:3-15:3   -58.50 -120.323184   3.323184 0.0742711
+## 125:3-70:3   -60.25 -122.073184   1.573184 0.0604247
+```
+
+---
+###Exemplo - XX
+
+**Comparações de Tukey**
+
+&lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-22-1.png" width="45%" style="display: block; margin: auto;" /&gt;
 ---
 class: animated, hide-logo, bounceInDown
 ## Política de proteção aos direitos autorais
