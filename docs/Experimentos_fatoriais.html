@@ -33,7 +33,7 @@ class: center, middle, inverse, title-slide
 ## Delineamentos Fatoriais
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 21/02/2022
+### Vitória. ES - 08/03/2022
 
 ---
 
@@ -254,7 +254,7 @@ class: animated, fadeIn
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-#Exemplo - I
+#Exemplo 1 - I
 
 Tempo de vida (horas) para um experimento de design de uma bateria - Montgomery, Pg. 181.
 
@@ -273,16 +273,16 @@ Tempo de vida (horas) para um experimento de design de uma bateria - Montgomery,
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-#Exemplo - II
+#Exemplo 1 - II
 
-<div id="htmlwidget-1f72dc0b18b99ba19ba8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1f72dc0b18b99ba19ba8">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3],[15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125],[130,155,74,180,34,40,80,75,20,70,82,58,150,188,159,126,136,122,106,115,25,70,58,45,138,110,168,160,174,120,150,139,96,104,82,60]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Material<\/th>\n      <th>Temperatura<\/th>\n      <th>Tempo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"baterias"},{"extend":"excel","filename":"baterias"},{"extend":"pdf","filename":"baterias"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b3d7d22b602f364f0524" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b3d7d22b602f364f0524">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3],[15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125],[130,155,74,180,34,40,80,75,20,70,82,58,150,188,159,126,136,122,106,115,25,70,58,45,138,110,168,160,174,120,150,139,96,104,82,60]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Material<\/th>\n      <th>Temperatura<\/th>\n      <th>Tempo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"baterias"},{"extend":"excel","filename":"baterias"},{"extend":"pdf","filename":"baterias"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-###Exemplo - III
+###Exemplo 1 - III
 
 
 ```r
@@ -324,7 +324,7 @@ means.temperatura
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-###Exemplo - IV
+###Exemplo 1 - IV
 
 
 
@@ -343,7 +343,7 @@ interaction.plot(Temperatura, Material, Tempo,legend=T,xlab="Temperatura",trace.
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-###Exemplo - V
+###Exemplo 1 - V
 
 **ANOVA**
 
@@ -364,7 +364,7 @@ summary(fit.fator)
 ```
 
 ---
-###Exemplo - VI
+###Exemplo 1 - VI
 
 **Alternativa para visualização das médias**
 
@@ -390,7 +390,7 @@ summary(fit.fator.multcomp,infer=T)
 ```
 
 ---
-###Exemplo - VII
+###Exemplo 1 - VII
 
 **Comparações Múltiplas para o efeito do material por temperatura**
 
@@ -423,7 +423,7 @@ summary(fit.fator.mat.temp,infer=T)
 ```
 
 ---
-###Exemplo - VIII
+###Exemplo 1 - VIII
 
 **Comparações das diferenças por pares**
 
@@ -482,7 +482,7 @@ confint(pairs(fit.fator.mat.temp))
 ```
 
 ---
-###Exemplo - IX
+###Exemplo 1 - IX
 
 **Comparações Múltiplas para o efeito do material por temperatura**
 
@@ -515,7 +515,7 @@ summary(fit.fator.temp.mat,infer=T)
 ```
 
 ---
-###Exemplo - X
+###Exemplo 1 - X
 
 **Comparações das diferenças por pares**
 
@@ -574,7 +574,7 @@ confint(pairs(fit.fator.temp.mat))
 ```
 
 ---
-###Exemplo - XI
+###Exemplo 1 - XI
 
 **Análise de resíduos**
 
@@ -589,7 +589,7 @@ plot(fit.fator)
 
 
 ---
-###Exemplo - XII
+###Exemplo 1 - XII
 
 **Desdobramento das interações**
 
@@ -620,7 +620,7 @@ grep("Material1:", names(coef(fit.fator.m)[4:9]))
 ```
 
 ---
-###Exemplo - XIII
+###Exemplo 1 - XIII
 
 
 ```r
@@ -641,7 +641,7 @@ summary(fit.fator.m, split=list("Material:Temperatura"=list("M1"=c(1,4), "M2"=c(
 
 
 ---
-###Exemplo - XIV
+###Exemplo 1 - XIV
 
  * Efeito do material em cada temperatura
 
@@ -684,7 +684,7 @@ grep("Temperatura125:", names(coef(fit.fator.t)[4:9]))
 ```
 
 ---
-###Exemplo - XV
+###Exemplo 1 - XV
 
 
 ```r
@@ -704,7 +704,7 @@ summary(fit.fator.t, split=list("Temperatura:Material"=list("T15"=c(1,4), "T70"=
 ```
 
 ---
-###Exemplo - XVI
+###Exemplo 1 - XVI
 
 **Comparações de Tukey**
 
@@ -719,7 +719,7 @@ plot(fit.fator.multcomp)
 
 
 ---
-###Exemplo - XVII
+###Exemplo 1 - XVII
 
 **Comparações de Tukey**
 
@@ -771,7 +771,7 @@ plot(fit.fator.multcomp)
 ```
 
 ---
-###Exemplo - XVIII
+###Exemplo 1 - XVIII
 
 **Comparações de Tukey**
 
@@ -829,7 +829,7 @@ plot(fit.fator.multcomp)
 ```
 
 ---
-###Exemplo - XIX
+###Exemplo 1 - XIX
 
 **Comparações de Tukey**
 
@@ -887,11 +887,470 @@ plot(fit.fator.multcomp)
 ```
 
 ---
-###Exemplo - XX
+###Exemplo 1 - XX
 
 **Comparações de Tukey**
 
 &lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-22-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+##Delineamento Fatorial `\(2^k\)`
+
+
+ * Em muitos casos podem ser considerados apenas dois níveis de cada fator (os níveis principais ou simplesmente a ausência e presença de cada fator), para se ter uma idéia dos fatores relevantes.
+ 
+ * Em outros casos, simplesmente tem-se interesse em apenas dois níveis de cada fator. Nesse caso, surgem algumas particularidades (facilidades).
+ 
+ * Os fatores podem ser qualitativos ou quantitativos.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+##Exemplo 2 - I
+
+Um pesquisador está interessado em estudar os efeitos das concentrações de um reagente e da quantidade de catalisador em um determinado processo químico. A resposta de interesse é a produção relativa a esse processo. Foram analisados os fatores Reagente (Fator A: 15% e 25%) e Catalisador (Fator B: 1 libra e 2 libras). Para cada tratamento foram realizadas três repetições. Obteve-se:
+
+| Reagente  |      Catalisador      |                       |
+|:---------:|:---------------------:|:---------------------:|
+|           |           1           |            2          |
+|     15%   | `\(28\quad 25\quad 27\)`  |  `\(18\quad 19\quad 23\)` |
+|     25%   | `\(36\quad 32\quad 32\)`  |  `\(31\quad 30\quad 29\)` |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+##Exemplo 2 - II
+
+**Apresentação Alternativa**
+
+|       Fator     | Tratamento  |       | Repetição  |       | Total |
+|:---------------:|:-----------:|:-----:|:----------:|:-----:|:-----:|
+| `\(A\quad\quad B\)` |             |   1   |      2     |   3   |       |
+| `\(-\quad\quad -\)` |    A15,B1   |  28   |     25     |  27   |   80  |
+| `\(+\quad\quad -\)` |    A25,B1   |  36   |     32     |  32   |  100  |
+| `\(-\quad\quad +\)` |    A15,B2   |  18   |     19     |  23   |   60  |
+| `\(+\quad\quad +\)` |    A25,B2   |  31   |     30     |  29   |   90  |
+
+* Os sinais `\(+\)` e `\(-\)` denotam os maiores e menores níveis de cada fator, respectivamente.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+##Exemplo 2 - II
+
+**Representação gráfica do experimento**
+
+&lt;img src="images/exemplo_fatorial_2k.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+##Exemplo 2 - III
+
+
+**Efeitos dos Fatores**
+
+ * Fator A:
+`$$A=\overline{y}_{A+}-\overline{y}_{A-}=\frac{1}{2n}[ab+a-b-(1)]=\frac{1}{6}[90+100-60-80]=8,33$$`
+
+--
+
+ * Fator B:
+`$$B=\overline{y}_{B+}-\overline{y}_{B-}=\frac{1}{2n}[ab+b-a-(1)]=\frac{1}{6}[90+60-100-80]=-5,00$$`
+
+--
+
+ * Interação:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+  AB&amp;=(\overline{y}_{A+,B+}-\overline{y}_{A-B+})-(\overline{y}_{A+,B-}-\overline{y}_{A-B-})\\
+    &amp;=\frac{1}{2n}[ab+(1)-a-b]=\frac{1}{6}[90+80-100-60]=1,67
+\end{align*}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+##Exemplo 2 - IV
+
+
+**Observações**
+
+ * O fator A tem efeito crescente.
+ 
+ * O fator B tem efeito decrescente.
+ 
+ * A interação apresenta um efeito menor do que os efeitos principais.
+ 
+ * Para o cálculo dos efeitos dos fatores foram usados contrastes
+
+--
+
+**Soma de Quadrados dos Contrastes do efeito total dos fatores**
+
+`$$SQ_C=\frac{\left(\sum_{i=1}^a c_i\overline{y}_i\right)^2}{n\sum_{i=1}^a c_i^2}.$$`
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+##Exemplo 2 - V
+
+Dessa forma:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+SQ_A&amp;=\frac{1}{4n}[ab+a-b-(1)]^2=208,33\\
+SQ_B&amp;=\frac{1}{4n}[ab+b-a-(1)]^2=75,00\\
+SQ_{AB}&amp;=\frac{1}{4n}[ab+(1)-a-b]^2=8,33
+\end{align*}\]
+&lt;/div&gt;
+
+As Somas de Quadrados Total e do Erro são calculadas da forma usual.
+
+--
+
+ &gt; Essa forma de cálculo é muito útil quando se analisam bancos de dados consideravelmente grandes. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+##Exemplo 2 - V
+
+**Tabela de contrastes**
+
+| Efeito | (1)  |  a  |  b  |  ab |
+|:------:|:----:|:---:|:---:|:---:|
+|   A:   |  -1  | +1  | -1  | +1  |
+|   B:   |  -1  | -1  | +1  | +1  |
+|  AB:   |  +1  | -1  | -1  | +1  |
+
+Contribuição de cada fator na explicação da variabilidade dos dados:
+
+| Fator  | Efeito estimado  |   SQ   |  Contribuição (%)  |
+|:------:|:----------------:|:------:|:------------------:|
+|   A:   |       8,33       | 208,33 |       64,44        |
+|   B:   |      -5,00       |  75,00 |       23,22        |
+|  AB:   |       1,67       |   8,33 |        2,58        |
+| Resíduo|                  |  31,33 |                    |
+|        |                  | 323,00 |                    |
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Experimento Fatorial `\(2^3\)`
+
+**Representação gráfica do experimento**
+
+&lt;img src="images/Esquema_fatorial_2_3.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Efeitos no experimento fatorial `\(2^3\)`
+
+&lt;img src="images/Efeitos_fatorial_2_3.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 3 - I
+
+Uma empresa está interessada em garantir que a quantidade de refrigerante colocada em cada garrafa seja mais uniforme entre os vasilhames. Fatores de interesse:
+
+ * Percentual de carbonatação (CARB): 10% e 12%
+ 
+ * Pressão de operação no enchimento (PRE): 25 e 30 psi
+ 
+ * Velocidade na linha de produção (VELOC): 200 e 250 bpm.
+
+--
+
+&gt; Há um total de `\(2\times 2 \times 2 = 8\)` tratamentos. Para cada tratamento foram medidas as diferenças entre a quantidade de refrigerante inserida no vasilhame menos o valor padrão de dois refrigerantes escolhidos ao acaso.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 3 - II
+
+**Resultados do experimento**
+
+|    | Fator |     | Tratamento |  Repetição  |    | Total |
+|:--:|:-----:|:---:|:----------:|:-----------:|:--:|:-----:|
+| A  |   B   |  C  |            |      1       |  2 |       |
+| -  |  -    |  -  |     (1)    |     -3       | -1 |  -4   |
+| -  |  -    |  +  |      c     |     -1       |  0 |  -1   |
+| -  |  +    |  -  |      b     |     -1       |  0 |  -1   |
+| -  |  +    |  +  |      bc    |      1       |  1 |   2   |
+| +  |  -    |  -  |      a     |      0       |  1 |   1   |
+| +  |  -    |  +  |      ac    |      2       |  1 |   3   |
+| +  |  +    |  -  |      ab    |      2       |  3 |   5   |
+| +  |  +    |  +  |     abc    |      6       |  5 |  11   |
+
+&gt;**Obs:** Os sinais " `\(-\)` " e " `\(+\)` " denotam, respectivamente, os níveis inferiores e superiores de cada fator.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 3 - III
+
+**Representação gráfica do experimento**
+
+
+&lt;img src="images/exemplo_2_3.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 3 - IV
+
+**Tabela de contrastes**
+
+| Tratamento   |    |     | Coeficientes |     |    |      |     |       |
+|:------------:|:--:|:---:|:------------:|:---:|:--:|:----:|:---:|:-----:|
+|              |  I |  A  |  B           |  AB | C  |  AC  | BC  |  ABC  |
+|  (1)         |  + |  -  |  -           |  +  | -  |  +   | +   |  -    |
+|   a          |  + |  +  |  -           |  -  | -  |  -   | +   |  +    |
+|   b          |  + |  -  |  +           |  -  | -  |  +   | -   |  +    |
+|  ab          |  + |  +  |  +           |  +  | -  |  -   | -   |  -    |
+|   c          |  + |  -  |  -           |  +  | +  |  -   | -   |  +    |
+|  ac          |  + |  +  |  -           |  -  | +  |  +   | -   |  -    |
+|  bc          |  + |  -  |  +           |  -  | +  |  -   | +   |  -    |
+| abc          |  + |  +  |  +           |  +  | +  |  +   | +   |  +    |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 3 - V
+
+**Estimação dos efeitos dos fatores**
+
+* Fator A:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+A&amp;=\overline{y}_{A+}-\overline{y}_{A-}=\frac{1}{4n}[a-(1)+ab-b+ac-c+abc-bc]\\
+ &amp;=\frac{1}{8}[1-(-4)+5-(-1)+3-(-1)+11-2]=3,00
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+ * Da mesma forma, obtemos os efeitos:
+
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+B&amp;=2,25 \quad\quad C=1,75\quad\quad AB=0,75\\
+AC&amp;=0,25 \quad\quad BC=0,50\quad\quad ABC=0,50
+\end{align*}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 3 - VI
+
+**Somas de quadrados**
+
+ * `\(SQC=\frac{(contraste)^2}{8n}\)`
+ 
+ * Assim, obtemos
+ 
+ `$$SQA=\frac{(24)^2}{8(2)}=36,00$$`
+ 
+ --
+ 
+* Analogamente,
+  
+ &lt;div class="math"&gt;
+\[\begin{align*}
+SQB&amp;=20,25\quad\quad SQC=12,25\\
+SQAB&amp;=2,25 \quad\quad SQAC=0,25\\
+SQBC&amp;=1,00\quad\quad SQABC=1,00
+\end{align*}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 3 - VII
+
+**Contribuição de cada fator na explicação da variabilidade dos dados**
+
+| Fator  | Efeito estimado |   SQ  |  Contribuição (%)  |
+|:------:|:---------------:|:-----:|:------------------:|
+|   A   |       3,00       | 36,00 |       46,15        |
+|   B   |       2,25       | 20,25 |       25,96        |
+|   C   |       2,75       | 12,25 |       15,71        |
+|  AB   |       0,75       |  2,25 |        2,88        |
+|  AC   |       0,25       |  0,25 |        0,32        |
+|  BC   |       0,50       |  1,00 |        1,28        |
+|  ABC  |       0,50       |  1,00 |        1,28        |
+|Resíduo|                  |  5,00 |        6,41        |
+|       |                  | 78,00 |                    |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Observações
+
+* Quando `\(k\)` aumenta, o número de tratamentos aumenta exponencialmente
+
+* Para `\(k = 4\)`, temos 16 tratamentos; `\(k = 5\)`, temos 32 tratamentos e `\(k = 6\)` temos 64 tratamentos.
+
+* Praticamente impossível avaliar a significância dos efeitos através da ANOVA sem ter pelo menos duas repetições por tratamento.
+
+* Com apenas uma observação por tratamento, se ajustado o modelo completo restará 0 graus de liberdade para o resíduo.
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Alternativas - I
+
+
+* Desconsiderar certos efeitos (por exemplo, algumas interações). Entretanto, tais efeitos são contabilizados no resíduo, dessa forma, poderiam levar a conclusões errôneas.
+
+* Usar alguma estatística para que, de forma descritiva, se avalie a magnitude dos efeitos.
+
+* Usar outros modelos.
+
+
+--
+
+
+&gt; **Proposta do Daniel, 1959:**
+  * Dados os pressupostos do modelo, espera-se que os estimadores de cada efeito tenham distribuição normal com variância `\(\sigma^2\)`.
+  * Dado que são combinações lineares de médias, se um efeito é não significativo espera-se que a distribuição do
+estimador tenha média próxima a zero.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Delineamento fatorial `\(2^4\)`
+
+## Exemplo 4 - I
+
+Um produto químico é produzido num recipiente sob pressão. Os fatores considerados são:
+
+ * Temperatura (A)
+ 
+ * Pressão (B)
+ 
+* Concentração de formaldeído (C)
+
+*  Taxa de agitação (D).
+
+O interesse é maximizar a taxa de filtração.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Exemplo 4 - II
+
+**Tabela de Contrastes**
+
+|    | Fator |     |      | Tratamento | Filtração ||    | Fator |     |      | Tratamento | Filtração |
+|:--:|:-----:|:---:|:----:|:----------:|:-----:||:--:|:-----:|:---:|:----:|:----------:|:-----:|
+| A  |   B   |  C  |  D   |            |       || A  |   B   |  C  |  D   |            |       |
+| -  |  -    |  -  |  -   |(1)         |  45   || -  |  -    |  -  |  +   | d          |  43   |
+| +  |  -    |  -  |  -   | a          |  71   || +  |  -    |  -  |  +   | ad         |  100  |
+| -  |  +    |  -  |  -   | b          |  48   || -  |  +    |  -  |  +   | bd         |  45   |
+| +  |  +    |  -  |  -   |ab          |  65   || +  |  +    |  -  |  +   |abd         |  104  |
+| -  |  -    |  +  |  -   |c           |  68   || -  |  -    |  +  |  +   |cd          |  75   |
+| +  |  -    |  +  |  -   |ac          |  60   || +  |  -    |  +  |  +   |acd         |  86   |
+| -  |  +    |  +  |  -   |bc          |  80   || -  |  +    |  +  |  +   |bcd         |  70   |
+| +  |  +    |  +  |  -   |abc         |  65   || +  |  +    |  +  |  +   |abcd        |  96   |
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Exemplo 4 - III
+
+**Representação gráfica do experimento**
+
+
+&lt;img src="images/exemplo_2_4.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Exemplo 4 - IV
+
+**Efeitos estimados**
+
+| Fator  | Efeito estimado |   SQ    |  Contribuição (%)  || Fator  | Efeito estimado |   SQ    |  Contribuição (%)  |
+|:------:|:---------------:|:-------:|:------------------:||:------:|:---------------:|:-------:|:------------------:|
+|   A   |       21,63      | 1870,56 |    32,64           ||   BD   |       -0,38      | 0,56 |    &lt;0,01         |
+|   B   |       3,13       | 39,06   |       0,68         ||   CD   |       -1,13      | 5,06 |     0,09         |
+|   C   |       9,88       | 390,06  |     6,80           ||   ABC   |       1,88      | 14,06 |    0,24         |
+|   D   |       14,63      | 855,56  |    14,93           ||   ABD   |       4,13      | 68,06 |    1,19         |
+|  AB   |       0,13       |  0,06   |      &lt;0,01         ||   ACD   |       1,63      | 10,56 |    0,18         |
+|  AC   |       -18,13     |  1314,06|   22,29            ||   BCD   |       -2,63     | 27,56 |    0,48         |
+|  AD   |       16,63      | 1105,56 |   19,29            ||   ABCD   |       1,38     | 7,56  |  0,13          |
+|  BC   |       2,38       |  22,56  |     0,39           ||       |              |     |                |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Exemplo 4 - V
+
+**qq-plot dos efeitos**
+
+
+
+&lt;img src="images/qqplot_2_4.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+
 ---
 class: animated, hide-logo, bounceInDown
 ## Política de proteção aos direitos autorais
