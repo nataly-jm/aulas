@@ -33,7 +33,7 @@ class: center, middle, inverse, title-slide
 ## Delineamentos Fatoriais
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 08/03/2022
+### Vitória. ES - 10/03/2022
 
 ---
 
@@ -275,8 +275,8 @@ class: animated, fadeIn
 
 #Exemplo 1 - II
 
-<div id="htmlwidget-b3d7d22b602f364f0524" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b3d7d22b602f364f0524">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3],[15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125],[130,155,74,180,34,40,80,75,20,70,82,58,150,188,159,126,136,122,106,115,25,70,58,45,138,110,168,160,174,120,150,139,96,104,82,60]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Material<\/th>\n      <th>Temperatura<\/th>\n      <th>Tempo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"baterias"},{"extend":"excel","filename":"baterias"},{"extend":"pdf","filename":"baterias"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-98862468f5904c51895d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-98862468f5904c51895d">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3],[15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125,15,15,15,15,70,70,70,70,125,125,125,125],[130,155,74,180,34,40,80,75,20,70,82,58,150,188,159,126,136,122,106,115,25,70,58,45,138,110,168,160,174,120,150,139,96,104,82,60]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Material<\/th>\n      <th>Temperatura<\/th>\n      <th>Tempo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"baterias"},{"extend":"excel","filename":"baterias"},{"extend":"pdf","filename":"baterias"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
@@ -1228,6 +1228,143 @@ class: animated, fadeIn
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
+#Exemplo 3 - VIII
+
+<div id="htmlwidget-564d6f0554fdfed538f5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-564d6f0554fdfed538f5">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1],[-1,-1,-1,-1,1,1,1,1,-1,-1,-1,-1,1,1,1,1],[-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1],[-3,-1,-1,0,-1,0,1,1,0,1,2,1,2,3,6,5]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>A<\/th>\n      <th>B<\/th>\n      <th>C<\/th>\n      <th>Diferenca<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"refrigerante"},{"extend":"excel","filename":"refrigerante"},{"extend":"pdf","filename":"refrigerante"}],"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo 3 - IX
+
+
+```r
+dados.fat_2_3&lt;-transform(dados.fat_2_3, A=factor(A), B=factor(B), C=factor(C))
+
+medias&lt;-with(dados.fat_2_3, tapply(Diferenca, list(A,B,C), mean))
+medias
+```
+
+```
+## , , -1
+## 
+##      -1    1
+## -1 -2.0 -0.5
+## 1   0.5  2.5
+## 
+## , , 1
+## 
+##      -1   1
+## -1 -0.5 1.0
+## 1   1.5 5.5
+```
+
+```r
+media.A&lt;-with(dados.fat_2_3, tapply(Diferenca, A, mean))
+media.A
+```
+
+```
+##   -1    1 
+## -0.5  2.5
+```
+
+```r
+media.B&lt;-with(dados.fat_2_3, tapply(Diferenca, B, mean))
+media.B
+```
+
+```
+##     -1      1 
+## -0.125  2.125
+```
+
+```r
+media.C&lt;-with(dados.fat_2_3, tapply(Diferenca, C, mean))
+media.C
+```
+
+```
+##    -1     1 
+## 0.125 1.875
+```
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo 3 - X
+
+
+
+
+```r
+boxplot(Diferenca ~ A * B * C, data=dados.fat_2_3, ylab="Diferença")
+```
+
+&lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-30-1.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo 3 - XI
+
+**ANOVA**
+
+
+```r
+fit.fat_2_3 &lt;- aov(Diferenca ~ A*B*C, data = dados.fat_2_3)
+summary(fit.fat_2_3)
+```
+
+```
+##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## A            1  36.00   36.00    57.6 6.37e-05 ***
+## B            1  20.25   20.25    32.4 0.000459 ***
+## C            1  12.25   12.25    19.6 0.002205 ** 
+## A:B          1   2.25    2.25     3.6 0.094350 .  
+## A:C          1   0.25    0.25     0.4 0.544737    
+## B:C          1   1.00    1.00     1.6 0.241504    
+## A:B:C        1   1.00    1.00     1.6 0.241504    
+## Residuals    8   5.00    0.63                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+###Exemplo 3 - XII
+
+**Alternativa para visualização das médias**
+
+
+```r
+fit.fat_2_3.multcomp&lt;-lsmeans::lsmeans(fit.fat_2_3, ~A:B:C)
+summary(fit.fat_2_3.multcomp,infer=T)
+```
+
+```
+##  A  B  C  lsmean    SE df lower.CL upper.CL t.ratio p.value
+##  -1 -1 -1   -2.0 0.559  8   -3.289   -0.711  -3.578  0.0072
+##  1  -1 -1    0.5 0.559  8   -0.789    1.789   0.894  0.3972
+##  -1 1  -1   -0.5 0.559  8   -1.789    0.789  -0.894  0.3972
+##  1  1  -1    2.5 0.559  8    1.211    3.789   4.472  0.0021
+##  -1 -1 1    -0.5 0.559  8   -1.789    0.789  -0.894  0.3972
+##  1  -1 1     1.5 0.559  8    0.211    2.789   2.683  0.0278
+##  -1 1  1     1.0 0.559  8   -0.289    2.289   1.789  0.1114
+##  1  1  1     5.5 0.559  8    4.211    6.789   9.839  &lt;.0001
+## 
+## Confidence level used: 0.95
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
 #Observações
 
 * Quando `\(k\)` aumenta, o número de tratamentos aumenta exponencialmente
@@ -1262,6 +1399,16 @@ class: animated, fadeIn
   * Dado que são combinações lineares de médias, se um efeito é não significativo espera-se que a distribuição do
 estimador tenha média próxima a zero.
 
+---
+###Exemplo 3 - XIII
+
+
+```r
+lm.fat_2_3&lt;-lm(Diferenca~A*B*C)
+DanielPlot(lm.fat_2_3)
+```
+
+&lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-33-1.png" width="40%" style="display: block; margin: auto;" /&gt;
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
@@ -1326,16 +1473,16 @@ class: animated, fadeIn
 
 **Efeitos estimados**
 
-| Fator  | Efeito estimado |   SQ    |  Contribuição (%)  || Fator  | Efeito estimado |   SQ    |  Contribuição (%)  |
-|:------:|:---------------:|:-------:|:------------------:||:------:|:---------------:|:-------:|:------------------:|
-|   A   |       21,63      | 1870,56 |    32,64           ||   BD   |       -0,38      | 0,56 |    &lt;0,01         |
-|   B   |       3,13       | 39,06   |       0,68         ||   CD   |       -1,13      | 5,06 |     0,09         |
-|   C   |       9,88       | 390,06  |     6,80           ||   ABC   |       1,88      | 14,06 |    0,24         |
-|   D   |       14,63      | 855,56  |    14,93           ||   ABD   |       4,13      | 68,06 |    1,19         |
-|  AB   |       0,13       |  0,06   |      &lt;0,01         ||   ACD   |       1,63      | 10,56 |    0,18         |
-|  AC   |       -18,13     |  1314,06|   22,29            ||   BCD   |       -2,63     | 27,56 |    0,48         |
-|  AD   |       16,63      | 1105,56 |   19,29            ||   ABCD   |       1,38     | 7,56  |  0,13          |
-|  BC   |       2,38       |  22,56  |     0,39           ||       |              |     |                |
+| Fator  | Efeito estimado |   SQ    |  Contribuição (%)  || Fator  | Efeito estimado |   SQ    | Contribuição (%)  |
+|:------:|:---------------:|:-------:|:------------------:||:------:|:---------------:|:-------:|:-----------------:|
+|   A   |       21,63      | 1870,56 |    32,64           ||   BD    |       -0,38    | 0,56    |    &lt;0,01          |
+|   B   |       3,13       | 39,06   |       0,68         ||   CD    |       -1,13    | 5,06    |     0,09          |
+|   C   |       9,88       | 390,06  |     6,80           ||   ABC   |       1,88     | 14,06   |    0,24           |
+|   D   |       14,63      | 855,56  |    14,93           ||   ABD   |       4,13     | 68,06   |    1,19           |
+|  AB   |       0,13       |  0,06   |      &lt;0,01         ||   ACD   |       1,63     | 10,56   |    0,18           |
+|  AC   |       -18,13     |  1314,06|   22,29            ||   BCD   |       -2,63    | 27,56   |    0,48           |
+|  AD   |       16,63      | 1105,56 |   19,29            ||   ABCD  |       1,38     | 7,56    |    0,13           |
+|  BC   |       2,38       |  22,56  |     0,39           ||         |                |         |                   |
 
 
 ---
@@ -1346,9 +1493,188 @@ class: animated, fadeIn
 
 **qq-plot dos efeitos**
 
-
-
 &lt;img src="images/qqplot_2_4.png" width="55%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 4 - VI
+
+<div id="htmlwidget-66fcff7f1f612a36b3eb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-66fcff7f1f612a36b3eb">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1,-1,1],[-1,-1,1,1,-1,-1,1,1,-1,-1,1,1,-1,-1,1,1],[-1,-1,-1,-1,1,1,1,1,-1,-1,-1,-1,1,1,1,1],[-1,-1,-1,-1,-1,-1,-1,-1,1,1,1,1,1,1,1,1],[45,71,48,65,68,60,80,65,43,100,45,104,75,86,70,96]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>A<\/th>\n      <th>B<\/th>\n      <th>C<\/th>\n      <th>D<\/th>\n      <th>taxa<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"Quimico"},{"extend":"excel","filename":"Quimico"},{"extend":"pdf","filename":"Quimico"}],"pageLength":8,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[8,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo 4 - VII
+
+
+```
+## The following objects are masked from dados.fat_2_3:
+## 
+##     A, B, C
+```
+
+
+```r
+boxplot(taxa ~ A * B * C * D, data=dados.fat_2_4, ylab="Taxa")
+```
+
+&lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-38-1.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+###Exemplo 4 - VIII
+
+**ANOVA**
+
+
+```r
+fit.fat_2_4 &lt;- aov(taxa ~ A*B*C*D, data = dados.fat_2_4)
+summary(fit.fat_2_4)
+```
+
+```
+##             Df Sum Sq Mean Sq
+## A            1 1870.6  1870.6
+## B            1   39.1    39.1
+## C            1  390.1   390.1
+## D            1  855.6   855.6
+## A:B          1    0.1     0.1
+## A:C          1 1314.1  1314.1
+## B:C          1   22.6    22.6
+## A:D          1 1105.6  1105.6
+## B:D          1    0.6     0.6
+## C:D          1    5.1     5.1
+## A:B:C        1   14.1    14.1
+## A:B:D        1   68.1    68.1
+## A:C:D        1   10.6    10.6
+## B:C:D        1   27.6    27.6
+## A:B:C:D      1    7.6     7.6
+```
+
+---
+###Exemplo 4 - IX
+
+
+
+```r
+lm.fat_2_4&lt;-lm(taxa~A*B*C*D)
+DanielPlot(lm.fat_2_4)
+```
+
+&lt;img src="Experimentos_fatoriais_files/figure-html/unnamed-chunk-40-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Adição de pontos centrais - I
+
+Uma verificação importante nos desenhos fatoriais com dois níveis deve ser referente à linearidade no efeito do fator. A adição de pontos centrais ao fatorial proporciona informação sobre a curvatura e permite uma estimativa independente do erro experimental.
+
+**Exemplo:**
+
+&lt;img src="images/Pontos_centrais_2_k.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Adição de pontos centrais - II
+
+A soma de quadrados de um grau de liberdade para a curvatura é dada por
+
+ &lt;div class="math"&gt;
+\[\begin{align*}
+SQ_{Curv}&amp;=\dfrac{n_{_F}n_{_C}(\bar{y}_{_F}-\bar{y}_{_C})^2}{n_{_F}+n_{_C}}\\
+    &amp;=\left(\dfrac{\bar{y}_{_F}-\bar{y}_{_C}}{\sqrt{\dfrac{1}{n_{_F}}+\dfrac{1}{n_{_C}}}}\right)^2,
+\end{align*}\]
+&lt;/div&gt;
+
+onde
+
+* `\(n_{_F}\)` e `\(n_{_C}\)` são os números de observações do experimento fatorial e dos pontos centrais, respectivamente.
+
+* `\(\bar{y}_{_F}\)` e `\(\bar{y}_{_C}\)` representam as médias dos dados do experimento fatorial e dos pontos centrais, respectivamente.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 5 - I
+
+Uma engenheira química está estudando o percentual de conversão de um processo. Há duas variáveis de interesse: tempo de reação e temperatura de reação. Dada a incerteza sobre a linearidade da relação na região de experimentação, ela decide conduzir um experimento `\(2^2\)` aumentado com 5 pontos centrais.
+
+&lt;img src="images/Exemplo_pontos_centrais.png" width="35%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 5 - II
+
+A média dos pontos na porção fatorial do experimento é  `\(\bar{y}_{_F}\)`=40,425 e a média dos pontos centrais é  `\(\bar{y}_{_C}=40,46\)`. A soma dos quadrados da curvatura é dada por
+
+ &lt;div class="math"&gt;
+\[\begin{align*}
+SQ_{Curv}&amp;=\dfrac{4\times 5(40,425-40,46)^2}{4+5}\\
+    &amp;=\dfrac{4\times 5(-0,035)^2}{4+5}=0,0027.
+\end{align*}\]
+&lt;/div&gt;
+
+O Quadrado Médio do Erro pode ser calculado usando os pontos centrais
+
+ &lt;div class="math"&gt;
+\[\begin{align*}
+QME&amp;=\frac{SQE}{n_{_C}-1}=\frac{\sum_{\text{pontos centrais}}(y_i-\bar{y_{_C}})^2}{n_C}\\
+    &amp;=\frac{\sum_{1=1}^5(y_i-40,46)^2}{4}=\frac{0,1720}{4}=0,0430.
+\end{align*}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Exemplo 5 - III
+
+##ANOVA
+
+|       Fonte       | gl |   SQ    |    QM   | `\(F_0\)` | 
+|:------------------|:--:|:-------:|:-------:|:-----:|
+| A (Tempo)         | 1  | 2,4025  |  2,4025 | 55,87 |
+| B (Temperatura)   | 1  | 0,4225  |  0,4225 |  9,38 |
+| Interação         | 1  | 0,0025  |  0,0025 |  0,06 |
+| Curvatura         | 1  | 0,0027  |  0,0027 |  0,06 |
+| Erro              | 4  | 0,1720  |  0,0430 |       |
+| Total             | 8  | 3,0022  |         |       |
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Blocagem e confundimento
+
+&lt;img src="images/Fatorial_blocos.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#Experimento Fatorial `\(2^3\)` em dois blocos com ABC confundido
+
+&lt;img src="images/Fatorial_blocos2.png" width="65%" style="display: block; margin: auto;" /&gt;
+
 
 
 ---
