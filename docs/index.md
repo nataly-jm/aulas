@@ -13,6 +13,8 @@ description: Repositório exclusivo para a disciplina de planejamento de experim
 * [Experimentos em Blocos Aleatorizados](https://nataly-jm.github.io/planejamento/Experimentos_em_Blocos.html)
 * [Experimentos em Quadrados Latinos](https://nataly-jm.github.io/planejamento/Experimentos_em_Quadrado_Latino.html)
 * [Experimentos Fatoriais](https://nataly-jm.github.io/planejamento/Experimentos_fatoriais.html)
+* [Programa Categorizados](https://nataly-jm.github.io/planejamento/Plano_Ensino_cat.html)
+* [Introdução Categorizados](https://nataly-jm.github.io/planejamento/intro_cat.html)
 
 
 
