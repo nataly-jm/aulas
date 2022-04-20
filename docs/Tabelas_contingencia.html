@@ -389,12 +389,9 @@ class: animated, fadeIn
 
 ##Métodos para encontrar o ponto limiar ótimo - I
 
-* Ponto na curva mais próximo do valor (0, 1): Distância entre `\((0, 1)\)` e qualquer ponto da curva ROC é `\(d^2 = (1 − s)2 + (1 − e)2\)`. Para obter o ponto de cortedevemos definir diversos pontos de corte ( `\(n\)` ) e associá-los a `\(n\)` distâncias. O valor mínimo de `\(d\)` resultará no valor de corte.
+* Ponto na curva mais próximo do valor (0, 1): Distância entre `\((0, 1)\)` e qualquer ponto da curva ROC é `\(d^2 = (1 − s)^2 + (1 − e)^2\)`. Para obter o ponto de cortedevemos definir diversos pontos de corte ( `\(n\)` ) e associá-los a `\(n\)` distâncias. O valor mínimo de `\(d\)` resultará no valor de corte.
 
 * Índice de Youden: Ponto na curva ROC mais distante da diagonal do quadrado unitário. Bastante utilizado.
-
-* Critério de minimização de custos: Pouco usado na literatura médica porque é difìcil implementá-lo
-
 
 
 
