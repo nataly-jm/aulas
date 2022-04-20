@@ -15,6 +15,7 @@ description: Repositório exclusivo para a disciplina de planejamento de experim
 * [Experimentos Fatoriais](https://nataly-jm.github.io/planejamento/Experimentos_fatoriais.html)
 * [Programa Categorizados](https://nataly-jm.github.io/planejamento/Plano_Ensino_cat.html)
 * [Introdução Categorizados](https://nataly-jm.github.io/planejamento/intro_cat.html)
+* [Tabelas de Contingência](https://nataly-jm.github.io/planejamento/Tabelas_contingencia.html)
 
 
 
