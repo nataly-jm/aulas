@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ANÁLISE DE DADOS CATEGORIZADOS STA13833</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# ANÁLISE DE DADOS CATEGORIZADOS STA13833
+## Tabelas de Contingência
+### Nátaly A. Jiménez Monroy
+### LECON/DEST - UFES
+### Vitória. ES - 20/04/2022
+
+---
+
+class: animated, fadeIn
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+
+#Conceitos fundamentais
+
+ * **Prevalência**: Proporção de indivíduos de uma população que apresentam uma condição clínica num determinado momento no tempo.
+ 
+ * **Incidência**: Proporção de um grupo inicialmente livre de uma condição clínica, e que a desenvolve depois de um período determinado de tempo.
+ 
+ * **Risco Relativo**: Razão entre a prevalência da doença nos indivíduos que possuem o fator em estudo e a prevalência da doença nos que não o possuem, podendo, assim, ser também chamado **&lt;span style="color:orange"&gt;prevalência relativa&lt;/span&gt;**.
+
+---
+class: animated, fadeIn
+
+#Probabilidade Condicional
+
+Dados dois eventos quaisquer `\(A\)` e `\(B\)`, sendo `\(P(B)&gt;0\)`, a probabilidade condicional de `\(A\)` dado que `\(B\)` ocorreu é dada por `$$P(A|B)=\dfrac{P(A\cap B)}{P(B)}.$$`
+
+--
+
+* Regra do produto de probabilidades: `$$P(A\cap B)=P(A|B)P(B)$$` ou `$$P(A\cap B)=P(B|A)P(A)$$`.
+
+--
+
+* Independência entre eventos: Dois eventos `\(A\)` e `\(B\)` são independentes se, e somente se, `$$P(A\cap B)=P(A)\times P(B)$$`.
+
+
+---
+class: animated, fadeIn
+
+#Qualidade dos Testes Diagnósticos
+O bom uso de um teste diagnóstico requer conhecimento das medidas que caracterizam sua qualidade intrínseca:
+	
+* Sensibilidade (s)
+* Especificidade (e)
+* Valor Preditivo Positivo (VPP)
+* Valor Preditivo Negativo (VPN)
+* Curva ROC (Receiver Operating Characteristic)
+
+&gt;Esquema padrão de síntese dos dados de testes diagnósticos:
+
+|     Doença        |          Resultado     |      do Teste         |   Total |
+|:-----------------:|:----------------------:|:---------------------:|:--------:|
+|                   |    Positivo ( `\(T_+\)` )  |  Negativo ( `\(T_-\)` )   |          |
+|Presente ( `\(D_+\)` ) |  `\(n_{11}\)`              | `\(n_{12}\)`              | `\(n_{1+}\)` |        
+|Ausente ( `\(D_-\)`  ) |  `\(n_{21}\)`              | `\(n_{22}\)`              | `\(n_{2+}\)` |
+|        Total      |  `\(n_{+1}\)`              | `\(n_{+2}\)`              | `\(n_{++}\)` |
+
+
+
+---
+class: animated, fadeIn
+
+#Sensibilidade
+
+Mede a capacidade de reação do teste em um paciente doente. Dada por
+`$$s=P(T_+|D_+)=\dfrac{P(T_+ \cap D_+)}{P(D_+)}=\dfrac{n_{11}}{n_{1+}},$$`
+ou seja, é a probabilidade de o teste ser positivo sabendo-se que o paciente examinado está doente.
+
+--
+
+**Exemplo**: Se a sensibilidade de um determinado teste para anticorpos do HIV é 95%, isto significa que para cada 100 pessoas com anticorpos do HIV, o teste é positivo para 95 e negativo para as 5 restantes.
+
+
+---
+class: animated, fadeIn
+
+#Especificidade
+
+Mede a capacidade de não reação do teste em um paciente não portador da doença, ou seja, o teste é específico para a doença em questão. Dada por
+`$$e=P(T_-|D_-)=\dfrac{P(T_- \cap D_-)}{P(D_-)}=\dfrac{n_{22}}{n_{2+}},$$`
+ou seja, é a probabilidade de o teste ser negativo sabendo-se que o paciente examinado não está doente.
+
+--
+
+**Exemplo**: Se a especificidade de um determinado teste para anticorpos do HIV é 99%, isto significa que para cada 100 pessoas sem anticorpos do HIV, o teste é negativo para 99 e positivo para 1.
+
+
+---
+class: animated, fadeIn
+
+##Limitações
+
+ * Sensibilidade e especificidade são índices provenientes de uma situação em que há certeza total sobre o diagnóstico (padrão ouro), o que geralmente não acontece.
+ 
+ * Os pacientes são classificados apenas como doentes e não doentes, não se admitindo estágios intermediários.
+ 
+ * Não ajudam à decisão da equipe médica que, recebendo um paciente com resultado positivo, precisa avaliar se o paciente está ou não doente.
+
+
+---
+class: animated, fadeIn
+
+#Exemplo
+
+Dados de pacientes com diagnóstico renal.
+
+|   Doença Renal    |          Resultado     |      do Teste         |   Total  |
+|:-----------------:|:----------------------:|:---------------------:|:--------:|
+|                   |    Positivo ( `\(T_+\)` )  |  Negativo ( `\(T_-\)` )   |          |
+|Presente ( `\(D_+\)` ) |  44                    | 23                    | 67       |        
+|Ausente ( `\(D_-\)`  ) |  10                    | 60                    | 70       |
+|        Total      |  54                    | 83                    | 137      |
+
+--
+
+Sensibilidade = ??
+
+Especificidade = ??
+
+
+---
+class: animated, slideInRight
+
+#Valor Preditivo Positivo
+
+É a probabilidade de o paciente realmente doente quando o resultado do teste é positivo. Ou seja:
+
+`$$VPP=P(D_+|T_+)=\dfrac{P(D_+ \cap T_+)}{P(T_+)}=\dfrac{sp}{sp+(1-p)(1-e)},$$`
+onde `\(p=P(D_+)\)` a prevalência da doença na população de interesse, isto é, a probabilidade de pessoas doentes ou a probabilidade de ocorrência da doença pré-teste (a priori), `\(s\)` é a sensibilidade do teste e `\(e\)` é a especificidade.
+
+
+---
+class: animated, slideInRight
+
+#Valor Preditivo Negativo
+
+É a probabilidade de o paciente não estar doente, quando o resultado do teste é negativo. Isto é:
+`$$VPN=P(D_-|T_-)=\dfrac{P(D_- \cap T_-)}{P(T_-)}=\dfrac{e(1-p)}{e(1-p)+(1-s)p}$$`
+onde `\(p=P(D_+)\)` a prevalência da doença na população de interesse, `\(s\)` é a sensibilidade do teste e `\(e\)` é a especificidade.
+
+---
+class: animated, slideInRight
+
+#Vecchio (1966)
+
+|  População |  Proporção  |      Resultado     |      do Teste         |
+|:----------:|:-----------:|:------------------:|:---------------------:|
+|            |             | Positivo ( `\(T_+\)` ) |  Negativo ( `\(T_-\)` )   |
+| Doente     |  `\(p\)`        | `\(ps\)`               | `\(p(1-s)\)`              |
+| Sadia      |  `\(1-p\)`      | `\((1-p)(1-e)\)`       | `\((1-p)e\)`              |
+| Total      |  1          | `\(ps+(1-p)(1-e)\)`    | `\(p(1-s)+(1-p)e\)`       |
+
+---
+class: animated, slideInRight
+
+#Exemplo - I
+
+Lind &amp; Singer (1986) estudaram a qualidade da tomografia computadorizada para o diagnóstico de metástase de carcinoma de fígado. Um total de 150 pacientes foram submetidos a dois exames: a tomografia computadorizada e a laparotomia. A laparotomia é o padrão ouro (classifica o paciente sem erro) para este caso.
+
+--
+
+Resultados da tomografia computadorizada em 67 pacientes com metástase e 83 sem metástase do carcinoma hepático
+
+|  Metástase |      Tomografia   |  Computadorizada     |  Total |
+|:----------:|:-----------------:|:--------------------:|:------:|
+|            |Positiva ( `\(T_+\)` ) |  Negativa ( `\(T_-\)` )  |        |
+| Presente   |   52              | 15                   |   67   |
+| Ausente    |   9               | 74                   |   83   |
+| Total      |   61              | 89                   |  150   |
+
+ &gt;Fonte: Lind, S.E. &amp; Singer, D.E., Diagnosing liver metastases: a Bayesian analysis. Journal of Clinical Oncology. v.3, p. 379-88, 1986.
+
+
+---
+class: animated, slideInRight
+
+#Exemplo - II
+
+`$$s=\dfrac{52}{67}=0,776$$`
+`$$e=\dfrac{74}{83}=0,892.$$`
+Para uma população cuja prevalência de metástase de carcinoma de fígado é de 2%, os valores preditivos da tomografia computadorizada são:
+
+`$$\text{VPP}=\dfrac{0,02\times 0,78}{0,02\times 0,78+(1-0,02)(1-0,89)}=0,13$$`
+`$$\text{VPN}=\dfrac{(1-0,02)\times 0,89}{(1-0,02)\times 0,89+0,02(1-0,78)}=0,99.$$`
+
+---
+class: animated, slideInRight
+
+#Exemplo - III
+
+**Observações:**
+
+ * O valor preditivo positivo é baixo, enquanto que o valor preditivo negativo é bastante alto.
+ 
+ * Se o resultado da tomografia computadorizada é negativo, a chance de não haver metástase é de 99%.
+ 
+ * Se, antes de qualquer informação, o paciente tinha uma chance de 2% de apresentar a doença, após o resultado do teste negativo esta chance é de apenas 1%.
+ 
+ * Probabilidade de Falso Positivo:
+`$$\text{PFP}=P(D_-|T_+)=1-P(D_+|T_+)=1-\text{VPP}.$$`
+
+ * Probabilidade de Falso Negativo:
+`$$\text{PFN}=P(D_+|T_-)=1-P(D_-|T_-)=1-\text{VPN}.$$`
+
+---
+class: animated, slideInRight
+
+#Escolha entre testes diagnósticos
+
+ * Idealmente, os testes utilizados devem ter alta sensibilidade e especificidade.
+ 
+ * Na prática nem sempre existem testes disponíveis com características ótimas.
+ 
+ * É comum a situação em que há mais de um teste ou os valores da sensibilidade e especificidade podem ser calibrados. 
+ * Desta forma, surge a necessidade da comparação entre eles para uma escolha mais adequada de acordo com o seu objetivo.
+ 
+* O objetivo muitas vezes pode ser visto como triagem (prevalência baixa) ou consultório médico (prevalência alta).
+
+* Quando a prevalência é baixa, VPP é mais influenciado pela especificidade.
+
+ * VPN é pouco influenciado tanto pela sensibilidade quanto pela especificidade.
+
+* Para prevalência alta, VPP é próximo de 1, independente dos valores da sensibilidade e da especificidade. 
+
+ * VPN é influenciado mais pela sensibilidade do que pela especificidade.
+
+
+---
+class: animated, slideInRight
+
+#Em conclusão...
+
+ * Um teste com alta especificidade deve ser usado quando a prevalência da doença é relativamente baixa (doença
+rara), mesmo que o teste tenha relativamente baixa sensibilidade.
+
+* Um teste com alta sensibilidade deve ser usado quando a prevalência da doença é alta (doença comum), mesmo que o teste tenha relativamente baixa especificidade.
+
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - I
+
+Desenvolvida no contexto de detecção de sinais eletrônicos e problemas com radares. O objetivo era quantificar a habilidade dos operadores dos radares (receiver operators) em distinguir um sinal de um ruído. Quando o radar detectava algo se aproximando, cabia ao operador decidir se o que foi captado era, por exemplo, um avião inimigo (o sinal) ou algum outro objeto voador irrelevante, como uma nuvem ou um bando de aves (o ruído).
+
+--
+
+**Vantagens**:
+
+*  A curva ROC pode conter todos os possíveis pontos de corte e identificar problemas de má-classificação.
+
+*  É independente da prevalência da doença na população.
+
+* Dois ou mais testes diagnósticos podem ser comparados em uma mesma figura.
+
+* Descreve quantitativamente o desempenho de um teste diagnóstico cujo resultado pode ser tratado como uma variável aleatória contínua ou categórica nominal.
+
+* Algumas vezes a sensibilidade é mais importante que a especificidade para o pesquisador (ou vice-versa) e a curva ROC pode ser usada para discussões fundamentadas nos dados e mostrar o valor da sensibilidade necessário para um valor de especificidade fixado.
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - II
+
+###Formalmente:
+
+Seja `\(T\)` uma variável aleatória que representa o resultado de um teste e seja uma regra de decisão baseada em um valor `\(t_0\)` tal que, se `\(T&gt;t_0\)`, o indivíduo é classificado como positivo (doente) e, se `\(T&lt;t_0\)`, o indivíduo é classificado como negativo (não doente).
+
+Para um ponto de corte particular `\(t_0\)`, temos `\(s=\textrm{P}(\textrm{Y}&gt;t_0)\)` e `\(e=\textrm{P}(\textrm{X}\leq t_0)\)`, onde X e Y são variáveis aleatórias que se referem aos possíveis resultados do teste diagnóstico para, respectivamente, os indivíduos não doentes e doentes.
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - III
+
+&lt;img src="images/Superposicao_distribuicoes.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - IV
+
+**Observações**:
+
+* Valores de corte elevados conduzem a um teste pouco sensível e muito específico.
+
+* Valores de corte baixo conduzem a um teste muito sensível e pouco específico.
+
+O ideal é escolher um ponto de corte que gere `\(s\)` e `\(e\)` simultaneamente grandes, mas isso nem sempre é adequado.
+
+* Não se pode correr o risco de não diagnosticar. Por exemplo, câncer em estágios iniciais ( `\(\uparrow s\)` ).
+
+* Em um grupo de baixo risco, elevada especificidade é necessária para o teste diagnóstico. Exame subsequente é caro e invasivo; faz com que o paciente não sofra dor desnecessária ( `\(\uparrow e\)` ).
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - V
+
+A curva ROC é uma função contínua de s versus `\((1 − e)\)` para diversos valores t0 obtidos dentro do espaço amostral de T, ligados por linhas retas
+
+&lt;img src="images/CurvaROC.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+**Critério**: Caso no qual a sensibilidade é "baixa" e especificidade "alta". Designa o paciente positivo quando a evidência da doença é muito forte. Situa-se no canto inferior esquerdo da curva.
+
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - VI
+
+ * Um teste que discrimina perfeitamente indivíduos doentes e não doentes teria, para algum ponto de corte, `\(s\)` e `\(e\)` de 100%, o qual seria representado no canto superior esquerdo da curva ROC.
+ 
+* Um teste incapaz de discriminar indivíduos doentes e não doentes produziria uma curva ROC representada por pontos que estariam contidos em uma reta que partiria da origem do gráfico até o canto superior direito. Ou seja, o teste sob investigação teria a mesma proporção de resultados positivos tanto para doentes como para não doentes.
+
+* A curva ROC não sofre mudanças se as observações amostrais forem submetidas a transformações monótonas, como logaritmo, raiz quadrada ou funções lineares com coeficientes positivos.
+
+
+
+---
+class: animated, fadeIn
+
+##Área sob a curva - AUC
+
+* Medida efetiva que combina a sensibilidade e a especificidade para assegurar a validade de um teste diagnóstico.
+
+* AUC é uma medida de acurácia geral de um teste diagnóstico.
+
+* Dado um indivíduo doente e outro não doente, ambos escolhidos ao acaso (assumindo independência), AUC é interpretada como a probabilidade do indivíduo portador da doença ter um resultado ao teste diagnóstico de maior magnitude que aquele não doente.
+
+* Valor máximo de AUC=1. Nesse caso, o teste é perfeito em diferenciar doentes de não-doentes. Isto implica que sensibilidade e especificidade são iguais a `\(1\)`.
+
+* Quanto maior o valor de AUC, melhor a discriminação do teste com respeito a doentes e não doentes.
+
+
+---
+class: animated, fadeIn
+
+##Obtenção da área sob a curva - I
+
+* Método não-paramétrico: Não exige o conhecimento de qualquer distribuição e, portanto, a curva ROC é chamada de curva empírica. Metodologia: Regra de Simpson (trapezoidal)
+
+* Método Paramétrico: É usado quando a distribuição estatística dos valores do teste diagnóstico entre doentes e não-doentes é conhecida.
+
+* **Observação**: Diferentes testes podem produzir valores similares de AUC, no entanto, isto não significa que as curvas são idênticas.
+
+
+&lt;img src="images/Comparacao_CurvaROC.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+
+##Obtenção da área sob a curva - II
+
+**Observações**
+
+ * O teste A é melhor do que o teste B e sua curva está mais próxima da discriminação perfeita.
+ 
+ * O teste B é melhor do que o teste A, onde alta sensibilidade é exigida e o teste A é melhor do que o teste B onde alta especificidade é necessária.
+
+---
+class: animated, fadeIn
+
+##Métodos para encontrar o ponto limiar ótimo - I
+
+&lt;img src="images/Metodos_pontolimiar.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+
+##Métodos para encontrar o ponto limiar ótimo - I
+
+* Ponto na curva mais próximo do valor (0, 1): Distância entre `\((0, 1)\)` e qualquer ponto da curva ROC é `\(d^2 = (1 − s)2 + (1 − e)2\)`. Para obter o ponto de cortedevemos definir diversos pontos de corte ( `\(n\)` ) e associá-los a `\(n\)` distâncias. O valor mínimo de `\(d\)` resultará no valor de corte.
+
+* Índice de Youden: Ponto na curva ROC mais distante da diagonal do quadrado unitário. Bastante utilizado.
+
+* Critério de minimização de custos: Pouco usado na literatura médica porque é difìcil implementá-lo
+
+
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
