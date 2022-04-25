@@ -7,8 +7,8 @@ description: Repositório exclusivo para a disciplina de Análise de Dados Categ
 
 # Slides
   
-* [Programa da disciplina](https://nataly-jm.github.io/categorizados/Plano_Ensino.html)
-* [Introdução](https://nataly-jm.github.io/categorizados/intro.html)
+* [Programa da disciplina](https://nataly-jm.github.io/aulas/categorizados/Plano_Ensino.html)
+* [Introdução](https://nataly-jm.github.io/aulas/categorizados/intro.html)
 
 
 
