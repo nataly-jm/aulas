@@ -1,2 +1,2 @@
-# aulas
-Material disciplina planejamento experimental I
+# Bacharelado em Estatística
+Material das disciplinas
