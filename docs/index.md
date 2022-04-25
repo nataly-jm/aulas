@@ -5,9 +5,9 @@ author: Laboratório de Estatística e Computação Natural - LECON -
 description: Repositório exclusivo para as disciplinas do curso de Estatística
 ---
 
-# [Planejamento de Experimentos]((https://nataly-jm.github.io/aulas/planejamento)
+# [Planejamento de Experimentos](https://nataly-jm.github.io/aulas/planejamento)
 
-# Dados Categorizados
+# [Dados Categorizados](https://nataly-jm.github.io/aulas/categorizados)
 
 
 
