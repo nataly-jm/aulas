@@ -5,6 +5,7 @@ author: Laboratório de Estatística e Computação Natural - LECON -
 description: Repositório exclusivo para a disciplina de planejamento de experimentos.
 ---
 
+
 # Slides
   
 * [Programa da disciplina](https://nataly-jm.github.io/aulas/planejamento/Plano_Ensino.html)
