@@ -9,7 +9,6 @@ description: Repositório exclusivo para a disciplina de Análise de Dados Categ
   
 * [Programa da disciplina](https://nataly-jm.github.io/aulas/categorizados/Plano_Ensino.html)
 * [Introdução](https://nataly-jm.github.io/aulas/categorizados/intro.html)
-* [Tabelas de Contingência](https://nataly-jm.github.io/aulas/categorizados/Tabelas_contingencia.html)
 
 
 
