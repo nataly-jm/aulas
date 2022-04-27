@@ -78,7 +78,7 @@ O bom uso de um teste diagnóstico requer conhecimento das medidas que caracteri
 ---
 class: animated, fadeIn
 
-#Sensibilidade
+##Sensibilidade
 
 Mede a capacidade de reação do teste em um paciente doente. Dada por
 `$$s=P(T_+|D_+)=\dfrac{P(T_+ \cap D_+)}{P(D_+)}=\dfrac{n_{11}}{n_{1+}},$$`
@@ -92,7 +92,7 @@ ou seja, é a probabilidade de o teste ser positivo sabendo-se que o paciente ex
 ---
 class: animated, fadeIn
 
-#Especificidade
+##Especificidade
 
 Mede a capacidade de não reação do teste em um paciente não portador da doença, ou seja, o teste é específico para a doença em questão. Dada por
 `$$e=P(T_-|D_-)=\dfrac{P(T_- \cap D_-)}{P(D_-)}=\dfrac{n_{22}}{n_{2+}},$$`
@@ -106,7 +106,7 @@ ou seja, é a probabilidade de o teste ser negativo sabendo-se que o paciente ex
 ---
 class: animated, fadeIn
 
-##Limitações
+###Limitações
 
  * Sensibilidade e especificidade são índices provenientes de uma situação em que há certeza total sobre o diagnóstico (padrão ouro), o que geralmente não acontece.
  
@@ -118,7 +118,7 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-#Exemplo
+###Exemplo 1
 
 Dados de pacientes com diagnóstico renal.
 
@@ -139,7 +139,7 @@ Especificidade = ??
 ---
 class: animated, slideInRight
 
-#Valor Preditivo Positivo
+##Valor Preditivo Positivo
 
 É a probabilidade de o paciente realmente doente quando o resultado do teste é positivo. Ou seja:
 
@@ -150,7 +150,7 @@ onde `\(p=P(D_+)\)` a prevalência da doença na população de interesse, isto 
 ---
 class: animated, slideInRight
 
-#Valor Preditivo Negativo
+##Valor Preditivo Negativo
 
 É a probabilidade de o paciente não estar doente, quando o resultado do teste é negativo. Isto é:
 `$$VPN=P(D_-|T_-)=\dfrac{P(D_- \cap T_-)}{P(T_-)}=\dfrac{e(1-p)}{e(1-p)+(1-s)p}$$`
@@ -159,7 +159,7 @@ onde `\(p=P(D_+)\)` a prevalência da doença na população de interesse, `\(s\
 ---
 class: animated, slideInRight
 
-#Vecchio (1966)
+**Vecchio (1966)**
 
 |  População |  Proporção  |      Resultado     |      do Teste         |
 |:----------:|:-----------:|:------------------:|:---------------------:|
@@ -171,7 +171,7 @@ class: animated, slideInRight
 ---
 class: animated, slideInRight
 
-#Exemplo - I
+###Exemplo 2 - I
 
 Lind &amp; Singer (1986) estudaram a qualidade da tomografia computadorizada para o diagnóstico de metástase de carcinoma de fígado. Um total de 150 pacientes foram submetidos a dois exames: a tomografia computadorizada e a laparotomia. A laparotomia é o padrão ouro (classifica o paciente sem erro) para este caso.
 
@@ -192,7 +192,7 @@ Resultados da tomografia computadorizada em 67 pacientes com metástase e 83 sem
 ---
 class: animated, slideInRight
 
-#Exemplo - II
+###Exemplo 2 - II
 
 `$$s=\dfrac{52}{67}=0,776$$`
 `$$e=\dfrac{74}{83}=0,892.$$`
@@ -204,7 +204,7 @@ Para uma população cuja prevalência de metástase de carcinoma de fígado é 
 ---
 class: animated, slideInRight
 
-#Exemplo - III
+###Exemplo 2 - III
 
 **Observações:**
 
@@ -223,7 +223,7 @@ class: animated, slideInRight
 ---
 class: animated, slideInRight
 
-#Escolha entre testes diagnósticos
+###Escolha entre testes diagnósticos
 
  * Idealmente, os testes utilizados devem ter alta sensibilidade e especificidade.
  
@@ -246,13 +246,119 @@ class: animated, slideInRight
 ---
 class: animated, slideInRight
 
-#Em conclusão...
+###Em conclusão...
 
  * Um teste com alta especificidade deve ser usado quando a prevalência da doença é relativamente baixa (doença
 rara), mesmo que o teste tenha relativamente baixa sensibilidade.
 
 * Um teste com alta sensibilidade deve ser usado quando a prevalência da doença é alta (doença comum), mesmo que o teste tenha relativamente baixa especificidade.
 
+---
+class: animated, fadeIn
+
+#Testes diagnósticos baseados em variáveis contínuas
+
+**Ponto de corte**
+
+* Os índices usados até aqui requerem que o resultado do teste seja positivo ou negativo e que a classificação do
+diagnóstico também seja dicotômica.
+
+* Para dados contínuos, tais como dosagens, é preciso estabelecer um valor a partir do qual o teste é considerado positivo ou negativo.
+
+* Esse limite é chamado **&lt;span style="color:orange"&gt;valor de referência&lt;/span&gt;** ou ponto de referência.
+
+* Cada teste clínico é caracterizado por um valor de referência e variando-se este ponto de corte, a sensibilidade e especificidade variam. Para cada situação é preciso escolher o valor que fornece a melhor combinação das duas medidas anteriores.
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 3 - I
+
+Verificação da qualidade de teste de intoxicação digitálica. Os digitálicos constituem um grupo de fármacos usados no
+tratamento de doença do coração, entre elas as arritmias e insuficiências cardiacas.
+
+--
+
+**Benefício**: Redução do batimento cardíaco, aumento da força de contração do miocárdio.
+
+**Efeitos adversos**: Intoxicação, que ocorre em 5% a 30% de pacientes hospitalizados que fazem uso de digitálicos.
+
+**Dificuldade**: Apesar de ser usado para corrigir arritmias, altas doses de digitálicos também causam arritmia.
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 3 - II
+
+| Digoxina (ng/mL) | Intoxicados  |  Não Intoxicados  |
+|:----------------:|:------------:|:-----------------:|
+|     [0,0; 0,5) |        2       |         6         |
+|     [0,5; 1,0) |        1       |         18        |
+|     [1,0; 1,5) |        4       |         30        |
+|     [1,5; 2,0) |        4       |         8         |
+|     [2,0; 2,5) |        5       |         0         |
+|     [2,5; 3,0) |        1       |         0         |
+|     [3,0; 3,5) |        1       |         0         |
+|     [3,5; 4,0) |        1       |         0         |
+|     [4,0; 4,5) |        1       |         0         |
+|     [4,5; 5,0) |        1       |         0         |
+|     Total	     |        21      |         62        |
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 3 - III
+
+**Critério 1**: Positivo acima de 1ng/mL
+
+| Classificação de Toxicidade| Teste Positivo  |  Teste Negativo  |  Total  |
+|:--------------------------:|:---------------:|:----------------:|:-------:|
+|     Intoxicado             |        18       |         3        |    21   |
+|     Não-intoxicado         |        38       |         24       |    62   |
+|         Total              |        56       |         27       |    83   |
+
+--
+
+**Critério 2**: Positivo acima de 2ng/mL
+
+| Classificação de Toxicidade| Teste Positivo  |  Teste Negativo  |  Total  |
+|:--------------------------:|:---------------:|:----------------:|:-------:|
+|     Intoxicado             |        10       |         11       |    21   |
+|     Não-intoxicado         |         0       |         62       |    62   |
+|         Total              |        10       |         73       |    83   |
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 3 - IV
+
+**Critério 3**: Positivo acima de 1,5ng/mL
+
+| Classificação de Toxicidade| Teste Positivo  |  Teste Negativo  |  Total  |
+|:--------------------------:|:---------------:|:----------------:|:-------:|
+|     Intoxicado             |        14       |         7        |    21   |
+|     Não-intoxicado         |         8       |         54       |    62   |
+|         Total              |        22       |         61       |    83   |
+
+--
+
+**Resumo dos critérios:**
+
+| Critério | Sensibilidade (Detecção)  |  Especificidade (Exclusão) |
+|:--------:|:-------------------------:|:--------------------------:|
+|  1       |            0,86           |         0,39               |
+|  2       |            0,48           |         1,00               |
+|  3       |            0,67           |         0,87               |
+
+--
+
+**Observação:** Variando-se o ponto de corte, a sensibilidade e especificidade também variam.
+
+&gt; Como escolher o ponto de corte? Analisando as curvas características de operação (ROC). 
 
 ---
 class: animated, fadeIn
@@ -291,7 +397,7 @@ class: animated, fadeIn
 
 ##Curva ROC (Receiver Operating Characteristic) - III
 
-&lt;img src="images/Superposicao_distribuicoes.png" width="25%" style="display: block; margin: auto;" /&gt;
+&lt;img src="images/Superposicao_distribuicoes.png" width="27%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: animated, fadeIn
@@ -304,22 +410,26 @@ class: animated, fadeIn
 
 * Valores de corte baixo conduzem a um teste muito sensível e pouco específico.
 
-O ideal é escolher um ponto de corte que gere `\(s\)` e `\(e\)` simultaneamente grandes, mas isso nem sempre é adequado.
+--
 
-* Não se pode correr o risco de não diagnosticar. Por exemplo, câncer em estágios iniciais ( `\(\uparrow s\)` ).
+O ideal é escolher um ponto de corte que gere `\(s\)` e `\(e\)` simultaneamente grandes, mas isso nem sempre é adequado:
 
-* Em um grupo de baixo risco, elevada especificidade é necessária para o teste diagnóstico. Exame subsequente é caro e invasivo; faz com que o paciente não sofra dor desnecessária ( `\(\uparrow e\)` ).
+* Não se pode correr o risco de não diagnosticar, por exemplo, câncer em estágios iniciais ( `\(\uparrow s\)` ).
+
+* Em um grupo de baixo risco, especificidade elevada é necessária para o teste diagnóstico. Se, por exemplo, o exame subsequente é caro e invasivo; faz com que o paciente não sofra dor desnecessária ( `\(\uparrow e\)` ).
 
 ---
 class: animated, fadeIn
 
 ##Curva ROC (Receiver Operating Characteristic) - V
 
-A curva ROC é uma função contínua de s versus `\((1 − e)\)` para diversos valores t0 obtidos dentro do espaço amostral de T, ligados por linhas retas
+A curva ROC é uma função contínua de `\(s\)` versus `\((1 − e)\)` para diversos valores `\(t_0\)` obtidos dentro do espaço amostral de `\(T\)`, ligados por linhas retas
 
 &lt;img src="images/CurvaROC.png" width="40%" style="display: block; margin: auto;" /&gt;
 
-**Critério**: Caso no qual a sensibilidade é "baixa" e especificidade "alta". Designa o paciente positivo quando a evidência da doença é muito forte. Situa-se no canto inferior esquerdo da curva.
+--
+
+**A - Critério Estrito**: Caso no qual a sensibilidade é "baixa" e especificidade "alta". Designa o paciente positivo quando a evidência da doença é muito forte. Situa-se no canto inferior esquerdo da curva.
 
 
 ---
@@ -327,7 +437,7 @@ class: animated, fadeIn
 
 ##Curva ROC (Receiver Operating Characteristic) - VI
 
- * Um teste que discrimina perfeitamente indivíduos doentes e não doentes teria, para algum ponto de corte, `\(s\)` e `\(e\)` de 100%, o qual seria representado no canto superior esquerdo da curva ROC.
+ * Um teste que discrimina perfeitamente indivíduos doentes e não doentes teria, para algum ponto de corte, `\(s\)` e `\(e\)` de 1, o qual seria representado no canto superior esquerdo da curva ROC.
  
 * Um teste incapaz de discriminar indivíduos doentes e não doentes produziria uma curva ROC representada por pontos que estariam contidos em uma reta que partiria da origem do gráfico até o canto superior direito. Ou seja, o teste sob investigação teria a mesma proporção de resultados positivos tanto para doentes como para não doentes.
 
@@ -338,13 +448,11 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-##Área sob a curva - AUC
+###Área sob a curva - AUC
 
 * Medida efetiva que combina a sensibilidade e a especificidade para assegurar a validade de um teste diagnóstico.
 
-* AUC é uma medida de acurácia geral de um teste diagnóstico.
-
-* Dado um indivíduo doente e outro não doente, ambos escolhidos ao acaso (assumindo independência), AUC é interpretada como a probabilidade do indivíduo portador da doença ter um resultado ao teste diagnóstico de maior magnitude que aquele não doente.
+* AUC é uma medida de **&lt;span style="color:orange"&gt;acurácia&lt;/span&gt;** geral de um teste diagnóstico.
 
 * Valor máximo de AUC=1. Nesse caso, o teste é perfeito em diferenciar doentes de não-doentes. Isto implica que sensibilidade e especificidade são iguais a `\(1\)`.
 
@@ -354,47 +462,91 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-##Obtenção da área sob a curva - I
+###Obtenção da área sob a curva - I
 
-* Método não-paramétrico: Não exige o conhecimento de qualquer distribuição e, portanto, a curva ROC é chamada de curva empírica. Metodologia: Regra de Simpson (trapezoidal)
+* Método não-paramétrico: Não exige o conhecimento de qualquer distribuição e, portanto, a curva ROC é chamada de curva empírica. Metodologia: Regra de Simpson (trapezoidal).
 
-* Método Paramétrico: É usado quando a distribuição estatística dos valores do teste diagnóstico entre doentes e não-doentes é conhecida.
+* Método Paramétrico: É usado quando a distribuição estatística dos valores do teste diagnóstico entre doentes e não-doentes é conhecida. A distribuição Binormal é bastante usada nesse contexto.
+
+--
+
 
 * **Observação**: Diferentes testes podem produzir valores similares de AUC, no entanto, isto não significa que as curvas são idênticas.
 
 
-&lt;img src="images/Comparacao_CurvaROC.png" width="70%" style="display: block; margin: auto;" /&gt;
-
-
 ---
 class: animated, fadeIn
 
-##Obtenção da área sob a curva - II
+###Obtenção da área sob a curva - II
+
+&lt;img src="images/Comparacao_CurvaROC.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+--
 
 **Observações**
 
- * O teste A é melhor do que o teste B e sua curva está mais próxima da discriminação perfeita.
+ * Na situação (b), o teste A é melhor do que o teste B e sua curva está mais próxima da discriminação perfeita.
  
- * O teste B é melhor do que o teste A, onde alta sensibilidade é exigida e o teste A é melhor do que o teste B onde alta especificidade é necessária.
+ * Na situação (c), o teste B é melhor do que o teste A onde alta sensibilidade é exigida; e o teste A é melhor do que o teste B onde alta especificidade é necessária.
 
 ---
 class: animated, fadeIn
 
-##Métodos para encontrar o ponto limiar ótimo - I
+###Métodos para encontrar o ponto limiar ótimo - I
 
 &lt;img src="images/Metodos_pontolimiar.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: animated, fadeIn
 
-##Métodos para encontrar o ponto limiar ótimo - I
+###Métodos para encontrar o ponto limiar ótimo - II
 
-* Ponto na curva mais próximo do valor (0, 1): Distância entre `\((0, 1)\)` e qualquer ponto da curva ROC é `\(d^2 = (1 − s)2 + (1 − e)2\)`. Para obter o ponto de cortedevemos definir diversos pontos de corte ( `\(n\)` ) e associá-los a `\(n\)` distâncias. O valor mínimo de `\(d\)` resultará no valor de corte.
+* **Ponto na curva mais próximo do valor `\((0,1)\)`**: Distância entre `\((0, 1)\)` e qualquer ponto da curva ROC é `\(d^2 = (1 − s)^2 + (1 − e)^2\)`. Para obter o ponto de corte devemos definir diversos pontos de corte `\((n)\)` e associá-los a `\(n\)` distâncias. O valor mínimo de `\(d\)` resultará no valor ótimo de corte.
 
-* Índice de Youden: Ponto na curva ROC mais distante da diagonal do quadrado unitário. Bastante utilizado.
+--
 
-* Critério de minimização de custos: Pouco usado na literatura médica porque é difìcil implementá-lo
+* **Índice de Youden**: Ponto na curva ROC mais distante da diagonal do quadrado unitário. Bastante utilizado.
 
+--
+
+* **Critério de minimização de custos**: Pouco usado na literatura médica porque é difìcil implementá-lo
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 4 - I
+
+O nível sérico de creatinina (composto químico encontrado no sangue) foi usado como ferramenta de diagnóstico para se detectar a rejeição potencial de um transplante de rim, no qual foram realizados aloenxertos renais. Um nível aumentado de creatinina é frequentemente associado com falha orgânica subsequente. 
+
+|  Creatinina Sérica (mg%) |  Sensibilidade   |  Especificidade ||  Creatinina Sérica (mg%) |  Sensibilidade   |  Especificidade |
+|:----------:|:-----------------:|:--------------------:|:------:|:-:|:----------:|:-----------------:|:--------------------:|:------:|
+|    1,2    | 0,939     | 0,123 ||    2,1    | 0,485     | 0,773 |
+|    1,3    | 0,939     | 0,203 ||    2,2    | 0,485     | 0,803 |
+|    1,4    | 0,909     | 0,281 ||    2,3    | 0,394     | 0,811 |
+|    1,5    | 0,818     | 0,380 ||    2,4    | 0,394     | 0,843 |
+|    1,6    | 0,758     | 0,461 ||    2,5    | 0,364     | 0,870 |
+|    1,7    | 0,727     | 0,535 ||    2,6    | 0,333     | 0,891 |
+|    1,8    | 0,636     | 0,649 ||    2,7    | 0,333     | 0,894 |
+|    1,9    | 0,636     | 0,711 ||    2,8    | 0,333     | 0,896 |
+|    2,0    | 0,545     | 0,766 ||    2,9    | 0,303     | 0,909 |
+
+---
+class: animated, fadeIn
+
+###Exemplo 4 - II
+
+**Observações:**
+
+* Se for usado um nível maior que 2,9 mg% como indicador de rejeição iminente, o teste tem uma sensibilidade de 0,303 e uma especificidade de 0,909. Para aumentar a sensibilidade, pode-se baixar o ponto de corte arbitrário que diferencia um resultado de teste positivo de um negativo.
+
+--
+
+* Se for usado 1,2 mg%, por exemplo, uma proporção maior dos resultados seria designada positiva. Nesse caso, dificilmente haveria falha em identificar um paciente que rejeitasse o órgão. Ao mesmo tempo, aumentaria a probabilidade de um falso positivo por esse meio, o que diminui a especificidade.
+
+--
+
+* Ao aumentar a especificidade, rigorosamente sempre classificaríamos mal uma pessoa que não rejeitasse o órgão e diminuiríamos a sensibilidade.
 
 
 
