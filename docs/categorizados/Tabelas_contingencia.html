@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Tabelas de Contingência
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 26/04/2022
+### Vitória. ES - 03/05/2022
 
 ---
 
@@ -37,7 +37,7 @@ class: animated, fadeIn
  * **Risco Relativo**: Razão entre a prevalência da doença nos indivíduos que possuem o fator em estudo e a prevalência da doença nos que não o possuem, podendo, assim, ser também chamado **&lt;span style="color:orange"&gt;prevalência relativa&lt;/span&gt;**.
 
 ---
-class: animated, fadeIn
+class: animated, bounceInDown
 
 #Probabilidade Condicional
 
@@ -53,7 +53,7 @@ Dados dois eventos quaisquer `\(A\)` e `\(B\)`, sendo `\(P(B)&gt;0\)`, a probabi
 
 
 ---
-class: animated, fadeIn
+class: animated, bounceInDown
 
 #Qualidade dos Testes Diagnósticos
 O bom uso de um teste diagnóstico requer conhecimento das medidas que caracterizam sua qualidade intrínseca:
@@ -549,7 +549,320 @@ class: animated, fadeIn
 * Ao aumentar a especificidade, rigorosamente sempre classificaríamos mal uma pessoa que não rejeitasse o órgão e diminuiríamos a sensibilidade.
 
 
+---
+class: animated, bounceInDown
+#Delineamentos Amostrais
 
+Aqui consideramos experimentos com informações coletadas apenas para variáveis binárias. Os valores obtidos desses experimentos são representados na forma de uma tabela de contingência `\(2\times 2\)` da forma
+
+|  Covariável   ||    Resposta   |              ||   Total  |
+|:-------------:||:-------------:|:------------:||:--------:|
+|               ||    `\(C_1\)`      |  `\(C_2\)`       ||          |
+|    `\(A_1\)`      ||  `\(n_{11}\)`     | `\(n_{12}\)`     || `\(n_{1+}\)` |        
+|    `\(A_2\)`      ||  `\(n_{21}\)`     | `\(n_{22}\)`     || `\(n_{2+}\)` |
+|        Total  ||  `\(n_{+1}\)`     | `\(n_{+2}\)`     || `\(n\)`      |
+
+
+  * Totais marginais:  `\(n_{1+}\)`, `\(n_{2+}\)`, `\(n_{+1}\)`, `\(n_{+2}\)`.
+  
+  * Total geral ou tamanho amostral: `\(n\)`.
+  
+  &gt; A forma como esses totais são considerados (fixos ou aleatórios) define o modelo probabilístico que será considerado.
+
+
+
+---
+class: animated, fadeIn
+##Modelo Produto de Binomiais Independentes - I
+
+* Experimento planejado de forma que duas amostras aleatórias `\((A_1 \text{ e } A_2)\)` de tamanhos `\(n_{1+}\)` e `\(n_{2+}\)`, respectivamente, sejam obtidas a partir de duas populações independentes.
+
+* Observa-se, para os elementos em `\(A_1\)` e `\(A_2\)`, quantos classificam na categoria `\(C_1\)` e quantos em `\(C_2\)`. 
+
+* Definem-se as variáveis aleatórias 
+  * `\(N_{11}\)` com distribuição `\(Bin(n_{1+},p_{11})\)`, associada à primeira linha da tabela, em que `\(p_{11}\)` representa a probabilidade de qualquer elemento da população `\(A_1\)` ser classificado na categoria `\(C_1\)`. 
+  * `\(N_{21}\)` com distribuição `\(Bin(n_{2+},p_{21})\)`, associada à segunda linha da tabela, em que `\(p_{21}\)` representa a probabilidade de qualquer elemento da população `\(A_2\)` ser classificado na categoria `\(C_1\)`.
+
+--
+
+* **Observação:** `\(\sum_{j=1}^2 p_{1j}=1\)` e `\(\sum_{j=1}^2 p_{2j}=1\)`.
+
+
+---
+class: animated, fadeIn
+##Modelo Produto de Binomiais Independentes - II
+
+* A distribuição conjunta associada à tabela é o produto de duas binomiais independentes:
+
+`$$P(N_{11}=n_{11},N_{21}=n_{21})={n_{1+}\choose n_{11}} p_{11}^{n_{11}}(1-p_{11})^{n_{1+}-n_{11}}{n_{2+}\choose n_{21}} p_{21}^{n_{21}}(1-p_{21})^{n_{2+}-n_{21}}.$$`
+--
+
+* Caso a variável resposta apresente mais de duas categorias `\((r&gt;2)\)`, a distribuição associada será o produto de multinomias independentes, sendo uma multinomial associada a cada linha da tabela.
+
+--
+
+* Esse esquema amostral é equivalente a um delineamento amostral estratificado.
+
+
+---
+class: animated, fadeIn
+##Modelo Multinomial
+
+* Experimento delineado de forma que se obtenha uma amostra aleatória de tamanho `\(n\)` fixo de uma população.
+
+* Observa-se quantos elementos dessa amostra classificam-se em cada uma das possíveis combinações da tabela: `\((A_1,C_1)\)`, `\((A_1,C_2)\)`, `\((A_2,C_1)\)` ou `\((A_2,C_2)\)`.
+
+--
+
+* O modelo associado é dado por:
+
+`$$P(N_{11}=n_{11}, N_{12}=n_{12}, N_{21}=n_{21}, N_{22}=n_{22})=n!\prod_{i,j=1}^2 \frac{p_{ij}^{n_{ij}}}{n_{ij}!},$$`
+
+ onde `\(n_{ij}\geq 0\)`, `\(\sum_{i=1}^2 n_{ij}= n\)` e `\(p_{ij}=1\)`.
+
+--
+
+* Este delineamento amostral é equivalente ao processo de amostragem aleatória simples, em que se seleciona uma amostra aleatória de tamanho `\(n\)` a partir de uma população suficientemente grande.
+
+
+---
+class: animated, fadeIn
+##Modelo Produto de Poisson
+
+* Experimento delineado de forma que apenas a duração do experimento é estabelecida.
+
+* Os tamanhos amostrais são aleatórios, dado que serão conhecidos apenas ao final do experimento.
+
+* Assume-se `\(N_{ij}\)`, `\((i,j=1,2)\)`, independentes com distribuição de Poisson de média `\(\mu_{ij}=t\lambda_{ij}\)`. A taxa média por unidade de tempo é representada por `\(\lambda_{ij}\)` e a duração do tempo representada por `\(t\)`.
+
+--
+
+* O modelo probabilístico associado é
+`$$P(N_{11}=n_{11}, N_{12}=n_{12}, N_{21}=n_{21}, N_{22}=n_{22})=\prod_{i,j=1}^2 \frac{e^{-\mu_{ij}}\mu_{ij}^{n_{ij}}}{n_{ij}!}\quad \mu_{ij}&gt;0.$$`
+
+
+---
+class: animated, fadeIn
+##Modelo Hipergeométrico
+
+* Considerado em situações em que os indivíduos são inicialmente alocados aleatoriamente em dois grupos considerados equivalentes, observando-se para cada um deles uma resposta binária.
+
+* Assumindo que os dois grupos não diferem significativamente, `\(n_{+1}\)` é considerado fixo.
+
+* Dessa forma, `\(n_{1+}\)`, `\(n_{2+}\)` e `\(n_{+2}\)` são fixos. Dado o condicionamento nas marginais fixas, o conhecimento de qualquer uma das frequências `\(n_{ij}\)` determina as restantes.
+
+--
+
+* Sob essa suposição, o modelo probabilístico associado é dado por
+`$$P(N_{11}=n_{11})=\frac{{n_{1+}\choose n_{11}}{n_{2+}\choose n_{+1}-n_{11}}}{{n\choose n_{+1}}}$$`
+
+
+---
+class: animated, fadeIn
+###Observações
+
+ * Os esquemas amostrais anteriores são os mais comuns.
+ 
+ * Nem todas as tabelas de contingência são geradas sob esses esquemas amostrais.
+ 
+ * Por exemplo, há casos em que as amostras não são independentes. Ou casos em que sequer é considerada uma amostra aleatória.
+ 
+ 
+---
+class: animated, bounceInDown
+#Estudos Clínicos e Modelos Associados
+
+Os delineamentos amostrais mais frequentes resultam de experimentos que podem ser:
+
+* Observacionais:
+  * descritivos
+  * caso-controle;
+  * coorte;
+  * transversal.
+  
+* Experimentais:
+ * Ensaio clinico aleatorizado.
+  
+--
+
+&gt;Dependendo do objetivo, os estudos podem ser prospectivos ou retospectivos. 
+
+
+ 
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - I
+
+&lt;img src="images/CasoControle.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - II
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (C)\)`  |  `\(j=2\, (\overline{C})\)` ||          |
+| `\(i=1 \, (E)\)`           ||                 |                         ||          |        
+| `\(i=2 \, (\overline{E})\)`||                 |                         ||          |
+|          Total         ||    `\(n_{+1}\)`     |         `\(n_{+2}\)`        ||    `\(n\)`   |
+
+--
+
+`$$p_{i(j)}=P(X=i|Y=j)$$`
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (C)\)`  |  `\(j=2\, (\overline{C})\)` ||          |
+| `\(i=1 \, (E)\)`           ||     `\(p_{1(1)}\)`  |       `\(p_{1(2)}\)`        || `\(p_{1+}\)` |        
+| `\(i=2 \, (\overline{E})\)`||     `\(p_{2(1)}\)`  |       `\(p_{2(2)}\)`        || `\(p_{2+}\)` |
+|          Total         ||       `\(1\)`       |         `\(1\)`             ||    `\(1\)`   |
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - III
+
+Temos
+`$$\begin{cases}
+  N_{11}&amp;\sim \textrm{Bin}(n_{+1},p_{1(1)})\\
+  N_{12}&amp;\sim \textrm{Bin}(n_{+2},p_{2(1)})\\
+  \end{cases}$$`
+
+* Modelo probabilístico: Produto de Binomiais.
+
+--
+
+* As probabilidades `\(p_{i(j)}\, j=1,2\)` são estimadas por
+`$$\widehat{p}_{i(j)}=\frac{n_{ij}}{n_{+j}}.$$`
+
+* Se a suposição de independência entre casos e controles não for razoável, deve-se usar metodologias mais apropriadas.
+
+
+---
+class: animated, fadeIn
+##Estudos de Coorte - I
+
+&lt;img src="images/Coorte1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Estudos de Coorte - II
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (D)\)`  |  `\(j=2\, (\overline{D})\)` ||          |
+| `\(i=1 \, (E)\)`           ||                 |                         || `\(n_{1+}\)` |        
+| `\(i=2 \, (\overline{E})\)`||                 |                         || `\(n_{2+}\)` |
+|          Total         ||                 |                         ||     .   |
+
+--
+
+`$$p_{(i)j}=P(Y=j|X=i)$$`
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (D)\)`  |  `\(j=2\, (\overline{D})\)` ||          |
+| `\(i=1 \, (E)\)`           ||     `\(p_{(1)1}\)`  |       `\(p_{(1)2}\)`        ||    `\(1\)`   |        
+| `\(i=2 \, (\overline{E})\)`||     `\(p_{(2)1}\)`  |       `\(p_{(2)2}\)`        ||    `\(1\)`   |
+|          Total         ||     `\(p_{+1}\)`    |         `\(p_{+2}\)`        ||    `\(1\)`   |
+
+
+---
+class: animated, fadeIn
+##Estudos de Coorte - III
+
+* `\(p_{(1)1}\)`: Incidência entre os expostos.
+
+* `\(p_{(2)1}\)`: Incidência entre os não-expostos.
+
+Temos
+`$$\begin{cases} 
+N_{11}&amp;\sim \textrm{Bin}(n_{1+},p_{(1)1})\\
+N_{21}&amp;\sim \textrm{Bin}(n_{2+},p_{(2)1})\\
+\end{cases}$$`
+
+--
+
+* Modelo probabilístico: Produto de Binomiais.
+
+* As probabilidades `\(p_{(i)j}\)` são estimadas por
+`$$\widehat{p}_{(i)j}=\frac{n_{ij}}{n_{i+}}.$$`
+
+
+
+---
+class: animated, fadeIn
+##Estudos Transversais - I
+
+&lt;img src="images/EsquemaTransversal.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Estudos Transversais - II
+
+Tem-se uma variável resposta `\((Y)\)` e uma variável explicativa `\((X)\)`.
+
+|             X   ||    Y      |        ||   Total  |
+|:---------------:||----------:|:------:||:--------:|
+|                 ||    `\(j=1\)`  |  `\(j=2\)` ||          |
+| `\(i=1\)`           ||           |        ||          |        
+| `\(i=2\)`           ||           |        ||          |
+|   Total         ||           |        ||    `\(n\)`   |
+
+
+--
+
+`$$p_{ij}=P(X=i,Y=j)$$`
+
+|             X   ||    Y      |           ||   Total  |
+|:---------------:||----------:|:---------:||:--------:|
+|                 ||    `\(j=1\)`  |  `\(j=2\)`    ||          |
+| `\(i=1\)`           ||  `\(p_{11}\)` |  `\(p_{12}\)` || `\(p_{1+}\)` |        
+| `\(i=2\)`           ||  `\(p_{21}\)` |  `\(p_{22}\)` || `\(p_{2+}\)` |
+|   Total         ||  `\(p_{+1}\)` |  `\(p_{+2}\)` ||    `\(1\)`   |
+
+
+---
+class: animated, fadeIn
+##Estudos Transversais - III
+
+* Modelo Probabilístico: Multinomial
+
+* Probabilidades `\(p_{ij}\)` estimadas por
+`$$\widehat{p}=\dfrac{n_{ij}}{n}.$$`
+
+
+---
+class: animated, fadeIn
+##Ensaio Clínico Aleatorizado - I
+
+&lt;img src="images/EsquemaECA.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+##Ensaio Clínico Aleatorizado - II
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (Com)\)`|  `\(j=2\, (Sem)\)`          ||          |
+| `\(i=1 \, (Tratamento)\)`  ||     `\(p_{(1)1}\)`  |       `\(p_{(1)2}\)`        ||    `\(1\)`   |        
+| `\(i=2 \, (Controle)\)`    ||     `\(p_{(2)1}\)`  |       `\(p_{(2)2}\)`        ||    `\(1\)`   |
+|          Total         ||     `\(p_{+1}\)`    |         `\(p_{+2}\)`        ||    `\(1\)`   |
+
+--
+
+* Similar ao delineamento de coorte.
+
+--
+
+
+&gt;**Diferença:** 
+ * Estudos de Coorte: Observacionais
+ * Ensaios clínicos: Experimentais
+
+
+* Modelo Probabilístico: Produto de Binomiais.
 ---
 class: animated, hide-logo, bounceInDown
 ## Política de proteção aos direitos autorais
