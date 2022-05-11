@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Tabelas de Contingência
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 03/05/2022
+### Vitória. ES - 11/05/2022
 
 ---
 
@@ -603,6 +603,43 @@ class: animated, fadeIn
 
 * Esse esquema amostral é equivalente a um delineamento amostral estratificado.
 
+---
+class: animated, fadeIn
+##Modelo Produto de Binomiais Independentes - III
+
+Na literatura há controvérsias sobre qual verossimilhança usar: a expressão do produto de binomiais independentes, ou a verossimilhança condicional proveniente da distribuição obtida ao se considerar que ambas as marginais da tabela são fixas. Fisher, Cox, Yates, Mantel e outros advogam pela **&lt;span style="color:orange"&gt;abordagem condicional&lt;/span&gt;**:
+Para obter a verossimilhança condicional temos de calcular:
+`$$\textrm{P}(X=n_{11}|n_{1+},n_{2+},n_{+1},n_{+2},n)=\textrm{P}(X=n_{11}|X+Y=n_{+1}),$$`
+onde `\(X\sim \textrm{bin}(n_{1+},p_{11})\)` e `\(Y\sim \textrm{bin}(n_{2+},p_{21})\)`. Então
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+  \textrm{P}&amp;(X=n_{11}|X+Y=n_{+1})=\dfrac{\textrm{P}(X=n_{11},X+Y=n_{+1})}{\textrm{P}(X+Y=n_{+1})}\\
+  						&amp;=\dfrac{\textrm{P}(X=n_{11},Y=n_{+1}-n_{11})}{\textrm{P}(X+Y=n_{+1})}\\
+                        &amp;=\dfrac{\textrm{P}(X=n_{11})\textrm{P}(Y=n_{+1}-n_{11})}{\sum_{i=1}^{n_{+1}}\textrm{P}(X=i,Y=n_{+1}-i)}\\
+                        &amp;=\dfrac{\binom{n_{1+}}{n_{11}}p_{11}^{n_{11}}(1-p_{11})^{n_{1+}-n_{11}}\binom{n_{2+}}{n_{+1}-n_{11}}p_{21}^{n_{+1}-n_{11}}(1-p_{21})^{n_{2+}-n_{+1}+n_{11}}}{\sum_i\binom{n_{1+}}{i}p_{11}^i(1-p_{11})^{n_{1+}-i}\binom{n_{2+}}{n_{+1}-i}p_{21}^{n_{+1}-i}(1-p_{21})^{n_{2+}-n_{+1}+i}},
+\end{align*}\]
+&lt;/div&gt;
+
+onde o somatório varia de `\(\textrm{Máx}(0,n_{+1}-n_{2+})\)` a `\(\textrm{Min}(n_{+1},n_{1+})\)`.
+
+---
+class: animated, fadeIn
+##Modelo Produto de Binomiais Independentes - IV
+
+Fazendo `\(q_{11}=1-p_{11}\)` e `\(q_{21}=1-p_{21}\)`, temos
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+  \textrm{P}(X=n_{11}|X+Y=n_{+1})&amp;=\dfrac{\binom{n_{1+}}{n_{11}}p_{11}^{n_{11}}q_{11}^{-n_{11}}\binom{n_{2+}}{n_{+1}-n_{11}}p_{21}^{-n_{11}}q_{21}^{n_{11}}}{\sum_i\binom{n_{1+}}{i}p_{11}^i q_{11}^{-i}\binom{n_{2+}}{n_{+1}-i}p_{21}^{-i}q_{21}^i}\\
+  						&amp;=\dfrac{\binom{n_{1+}}{n_{11}}\binom{n_{2+}}{n_{+1}-n_{11}}\psi^a}{\sum_i\binom{n_{1+}}{i}p_{11}^i \binom{n_{2+}}{n_{+1}-i}\psi^i},
+\end{align*}\]
+&lt;/div&gt;
+
+onde `\(\psi=\dfrac{p_{11}q_{21}}{p_{21}q_{11}}\)`. Sob `\(H_0\)`, `\(\psi=1\)` e
+`$$\textrm{P}(X=n_{11}|X+Y=n_{+1})=\dfrac{\binom{n_{1+}}{n_{11}}\binom{n_{2+}}{n_{+1}-n_{11}}}{\binom{n}{n_{+1}}},$$`
+que é uma **&lt;span style="color:orange"&gt;Distribuição Hipergeométrica&lt;/span&gt;**.
+
 
 ---
 class: animated, fadeIn
@@ -675,9 +712,9 @@ class: animated, bounceInDown
 Os delineamentos amostrais mais frequentes resultam de experimentos que podem ser:
 
 * Observacionais:
-  * descritivos
-  * caso-controle;
+  * descritivo;
   * coorte;
+  * caso-controle;
   * transversal.
   
 * Experimentais:
@@ -688,65 +725,83 @@ Os delineamentos amostrais mais frequentes resultam de experimentos que podem se
 &gt;Dependendo do objetivo, os estudos podem ser prospectivos ou retospectivos. 
 
 
- 
 ---
 class: animated, fadeIn
-##Estudos de Caso-controle - I
+##Estudos Descritivos
 
-&lt;img src="images/CasoControle.png" width="80%" style="display: block; margin: auto;" /&gt;
+* Estudo de caso (minuciosa descrição do diagnóstico e evolução da doença em um pequeno número de pacientes)
 
----
-class: animated, fadeIn
-##Estudos de Caso-controle - II
+* Estudo de uma série de casos (clínicos usam dados de arquivos de suas instituições para produzir artigos)
 
-|             X          ||          Y      |                         ||   Total  |
-|:----------------------:||----------------:|:-----------------------:||:--------:|
-|                        ||    `\(j=1\, (C)\)`  |  `\(j=2\, (\overline{C})\)` ||          |
-| `\(i=1 \, (E)\)`           ||                 |                         ||          |        
-| `\(i=2 \, (\overline{E})\)`||                 |                         ||          |
-|          Total         ||    `\(n_{+1}\)`     |         `\(n_{+2}\)`        ||    `\(n\)`   |
-
---
-
-`$$p_{i(j)}=P(X=i|Y=j)$$`
-
-|             X          ||          Y      |                         ||   Total  |
-|:----------------------:||----------------:|:-----------------------:||:--------:|
-|                        ||    `\(j=1\, (C)\)`  |  `\(j=2\, (\overline{C})\)` ||          |
-| `\(i=1 \, (E)\)`           ||     `\(p_{1(1)}\)`  |       `\(p_{1(2)}\)`        || `\(p_{1+}\)` |        
-| `\(i=2 \, (\overline{E})\)`||     `\(p_{2(1)}\)`  |       `\(p_{2(2)}\)`        || `\(p_{2+}\)` |
-|          Total         ||       `\(1\)`       |         `\(1\)`             ||    `\(1\)`   |
+* Dados institucionais (Instituições estatais)
 
 
 ---
 class: animated, fadeIn
-##Estudos de Caso-controle - III
+##Exemplo 5 - I
 
-Temos
-`$$\begin{cases}
-  N_{11}&amp;\sim \textrm{Bin}(n_{+1},p_{1(1)})\\
-  N_{12}&amp;\sim \textrm{Bin}(n_{+2},p_{2(1)})\\
-  \end{cases}$$`
+&lt;img src="images/Estudodecasos.png" width="48%" style="display: block; margin: auto;" /&gt;
 
-* Modelo probabilístico: Produto de Binomiais.
+---
+class: animated, fadeIn
+##Exemplo 5 - II
 
---
+ - **Sintomas dos animais**: diarréia, falta de   apetite, vômito e barriga inchada. 
 
-* As probabilidades `\(p_{i(j)}\, j=1,2\)` são estimadas por
-`$$\widehat{p}_{i(j)}=\frac{n_{ij}}{n_{+j}}.$$`
+ - **Descriçao do estudo**: Maria da Glória disse que começou a investigar o caso quando registrou o quarto óbito em um mês. “Passei a desconfiar que havia algo errado. Na ficha de registro, todos eram alimentados com rações Magnus Fórmula Natural para animais de pequeno porte. Fiz análises nos cães mortos e descobri que todos haviam tido uma espécie de hepatite. Exames mostraram a presença da substância aflatoxina, encontrada no milho, que provoca o amarelamento do fígado, a redução do órgão e o endurecimento até a paralisação total do funcionamento", detalhou.
 
-* Se a suposição de independência entre casos e controles não for razoável, deve-se usar metodologias mais apropriadas.
+ - **Conclusão**: Dois lotes contaminados. 
+
+---
+class: animated, fadeIn
+##Exemplo 6 - I
+
+###Estudo de uma série de casos
+
+- **Caso**: Oftalmologista N. Gregg (Sydney, Austrália) observou, no primeiro semestre de 1941, vários recém-nascidos com catarata congênita. 
+
+- **Análise dos casos (descrição)**: Procurou as mães dos bebês e verificou que haviam sido acometidas por rubéola, exatamente durante o primeiro trimestre das gestações.
+
+- **Conclusão**: As observações clínicas do Dr. Gregg criaram as condições para que várias pesquisas posteriores concluíssem hoje, além de qualquer dúvida razoável, haver associação entre rubéola no primeiro trimestre da gravidez e defeitos congênitos. 
+
+&gt;Essa constatação e o desenvolvimento de vacinas determinaram a introdução do procedimento de vacinação das mulheres em idade fértil. 
 
 
 ---
 class: animated, fadeIn
 ##Estudos de Coorte - I
 
-&lt;img src="images/Coorte1.png" width="80%" style="display: block; margin: auto;" /&gt;
+####Caracterização
+
+- O estudo avança no tempo e dá ênfase ao fator de risco. 
+
+- Identifica-se um grupo exposto ao fator e um grupo controle, constituído de pessoas que não foram expostas ao fator.
+
+- Os dois grupos são acompanhados por um período de tempo e as taxas de incidência da doença calculadas.
+
+- Estuda a associação entre a doença e o fator.
+
+- O pesquisador tem a possibilidade de usar critérios uniformes, tanto na identificação da presença ou não do
+fator de risco no início do estudo, quanto na verificação da ocorrência da doença nos exames de acompanhamento.
+
+- Liberdade na escolha do que medir e como medir.
+
+- Permite obter diretamente uma estimativa de magnitude do risco relativo.
+
+- Os estudos são longos, grandes e normalmente caros. 
+
+- Do ponto de vista teórico o estudo de coorte é melhor que o estudo caso-controle
+
 
 ---
 class: animated, fadeIn
 ##Estudos de Coorte - II
+
+&lt;img src="images/Coorte1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Estudos de Coorte - III
 
 |             X          ||          Y      |                         ||   Total  |
 |:----------------------:||----------------:|:-----------------------:||:--------:|
@@ -764,7 +819,7 @@ class: animated, fadeIn
 |                        ||    `\(j=1\, (D)\)`  |  `\(j=2\, (\overline{D})\)` ||          |
 | `\(i=1 \, (E)\)`           ||     `\(p_{(1)1}\)`  |       `\(p_{(1)2}\)`        ||    `\(1\)`   |        
 | `\(i=2 \, (\overline{E})\)`||     `\(p_{(2)1}\)`  |       `\(p_{(2)2}\)`        ||    `\(1\)`   |
-|          Total         ||     `\(p_{+1}\)`    |         `\(p_{+2}\)`        ||    `\(1\)`   |
+|          Total         ||     `\(p_{+1}\)`    |         `\(p_{+2}\)`        ||          |
 
 
 ---
@@ -789,16 +844,458 @@ N_{21}&amp;\sim \textrm{Bin}(n_{2+},p_{(2)1})\\
 `$$\widehat{p}_{(i)j}=\frac{n_{ij}}{n_{i+}}.$$`
 
 
+---
+class: animated, fadeIn
+##Exemplo 7 - I
+
+Estudo da associação entre exercício físico e mortalidade por coronariopatia em adultos de meia idade.
+
+&lt;img src="images/TabelaCoorte.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Exemplo 7 - II
+
+**Medida usada**: Risco Relativo
+
+`$$\widehat{RR}=\frac{\hat{p}_{(1)1}}{\hat{p}_{(2)1}}=\frac{400/5000}{80/2000}=2.$$`
+--
+
+&gt;O **&lt;span style="color:orange"&gt;risco&lt;/span&gt;** de morrer por doença coronária no grupo sedentário é duas vezes maior do que o grupo não sedentário.
+
+--
+
+**Observação:**
+
+`$$\text{Chance}=\frac{\hat{p}_{(1)1}}{1-\hat{p}_{(1)1}}=\frac{400/5000}{4600/5000}=\frac{0,08}{0,92}=0,087.$$`
+&gt;Para cada pessoa que sobrevive em uma população de 100 sedentários, aproximadamente 9 pessoas morrem por coronariopatia.
+
+
+---
+class: animated, fadeIn
+##Fatores de confundimento
+
+* Quando a contribuição de um fator identificada em uma análise individual pode ser total ou parcialmente atribuída a outro, dizemos que existe confundimento de efeitos.
+
+* Para se afirmar que uma variável é um fator de risco para uma doença é preciso produzir evidências de que não existem fatores de confundimento, isto é, variáveis associadas ao fator e a doença que explicam a associação observada.
+
+* Para controlar os fatores de confusão podem ser adotadas duas estratégias:
+
+  - Usar na fase de planejamento de estudo a **&lt;span style="color:orange"&gt;aleatorização&lt;/span&gt;** (para os ensaios clínicos) ou a **&lt;span style="color:orange"&gt;homogeneização&lt;/span&gt;** (para estudos observacionais): a aleatorização faz com que os outros fatores além do tratamento tenham a mesma distribuição nos diversos grupos. A homogeinização consiste em selecionar indivíduos com características semelhantes em relação aos fatores que afetam a resposta de tal forma que a única diferença relevante entre os grupos seja o tratamento.
+
+ - Usar técnicas estatísticas na análise dos dados que permitam isolar a contribuição específica de cada fator (Só controlam o efeito de fatores conhecidos).
+
+---
+class: animated, fadeIn
+##Hipóteses - I
+
+Hipótese de homogeneidade:
+`$$\begin{cases}
+\textrm{H}_0:&amp; p_{(1)1}=p_{(2)1}\\
+\textrm{H}_1:&amp; p_{(1)1}\neq p_{(2)1}\\
+\end{cases}$$`
+
+Estatística de teste:
+`$$Q_p=\sum_{i=1}^2 \sum_{j=1}^2\dfrac{(n_{ij}-e_{ij})^2}{e_{ij}}\sim \chi^2_{(1)},$$`
+onde `\(e_{ij}=\dfrac{(n_{i+})(n_{+j})}{n}\)`.
+
+Sob `\(H_0: \textrm{E}(N_{i1})=n_{i+}p_{+1}\,\)` e `\(\,\textrm{E}(N_{i2})=n_{i+}p_{+2}.\)`
+
+&gt;**Para tabelas `\(2\times 2\)`**:
+`$$Q_p=\dfrac{n(n_{11}n_{22}-n_{12}n_{21})^2}{n_{1+}m_{2+}n_{+1}n_{+2}}.$$`
+
+---
+class: animated, fadeIn
+##Hipóteses - II
+
+**Correção de continuidade (Yates):** O objetivo é reduzir o erro de aproximação e evitar a superestimação da significância quando a amostra é pequena.
+
+`$$Q_p=\sum_{i=1}^2\sum_{j=1}^2 \dfrac{(|n_{ij}-e_{ij}|-0,5)^2}{e_{ij}}.$$`
+Para tabelas `\(2\times 2\)`,
+`$$Q_p=\dfrac{n(|n_{11}n_{22}-n_{12}n_{21}|-n/2)^2}{n_{1+}n_{2+}n_{+1}n_{+2}}.$$`
+&gt;A correção de Yates tem sido criticada por tender a sobrecorrigir e aumentar o erro tipo II do teste.
+
+---
+class: animated, fadeIn
+##Hipóteses - III
+
+**Observações**:
+
+* A distribuição de `\(Q_p\)` apenas se aproxima de uma distribuição `\(\chi^2\)` com  1 grau de liberdade de maneira satisfatória quando as frequências esperadas são todas maiores do que 5 `\((e_{ij}&gt;5)\)`.
+
+* Cochran (1954) estabeleceu que:
+	- O teste `\(\chi^2\)` só pode ser aplicado quando `\(n&gt;20\)`.
+	
+  - Quando `\(20&lt;n\leq 40\)`, o teste só pode ser aplicado se todas as frequências esperadas forem maiores que 5.
+  
+  - Se `\(n\geq 40\)`, a frequência esperada mínima não pode ser menor que 1.
+
+&gt;Se as condições não forem satisfeitas, a alternativa é aplicar o Teste Exato de Fisher .
+
+---
+class: animated, fadeIn
+##Hipóteses - IV
+####Outras formas de expressar a hipótese de homogeneidade
+
+- `\(\textrm{H}_0: p_{(1)1}-p_{(2)1}=0\)` (Risco atribuível)
+
+- `\(\textrm{H}_0: \dfrac{p_{(1)1}}{p_{(2)1}}=1\)` (Risco relativo)
+
+- `\(\textrm{H}_0: \dfrac{p_{(1)1}/(1-p_{(1)1})}{p_{(2)1}/(1-p_{(2)1})}=1\)` (razão de chances - **&lt;span style="color:orange"&gt;odds ratio&lt;/span&gt;**).
+
+&gt;**Observação:**
+`$$\begin{align*}
+  \textrm{OR}_{E|\overline{E}}&amp;=\dfrac{odds_E}{odds_{\overline{E}}}=\dfrac{p_{(1)1}p_{(2)2}}{p_{(1)2}p_{(2)1}}\\
+  						 &amp;=\dfrac{n_{11}n_{22}}{n_{12}n_{21}}.
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+##Estimação Intervalar das medidas de associação - I
+
+###Risco Relativo:
+`$$\textrm{IC}_{\textrm{RR}}: \textrm{exp}\left(\hat{f}\pm z_{\alpha/2}\sqrt{\widehat{Var}(f)}\right),$$`
+onde: 
+
+- `\(f=\ln (\textrm{RR})=\ln (p_{(1)1})-\ln (p_{(2)1})\)`
+
+- `\(\widehat{Var}(f)=\dfrac{(1-p_{(1)1})}{(n_{1+})(p_{(1)1})}+\dfrac{(1-p_{(2)1})}{(n_{2+})(p_{(2)1})}\)`
+
+- `\(Z_{\alpha/2}\)` é o percentil `\(100(1-\alpha/2)\)` da distribuição Normal Padrão.
+
+
+---
+class: animated, fadeIn
+##Estimação Intervalar das medidas de associação - II
+
+###Odds Ratio:
+`$$\textrm{IC}_{\textrm{OR}}: \textrm{exp}\left(\hat{f}\pm z_{\alpha/2}\sqrt{\widehat{Var}(f)}\right),$$`
+onde: 
+
+- `\(f=\ln (\textrm{OR})\)`
+
+- `\(\widehat{Var}(f)=\left(\dfrac{1}{n_{11}}+\dfrac{1}{n_{12}}+\dfrac{1}{n_{21}}+\dfrac{1}{n_{22}}\right)\)`
+
+- `\(Z_{\alpha/2}\)` é o percentil `\(100(1-\alpha/2)\)` da distribuição Normal Padrão.
+
+
+---
+class: animated, fadeIn
+##Teste Exato de Fisher - I
+
+* Baseado na abordagem condicional dos experimentos em que os totais das linhas e colunas são fixados.
+
+* Considerado nos casos em que o tamanho da amostra é pequeno ou quando há frequências esperadas muito baixas (próximas de zero ou zero).
+
+* Calcula-se a probabilidade de ocorrência de todas as configurações possíveis da tabela de contingência original, com os totais de linha e coluna preservados, que sejam pelo menos tão favoráveis a `\(H_1\)`, em relação á tabela observada, considerando a distribuição Hipergeométrica.
+
+* Pode-se testar
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p_{11}=p_{21}\\
+  \textrm{H}_1&amp;: \begin{cases}
+  p_{11}&gt; p_{21}\textrm{ ou }\\
+  p_{11}&lt; p_{21}\textrm{ ou }\\
+  p_{11}\neq p_{21}
+  \end{cases}
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+##Teste Exato de Fisher - II
+
+**Cálculo do valor p**
+
+Sejam 
+`$$\begin{cases}
+  N_{11}&amp;\sim \textrm{Bin}(n_{1+},p_{11})\\
+  N_{21}&amp;\sim \textrm{Bin}(n_{2+},p_{21})
+  \end{cases}$$`
+
+* Se `\(\textrm{H}_1: p_{11}&gt;p_{21}\)`, 
+`$$\begin{align*}
+\textrm{valor p}&amp;=\textrm{P}(N_{11}\geq n_{11}|N_{11}+N_{21}=n_{+1})\\
+&amp;=\sum_{k\geq n_{11}} \dfrac{\binom{n_{1+}}{k}\binom{n_{++}-n_{1+}}{n_{+1}-k}}{\binom{n_{++}}{n_{+1}}}
+\end{align*}$$`
+
+* Se `\(\textrm{H}_1: p_{11}&lt;p_{21}\)`, 
+`$$\begin{align*}
+\textrm{valor p}&amp;=\textrm{P}(N_{11}\leq n_{11}|N_{11}+N_{21}=n_{+1})\\
+&amp;=\sum_{k\leq n_{11}} \dfrac{\binom{n_{1+}}{k}\binom{n_{++}-n_{1+}}{n_{+1}-k}}{\binom{n_{++}}{n_{+1}}}
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+##Exemplo 8 - I
+
+Sir Ronald A. Fisher descreveu o seguinte experimento: ele convidou uma colega para distinguir se, na preparação do chá (bebida muito apreciada pelos ingleses), foi adicionado primeiro leite ou o próprio chá. A mulher experimentou oito xícaras de chá, sendo que em quatro delas o leite foi adicionado primeiro, e nas outras quatro, o chá foi adicionado primeiro. Para cada uma das xícaras, foi perguntado a ela o que foi primeiramente adicionado. Ela sabia que existiam quatro xícaras de cada tipo sem, no entanto, saber quais eram. O interesse foi determinar se havia concordância positiva entre a opinião dela e a verdadeira ordem.
+
+**Resultados do experimento:**
+
+| Primeiro Ingreditente  || Resposta   |            ||   Total    |
+|:----------------------:||-----------:|:-----------:||:----------:|
+|                        ||   Leite    |      Chá    ||            |
+| Leite                  ||   3        |        1    || `\(n_{1+}=4\)` |        
+| Chá                    ||   1        |        3    || `\(n_{2+}=4\)` |
+|          Total         || `\(n_{+1}=4\)` |  `\(n_{+2}=4\)` ||  `\(n=8\)`   |
+
+
+---
+class: animated, fadeIn
+##Exemplo 8 - II
+
+* Hipóteses:
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p_{11}=p_{21}\\
+  \textrm{H}_1&amp;: p_{11}&gt; p_{21}
+\end{align*}$$`
+
+--
+
+* `\(N_{11}\sim \textrm{Hipergeométrica}(8,4,4)\)`.
+
+--
+
+* A única tabela mais favorável à hipótese alternativa, sob as restrições é:
+
+| Primeiro Ingreditente  || Resposta   |            ||   Total    |
+|:----------------------:||-----------:|:-----------:||:---------:|
+|                        ||   Leite    |      Chá    ||           |
+| Leite                  ||   4        |        0    || 4         |        
+| Chá                    ||   0        |        4    || 4         |
+|          Total         ||   4        |        4    || 8         |
+
+--
+
+`$$\begin{align*}
+\textrm{valor p}&amp;=\textrm{P}(N_{11}=3|N_{11}+N_{21}=4)+\textrm{P}(N_{11}=4|N_{11}+N_{21}=4)\\
+&amp;=0,22864+0,0143=0,2428.
+\end{align*}$$`
+
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - I
+
+Forma de pesquisa que verifica se indivíduos selecionados porque têm uma doença/característica (os casos) diferem significativamente em relação à exposição a um dado fator de risco de um grupo de indivíduos comparáveis, mas que não possuem a doença/característica (os controles).
+
+####Caracterização
+
+- Os **&lt;span style="color:orange"&gt;casos&lt;/span&gt;** devem ser todos os que ocorreram durante um período de tempo em uma população definida.
+
+- Os **&lt;span style="color:orange"&gt;controles&lt;/span&gt;** devem ser pessoas comparáveis aos casos mas sem a doença/característica, ou seja, pessoas que caso adquirissem a doença/característica seriam escolhidas como casos.
+
+- Não há dificuldades éticas para sua implementação se os dados usados são de seres humanos.
+
+- O tempo gasto e os custos associados são relativamente pequenos, já que normalmente são utilizados dados pré-existentes.
+
+- Particularmente adequados ao estudo de doenças/características raras. 
+
+- Definição de regras claras para a escolha dos casos e controles. Deve-se tomar cuidado com os vícios de seleção
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - II
+
+&lt;img src="images/CasoControle.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - III
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (C)\)`  |  `\(j=2\, (\overline{C})\)` ||          |
+| `\(i=1 \, (E)\)`           ||                 |                         ||          |        
+| `\(i=2 \, (\overline{E})\)`||                 |                         ||          |
+|          Total         ||    `\(n_{+1}\)`     |         `\(n_{+2}\)`        ||    `\(n\)`   |
+
+--
+
+`$$p_{i(j)}=P(X=i|Y=j)$$`
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (C)\)`  |  `\(j=2\, (\overline{C})\)` ||          |
+| `\(i=1 \, (E)\)`           ||     `\(p_{1(1)}\)`  |       `\(p_{1(2)}\)`        || `\(p_{1+}\)` |        
+| `\(i=2 \, (\overline{E})\)`||     `\(p_{2(1)}\)`  |       `\(p_{2(2)}\)`        || `\(p_{2+}\)` |
+|          Total         ||       `\(1\)`       |         `\(1\)`             ||          |
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - IV
+
+Temos
+`$$\begin{cases}
+  N_{11}&amp;\sim \textrm{Bin}(n_{+1},p_{1(1)})\\
+  N_{12}&amp;\sim \textrm{Bin}(n_{+2},p_{2(1)})\\
+  \end{cases}$$`
+
+* Modelo probabilístico: Produto de Binomiais.
+
+--
+
+* As probabilidades `\(p_{i(j)}\, j=1,2\)` são estimadas por
+`$$\widehat{p}_{i(j)}=\frac{n_{ij}}{n_{+j}}.$$`
+
+* Se a suposição de independência entre casos e controles não for razoável, deve-se usar metodologias mais apropriadas.
+
+
+---
+class: animated, fadeIn
+##Exemplo 9
+
+Estudo da associação entre fumo e câncer de pulmão em pacientes do sexo masculino.
+
+&lt;img src="images/TabelaCasoControle.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Hipóteses - I
+
+Hipótese de homogeneidade:
+`$$\begin{cases}
+\textrm{H}_0:&amp; p_{1(1)}=p_{1(2)}\\
+\textrm{H}_1:&amp; p_{1(1)}\neq p_{1(2)}\\
+\end{cases}$$`
+Estatística de teste:
+`$$Q_p=\sum_{i=1}^2 \sum_{j=1}^2\dfrac{(n_{ij}-e_{ij})^2}{e_{ij}}\sim \chi^2_{(1)},$$`
+onde `\(e_{ij}=\dfrac{(n_{i+})(n_{+j})}{n}\)`.
+
+Sob `\(H_0: \textrm{E}(N_{1j})=n_{+j}p_{1+}\,\)` e `\(\,\textrm{E}(N_{2j})=n_{+j}p_{2+}.\)`
+
+---
+class: animated, fadeIn
+##Hipóteses - II
+
+A hipótese `\(\textrm{H}_0:p_{1(1)}=p_{1(2)}\)` também pode ser expressa por:
+`$$\textrm{H}_0: \dfrac{p_{1(1)}/(1-p_{1(1)})}{p_{1(2)}/(1-p_{1(2)})}=\dfrac{p_{1(1)}p_{2(2)}}{p_{2(1)}p_{1(2)}}=1.$$`
+
+&gt;**Observação**:
+* `\(\textrm{RR}=\dfrac{\textrm{P}(C|E)}{\textrm{P}(C|\bar{E})}\)` NÃO SE APLICA a esses estudos.
+* `\(\textrm{OR}_{C|\bar{C}}=\dfrac{n_{11}n_{22}}{n_{12}n_{21}}\)`
+
+---
+class: animated, fadeIn
+##Relação entre RR e OR
+
+* Se os casos de interesse forem raros (por exemplo, doença rara), os estudos de coorte são INVIÁVEIS.
+
+* Nesses casos são mais comuns os estudos de casos e controles.
+
+ **&lt;span style="color:orange"&gt;Se doença rara &lt;/span&gt;** `\(\Longrightarrow\)` RR `\(\approx\)` OR:
+
+`$$\begin{align*}
+\textrm{RR}&amp;=\dfrac{p_{(1)1}}{p_{(2)1}}=\dfrac{P(D|E)}{P(D|\overline{E})}\\
+			&amp;=\dfrac{P(D)P(E|D)/[P(D)P(E|D)+P(\overline{D})P(E|\overline{D})]}{P(D)P(\overline{E}|D)/[P(D)P(\overline{E}|D)+P(\overline{D})P(\overline{E}|\overline{D})]}\\
+            &amp;=\dfrac{P(E|D)\{P(\overline{E}|\bar{D})+P(D)[P(\overline{E}|D)-P(\overline{E}|\overline{D})]\}}{P(\overline{E}|D)\{P(E|\overline{D})+P(D)[P(E|D)-P(E|\overline{D})]\}}.
+\end{align*}$$`
+Mas, `\(P(D)\rightarrow 0\)`, então
+`$$\textrm{RR}\approx \dfrac{P(E|D)P(\overline{E}|\overline{D})}{p(\overline{E}|D)P(E|\overline{D})}=\dfrac{p_{1(1)}p_{2(2)}}{p_{2(1)}p_{1(2)}}=\textrm{OR}.$$`
+
+---
+class: animated, fadeIn
+##Exemplo 10 - I
+
+Em um estudo de caso-controle, realizado para estudar fatores de risco para câncer de mama em mulheres atendidas pelo Hospital das Clínicas da UFMG, observou entre os casos 14 pacientes expostas e 4 não expostas ao fator: histórico familiar, em primeiro grau, de câncer de mama. Entre as pacientes usadas como controles, 233 haviam sido expostas e 281 não tiveram exposição.
+
+
+|     Doença   || Exposição  |        ||   Total  |
+|:------------:||:----------:|:------:||:--------:|
+|              ||  Sim       |   Não  ||          |
+| Caso         ||   14       |  4     ||  18      |        
+| Controle     ||   233      |  281   ||  514     |
+|   Total      ||   247      |  285   ||  532     |
+
+* Hipoteses:
+`$$\begin{align*}
+ \textrm{H}_0 &amp;: p_{11}=p_{21}\\
+ \textrm{H}_1 &amp;: p_{11}\neq p_{21},
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+##Exemplo 10 - II
+
+Considerando-se as marginais fixas testamos a hipótese a través do Teste exato de Fisher. Assumindo que `\(H_0\)` é verdadeira, temos
+
+`$$\textrm{P}(X=n_{11}|N_{11}+N_{21}=247)=\dfrac{\binom{18}{n_{11}}\binom{514}{247-n_{11}}}{\binom{532}{247}}.$$`
+
+Mantidas as marginais fixas, apenas 19 tipos diferentes de tabelas podem ser gerados `\((n_{11}=0,1,2,\ldots,18)\)`.
+
+Assumindo que `\(H_0\)` é verdadeira, calcula-se a probabilidade de ocorrência de cada tabela, por exemplo, para a tabela inicial, temos
+`$$\textrm{P}(N_{11}=14|N_{11}+N_{21}=247)=\dfrac{\binom{18}{14}\binom{514}{247-a}}{\binom{532}{247}}=0,0049$$`
+
+---
+class: animated, fadeIn
+##Exemplo 10 - III
+
+&lt;img src="images/Exemplo_TEF.png" width="32%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Exemplo 10 - IV
+
+Para obter o p-valor do teste exato de Fisher, consideramos as tabelas cujas probabilidades sejam menores ou iguais à probabilidade da tabela observada no experimento.
+
+Neste caso, isto consiste em somar as probabilidades relativas às tabelas 1, 2, 3, 15, 16, 17, 18, 19. Daí, p-valor=0,0095.
+
+&gt;Forte evidência de associação entre histórico familiar e câncer de mama.
+
 
 ---
 class: animated, fadeIn
 ##Estudos Transversais - I
 
-&lt;img src="images/EsquemaTransversal.png" width="65%" style="display: block; margin: auto;" /&gt;
+* Semelhantes aos estudos de coorte, no entanto, todas as medições são feitas num único momento.
+
+* Os dados representam um corte transversal ou "fotografia"das características da população em estudo.
+
+* Investiga-se causa e efeito de maneira simultânea para averiguar, por exemplo, associação entre exposição ou
+não à doença/característica.
+
+* Medida usada: Prevalência.
+
+* Estes estudos são também chamados **&lt;span style="color:orange"&gt;Estudos de prevalência&lt;/span&gt;**.
+
+* Rápidos, geralmente baratos, fáceis em termos logísticos e não sensíveis a problemas como as perdas de
+seguimento e outros, característicos dos estudos longitudinais.
+
+* Podem ser realizados como a primeira etapa de um estudo de coorte ou ensaio clínico sem grandes custos adicionais. Os resultados definem as características demográficas e clínicas de base da amostra em estudo e podem, por vezes, revelar associações de interesse para o restante do estudo.
 
 ---
 class: animated, fadeIn
 ##Estudos Transversais - II
+
+###Desvantagens
+
+* Impossibilidade de estabelecer relações causais por não provarem a existência de uma sequência
+temporal entre exposição ao fator e o subsequente desenvolvimento da doença.
+
+* Impossibilidade de estabelecer relações causais por não provarem a existência de uma sequência temporal entre
+exposição ao fator e o subsequente desenvolvimento da doença.
+
+* Partilham as desvantagens dos estudos observacionais em geral.
+
+* Pouco práticos no estudo de doenças raras, uma vez que obrigam à selecção de amostras muito numerosas.
+
+* Este tipo de estudos são susceptíveis aos chamados viéses de prevalência/incidência que acontecem quando o efeito de determinados factores relacionados com a duração da doença é confundido com um efeito na ocorrência da doença.
+
+
+---
+class: animated, fadeIn
+##Estudos Transversais - III
+
+&lt;img src="images/EsquemaTransversal.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Estudos Transversais - IV
 
 Tem-se uma variável resposta `\((Y)\)` e uma variável explicativa `\((X)\)`.
 
@@ -824,31 +1321,91 @@ Tem-se uma variável resposta `\((Y)\)` e uma variável explicativa `\((X)\)`.
 
 ---
 class: animated, fadeIn
-##Estudos Transversais - III
+##Estudos Transversais - V
 
 * Modelo Probabilístico: Multinomial
 
 * Probabilidades `\(p_{ij}\)` estimadas por
 `$$\widehat{p}=\dfrac{n_{ij}}{n}.$$`
 
+---
+class: animated, fadeIn
+##Hipóteses
+
+* Hipótese de Independência
+
+`$$\begin{align*}
+\textrm{H}_0&amp;:p_{ij}=(p_{i+})(p_{+j})\quad \textrm{para } i,j=1,2\\
+\textrm{H}_1&amp;:p_{ij}\neq (p_{i+})(p_{+j})\quad \textrm{para pelo menos um par }(i,j)
+\end{align*}$$`
+
+--
+
+Dado que o modelo é Multinomial:
+
+* Frequências esperadas: `\(E(N_{ij})=n(p_{ij})\)`, `\(i,j=1,2.\)`
+
+* Sob `\(H_0\)`: `\(E(N_{ij})=n(p_{i+})(p_{+j})\)`, `\(i,j=1,2\)`.
+
+* Estimativas
+
+`$$e_{ij}=n\left(\dfrac{n_{i+}}{n}\right)\left(\dfrac{n_{+j}}{n}\right), i,j=1,2.$$`
+
+* Estatística de teste: `\(Q_p\)`.
+
+---
+class: animated, fadeIn
+##Medidas de associação
+
+* Risco relativo e odds ratio: Não são apropriadas.
+
+* Prevalência: proporção de indivíduos que estão doentes em um determinado tempo específico (momento de observação).
+
+* Incidência: porporção de indivíduos que se tornaram doentes no decorrer de um período de tempo de acompanhamento.
+
+* Se os totais `\(n_{i+}\)` forem condicionados, com os devidos cuidados na interpretação, pode-se usar o odds ratio e a razão de prevalências:
+
+`$$OR=\dfrac{n_{11}n_{22}}{n_{12}n_{21}}\qquad RP=\dfrac{n_{11}/n_{1+}}{n_{21}/n_{2+}}.$$`
+
 
 ---
 class: animated, fadeIn
 ##Ensaio Clínico Aleatorizado - I
+
+* Permite decidir entre dois ou mais tratamentos qual é o mais efetivo. 
+
+* Metodologia apropriada para a comparação de tratamentos. 
+
+* Usado também quando é incerto o valor de uma nova terapia ou os méritos da terapia existente estão em disputa. 
+
+* A alocação aleatória dos participantes aos grupos permite obter grupos semelhantes em todas as suas características
+medidas ou não.
+
+* Técnicas estatísticas são usadas para se decidir se há ou não diferença na eficácia das terapias envolvidas.
+
+* Forma experimental de pesquisa.
+
+* Está sujeito a constrangimentos éticos, disciplinados pela convenção de Helsinque.
+
+* Estudos cegos e estudos duplo-cego eliminam o efeito placebo.
+
+---
+class: animated, fadeIn
+##Ensaio Clínico Aleatorizado - II
 
 &lt;img src="images/EsquemaECA.png" width="65%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 class: animated, fadeIn
-##Ensaio Clínico Aleatorizado - II
+##Ensaio Clínico Aleatorizado - III
 
 |             X          ||          Y      |                         ||   Total  |
 |:----------------------:||----------------:|:-----------------------:||:--------:|
 |                        ||    `\(j=1\, (Com)\)`|  `\(j=2\, (Sem)\)`          ||          |
 | `\(i=1 \, (Tratamento)\)`  ||     `\(p_{(1)1}\)`  |       `\(p_{(1)2}\)`        ||    `\(1\)`   |        
 | `\(i=2 \, (Controle)\)`    ||     `\(p_{(2)1}\)`  |       `\(p_{(2)2}\)`        ||    `\(1\)`   |
-|          Total         ||     `\(p_{+1}\)`    |         `\(p_{+2}\)`        ||    `\(1\)`   |
+|          Total         ||     `\(p_{+1}\)`    |         `\(p_{+2}\)`        ||          |
 
 --
 
@@ -861,8 +1418,61 @@ class: animated, fadeIn
  * Estudos de Coorte: Observacionais
  * Ensaios clínicos: Experimentais
 
+--
 
 * Modelo Probabilístico: Produto de Binomiais.
+
+
+---
+class: animated, fadeIn
+##Exemplo 11 - I
+
+Fisher et al. (1987) publicaram o primeiro relato de um ensaio clínico que comprovou a eficácia de zidovudina (AZT) para prolongar a vida de pacientes com AIDS. O estudo conduzido foi um ensaio clínico aleatorizado com 24 semanas de
+tratamento.
+
+|      Grupo   ||   Situação|        ||   Total  |
+|:------------:||----------:|:------:||:--------:|
+|              ||   Vivo    |  Óbito ||          |
+| AZT          ||   144     |    1   ||   145    |        
+| Placebo      ||   121     |   16   ||   137    |
+|   Total      ||   265     |   17   ||   282    |
+
+--
+
+* Proporção de pacientes vivos que tomaram AZT:
+
+`$$\widehat{p}_{11}=\dfrac{144}{145}=0,993.$$`
+* Proporção de pacientes vivos que tomaram o placebo:
+
+`$$\widehat{p}_{21}=\dfrac{121}{137}=0,883.$$`
+
+---
+class: animated, fadeIn
+##Exemplo 11 - II
+
+Tabela de valores esperados: 
+
+|      Grupo   ||   Situação   |        ||   Total  |
+|:------------:||-------------:|:------:||:--------:|
+|              ||   Vivo       |  Óbito ||          |
+|   AZT        ||   136,26     |  8,74  ||   145    |        
+| Placebo      ||   128,74     |  8,26  ||   137    |
+|   Total      ||   265,00     |  17,00 ||   282    |
+
+--
+
+`$$\begin{align*}
+  Q_{p(Yates)}&amp;=\dfrac{n(|n_{11}n_{22}-n_{21}n_{12}|-n/2)^2}{n_{1+}n_{2+}n_{+1}n_{+2}}\\
+  					 &amp;=\dfrac{282(|144\times 16-1\times 121|-282/2)^2}{145\times 137\times 265\times 17}\\
+             &amp;=14,74.
+\end{align*}$$`
+
+
+Sob `\(H_0\)`, `\(\textrm{P}(\chi^2_1&gt;q_c)=0,05\Rightarrow q_c=3,841\)`. Então, rejeita-se a hipótese de igualdade entre os grupos AZT e Placebo.
+
+
+
+
 ---
 class: animated, hide-logo, bounceInDown
 ## Política de proteção aos direitos autorais
