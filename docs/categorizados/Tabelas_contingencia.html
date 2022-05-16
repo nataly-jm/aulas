@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Tabelas de Contingência
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 11/05/2022
+### Vitória. ES - 16/05/2022
 
 ---
 
@@ -1367,7 +1367,6 @@ class: animated, fadeIn
 
 `$$OR=\dfrac{n_{11}n_{22}}{n_{12}n_{21}}\qquad RP=\dfrac{n_{11}/n_{1+}}{n_{21}/n_{2+}}.$$`
 
-
 ---
 class: animated, fadeIn
 ##Ensaio Clínico Aleatorizado - I
@@ -1469,6 +1468,252 @@ Tabela de valores esperados:
 
 
 Sob `\(H_0\)`, `\(\textrm{P}(\chi^2_1&gt;q_c)=0,05\Rightarrow q_c=3,841\)`. Então, rejeita-se a hipótese de igualdade entre os grupos AZT e Placebo.
+
+
+---
+class: animated, fadeIn
+#Teste de McNemar - I
+
+* Usado quando o interesse é comparar as proporções em amostras onde a mesma unidade amostral é avaliada sob condições diferentes (observadores, momentos, tratamentos, etc). Essas são as chamadas **&lt;span style="color:orange"&gt;Amostras pareadas&lt;/span&gt;**.
+
+&gt;Também podem ser observados pares de indivíduos com aproximadamente as mesmas características.
+
+
+ |  Amostra II     || Amostra I |           ||   Total  |
+ |:---------------:||----------:|:---------:||:--------:|
+ |                 ||   Sucesso |  Fracasso ||          |
+ |    Sucesso      ||  `\(n_{11}\)` | `\(n_{12}\)`  || `\(n_{1+}\)` |        
+ |    Fracasso     ||  `\(n_{21}\)` | `\(n_{22}\)`  || `\(n_{2+}\)` |
+ |      Total      ||  `\(n_{+1}\)` | `\(n_{+2}\)`  || `\(n\)`      |
+
+
+* Modelo probabilístico: Multinomial
+
+
+
+---
+class: animated, fadeIn
+#Teste de McNemar - II
+
+* Hipóteses:
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p_{i+}=p_{+j}, \forall i=j \Longrightarrow \textrm{ concordância marginal}\\
+  \textrm{H}_1&amp;: p_{i+}\neq p_{+j} \textrm{ para pelo menos um par.}
+\end{align*}$$`
+
+Nesse caso, basta testar
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p_{1+}=p_{+1},\\
+  \textrm{H}_1&amp;: p_{1+}\neq p_{+1},
+\end{align*}$$`
+
+dado que `\(p_{1+}=1-p_{2+}\)` e `\(p_{+1}=1-p_{+2}\)`.
+
+---
+class: animated, fadeIn
+#Teste de McNemar - III
+
+**Observação:**
+
+`$$\begin{align*}
+\textrm{H}_0: p_{1+}=p_{+1}&amp;\Leftrightarrow p_{11}+p_{12}=p_{11}+p_{21}\Leftrightarrow p_{12}+p_{12}=p_{21}+p_{12}\\
+  &amp;\Leftrightarrow \dfrac{p_{12}}{p_{12}+p_{21}}=\dfrac{1}{2}\Leftrightarrow \dfrac{np_{12}}{np_{12}+np_{21}}=\dfrac{1}{2}\\
+  &amp;\Leftrightarrow \dfrac{\mu_{12}}{\mu_{12}+\mu_{21}}=\dfrac{1}{2}\Leftrightarrow p=\dfrac{1}{2},
+\end{align*}$$`
+
+onde `\(p=\dfrac{p_{12}}{p_{12}+p_{21}}=\dfrac{\mu_{12}}{\mu_{12}+\mu_{21}}\)` e `\(\mu_{ij}=np_{ij}\)`.
+
+--
+
+Assim, as hipóteses anteriores podem ser escritas como
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p=1/2,\\
+  \textrm{H}_1&amp;: p\neq 1/2
+\end{align*}$$`
+
+
+
+
+---
+class: animated, fadeIn
+#Teste de McNemar - IV
+
+**Aspectos Relevantes:**
+
+Suposição razoável: `\(n\)` não foi fixado. Logo,
+
+`$$N_{ij}\sim \textrm{Poisson}(\mu_{ij})$$`
+* `\(N_{12}|(N_{12}+N_{21})=s\sim \textrm{Bin}(s,p)\)`
+
+* Sob `\(H_0: p=1/2\)`,
+
+`$$\textrm{P}(N_{12}=n_{12}|(N_{12}+N_{21})=s)=\binom{s}{n_{12}} \left(\frac{1}{2}\right)^s$$`
+
+---
+class: animated, fadeIn
+#Teste de McNemar - V
+
+**Demonstração:**
+
+`$$\begin{align*}
+&amp;\textrm{P}(N_{12}=n_{12}|N_{12}+N_{21}=s)=\dfrac{\textrm{P}(N_{12}=n_{12},N_{12}+N_{21}=s)}{\textrm{P}(N_{12}+N_{21}=s)}\\
+&amp;=\dfrac{\textrm{P}(N_{12}=n_{12},N_{21}=s-n_{12})}{\textrm{P}(N_{12}+N_{21}=s)}
+=\dfrac{\textrm{P}(N_{12}=n_{12})\textrm{P}(N_{21}=s-n_{12})}{\textrm{P}(N_{12}+N_{21}=s)}\\
+&amp;=\dfrac{\frac{e^{-\mu_{12}}\mu_{12}^{n_{12}}}{n_{12}!}\frac{e^{-\mu_{21}}\mu_{21}^{s-n_{12}}}{(s-n_{12})!}}{\frac{e^{-(\mu_{12}+\mu_{21})}(\mu_{12}+\mu_{21})^{s}}{s!}}\\
+&amp;=\dfrac{s!}{n_{12}!(s-n_{12})!}\left(\dfrac{\mu_{12}}{\mu_{12}+\mu_{21}}\right)^{n_{12}}\left(\dfrac{\mu_{21}}{\mu_{12}+\mu_{21}}\right)^{s-n_{12}}\\
+&amp;=\dfrac{s!}{n_{12}!(s-n_{12})!}p^{n_{12}}(1-p)^{s-n_{12}}
+\end{align*}$$`
+---
+class: animated, fadeIn
+#Teste de McNemar - VI
+
+**Teste Exato**
+
+Seja `\(n_{12}=a\)` o número de pares discordantes do tipo 1.
+
+* Se `\(H_1: p&lt;1/2\)`, então
+`$$\textrm{valor p}=\textrm{P}(N_{12}\leq a|N_{12}+N_{21}=s)=\left(\dfrac{1}{2}\right)^s\sum_{k=0}^a \binom{s}{k}$$`
+
+* Se `\(H_1: p&gt;1/2\)`, então
+`$$\textrm{valor p}=\textrm{P}(N_{12}\geq a|N_{12}+N_{21}=s)=\left(\dfrac{1}{2}\right)^s\sum_{k=a}^s \binom{s}{k}$$`
+
+* Se `\(H_1: p\neq 1/2\)`, então
+`$$\textrm{valor p}=2\left(\dfrac{1}{2}\right)^s\min\left\{\sum_{k=a}^s \binom{s}{k}\sum_{k=0}^a \binom{s}{k}\right\}$$`
+
+
+&gt;Observação: O Teste de McNemar, definido como anteriormente, também é conhecido como **&lt;span style="color:orange"&gt;Teste dos Sinais&lt;/span&gt;**.
+
+
+---
+class: animated, fadeIn
+#Teste de McNemar - VII
+
+**Teste Assintótico**
+
+Seja `\(Y=N_{12}|(N_{12}+N_{21})=s\)`. Daí, sob `\(H_0\)`.
+`$$Y\sim \textrm{Bin}(s,1/2).$$` 
+Seja `\(Z_t=\dfrac{Y-s/2}{\sqrt{s/4}}\)`. Para `\(n\)` suficientemente grande, `\(Z_t\sim N(0,1)\)` e, consequentemente, 
+`$$Q_t=Z_t^2\approx \chi_1^2.$$`
+A estatística `\(Q_t\)` pode ser usada como estatística de teste. 
+
+
+---
+class: animated, fadeIn
+##Teste de McNemar - VIII
+
+**Teste assintótico para n moderado/pequeno**
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+Q_{McN}&amp;=\dfrac{\left(|n_{12}-\frac{n_{12}+n_{21}}{2}|-\frac{1}{2}\right)^2}{\frac{n_{12}+n_{21}}{2}}+\dfrac{\left(|n_{21}-\frac{n_{12}+n_{21}}{2}|-\frac{1}{2}\right)^2}{\frac{n_{12}+n_{21}}{2}}\\
+			&amp;=\dfrac{(|n_{12}-n_{21}|-1)^2}{n_{12}+n_{21}}
+\end{align*}
+\]
+&lt;/div&gt;
+
+
+Sob `\(H_0\)`, 
+
+`$$Q_{McN}\sim \chi^2_{(1)}.$$`
+
+
+Portanto, rejeita-se `\(H_0\)` quando `\(Q_{McN}&gt;\chi^2_{(1,1-\alpha)}\)`, onde `\(\chi^2_{(1,1-\alpha)}\)` é  percentil de ordem `\(1-\alpha\)` da distribuição `\(\chi^2\)` com 1 grau de liberdade.
+
+
+---
+class: animated, fadeIn
+##Exemplo 12 - I
+
+**Associação entre Quimioterapia e câncer de mama:** 
+
+Foram observados pares de pacientes com aproximadamente mesma idade e condições clínicas por um período de 5 anos.
+
+* Grupos:
+
+ - A: Tratamento quimioterápico durante 6 meses (início na 1ª semana após mastectomia).
+ - B: Tratamento quimioterápico na 1ª semana.
+ 
+
+ |  Tratamento || Sobrevivência |           ||   Total  |
+ |:-----------:||:-------------:|:---------:||:--------:|
+ |             ||     Sim       |     Não   ||          |
+ |    A        ||      526      |    95     ||   621    |        
+ |    B        ||      515      |    106    ||   621    |
+ |   Total     ||     1041      |    201    ||  1242    |
+
+Observamos que as proporções de sobrevivência após 5 anos de pacientes dos dois grupos são bastante similares.
+
+
+---
+class: animated, fadeIn
+##Exemplo 12 - II
+
+**Problema**: Estes cálculos não consideram o pareamento. Faz-se necessário verificar a informação na forma de pares:
+
+
+ |  Tratamento A || Tratamento B  |           ||   Total  |
+ |:-----------:||:---------------:|:---------:||:--------:|
+ |             ||       Sim       |     Não   ||          |
+ |    Sim      ||        510      |    16     ||   526    |        
+ |    Não      ||          5      |     90    ||    95    |
+ |   Total     ||       515       |    106    ||   621    |
+
+--
+
+`$$\begin{align*}
+Q_{McN}&amp;=\dfrac{(|16-5|-1)^2}{16+5}=4,76\\
+\textrm{valor p}&amp;: 0,02919
+\end{align*}$$`
+
+--
+
+&gt;Há evidência estatística de diferença entre os tratamentos. Em particular, o tratamento A fornece melhores resultados.
+
+
+---
+class: animated, fadeIn
+##Exemplo 13
+
+Dados coletados por um pesquisador para determinar se um novo método, mais simples, para detecção de cáries é mais eficiente que o metodo convencional. Selecionou-se uma amostra aleatória simples sem reposição de 97 pacientes. Em cada um deles foram aplicadas as duas técnicas. A tabela a seguir apresenta os resultados de uma subamostra de 24 pacientes.
+
+ | Simplificado ||  Convencional   |           ||   Total  |
+ |:------------:||:---------------:|:---------:||:--------:|
+ |              ||       Baixo     |    Alto   ||          |
+ |     Baixo    ||        11       |     0     ||    11    |        
+ |     Alto     ||         2       |     11    ||    13    |
+ |    Total     ||        13       |     11    ||    24    |
+ 
+--
+
+Neste caso: `\(s=2\)`, `\(n_{12}=0\)`, `\(H_1: p \neq 1/2\)`. Assim,
+`$$\textrm{valor p}=2\left(\dfrac{1}{2}\right)^2\min\left\{\sum_{k=0}^2 \binom{s}{k}\sum_{k=0}^0 \binom{s}{k}\right\}=0,5.$$`
+Assim, há indícios de que existe concordância marginal entre os métodos de detecção de cáries.
+ 
+
+---
+class: animated, fadeIn
+##Exercício
+
+**Medicamentos para cefaleia:**
+
+Um estudo avaliou 100 doentes com cefaleias frequentes. Os mesmos 100 doentes tomaram durante um mês o medicamento A e no mês seguinte o medicamento B. Solicitou-se aos doentes que registassem se durante cada mês tiveram ou não dores de cabeça. Os resultados são resumidos a seguir:
+
+
+ |  Medicamento A || Medicamento B  |               ||   Total  |
+ |:--------------:||:--------------:|:-------------:||:--------:|
+ |                ||  Sem Cefaleia  |  Com Cefaleia ||          |
+ | Sem Cefaleia   ||        45      |         4     ||    49    |        
+ | Com Cefaleia   ||        17      |        34     ||    51    |
+ |   Total        ||        62      |        38     ||   100    |
+ 
+
+Podemos afirmar que os dois medicamentos têm o mesmo efeito?
+
+
+
 
 
 
