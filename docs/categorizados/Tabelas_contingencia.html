@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Tabelas de Contingência
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 16/05/2022
+### Vitória. ES - 29/05/2022
 
 ---
 
@@ -144,7 +144,7 @@ class: animated, slideInRight
 É a probabilidade de o paciente realmente doente quando o resultado do teste é positivo. Ou seja:
 
 `$$VPP=P(D_+|T_+)=\dfrac{P(D_+ \cap T_+)}{P(T_+)}=\dfrac{sp}{sp+(1-p)(1-e)},$$`
-onde `\(p=P(D_+)\)` a prevalência da doença na população de interesse, isto é, a probabilidade de pessoas doentes ou a probabilidade de ocorrência da doença pré-teste (a priori), `\(s\)` é a sensibilidade do teste e `\(e\)` é a especificidade.
+onde `\(p=P(D_+)\)` a prevalência da doença na população de interesse, isto é, a probabilidade de pessoas doentes ou a probabilidade de ocorrência darequire(DescTooks) doença pré-teste (a priori), `\(s\)` é a sensibilidade do teste e `\(e\)` é a especificidade.
 
 
 ---
@@ -1712,9 +1712,433 @@ Um estudo avaliou 100 doentes com cefaleias frequentes. Os mesmos 100 doentes to
 
 Podemos afirmar que os dois medicamentos têm o mesmo efeito?
 
+---
+class: animated, bounceInDown
+
+#Tabelas `\(r\times s\)`
+
+**Estrutura:**
+
+ |  X        ||          |    Y      |           |           ||   Total   |
+ |:---------:||:--------:|:---------:|:---------:|:---------:||:---------:|
+ |           || `\(j=1\)`    |   `\(j=2\)`   | `\(\cdots\)`  | `\(j=s\)`     ||           |
+ | `\(i=1\)`     || `\(n_{11}\)` | `\(n_{12}\)`  | `\(\cdots\)`  | `\(n_{1s}\)`  || `\(n_{1+}\)`  |        
+ | `\(i=2\)`     || `\(n_{21}\)` | `\(n_{22}\)`  | `\(\cdots\)`  | `\(n_{2s}\)`  || `\(n_{2+}\)`  |        
+ | `\(\vdots\)`  || `\(\vdots\)` | `\(\vdots\)`  | `\(\vdots\)`  | `\(\vdots\)`  || `\(\vdots\)`  |        
+ | `\(i=r\)`     || `\(n_{r1}\)` | `\(n_{r2}\)`  | `\(\cdots\)`  | `\(n_{rs}\)`  || `\(n_{r+}\)`  | 
+ |  Total    || `\(n_{+1}\)` | `\(n_{+2}\)`  | `\(\cdots\)`  | `\(n_{+s}\)`  ||   `\(n\)`     |        
 
 
 
+---
+class: animated, fadeIn
+##Variáveis X e Y  Nominais
+
+* Hipóteses:
+
+ - Se `\(n_{i+}\)` fixos `\(\Longrightarrow\)` Hipótese de homogeneidade.
+ 
+ - Se `\(n\)` fixo `\(\Longrightarrow\)` Hipótese de independência.
+ 
+ - Se totais aleatórios `\(\Longrightarrow\)` Hipótese de multiplicatividade
+
+* Estatística de Teste:
+
+`$$Q_P=\sum_{i=1}^s\sum_{j=1}^r\dfrac{(n_{ij}-e_{ij})^2}{e_{ij}}\sim \chi^2_{(s-1)(r-1)},$$`
+com `\(e_{ij}=\dfrac{(n_{i+})(n_{+j})}{n}\)`, `\(i=1,\ldots,s\)` e `\(j=1,\ldots,r\)`.
+
+---
+class: animated, fadeIn
+##Exemplo 14
+
+ |  Partido     ||     |  Moradia  |      |      ||   Total   |
+ |:------------:||:---:|:---------:|:----:|:----:||:---------:|
+ |              ||  A  |    B      |  C   |  D   ||           |
+ | Democrata    || 221 |   160     | 360  | 140  ||   881     |        
+ | Independente || 200 |   291     | 160  | 311  ||   962     |        
+ | Republicano  || 208 |   106     | 316  |  97  ||   727     |        
+ |  Total       || 629 |   557     | 836  | 548  ||   2570    |        
+
+--
+
+* Modelo associado `\(\Longrightarrow\)`  Multinomial
+
+`$$\begin{align*}
+  \textbf{H}_0&amp;: p_{ij}=(p_{i+})(p_{+j}),\quad i=1,2,3 \textrm{ e } j=1,\ldots,4\\
+  \textbf{H}_1&amp;: p_{ij}\neq (p_{i+})(p_{+j}),\quad \textrm{para pelo menos um par } (i,j)
+\end{align*}$$`
+
+* `\(Q_P=273,92\Longrightarrow\)` há evidência de associação entre partido político e local de moradia.
+
+
+---
+class: animated, fadeIn
+##Variável Y ordinal e X Nominal com totais `\(n_{i+}\)` fixos
+
+**Alternativa:** Atribuir escores `\(\textbf{a}=(a_1,\ldots,a_r)\)` para as categorias de Y e definir um escore médio `\(\bar{F}_i\)` para cada subpopulação, tal que
+
+`$$\bar{F}_i=\sum_{j=1}^r a_j(p_{(i)j}),\quad i=1,\ldots,s.$$`
+ Particularmente, se `\(s=2\)`, `\(H_0: \bar{F}_1=\bar{F}_2\)`.
+ 
+* `\(\bar{f}_i=\sum_{j=1}^r a_j(\hat{p}_{(i)j})=\sum_{j=1}^r a_j \left(\frac{n_{ij}}{n_{i+}}\right)\)`, `\(i=1,2\)`
+ 
+* `\(E(\bar{f}_1|\textrm{H}_0)=\sum_{j=1}^r a_j\left(\frac{\textrm{E}(N_{1j})}{n_{1+}}\right)=\sum_{j=1}^r a_j\left(\frac{n_{+j}}{n}\right)=\mu_a\)`
+
+* `\(\textrm{Var}(\bar{f}_1|\textrm{H}_0)=\frac{(n-n_{1+})}{(n_{1+})(n_{+1})}\sum_{j=1}^r (a_j-\mu_a)^2\left(\frac{n_{+j}}{n}\right)=\frac{(n-n_{1+})}{(n_{1+})(n_{+1})}V_a\)`
+
+
+
+---
+class: animated, bounceInDown
+
+#Medidas de Associação
+
+* Há famílias de medidas de associação para tabelas `\((r\times s)\)`.
+
+* Em geral, essas medidas são baseadas na estatística `\(Q_P=\sum_{i=1}^r\sum_{j=1}^s \dfrac{(n_{ij}-e_{ij})^2}{e_{ij}}\)`.
+
+* Busca-se construir estatísticas com suporte limitado (intervalo `\((0,a)\)`, `\(a&gt;0\)`) de tal forma que quanto maior/menor seja seu valor, maior/menor e o grau de independência.
+
+* A fórmula geral é `\(M=g(Q_P)/T\)`, em que `\(T\)` serve para limitar superiormente a estatística `\(M\)`. Assim, quanto mais próximo de zero for o valor de `\(M\)`, menor será a magnitude da associação e quanto mais próximo desse limitante, maior será a magnitude dessa associação.
+
+
+---
+class: animated, fadeIn
+##Coeficiente Phi -I
+
+A correlação pode ser usada como medida de associação entre duas variáveis, definida como
+ $$
+  \rho=\frac{\textrm{E}(XY)-\textrm{E}(X)\textrm{E}(Y)}{\sqrt{\textrm{Var}(X)\textrm{Var}(Y)}}.
+ $$
+
+  - Se `\(X\)` e `\(Y\)` são independentes, `\(\textrm{E}(XY)-\textrm{E}(X)\textrm{E}(Y)=0\)` e, portanto, `\(\rho=0\)`.
+  
+  - Se as duas variáveis são idênticas (opostas),isto é, `\(X=Y\)` `\((X=1-Y)\)`, então `\(\rho=1\, (-1)\)`.
+ 
+ &gt; **Observação**: A corelação de Pearson é uma estimativa da correlação, substituindo os momentos amostrais no lugar dos parâmetros respectivos.
+ 
+ 
+---
+class: animated, fadeIn
+##Coeficiente Phi - II
+
+ Em particular, quando `\(X\)` e `\(Y\)` são binárias, os momentos são dados por
+ 
+`$$\begin{align*}
+ \widehat{\textrm{E}(XY)}&amp;=\dfrac{n_{11}}{n},\quad \widehat{\textrm{E}(X)}=\dfrac{n_{1+}}{n},\quad \widehat{\textrm{E}(Y)}=\dfrac{n_{+1}}{n},\\
+ \widehat{\textrm{Var}(X)}&amp;=\dfrac{n_{1+}n_{2+}}{n^2},\quad \widehat{\textrm{Var}(Y)}=\dfrac{n_{+1}n_{+2}}{n^2}
+ \end{align*}$$`
+ 
+ 
+ Daí,
+ 
+`$$\begin{align*}
+ \widehat{\rho}&amp;=\dfrac{n_{11}n_{22}-n_{12}n_{21}}{\sqrt{n_{1+}n_{2+}n_{+1}n_{+2}}}\\
+ &amp;=\sqrt{Q_P/n}=\Phi \Longrightarrow \textbf{Coeficiente Phi}
+ \end{align*}$$`
+ 
+ &gt;**Observação**:  O coeficiente Phi não é muito apropriado para tabelas maiores do que `\(2\times 2\)`.
+ 
+
+---
+class: animated, fadeIn
+##Coeficiente V de Cramer
+
+É uma alternativa para o coeficiente Phi.
+
+`$$V=\sqrt{\dfrac{\Phi^2}{\textrm{min}(r,s)}}.$$`
+
+ &gt; **Vantagem**: Pode ser usado em tabelas de dimensão `\((r\times s)\)`. Em particular, quando `\(r=s=2\)`, os coeficientes `\(V\)` e `\(\Phi\)` são iguais.
+ 
+ 
+---
+class: animated, fadeIn
+##Coeficiente de contingência de Pearson
+
+`$$C=\sqrt{\dfrac{Q_P}{Q_P+n}}.$$`
+
+O coeficiente `\(C\)` não alcança o valor 1, sendo usualmente apresentado na sua forma ajustada para atingir o máximo 1.
+
+`$$C^*=C\sqrt{\dfrac{\textrm{min}(r,s)}{\textrm{min}(r,s)-1}}.$$`
+
+
+---
+class: animated, fadeIn
+##Medidas para variáveis ordinais
+
+* Quando ambas as variáveis são ordinais, outras medidas podem ser mais apropriadas, principalmente dependendo das hipóteses de  interesse.
+
+* Nesses casos, interessa mais medir concordância do que dependência, embora tais conceitos possam estar relacionados.
+
+* A idéia é comparar a quantidade de observações concordantes com as discordantes.
+
+&gt;**Observação**: Define-se:
+ - C: Número de pares concordantes
+ - D: Número de pares discordantes
+
+ 
+---
+class: animated, fadeIn
+##Coeficiente Gamma de Kruskall-Goodman
+
+Definido como a diferença entre a probabilidade de pares concordantes `\((p_c)\)` e discordantes `\((p_d)\)`, condicionada em todos os pares concordantes e discordantes. Isto é
+
+`$$\gamma=\dfrac{p_c-p_d}{p_c+p_d},$$`
+ onde `\(p_c=\frac{C}{n^2}\)` e `\(p_d=\frac{D}{n^2}\)`. Daí,
+ 
+`$$\widehat{\gamma}=\dfrac{C-D}{C+D}.$$`
+ &gt; O coeficiente `\(\gamma\)` toma valores entre `\(-1\)` e `\(1\)`.
+
+---
+class: animated, fadeIn
+##Coeficiente `\(\tau_b\)` de Kendall
+
+É similiar ao coeficiente `\(\gamma\)`, mas neste caso os empates são considerados. O coeficiente é calculado pela razão da diferença de probabilidades de concordâncias e discordâncias sobre a média geométrica da probabilidade de não haver nenhum empate entre `\(X\)` e `\(Y\)`.
+
+Assim,
+`$$\tau_b=\dfrac{p_c-p_d}{\sqrt{(1-\sum_i p_{i+}^2)(1-\sum_j p_{+j}^2)}}.$$`
+ Estimando os parâmetros com dados da tabela, obtem-se
+ 
+`$$\widehat{\tau}_b=\dfrac{C-D}{\sqrt{(n^2-\sum_i n^2_{i+})(n^2-\sum_j n^2_{+j})}},$$`
+ onde `\(n^2-\sum_i n^2_{i+}\)` e `\(n^2-\sum_j n^2_{+j}\)` representam o número de pares sem empates em `\(X\)` e `\(Y\)`, respectivamente.
+
+
+---
+class: animated, fadeIn
+##Coeficiente `\(\tau_c\)` de Kendall-Stuart
+
+Coeficiente relacionado com o `\(\gamma\)`. Também baseado na diferença das probabilidades de concordâncias e discordâncias, ajustando de acordo com o tamanho da tabela.
+
+Seja `\(m=\min(r,s)\)`. Pode mostrar-se que os máximos de `\(p_c\)` e de `\(p_d\)` são iguais a `\(\frac{m-1}{m}\)`. O coeficiente `\(\tau_c\)` define-se como:
+
+`$$\tau_c=\dfrac{p_c-p_d}{(m-1)/m}.$$`
+ Estimado por:
+ 
+`$$\widehat{\tau}_c=\dfrac{m(C-D)}{(m-1)n^2}.$$`
+
+---
+class: animated, fadeIn
+##Exemplo 15
+
+Dados coletados por um pesquisador para determinar se um novo método, mais simples, para detecção de cárie é mais eficiente que o metodo convencional. Selecionou-se uma amostra aleatória simples sem reposição de 97 pacientes. Em cada um deles foram aplicadas as duas técnicas. 
+
+ | Simplificado ||                 | Convencional  |            ||   Total  |
+ |:------------:||:---------------:|:------------ :|:----------:||:--------:|
+ |              ||       Baixo     |     Médio     |   Alto     ||          |
+ |     Baixo    ||        11       |      5        |    0       ||    16    |        
+ |     Médio    ||        14       |      34       |    7       ||    55    |
+ |     Alto     ||         2       |      13       |    11      ||    26    |
+ |    Total     ||        27       |      52       |    18      ||    97    |
+
+&gt; O interesse é verificar o grau de concordância absoluta entre os dois métodos.
+
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` de Cohen - I
+
+O coeficiente `\(\kappa\)`, diferentemente do coeficiente `\(\tau\)` de Kendall, compara a proporção (total) de concordância conjunta com a proporção (total) esperada de concordância conjunta.
+
+ Sejam
+ 
+* `\(p_0=\sum_{i=1}^r p_{ii}\)`: Proporção (total) de concordância conjunta.
+
+* `\(p_e=\sum_{i=1}^r p_{i+}p_{+i}\)`: Proporção (total) esperada de concordância sob independência.
+
+
+O coeficiente de concordância `\(\kappa\)` de Cohen é definido como
+
+`$$\kappa=\dfrac{p_0-p_e}{1-p_e}$$`
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` de Cohen - II
+
+**Concordância absoluta**
+
+ | Simplificado ||                 | Convencional  |            ||   Total   |
+ |:------------:||:---------------:|:------------ :|:----------:||:---------:|
+ |              ||       Baixo     |     Médio     |   Alto     ||           |
+ |     Baixo    ||    `\(p_{11}\)`     |      0        |    0       || `\(p_{1+}\)`  |        
+ |     Médio    ||        0        |    `\(p_{22}\)`   |    0       || `\(p_{2+}\)`  |
+ |     Alto     ||        0        |      0        |  `\(p_{33}\)`  || `\(p_{3+}\)`  |
+ |    Total     ||    `\(p_{+1}\)`     |    `\(p_{+2}\)`   |  `\(p_{+3}\)`  ||    `\(1\)`    |
+
+
+--
+
+Ou seja, `\(p_{i+}=p_{+j}=p_{ij}, \forall i=j\)` `\(\Longrightarrow\)` Concordância absoluta.
+
+
+&gt;**Observação**: A independência é incompatível com essa situação.
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` de Cohen - III
+
+* O coeficiente `\(\kappa\)` mensura a concordância conjunta (e não a concordância marginal).
+
+* Quanto menor (maior) for a quantidade de pares concordantes menor (maior) será o coeficiente `\(\kappa\)` (podendo ser negativo).
+
+* Quanto maior for a concordância entre os métodos, esperamos que `\(p_0\)` seja não apenas diferente, mas sim, maior do que do que `\(p_e\)`.
+
+--
+
+**Estimadores associados ao coeficiente `\(\kappa\)`**
+
+* Estimador pontual: 
+
+`\(\widehat{\kappa}=\dfrac{\widehat{p}_0-\widehat{p}_e}{1-\widehat{p}_e}\)`, em que `\(\widehat{p}_0=\sum_{i=1}^r \widehat{p}_{ii}\)` e `\(\widehat{p}_e=\sum_{i=1}^r \widehat{p}_{i+}\widehat{p}_{+i}\)`, `\(\widehat{p}_{ii}=\dfrac{n_{ii}}{n}\)`, `\(\widehat{p}_{i+}=\dfrac{n_{i+}}{n}\)` e `\(\widehat{p}_{+i}=\dfrac{n_{+i}}{n}\)`.
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` de Cohen - IV
+
+
+* Estimador do erro padrão assintótico:
+
+ `$$\widehat{ep}(\widehat{\kappa})=\dfrac{\sqrt{A+B-C}}{(1-\widehat{p}_e)\sqrt{n}},$$`
+ 
+em que
+
+`$$\begin{align*}
+  A&amp;=\sum_{i=1}^r \widehat{p}_{ii}\left[1-(\widehat{p}_{i+}+\widehat{p}_{+i})(1-\widehat{\kappa})\right]^2\\
+  B&amp;=(1-\widehat{\kappa})^2\sum_{i=1}^r\sum_{j\neq i} \widehat{p}_{ij} (\widehat{p}_{+i}+\widehat{p}_{j+})^2\\
+ C&amp;=\left[\widehat{\kappa}-\widehat{p}_e(1-\widehat{\kappa})\right]^2
+  \end{align*}$$`
+
+
+
+---
+class: animated, fadeIn
+##Exemplo 16
+
+Admitamos que dois especialistas (A e B) tenham que aceitar ou rejeitar um conjunto de 50 projetos de pesquisa.
+
+ |  Especialista A || Especialista B  |               ||   Total  |
+ |:---------------:||:---------------:|:-------------:||:--------:|
+ |                 ||     Aceitar     |     Rejeitar  ||          |
+ |    Aceitar      ||        20       |         5     ||    25    |        
+ |    Rejeitar     ||        10       |        15     ||    25    |
+ |   Total         ||        30       |        20     ||    50    |
+
+--
+
+Temos
+
+`$$\begin{align*}
+  \widehat{p}_0&amp;=\dfrac{20+15}{50}=0,7\\
+  \widehat{p}_e&amp;=\dfrac{25}{50}\times \dfrac{30}{50}+\dfrac{25}{50}\times \dfrac{20}{50}=0,3+0,2=0,5
+ \end{align*}$$`
+ 
+ Logo `\(\widehat{\kappa}=\dfrac{0,7-0,5}{1-0,5}=0,4 \Longrightarrow \textrm{ Concordância razoável}.\)`
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` ponderado - I
+
+* O coeficiente `\(\kappa\)` anteriormente apresentado  é apropriado para variáveis nominais e não leva em  consideração os pares discordantes.
+
+* Quando as categorias são ordinais, é importante considerar alguma "distância" entre elas.
+
+* Nesse caso é mais apropriado usar o **&lt;span style="color:orange"&gt;coeficiente de concordância ponderado&lt;/span&gt;**  `\((\kappa_w)\)`.
+
+* Algumas opções de pesos:
+ - Pesos lineares (igualmente espaçados):
+ 
+`$$w_{ij}=1-\dfrac{|i-j|}{r-1}.$$`
+ 
+ - Pesos quadráticos ("Fleiss-Cohen"):
+ 
+`$$w_{ij}=1-\dfrac{(i-j)^2}{(r-1)^2}.$$`
+ 
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` ponderado - II
+
+* Estimador pontual:
+
+ `$$\widehat{\kappa}_w=\dfrac{\widehat{p}_{0_w}-\widehat{p}_{e_w}}{1-\widehat{p}_{e_w}},$$` em que `\(\widehat{p}_{0_w}=\sum_{i=1}^r\sum_{j=1}^r w_{ij}\widehat{p}_{ij}\)` e `\(\widehat{p}_{e_w}=\sum_{i=1}^r\sum_{j=1}^r w_{ij}\widehat{p}_{i+}\widehat{p}_{+j}\)`.
+
+* Estimador do erro-padrão assintótico:
+
+ `$$\widehat{ep}(\widehat{\kappa}_w)=\dfrac{\sqrt{A-B}}{(1-\widehat{p}_e)\sqrt{n}},$$`
+ em que
+ 
+`$$\begin{align*}
+ A&amp;=\sum_{i=1}^r\sum_{j=1}^r \widehat{p}_{ij}\left[w_{ij}-(w_{i+}+w_{+j})(1-\widehat{\kappa}_w)\right]^2\quad
+ B=\left[\widehat{\kappa}_w-\widehat{p}_{e_w}(1-\widehat{\kappa}_w)\right]^2
+ \end{align*}$$`
+ 
+ e `\(w_{i+}=\sum_{j=1}^r w_{ij}\widehat{p}_{+j}\)` e `\(w_{+j}=\sum_{i=1}^r w_{ij}\widehat{p}_{i+}\)`.
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` ponderado - III
+
+* Para `\(n_{ij}\)`, suficientemente grandes, as distribuições de `\(\kappa\)` e `\(\kappa_w\)` aproximam-se de normais com suas respectivas medias e variâncias.
+
+* Portanto, podem ser testadas hipóteses de interesse e serem construídos intervalos de confiança, ambos assintóticos.
+
+* Os coeficientes `\(\kappa\)` e `\(\kappa_w\)` devem ser utilizados somente em tabelas quadradas.
+
+--
+
+De acordo com Landis &amp; Koch (1977), podemos classificar os valores dos coeficiente `\(\kappa\)` e `\(\kappa_w\)`, de acordo com
+
+ |      Valor      || Nível de Concordância    |
+ |:---------------:||:------------------------:|
+ |    `\(&lt;0\)`         ||   Nula (aleatório)       |
+ |    `\(0,0-0,2\)`    ||   Concordância mínima    |
+ |   `\(0,21-0,4\)`	   || Concordância razoável    |
+ |   `\(0,41-0,6\)`	   || Concordância moderada    |
+ |   `\(0,61-0,8\)`	   || Concordância substancial |
+ |   `\(0,81-1,0\)`	   || Concordância quase perfeita |
+
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` ponderado - IV
+
+**Coeficientes para os dados do Exemplo 14**
+
+ |  Coeficiente    || Estimativa    |  ep   |    IC (95%)  |
+ |:---------------:||:-------------:|:-----:|:-------------|
+ |  `\(\kappa\)`			 ||	  0,296       | 0,083 | (0,134;0,458)|
+ | `\(\kappa_w\)` (pesos lineares)		|| 0,372 | 0,077 | (0,221;0,522)|
+ | `\(\kappa_w\)` (pesos quadráticos)	|| 0,471 | 0,077 | (0,320;0,623)|
+ 
+ 
+ &gt;Há uma concordância de razoável a moderada entre os métodos.
+
+
+---
+class: animated, fadeIn
+##Coeficiente D de Somer
+
+Similiar ao coeficiente `\(\tau_b\)` de Kendall. Entretanto, o coeficiente D de Somer ajusta por empates nas variáveis X e Y individualmente, criando dois índices:
+
+`$$\begin{align*}
+ D(Y|X)&amp;=\dfrac{p_c-p_d}{1-\sum_{i=1}^s p_{i+}^2}\\
+ D(X|Y)&amp;=\dfrac{p_c-p_d}{1-\sum_{j=1}^r p_{+j}^2}.
+ \end{align*}$$`
+ 
+ Logo, `\((D(Y|X)- (D(X|Y))\)` é a diferença entre as probabilidades de concordâncias e discordâncias, dado que não há empates nas filas de `\(X\)` (colunas de `\(Y\)` ). Esses coeficientes variam entre `\(-1\)` e `\(1\)`.
+
+--
+
+**Estimadores**
+
+`$$\begin{align*}
+ \widehat{D}(Y|X)&amp;=\dfrac{C-D}{n^2-\sum_{i=1}^s n_{i+}^2}\\
+ \widehat{D}(X|Y)&amp;=\dfrac{C-D}{1-\sum_{j=1}^r n_{+j}^2}.
+ \end{align*}$$`
 
 
 
