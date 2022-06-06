@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Associação em Tabelas de Tripla Entrada
 ### Nátaly A. Jiménez Monroy
 ### LECON/DEST - UFES
-### Vitória. ES - 30/05/2022
+### Vitória. ES - 01/06/2022
 
 ---
 
@@ -335,6 +335,120 @@ class: animated, fadeIn
 
 * O teste fica muito limitado na presença de muitas tabelas ou tabelas com tamanho amostral pequeno.
 
+
+---
+class: animated, fadeIn
+
+#Estatística de Mantel-Haenszel Estendida - I
+
+* Proposta por Mantel (1963) para a análise de um conjunto de tabelas `\(2\times r\)` quando a resposta é ordinal.
+
+* Considere `\(\mathbf{a}_h=(a_{h1}, a_{h2}, \ldots, a_{hr})\)` o conjunto de escores assumidos para os `\(r\)` níveis da variável resposta na h-ésima tabela `\(2\times r\)`.  Assim, considerando-se `\(q\)` tabelas `\(2\times r\)`, tem-se
+
+`$$f_{+1}=\sum_{h=1}^q \sum_{j=1}^r (a_{hj})(n_{h1j})=\sum_{h=1}^q (n_{h1+})(\overline{f}_{h1}),$$`
+em que
+
+`$$\overline{f}_{h1}=\sum_{j=1}^r\frac{a_{hj}n_{h1j}}{n_{h1+}}.$$`
+é o escore médio para o nível 1 de `\(X\)` na `\(h-ésima\)` tabela. 
+
+
+
+---
+class: animated, fadeIn
+
+#Estatística de Mantel-Haenszel Estendida - II
+
+*Sob a hipótese nula de não associação, `\(f_{+1}\)` tem valor esperado dado por
+
+`$$E(f_{+1}|H_0)=\sum_{h=1}^q (n_{h1+})(\mu_h)=\mu_*$$`
+e variância
+
+`$$V(f_{+1}|H_0)=\sum_{j=1}^q \frac{(n_{h1})(n_h-n_{h1+})}{(n_h-1)}v_h=v_*,$$`
+em que `\(\mu_h=\sum_{j=1}^r \frac{(a_{hj})(n_{h+j})}{n_h}\)` e `\(v_h=\sum_{j=1}^r (a_{hj}-\mu_h)^2\left(\frac{n_{n+j}}{n_h}\right).\)`
+
+
+---
+class: animated, fadeIn
+
+#Estatística de Mantel-Haenszel Estendida - III
+
+* Se os tamanhos amostrais `\(n_{+i+}=\sum_{h=1}^q\sum_{j=1}^r n_{hij}\)` forem suficientemente grandes, então `\(f_{+1}\)` terá distribuição aproximadamente normal. Dessa forma, a quantidade
+
+`$$Q_{SMH}=\frac{(f_{+1}-\mu_*)^2}{v_*}\sim \chi^2_{(1)}.$$`
+* A estatística `\(Q_{SMH}\)` é eficiente para detectar padrões de diferenças quando `\((\overline{f}_{h1}-\overline{f}_{h2})\)` apresentarem predominantemente o mesmo sinal.
+
+
+---
+class: animated, fadeIn
+
+#Exemplo 3
+
+Estudo clínico duplo-cego realizado para verificar a existência de associação entre um tratamento para artrite reumatóide e o grau de melhora, controlando-se pela variável sexo.
+
+ |    Sexo     || Tratamento   ||           |      Efeito     |               ||   Total  |
+ |:-----------:||:------------:||:---------:|:---------------:|:-------------:||:--------:|
+ |             ||              ||  Nenhuma  |     Alguma      |   Acentuada   ||          |
+ |  Feminino   ||    Ativo     ||     6     |       5         |   16          ||    27    |
+ |             ||    Placebo   ||    19     |       7         |    6          ||    32    |
+ |  Total      ||              ||    25     |       12        |   22          ||    59    |
+ |  Masculino  ||    Ativo     ||     7     |       2         |    5          ||    14    |
+ |             ||    Placebo   ||    10     |       0         |    1          ||    11    |
+ |   Total     ||              ||    17     |       2         |    6          ||    25    |
+
+--
+
+`$$\mathbf{a}=(1,2,3)\quad Q_{SMH}=14,63 \,\,(p&lt;0,0001).$$`
+Os tamanhos amostrais `\(n_{+1+}=41\)` e `\(n_{+2+}=43\)` são suficientemente grandes e garantem uma boa aproximação para a distrubuição qui-quadrado.
+
+---
+class: animated, fadeIn
+
+#Estatística de Correlação de Mantel-Haenszel Estendida
+
+*Estatística de teste para associação de duas variáveis ordinais em um conjunto de tabelas `\(s\times 2\)`, baseada nos escores assumidos para as linhas e colunas das tabelas.
+
+*A estatística é expressa por
+
+`$$Q_{CSMH}=\frac{\left[\sum_{h=1}^q n_h\left(\overline{f}_h-E(\overline{f}|H_0)\right)\right]^2}{\sum_{h=1}^q n_h^2 var(\overline{f}|H_0)}=\frac{\left[\sum_{i=1}^q{n_h(v_{hc}v_{ha})^{1/2}r_{ac.h}}\right]^2}{\sum_{h=1}^q [n_h^2 v_{hc}v_{ha}/(n_h-1)]},$$`
+onde `\(r_{ac.h}\)` representa a correlação para a tabela `\(h\)`.
+
+
+
+---
+class: animated, fadeIn
+
+#Exemplo 4  - I
+
+Estudo sobre a existência de associação entre a variável resposta uso de tabaco e o fator "consciência de risco" de "uso de tabaco pelo adolescente", controlando pelo fator "uso de tabaco pelo pai".
+
+ |  Pai usa    || Consciência  || Não usa   |   Usa      ||   Total  |
+ |:-----------:||:------------:||:---------:|:----------:||:--------:|
+ |    Não      ||   Mínima     ||   59      |    25      ||   84     |
+ |             ||   Moderada   ||   169     |    29      ||   198    |
+ |             ||  Substancial ||   196     |    9       ||   205    |
+ |  Total      ||              ||   424     |   63       ||   487    |
+ |    Sim      ||   Mínima     ||    11     |    8       ||    19    |
+ |             ||   Moderada   ||    33     |   11       ||    44    |
+ |             ||  Substancial ||    22     |   2        ||    24    |
+ |  Total      ||              ||    66     |   21       ||    87    |
+ 
+
+
+
+---
+class: animated, fadeIn
+
+#Exemplo 4  - II
+
+`$$\mathbf{a}=(1,2,3)$$`
+`$$\mathbf{c}=(1,2,3)$$`
+`$$Q_{CSMH}=40,66 \,\,(p&lt;0,0001).$$`
+
+--
+
+&gt;*Existe forte associação entre consciência do risco de fumar e uso de tabaco pelo adolescente, controlando-se pelo fator uso de tabaco pelo pai. 
+
+&gt;*Ainda, `\(r_{ac.1}=-0,265\)` e `\(r_{ac.s}=-0,276\)`, indicam correlação negativa entre consciência de risco e uso do tabaco.
 
 
 

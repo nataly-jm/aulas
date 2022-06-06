@@ -12,11 +12,21 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # ANÁLISE DE DADOS CATEGORIZADOS STA13833
+]
+.subtitle[
 ## Tabelas de Contingência
+]
+.author[
 ### Nátaly A. Jiménez Monroy
+]
+.institute[
 ### LECON/DEST - UFES
-### Vitória. ES - 29/05/2022
+]
+.date[
+### Vitória. ES - 06/06/2022
+]
 
 ---
 
@@ -118,7 +128,7 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-###Exemplo 1
+###Exemplo 1 - I
 
 Dados de pacientes com diagnóstico renal.
 
@@ -134,6 +144,63 @@ Dados de pacientes com diagnóstico renal.
 Sensibilidade = ??
 
 Especificidade = ??
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 1 - II
+
+**No R**:
+
+
+```r
+require(epiR)
+dados&lt;-matrix(c(44, 10, 23, 60),nrow = 2,dimnames =list(Doenca= c("Presente", "Ausente"),Teste = c("Positivo","Negativo")))
+dados
+```
+
+```
+##           Teste
+## Doenca     Positivo Negativo
+##   Presente       44       23
+##   Ausente        10       60
+```
+
+---
+class: animated, fadeIn
+
+###Exemplo 1 - III
+
+
+```r
+epi.tests(dados)
+```
+
+```
+##           Outcome +    Outcome -      Total
+## Test +           44           23         67
+## Test -           10           60         70
+## Total            54           83        137
+## 
+## Point estimates and 95% CIs:
+## --------------------------------------------------------------
+## Apparent prevalence *                  0.49 (0.40, 0.58)
+## True prevalence *                      0.39 (0.31, 0.48)
+## Sensitivity *                          0.81 (0.69, 0.91)
+## Specificity *                          0.72 (0.61, 0.82)
+## Positive predictive value *            0.66 (0.53, 0.77)
+## Negative predictive value *            0.86 (0.75, 0.93)
+## Positive likelihood ratio              2.94 (2.03, 4.26)
+## Negative likelihood ratio              0.26 (0.14, 0.46)
+## False T+ proportion for true D- *      0.28 (0.18, 0.39)
+## False T- proportion for true D+ *      0.19 (0.09, 0.31)
+## False T+ proportion for T+ *           0.34 (0.23, 0.47)
+## False T- proportion for T- *           0.14 (0.07, 0.25)
+## Correctly classified proportion *      0.76 (0.68, 0.83)
+## --------------------------------------------------------------
+## * Exact CIs
+```
 
 
 ---
@@ -205,6 +272,42 @@ Para uma população cuja prevalência de metástase de carcinoma de fígado é 
 class: animated, slideInRight
 
 ###Exemplo 2 - III
+**No R:**
+
+```r
+dados&lt;-matrix(c(52, 15, 9, 74),nrow = 2)
+epi.tests(dados)
+```
+
+```
+##           Outcome +    Outcome -      Total
+## Test +           52            9         61
+## Test -           15           74         89
+## Total            67           83        150
+## 
+## Point estimates and 95% CIs:
+## --------------------------------------------------------------
+## Apparent prevalence *                  0.41 (0.33, 0.49)
+## True prevalence *                      0.45 (0.37, 0.53)
+## Sensitivity *                          0.78 (0.66, 0.87)
+## Specificity *                          0.89 (0.80, 0.95)
+## Positive predictive value *            0.85 (0.74, 0.93)
+## Negative predictive value *            0.83 (0.74, 0.90)
+## Positive likelihood ratio              7.16 (3.81, 13.44)
+## Negative likelihood ratio              0.25 (0.16, 0.39)
+## False T+ proportion for true D- *      0.11 (0.05, 0.20)
+## False T- proportion for true D+ *      0.22 (0.13, 0.34)
+## False T+ proportion for T+ *           0.15 (0.07, 0.26)
+## False T- proportion for T- *           0.17 (0.10, 0.26)
+## Correctly classified proportion *      0.84 (0.77, 0.89)
+## --------------------------------------------------------------
+## * Exact CIs
+```
+
+---
+class: animated, slideInRight
+
+###Exemplo 2 - IV
 
 **Observações:**
 
@@ -872,6 +975,89 @@ class: animated, fadeIn
 
 
 ---
+class: animated, slideInRight
+
+###Exemplo 7 - III
+
+**No R:**
+
+```r
+require(epiR)
+dados &lt;- c(400,4600,80,1920)
+epi.2by2(dat = dados, method = "cohort.count", digits = 2,conf.level = 0.95, units = 100, interpret = FALSE, outcome = "as.columns")
+```
+
+```
+##              Outcome +    Outcome -      Total        Inc risk *        Odds
+## Exposed +          400         4600       5000              8.00      0.0870
+## Exposed -           80         1920       2000              4.00      0.0417
+## Total              480         6520       7000              6.86      0.0736
+## 
+## Point estimates and 95% CIs:
+## -------------------------------------------------------------------
+## Inc risk ratio                                 2.00 (1.58, 2.53)
+## Odds ratio                                     2.09 (1.63, 2.67)
+## Attrib risk in the exposed *                   4.00 (2.86, 5.14)
+## Attrib fraction in the exposed (%)            50.00 (36.79, 60.45)
+## Attrib risk in the population *                2.86 (1.81, 3.90)
+## Attrib fraction in the population (%)         41.67 (29.08, 52.02)
+## -------------------------------------------------------------------
+## Uncorrected chi2 test that OR = 1: chi2(1) = 35.787 Pr&gt;chi2 = &lt;0.001
+## Fisher exact test that OR = 1: Pr&gt;chi2 = &lt;0.001
+##  Wald confidence limits
+##  CI: confidence interval
+##  * Outcomes per 100 population units
+```
+
+
+---
+class: animated, slideInRight
+
+###Exemplo 7 - IV
+
+
+```r
+epi.2by2(dat = dados, method = "cohort.count", digits = 2,conf.level = 0.95, units = 100, interpret = TRUE, outcome = "as.columns")
+```
+
+```
+##              Outcome +    Outcome -      Total        Inc risk *        Odds
+## Exposed +          400         4600       5000              8.00      0.0870
+## Exposed -           80         1920       2000              4.00      0.0417
+## Total              480         6520       7000              6.86      0.0736
+## 
+## Point estimates and 95% CIs:
+## -------------------------------------------------------------------
+## Inc risk ratio                                 2.00 (1.58, 2.53)
+## Odds ratio                                     2.09 (1.63, 2.67)
+## Attrib risk in the exposed *                   4.00 (2.86, 5.14)
+## Attrib fraction in the exposed (%)            50.00 (36.79, 60.45)
+## Attrib risk in the population *                2.86 (1.81, 3.90)
+## Attrib fraction in the population (%)         41.67 (29.08, 52.02)
+## -------------------------------------------------------------------
+## Uncorrected chi2 test that OR = 1: chi2(1) = 35.787 Pr&gt;chi2 = &lt;0.001
+## Fisher exact test that OR = 1: Pr&gt;chi2 = &lt;0.001
+##  Wald confidence limits
+##  CI: confidence interval
+##  * Outcomes per 100 population units 
+## 
+##  Measures of association strength:
+##  The outcome risk among the exposed was 2 (95% CI 1.58 to 2.53) times greater than the outcome risk among the unexposed. 
+##  
+##  The outcome odds among the exposed was 2.09 (95% CI 1.63 to 2.67) times greater than the outcome odds among the unexposed. 
+## 
+##  Measures of effect in the exposed:
+##  Exposure changed outcome risk in the exposed by 4 (95% CI 2.86 to 5.14) per 100 population units. 50% of outcomes in the exposed were attributable to exposure (95% CI 36.8% to 60.4%). 
+## 
+##  Number needed to treat for benefit (NNTB) and harm (NNTH):
+##  The number needed to treat for one subject to benefit (NNTB) is 25 (95% CI 19 to 35). 
+## 
+##  Measures of effect in the population:
+##  Exposure changed outcome risk in the population by 2.86 (95% CI 1.81 to 3.9) per 100 population units. 41.7% of outcomes in the population were attributable to exposure (95% CI 29.1% to 52%).
+```
+
+
+---
 class: animated, fadeIn
 ##Fatores de confundimento
 
@@ -1076,6 +1262,32 @@ class: animated, fadeIn
 
 
 ---
+class: animated, slideInRight
+
+###Exemplo 8 - III
+
+
+```r
+Cha&lt;-matrix(c(3, 1, 1, 3),nrow = 2,dimnames =list(Indicado = c("Leite", "Chá"),Real = c("Leite","Chá")))
+fisher.test(Cha, alternative = "greater")
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  Cha
+## p-value = 0.2429
+## alternative hypothesis: true odds ratio is greater than 1
+## 95 percent confidence interval:
+##  0.3135693       Inf
+## sample estimates:
+## odds ratio 
+##   6.408309
+```
+
+
+---
 class: animated, fadeIn
 ##Estudos de Caso-controle - I
 
@@ -1148,11 +1360,42 @@ Temos
 
 ---
 class: animated, fadeIn
-##Exemplo 9
+##Exemplo 9 - I
 
 Estudo da associação entre fumo e câncer de pulmão em pacientes do sexo masculino.
 
 &lt;img src="images/TabelaCasoControle.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Exemplo 9 - II
+
+
+```r
+require(epiR)
+dados &lt;- c(647,622,2,27)
+epi.2by2(dat = dados, method = "case.control", digits = 2,conf.level = 0.95, units = 100, interpret = FALSE, outcome = "as.columns")
+```
+
+```
+##              Outcome +    Outcome -      Total        Prevalence *        Odds
+## Exposed +          647          622       1269                51.0      1.0402
+## Exposed -            2           27         29                 6.9      0.0741
+## Total              649          649       1298                50.0      1.0000
+## 
+## Point estimates and 95% CIs:
+## -------------------------------------------------------------------
+## Odds ratio                                     14.04 (3.33, 59.30)
+## Attrib fraction (est) in the exposed (%)      92.87 (71.42, 99.18)
+## Attrib fraction (est) in the population (%)   92.59 (68.98, 98.23)
+## -------------------------------------------------------------------
+## Uncorrected chi2 test that OR = 1: chi2(1) = 22.044 Pr&gt;chi2 = &lt;0.001
+## Fisher exact test that OR = 1: Pr&gt;chi2 = &lt;0.001
+##  Wald confidence limits
+##  CI: confidence interval
+##  * Outcomes per 100 population units
+```
+
 
 ---
 class: animated, fadeIn
@@ -1210,7 +1453,7 @@ Em um estudo de caso-controle, realizado para estudar fatores de risco para cân
 |              ||  Sim       |   Não  ||          |
 | Caso         ||   14       |  4     ||  18      |        
 | Controle     ||   233      |  281   ||  514     |
-|   Total      ||   247      |  285   ||  532     |
+| Total        ||   247      |  285   ||  532     |
 
 * Hipoteses:
 `$$\begin{align*}
@@ -1247,6 +1490,35 @@ Neste caso, isto consiste em somar as probabilidades relativas às tabelas 1, 2,
 
 &gt;Forte evidência de associação entre histórico familiar e câncer de mama.
 
+
+---
+class: animated, fadeIn
+##Exemplo 10 - V
+
+
+```r
+dados &lt;- c(14,233,4,281)
+epi.2by2(dat = dados, method = "case.control", digits = 2,conf.level = 0.95, units = 100, interpret = FALSE, outcome = "as.columns")
+```
+
+```
+##              Outcome +    Outcome -      Total        Prevalence *        Odds
+## Exposed +           14          233        247                5.67      0.0601
+## Exposed -            4          281        285                1.40      0.0142
+## Total               18          514        532                3.38      0.0350
+## 
+## Point estimates and 95% CIs:
+## -------------------------------------------------------------------
+## Odds ratio                                     4.22 (1.37, 13.00)
+## Attrib fraction (est) in the exposed (%)      76.25 (23.03, 94.38)
+## Attrib fraction (est) in the population (%)   59.35 (3.18, 82.93)
+## -------------------------------------------------------------------
+## Uncorrected chi2 test that OR = 1: chi2(1) = 7.361 Pr&gt;chi2 = 0.007
+## Fisher exact test that OR = 1: Pr&gt;chi2 = 0.008
+##  Wald confidence limits
+##  CI: confidence interval
+##  * Outcomes per 100 population units
+```
 
 ---
 class: animated, fadeIn
@@ -1472,6 +1744,41 @@ Sob `\(H_0\)`, `\(\textrm{P}(\chi^2_1&gt;q_c)=0,05\Rightarrow q_c=3,841\)`. Ent�
 
 ---
 class: animated, fadeIn
+##Exemplo 11 - III
+
+
+```r
+dados&lt;-matrix(c(144, 121, 1, 16), nrow = 2, dimnames = list(Grupo = c("AZT", "Placebo"), Situacao = c("Vivo", "Óbito")))
+dados
+```
+
+```
+##          Situacao
+## Grupo     Vivo Óbito
+##   AZT      144     1
+##   Placebo  121    16
+```
+
+```r
+fisher.test(dados)
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  dados
+## p-value = 6.564e-05
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##    2.856659 800.904923
+## sample estimates:
+## odds ratio 
+##   18.91139
+```
+
+---
+class: animated, fadeIn
 #Teste de McNemar - I
 
 * Usado quando o interesse é comparar as proporções em amostras onde a mesma unidade amostral é avaliada sob condições diferentes (observadores, momentos, tratamentos, etc). Essas são as chamadas **&lt;span style="color:orange"&gt;Amostras pareadas&lt;/span&gt;**.
@@ -1672,10 +1979,38 @@ Q_{McN}&amp;=\dfrac{(|16-5|-1)^2}{16+5}=4,76\\
 
 &gt;Há evidência estatística de diferença entre os tratamentos. Em particular, o tratamento A fornece melhores resultados.
 
+---
+class: animated, fadeIn
+##Exemplo 12 - III
+
+
+```r
+dados&lt;-matrix(c(510, 5, 16, 90), nrow = 2, dimnames = list(Trat_A = c("Sim", "Não"), Trat_B = c("Sim", "Não"))) 
+dados
+```
+
+```
+##       Trat_B
+## Trat_A Sim Não
+##    Sim 510  16
+##    Não   5  90
+```
+
+```r
+mcnemar.test(dados, correct = T)
+```
+
+```
+## 
+## 	McNemar's Chi-squared test with continuity correction
+## 
+## data:  dados
+## McNemar's chi-squared = 4.7619, df = 1, p-value = 0.0291
+```
 
 ---
 class: animated, fadeIn
-##Exemplo 13
+##Exemplo 13 - I
 
 Dados coletados por um pesquisador para determinar se um novo método, mais simples, para detecção de cáries é mais eficiente que o metodo convencional. Selecionou-se uma amostra aleatória simples sem reposição de 97 pacientes. Em cada um deles foram aplicadas as duas técnicas. A tabela a seguir apresenta os resultados de uma subamostra de 24 pacientes.
 
@@ -1692,6 +2027,35 @@ Neste caso: `\(s=2\)`, `\(n_{12}=0\)`, `\(H_1: p \neq 1/2\)`. Assim,
 `$$\textrm{valor p}=2\left(\dfrac{1}{2}\right)^2\min\left\{\sum_{k=0}^2 \binom{s}{k}\sum_{k=0}^0 \binom{s}{k}\right\}=0,5.$$`
 Assim, há indícios de que existe concordância marginal entre os métodos de detecção de cáries.
  
+
+---
+class: animated, fadeIn
+##Exemplo 13 - II
+
+
+```r
+dados&lt;-matrix(c(11, 2, 0, 11), nrow = 2, dimnames = list(Simplificado = c("Baixo", "Alto"), Convencional = c("Baixo", "Alto"))) 
+dados
+```
+
+```
+##             Convencional
+## Simplificado Baixo Alto
+##        Baixo    11    0
+##        Alto      2   11
+```
+
+```r
+mcnemar.test(dados, correct = T)
+```
+
+```
+## 
+## 	McNemar's Chi-squared test with continuity correction
+## 
+## data:  dados
+## McNemar's chi-squared = 0.5, df = 1, p-value = 0.4795
+```
 
 ---
 class: animated, fadeIn
@@ -1749,7 +2113,7 @@ com `\(e_{ij}=\dfrac{(n_{i+})(n_{+j})}{n}\)`, `\(i=1,\ldots,s\)` e `\(j=1,\ldots
 
 ---
 class: animated, fadeIn
-##Exemplo 14
+##Exemplo 14 - I
 
  |  Partido     ||     |  Moradia  |      |      ||   Total   |
  |:------------:||:---:|:---------:|:----:|:----:||:---------:|
@@ -1769,6 +2133,36 @@ class: animated, fadeIn
 \end{align*}$$`
 
 * `\(Q_P=273,92\Longrightarrow\)` há evidência de associação entre partido político e local de moradia.
+
+---
+class: animated, fadeIn
+##Exemplo 14 - II
+
+
+```r
+dados&lt;-matrix(c(221, 200, 208, 100, 291, 106, 300, 160, 316, 140, 311, 97), nrow = 3, ncol = 4, dimnames = list(Partido=c("Democrata", "Independente", "Republicano"), Moradia=c("A", "B", "C", "D")))
+dados
+```
+
+```
+##               Moradia
+## Partido          A   B   C   D
+##   Democrata    221 100 300 140
+##   Independente 200 291 160 311
+##   Republicano  208 106 316  97
+```
+
+```r
+chisq.test(dados)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  dados
+## X-squared = 282.21, df = 6, p-value &lt; 2.2e-16
+```
 
 
 ---
@@ -1931,7 +2325,6 @@ Dados coletados por um pesquisador para determinar se um novo método, mais simp
  |    Total     ||        27       |      52       |    18      ||    97    |
 
 &gt; O interesse é verificar o grau de concordância absoluta entre os dois métodos.
-
 
 
 ---
@@ -2106,7 +2499,7 @@ De acordo com Landis &amp; Koch (1977), podemos classificar os valores dos coefi
 class: animated, fadeIn
 ##Coeficiente de concordância `\(\kappa\)` ponderado - IV
 
-**Coeficientes para os dados do Exemplo 14**
+**Coeficientes para os dados do Exemplo 15**
 
  |  Coeficiente    || Estimativa    |  ep   |    IC (95%)  |
  |:---------------:||:-------------:|:-----:|:-------------|
@@ -2116,6 +2509,121 @@ class: animated, fadeIn
  
  
  &gt;Há uma concordância de razoável a moderada entre os métodos.
+
+---
+class: animated, fadeIn
+##Exemplo 15 - II
+
+
+```r
+dados&lt;-matrix(c(11, 14, 2, 5, 34, 13, 0, 7, 11), nrow = 3, ncol = 3, dimnames = list(Simplificado=c("Baixo", "Médio", "Alto"), Convencional=c("Baixo", "Médio", "Alto")))
+epi.kappa(dados,method="cohen")
+```
+
+```
+## $prop.agree
+##         obs       exp
+## 1 0.5773196 0.3996174
+## 
+## $pabak
+##         est       lower     upper
+## 1 0.1546392 -0.05442645 0.3540033
+## 
+## $kappa
+##         est         se    lower     upper
+## 1 0.2959816 0.08354111 0.132244 0.4597192
+## 
+## $z
+##   test.statistic      p.value
+## 1       3.542945 0.0003956846
+```
+
+```r
+epi.kappa(dados,method="fleiss")
+```
+
+```
+## $prop.agree
+##         obs       exp
+## 1 0.5773196 0.3996174
+## 
+## $pabak
+##         est       lower     upper
+## 1 0.1546392 -0.05442645 0.3540033
+## 
+## $kappa
+##         est         se    lower     upper
+## 1 0.2959816 0.07196796 0.154927 0.4370362
+## 
+## $z
+##   test.statistic      p.value
+## 1       4.112686 3.910826e-05
+```
+
+---
+class: animated, fadeIn
+##Exemplo 15 - III
+
+
+```r
+epi.kappa(dados,method="fleiss")
+```
+
+```
+## $prop.agree
+##         obs       exp
+## 1 0.5773196 0.3996174
+## 
+## $pabak
+##         est       lower     upper
+## 1 0.1546392 -0.05442645 0.3540033
+## 
+## $kappa
+##         est         se    lower     upper
+## 1 0.2959816 0.07196796 0.154927 0.4370362
+## 
+## $z
+##   test.statistic      p.value
+## 1       4.112686 3.910826e-05
+```
+
+---
+class: animated, fadeIn
+##Exemplo 15 - IV
+
+
+```r
+require(vcd)
+```
+
+```
+## Carregando pacotes exigidos: vcd
+```
+
+```
+## Carregando pacotes exigidos: grid
+```
+
+```r
+Kappa(dados)
+```
+
+```
+##             value     ASE     z  Pr(&gt;|z|)
+## Unweighted 0.2960 0.08266 3.581 3.427e-04
+## Weighted   0.3717 0.07667 4.849 1.243e-06
+```
+
+```r
+confint(Kappa(dados))
+```
+
+```
+##             
+## Kappa              lwr       upr
+##   Unweighted 0.1339713 0.4579919
+##   Weighted   0.2214727 0.5220127
+```
 
 
 ---
@@ -2218,6 +2726,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
