@@ -12,11 +12,21 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # ANÁLISE DE DADOS CATEGORIZADOS STA13833
+]
+.subtitle[
 ## Associação em Tabelas de Tripla Entrada
+]
+.author[
 ### Nátaly A. Jiménez Monroy
+]
+.institute[
 ### LECON/DEST - UFES
-### Vitória. ES - 01/06/2022
+]
+.date[
+### Vitória. ES - 15/06/2022
+]
 
 ---
 
@@ -75,6 +85,254 @@ class: animated, fadeIn
 
 &gt;Em face da incerteza,  é conveniente realizar ambas as an ́alises: com e sem estratificação.
 
+
+---
+class: animated, bounceInDown
+
+#Notação e Estrutura
+
+* Uma tabela de contingência de três vias é uma classificação cruzada de observações nos níveis de três varáveis categóricas. Assumimos três varáveis `\(X\)`, `\(Y\)` e `\(Z\)`, em que 
+
+ - `\(X\)` toma valores `\(1, 2, \ldots, I\)`.
+ 
+ - `\(Y\)` toma valores `\(1, 2, \ldots, J\)`.
+ 
+ - `\(Z\)` toma valores `\(1, 2, \ldots, K\)`.
+ 
+* Se observamos as variáveis `\((X,Y,Z)\)` para cada indivíduo em uma amostra de tamanho `\(n\)`, os dados podem ser resumidos como uma tabela tridimensional. Seja `\(n_{ijk}\)` o número de unidades para as quais `\(X=i\)`, `\(Y=j\)` e `\(Z=j\)`, Dessa forma, o vetor de contagens de células `\((n_{111}, n_{112}, \ldots, n_{IJK})\)` pode ser organizado em uma tabela com dimensões `\(I\times J\times K\)`.
+
+--
+
+&gt;Geometricamente, podemos pensar na tabela de três vias como um cubo.
+
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - I
+
+Informações sobre admissões nas pós-graduações nos seis maiores departamentos da U.C. Berkeley em 1973.
+
+ |  Departamento || Homens admitidos ||  Homens rejeitados  ||  Mulheres admitidas  ||  Mulheres rejeitadas  |
+ |:-------------:||:----------------:||:-------------------:||:--------------------:||:---------------------:|
+ |    A          ||     512          ||         313         ||      89              ||          19           |
+ |    B          ||     353          ||         207         ||      17              ||          8            |
+ |    C          ||     120          ||         205         ||      202             ||        291            |
+ |    D          ||     138          ||         279         ||      131             ||        244            |
+ |    E          ||      53          ||         138         ||       94             ||        199            |
+ |    F          ||      22          ||         351         ||       24             ||        317            |
+
+--
+
+* Podemos visualizar essa informação como uma tabela `\(2\times 2\times 6\)`, onde `\(X=\)` Sexo (1=masculino, 2=feminino), `\(Y=\)` Admissão (1=admitido, 2=rejeitado), e `\(Z=\)` departamento `\((1=A, 2=B,\ldots,6=F)\)`. Por exemplo, `\(n_{112}=353\)` corresponde ao número de homens admitidos no departemento B.
+
+
+
+---
+class: animated, bounceInDown
+
+#Tabelas Parciais
+
+Um conjunto de tabelas de duas vias é definido como **&lt;span style="color:orange"&gt;tabelas parciais&lt;/span&gt;**. Há três formas diferentes das tabelas parciais:
+
+ - Considerando `\(I\)`, tabelas `\(Y\times Z\)` para cada nível de `\(X\)`,
+ 
+ - Considerando `\(J\)`, tabelas `\(X\times Z\)` para cada nível de `\(Y\)`,
+
+ - Considerando `\(K\)`, tabelas `\(Y\times Z\)` para cada nível de `\(Z\)`,.
+ 
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - II
+
+Tabelas parciais entre sexo e admissão para cada departamento nos dados de Berkeley. Esta representação corresponde à **&lt;span style="color:orange"&gt;distribuição condicional&lt;/span&gt;** porque o departamento está fixado em cada tabela. 
+
+* **Departamento A**:
+
+
+ |     Sexo     || Admissão     |             |
+ |:------------:||:------------:|:-----------:|
+ |              ||   Admitido   | Rejeitado   |
+ |  Masculino   ||   512        |   313       |
+ |  Feminino    ||    89        |   19        |
+ 
+
+* **Departamento B**:
+
+
+ |     Sexo     || Admissão     |             |
+ |:------------:||:------------:|:-----------:|
+ |              ||   Admitido   | Rejeitado   |
+ |  Masculino   ||   353        |   207       |
+ |  Feminino    ||    17        |    8        |
+
+---
+class: animated, bounceInDown
+
+#Tabelas Marginais
+
+* Considerando `\(n_{ij+}=\sum_{k=1}^K n_{ijk}\)`. O vetor de contagens `\((n_{11+}, n_{12+},\ldots,n_{IJ+})\)` pode ser organizado em uma tabela de dimensões `\(I\times J\)`, chamada de **&lt;span style="color:orange"&gt;tabela marginal&lt;/span&gt;** de X e Y. 
+
+* Há três possíveis tabelas marginais resultantes de uma tabela de três vias. Essencialmente, somando-se sobre uma variável, ignora-se sua associação com cada uma das outras variáveis.
+
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - III
+
+Tabela marginal entre sexo e admissão, obtida somando sobre os seis departamentos.
+
+
+ |     Sexo     || Admissão     |             || Total  |
+ |:------------:||:------------:|:-----------:||:-------|
+ |              ||   Admitido   | Rejeitado   ||        |
+ |  Masculino   ||   1198       |   1493      ||  1691  |
+ |  Feminino    ||    557       |   1278      ||  1835  |
+ |    Total     ||    1755      |   2771      ||  4526  |
+ 
+
+---
+class: animated, bounceInDown
+
+#Distribuição Conjunta
+
+* Se os `\(n\)` indivíduos na amostra são independentes e identicamente distribuídos, ou seja, se for uma **&lt;span style="color:orange"&gt;amostra aleatória&lt;/span&gt;**, o vetor de contagens de células  `\((n_{111}, n_{112}, \ldots, n_{IJK})\)` tem distribuição multinomial com parâmetro `\(n\)` e vetor de probabilidades `\(p=(p_{111}, p_{112},\ldots,p_{IJK})\)`, onde 
+`$$p_{ijk}=P(X=i,Y=j,Z=k).$$`
+
+* As probabilidades `\(p_{ijk}\)` são as  **&lt;span style="color:orange"&gt;probabilidades conjuntas&lt;/span&gt;** de que um indivíduo selecionado aleatoriamente esteja na célula `\((i,j,k)\)` da tabela de contingência.
+
+* Sob o modelo multinomial não restrito (saturado), não há restrições sobre `\(p\)` diferentes de `\(\sum_{i=1}^I \sum_{j=1}^J \sum_{k=1}^K p_{ijk}=1,\)` com estimativas de máxima verossimilhança dadas pelas proporções amostrais `\(\widehat{p}_{ijk}=n_{ijk}/n.\)` 
+
+
+---
+class: animated, bounceInDown
+
+#Distribuição Condicional
+
+* A distribuição condicional é um subconjunto de variáveis dado outro subconjunto de variáveis mutuamente exclusivas. Por exemplo, a distribuição condicional de X e Y, dado Z é `\(p_{ij|k}=p_{ijk}/p_{++k},\)` tal que `\(\sum_{ij} p_{ij|k}=1\)`.
+
+* Intuitivamente, estamos olhando como a distribuição conjunta de X e Y varia de acordo com os níveis de `\(Z\)`.
+
+--
+
+* Também podemos considerar a distribuição condicional de uma variável dadas as outras duas. Por exemplo, `\(p_{j|ik}=p_{ijk}/p_{i+k},\)` tal que `\(\sum_j p_{j|ik}=1.\)` Essa é a distribuição condicional de Y, dadas X e Z. Estamos observando as mudanças em Y de acordo com as mudanças dos níveis de X ou Z.
+
+
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - IV
+
+**Distribuição condicional de sexo e admissão, dado o departamento B**
+
+
+ - Temos `\(n_{++2}=353+207+17+8=585\)` indivíduos no departamento B. Dividindo cada contagem observada por esse total obtemos a distribuição condicional:
+ 
+
+ |     Sexo     ||      Admissão      |                   |
+ |:------------:||:------------------:|:-----------------:|
+ |              ||      Admitido      |     Rejeitado     |
+ |  Masculino   ||   353/585=0,6034   |   207/585=0,3538  |
+ |  Feminino    ||    17/585=0,0291   |     8/585=0,0137  |
+
+
+--
+
+&gt;**Observação:** As associações marginais e condicionais podem ser bem diferentes. 
+
+ 
+
+---
+class: animated, bounceInDown
+
+#Esquemas Amostrais
+
+* Analogamente aos esquemas amostrais para tabelas `\(2\times 2\)`, temos:
+
+ - Amostragem Poisson sem restrição - nada é fixo e cada célula é uma variável aleatória Poisson com taxa `\(\mu_{ijk}.\)`
+ 
+ - Amostragem multinomial com tamanho amostral fixo `\(n\)`.
+ 
+--
+
+* Se os totais são fixos: 
+
+ - Amostragem estratificada, onde temos amostragem produto de multinomiais com tamanho amostral fixo para cada tabela parcial. Por exemplo, `\(n_{++k}.\)`
+ 
+ - Amostragem produto de multinomiais dentro de cada tabela parcial. Por exemplo, fixado `\(n_{i+k}\)`. Essa é a linha fixa dentro de cada tabela parcial.
+ 
+
+
+---
+class: animated, bounceInDown
+
+#Odds Ratios Marginais
+
+* São odds ratios entre duas variáveis na tabela marginal. Podem ser usados para testar **&lt;span style="color:orange"&gt;independência marginal&lt;/span&gt;** entre duas variáveis enquanto se "ignora" a terceira.
+
+* Por exemplo, para a marginal XY, onde `\(\mu_{ij+}\)` denota a contagem esperada de indivíduos com `\(X=i\)` e `\(Y=j\)` na tabela marginal obtida somando sobre `\(Z\)`, o **&lt;span style="color:orange"&gt;odds ratio marginal&lt;/span&gt;** é dado por:
+
+`$$OR_{XY}=\frac{\mu_{11+}\mu_{22+}}{\mu_{12+}\mu_{21+}}.$$`
+
+
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - V
+
+`$$p_1=P(Homem \, Admitido)=\frac{1198}{1691}\quad\quad 1-p_1=P(Homem \, Rejeitado)=\frac{1493}{1691}$$`
+`$$Chance(Homem \, ser \, Admitido)=\frac{1198/1691}{1493/1691}=\frac{1198}{1493}$$`
+--
+
+`$$p_2=P(Mulher \, Admitida)=\frac{557}{1835}\quad\quad 1-p_2=P(Mulher \, Rejeitada)=\frac{1278}{1835}$$`
+`$$Chance(Mulher \, ser \, Admitida)=\frac{557/1835}{1278/1835}=\frac{557}{1278}$$`
+--
+
+Dessa forma,
+
+`$$\widehat{OR}=\frac{1198/1493}{557/1278}=\frac{1198\times 1278}{1493\times 557}= 1,84.$$`
+Assim, agregando valores sobre todos os departamentos, a chance de admissão de um homem é estimada em 1,84 vezes a chance de uma mulher ser admitida.
+
+
+
+---
+class: animated, bounceInDown
+
+#Odds Ratios Condicionais
+
+* São odds ratios entre duas variáveis para níveis fixos da terceira variável. Permitem testar **&lt;span style="color:orange"&gt;independência condicional&lt;/span&gt;** de duas variáveis, dada uma terceira variável.
+
+* Por exemplo, para o nível fixo `\(Z=k\)`, o odds ratio condicional entre X e Y é dado por
+
+`$$OR_{XY(k)}=\frac{\mu_{11k}\mu_{22k}}{\mu_{12k}\mu_{21k}}.$$`
+
+* Há tantos odss ratios condicionais quantos sejam os níveis da variável condicional, cada um pode ser estimado a partir da correspondente tabela condicional ou parcial entre X e Y, dado `\(Z=k\)`.
+
+
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - VI
+
+Para os dados de admissão, os odds ratios condicionais estimados entre sexo e admissão são:
+
+`$$\begin{align*}
+OR_{XY(Z=A)}&amp;=\frac{512\times 19}{89\times 313}=0,35\\
+OR_{XY(Z=B)}&amp;=\frac{353\times 8}{17\times 207}=0,80.
+\end{align*}$$`
+
+--
+
+&gt;Restringindo a atenção para o Departamento A, o odds de um homem ser admitido é de 0,35 vezes o odds da uma mulher ser admitida. Equivalentemente, podemos dizer que a chance de uma mulher ser admitida é de `\(1/0,35=2,86\)` vezes a chance de um homem ser admitido.
+Similarmente, no Departamento B, a chance de admissão de uma mulher é maior que a de um homem. 
+
+ 
 ---
 class: animated, bounceInDown
 
@@ -168,7 +426,167 @@ class: animated, fadeIn
 
 
 ---
+class: animated, bounceInDown
+
+#Modelos de Independência e Associações
+
+* Para amostragem multinomial e tabelas bidimensionais, apenas a independência entre linhas e colunas é de interesse.
+
+* Com tabelas tridimensionais, há pelo menos oito modelos de interesse.
+
+* Esses modelos podem ser extendidos para qualquer número de variáveis categóricas (tabelas de `\(k\)` vias).
+
+
+---
 class: animated, fadeIn
+
+#Tipos de Independência - I
+
+* **Mútua:** Todas as variáveis são independentes das outras. Denota-se por `\((X, Y, Z)\)`, ou `\(X\perp Y\perp Z.\)`
+
+--
+
+* **Conjunta:** Duas variáveis são conjuntamente independentes da terceira. Denota-se por `\((XY, Z)\)`, ou `\(XY\perp Z.\)`
+
+--
+
+* **Marginal:** Duas variáveis são independentes quando ignorada a terceira variável, isto é, `\(OR_{XY}=1\)`. Denota-se por `\((X,Y).\)`
+
+--
+
+* **Condicional:** Duas variáveis são independentes dada a terceira variável, isto é, `\(OR_{XY(Z=k)}=1\)`, para `\(k=1,2,\ldots,K\)`. Denota-se por `\((XY, YZ)\)`, ou `\(X\perp Y|Z.\)`
+
+--
+
+* **Homogênea:** Os odds-ratios condicionais (ou parciais) não dependem do valor da terceira variável. Denota-se por `\((XY, XZ, YZ).\)`
+
+
+---
+class: animated, fadeIn
+
+#Tipos de Independência - II
+
+**Observações:**
+
+* Independência mútua `\(\Longrightarrow\)` independência conjunta. Isto é, todas as variáveis são independentes das outras.
+
+* Independência conjunta `\(\Longrightarrow\)` independência marginal. Isto é, uma variável é independente das outras duas.
+
+* Independência marginal `\(\not\Longrightarrow\)` independência conjunta.
+
+* Independência marginal `\(\not\Longrightarrow\)` independência condicional.
+
+* Independência condicional `\(\not\Longrightarrow\)` independência marginal.
+
+
+---
+class: animated, fadeIn
+
+#Independência Mútua (Completa) - I
+
+O modelo mais simples que pode ser proposto é aquele em que **&lt;span style="color:orange"&gt;todas&lt;/span&gt;** as variáveis são independentes das outras. 
+
+O modelo `\((X, Y, Z)\)` implica que, se olharmos para as tabelas `\(X \times Y\)`, `\(X \times Z\)` e `\(Y \times Z\)`, todos os odds ratios nessas tabelas são iguais a 1. Ou seja, independência mútua implica na indpendência marginal.
+
+Temos `\(P(X=i, Y=j, Z=k)=P(X=i)P(Y=j)P(Z=k)\)`, para todo `\(i, j, k\)`. Isto é, as probabilidades conjuntas são produto das probabilidades marginais: `\(P(X=i, Y=j)=P(X=i)P(Y=j)\)`.
+
+Denotamos as probabilidades marginais como
+`$$p_{i++}=P(X=i)\qquad p_{+j+}=P(Y=j)\qquad p_{++k}=P(Z=i),$$`
+ tal que `\(p_{ijk}=[p_{i++}p_{+j+}p_{++k}]\)`.
+ 
+ 
+---
+class: animated, fadeIn
+
+#Independência Mútua (Completa) - II
+
+As estimativas de MV são as proporções amostrais nas margens da tabela:
+ 
+`$$\begin{align*}
+\widehat{p}_{i++}&amp;=n_{i++}/n,\quad i=1,2,\ldots,I.\\
+\widehat{p}_{+j+}&amp;=n_{+j+}/n,\quad j=1,2,\ldots,J.\\
+\widehat{p}_{++k}&amp;=n_{++k}/n,\quad k=1,2,\ldots,K.\\
+\end{align*}$$`
+
+--
+
+Dessa forma, as estimativas das contagens esperadas são:
+
+`$$E(n_{ijk})=n\widehat{p}_{i++}\widehat{p}_{+j+}\widehat{p}_{++k}=\frac{n_{i++}n_{+j+}n_{++k}}{n^2}.$$`
+
+
+---
+class: animated, fadeIn
+
+#Independência Conjunta
+
+Há três modelos de independência conjunta que podem ser considerados. Assumindo `\((XY, Z)\)`:
+
+`$$p_{ijk}=P(X=i,Y=j)P(Z=k)=p_{ij}+p_{++k},$$`
+
+onde `\(\sum_i\sum_j p_{ij+}=1\)` e `\(\sum_k p_{++k}=1.\)`
+
+Se conhecemos as contagens nas tabelas `\(XY\)` e `\(Z\)`, podemos calcular as contagens esperadas na tabela `\(XYZ\)`. O número de parânetros livres, ou seja, o número de parãmetros desconchecidos que devem ser estimados é `\((IJ-1)+(K-1)\)` e suas estimatias MV são dadas por 
+`\(\widehat{p}_{ij+}=n_{ij+}/n\)` e `\(\widehat{p}_{++k}=n_{++k}/n\)`. As frequências esperadas são
+`$$\widehat{E}_{ijk}=\frac{n_{ij+}n_{++k}}{n}.$$`
+
+
+---
+class: animated, fadeIn
+
+#Independência Marginal
+
+As variáveis X e Y são marginalmente independentes se
+`$$p_{ij+}=p_{i++}p_{+j+}$$`
+Considera-se a relação entre X e Y apenas, e se ignora `\(Z\)`. Controlar ou ajustar para os diferentes níveis de `\(Z\)` envolve a revisão das tabelas parciais.
+
+--
+
+&gt;Independência conjunta implica independência marginal, mas não o contrário. Por exemplo, se o modelo `\((XY, Z)\)` é adequado, isto implica que X é independente de Z, e Y é independente de Z. Mas, se X é independente de Z, e Y é independente de Z, isto não necessariamente implica que X e Y são conjuntamente independentes de Z.
+
+
+---
+class: animated, fadeIn
+
+#Independência Condicional - I
+
+Há três possíveis modelos de independência condicional com três variáveis: `\((XY, XZ)\)`, `\((XY, YZ)\)` e `\((XZ, YZ)\)`. 
+`$$P(Y=j, Z=k|X=i)=P(Y=j|X=i)P(Z=k|X=i).$$`
+
+Em termos dos odds-ratios, o modelo de independência condicional implica que, se olharmos para as tabelas parciais, os odds-ratios nessas tabelas não devem ser significativamente diferentes de 1.
+
+As probabilidades podem ser escritas como
+
+`$$\begin{align*}
+p_{ijk}=&amp; P(X=i)P(Y=j, Z=k|X=i)\\
+       =&amp; P(X=i)P(Y=j|X=i)P(Z=k|X=i)\\
+       &amp;= p_{i++}p_{j|i}p_{k|i}
+\end{align*},$$`
+
+
+onde `\(\sum_i p_{i++}=1\)`, `\(\sum_j p_{j|i}=1\)` para cada `\(i\)`, e `\(\sum_k p_{k|i}=1\)` para cada `\(i\)`. 
+
+
+---
+class: animated, fadeIn
+
+#Independência Condicional - II
+
+As estimativas MV são dadas por
+
+`$$\widehat{p}_{i++}=n_{i++}/n,\quad \widehat{p}_{j|i}=n_{ij+}/n_{i++},\quad \widehat{p}_{k|i}=n_{i+k}.$$`
+As frequências esperadas estimadas são
+`$$\widehat{E}=\frac{n_{ij+}n_{i+k}}{n_{i++}}.$$`
+
+&gt;Testar independência condicional de Y e Z dado X é equivalente a separar a tabela para os níveis de `\(X=1,\ldots,I\)` e testar a independência dentro de cada nível.
+
+&gt; Há duas formas de avaliar a independência condicional:
+ - Estatística `\(\chi^2.\)`
+ - Teste de Cochran-Mantel-Hanszel
+
+
+---
+class: animated, bounceInDown
 
 #Estatística de Mantel-Haenszel - I
 
@@ -239,7 +657,7 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-#Exemplo 1 - continuação
+#Exemplo 3 - continuação paradoxo de Simpson
 
 * `\(Q_{MH}=16,17\)` com 1 grau de liberdade. Valor `\(p=5,798e-05\)`.
 
@@ -253,7 +671,7 @@ A chance de venda na semana 1 é 0,57 vezes a chance de venda na semana 2.
 ---
 class: animated, fadeIn
 
-#Exemplo 2  - I
+#Exemplo 4  - I
 
 
  |  Centro || Medicamento  ||  Efeito   |               ||   Total  |
@@ -276,7 +694,7 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-#Exemplo 2  - II
+#Exemplo 4  - II
 
 &gt;**Observações:**
 &gt;* Se há diferenças entre centros e os pacientes atendidos neles, seu efeito deve ser controlado na análise.
@@ -286,7 +704,7 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-#Exemplo 2  - III
+#Exemplo 4  - III
 
 **Análise Descritiva**
 
@@ -309,7 +727,7 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-#Exemplo 2  - IV
+#Exemplo 4  - IV
 
 * `\(Q_{MH}=18,41\)` `\((valor_p&lt;0,0001)\)`, indicando associação entre as variáveis tratamento e resposta do paciente, controlando pela variável estratificadora centro médico.
 
@@ -381,7 +799,7 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
-#Exemplo 3
+#Exemplo 5
 
 Estudo clínico duplo-cego realizado para verificar a existência de associação entre um tratamento para artrite reumatóide e o grau de melhora, controlando-se pela variável sexo.
 
@@ -417,7 +835,7 @@ onde `\(r_{ac.h}\)` representa a correlação para a tabela `\(h\)`.
 ---
 class: animated, fadeIn
 
-#Exemplo 4  - I
+#Exemplo 6  - I
 
 Estudo sobre a existência de associação entre a variável resposta uso de tabaco e o fator "consciência de risco" de "uso de tabaco pelo adolescente", controlando pelo fator "uso de tabaco pelo pai".
 
@@ -434,11 +852,10 @@ Estudo sobre a existência de associação entre a variável resposta uso de tab
  
 
 
-
 ---
 class: animated, fadeIn
 
-#Exemplo 4  - II
+#Exemplo 6  - II
 
 `$$\mathbf{a}=(1,2,3)$$`
 `$$\mathbf{c}=(1,2,3)$$`
@@ -451,7 +868,55 @@ class: animated, fadeIn
 &gt;*Ainda, `\(r_{ac.1}=-0,265\)` e `\(r_{ac.s}=-0,276\)`, indicam correlação negativa entre consciência de risco e uso do tabaco.
 
 
+---
+class: animated, bounceInDown
 
+#Associação Homogênea - I
+
+* A associação homogênea implica que a relação condicional entre qualquer par de variáveis dada a terceira é a mesma em cada nível da terceira variável.
+
+* Esse modelo também é conhecido como de interação de segunda ordem, ou modelo sem interação de terceira ordem.
+
+* O modelo de independência condicional `\((XY, XZ)\)` requer que os odds-ratios de `\(YZ\)` em cada nível de `\(X=1,\ldots,I\)` sejam iguais a 1.
+
+* O modelo de associação homogênea `\((XY, XZ, YZ)\)` requer que os odds-ratios de `\(YZ\)` em cada nível de X sejam idênticos, mas não necessariamente iguais a 1.
+
+* Sob o modelo de associação homogênea não há forma fechada dos estimadores para as caselas esperadas.
+
+
+---
+class: animated, bounceInDown
+
+#Associação Homogênea - II
+
+####Teste de Breslow-Day
+
+Para testar a hipótese de que os odds-ratios entre `\(X\)` e `\(Y\)` são os mesmos em cada nível de `\(Z\)`
+`$$H_0: OR_{XY|1}=OR_{XY|2}=\cdots OR_{XY|k}$$`
+podemos usar a estatística de Breslow-Day, dada por
+`$$\chi^2=\sum_i\sum_j\sum_k\frac{(O_{ijk}-E_{ijk})^2}{E_{ijk}},$$`
+onde `\(E_{ijk}\)` são calculados sob `\(H_0\)`. 
+
+
+
+
+---
+class: animated, fadeIn
+
+#Associação Homogênea - III
+
+**Observações:**
+
+ - A estatística BD tem distribuição assintoticamente qui-quadrado com `\(K-1\)` graus de liberdade.
+ 
+ - Não funciona bem com tamanhos amostrais pequenos, enquanto que a estatística de CMH continua funcionando bem.
+ 
+ - Ainda não foi generalizada para tabelas `\(I\times J\times K\)`, enquanto que a estatística CMH já tem uma generalização.
+ 
+ - Se a independência condicional de CMH for rejeitada, ainda será necessário testar associação homogênea.
+ 
+ 
+ 
 ---
 class: animated, hide-logo, bounceInDown
 ## Política de proteção aos direitos autorais
@@ -528,6 +993,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
