@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ### LECON/DEST - UFES
 ]
 .date[
-### Vitória. ES - 15/06/2022
+### Vitória. ES - 19/06/2022
 ]
 
 ---
@@ -244,7 +244,111 @@ class: animated, fadeIn
 
 &gt;**Observação:** As associações marginais e condicionais podem ser bem diferentes. 
 
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - V
+
+
+```r
+UCBAdmissions
+```
+
+```
+## , , Dept = A
+## 
+##           Gender
+## Admit      Male Female
+##   Admitted  512     89
+##   Rejected  313     19
+## 
+## , , Dept = B
+## 
+##           Gender
+## Admit      Male Female
+##   Admitted  353     17
+##   Rejected  207      8
+## 
+## , , Dept = C
+## 
+##           Gender
+## Admit      Male Female
+##   Admitted  120    202
+##   Rejected  205    391
+## 
+## , , Dept = D
+## 
+##           Gender
+## Admit      Male Female
+##   Admitted  138    131
+##   Rejected  279    244
+## 
+## , , Dept = E
+## 
+##           Gender
+## Admit      Male Female
+##   Admitted   53     94
+##   Rejected  138    299
+## 
+## , , Dept = F
+## 
+##           Gender
+## Admit      Male Female
+##   Admitted   22     24
+##   Rejected  351    317
+```
+
+```r
+admit.gender=margin.table(UCBAdmissions, c(1,2))
+```
  
+---
+class: animated, fadeIn
+
+#Exemplo 2 - VI
+
+
+```r
+admit.gender=margin.table(UCBAdmissions, c(1,2))
+admit.gender
+```
+
+```
+##           Gender
+## Admit      Male Female
+##   Admitted 1198    557
+##   Rejected 1493   1278
+```
+
+```r
+prop.table(admit.gender)
+```
+
+```
+##           Gender
+## Admit           Male    Female
+##   Admitted 0.2646929 0.1230667
+##   Rejected 0.3298719 0.2823685
+```
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - VII
+
+
+```r
+chisq.test(admit.gender)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  admit.gender
+## X-squared = 91.61, df = 1, p-value &lt; 2.2e-16
+```
 
 ---
 class: animated, bounceInDown
@@ -278,12 +382,10 @@ class: animated, bounceInDown
 
 `$$OR_{XY}=\frac{\mu_{11+}\mu_{22+}}{\mu_{12+}\mu_{21+}}.$$`
 
-
-
 ---
 class: animated, fadeIn
 
-#Exemplo 2 - V
+#Exemplo 2 - VIII
 
 `$$p_1=P(Homem \, Admitido)=\frac{1198}{1691}\quad\quad 1-p_1=P(Homem \, Rejeitado)=\frac{1493}{1691}$$`
 `$$Chance(Homem \, ser \, Admitido)=\frac{1198/1691}{1493/1691}=\frac{1198}{1493}$$`
@@ -318,7 +420,7 @@ class: animated, bounceInDown
 ---
 class: animated, fadeIn
 
-#Exemplo 2 - VI
+#Exemplo 2 - IX
 
 Para os dados de admissão, os odds ratios condicionais estimados entre sexo e admissão são:
 
@@ -332,7 +434,6 @@ OR_{XY(Z=B)}&amp;=\frac{353\times 8}{17\times 207}=0,80.
 &gt;Restringindo a atenção para o Departamento A, o odds de um homem ser admitido é de 0,35 vezes o odds da uma mulher ser admitida. Equivalentemente, podemos dizer que a chance de uma mulher ser admitida é de `\(1/0,35=2,86\)` vezes a chance de um homem ser admitido.
 Similarmente, no Departamento B, a chance de admissão de uma mulher é maior que a de um homem. 
 
- 
 ---
 class: animated, bounceInDown
 
@@ -407,6 +508,32 @@ class: animated, fadeIn
 class: animated, fadeIn
 
 #Paradoxo de Simpson - IV
+
+
+```r
+campanha&lt;-array(c(60,320,140,480,640,180,160,20), dim=c(2,2,2), dimnames=list(c("Sim","Não"),c("Semana 1","Semana 2"),c("Cidade A","Cidade B")))
+mantelhaen.test(campanha,correct=FALSE)
+```
+
+```
+## 
+## 	Mantel-Haenszel chi-squared test without continuity correction
+## 
+## data:  campanha
+## Mantel-Haenszel X-squared = 16.685, df = 1, p-value = 4.413e-05
+## alternative hypothesis: true common odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.4293756 0.7440354
+## sample estimates:
+## common odds ratio 
+##         0.5652174
+```
+
+
+---
+class: animated, fadeIn
+
+#Paradoxo de Simpson - V
 
 **Observações:**
 
@@ -491,8 +618,8 @@ O modelo `\((X, Y, Z)\)` implica que, se olharmos para as tabelas `\(X \times Y\
 Temos `\(P(X=i, Y=j, Z=k)=P(X=i)P(Y=j)P(Z=k)\)`, para todo `\(i, j, k\)`. Isto é, as probabilidades conjuntas são produto das probabilidades marginais: `\(P(X=i, Y=j)=P(X=i)P(Y=j)\)`.
 
 Denotamos as probabilidades marginais como
-`$$p_{i++}=P(X=i)\qquad p_{+j+}=P(Y=j)\qquad p_{++k}=P(Z=i),$$`
- tal que `\(p_{ijk}=[p_{i++}p_{+j+}p_{++k}]\)`.
+`$$p_{i++}=P(X=i),\qquad p_{+j+}=P(Y=j),\qquad p_{++k}=P(Z=i),$$`
+ tal que `\(p_{ijk}=p_{i++}p_{+j+}p_{++k},\quad \forall i,j,k\)`.
  
  
 ---
@@ -522,7 +649,7 @@ class: animated, fadeIn
 
 Há três modelos de independência conjunta que podem ser considerados. Assumindo `\((XY, Z)\)`:
 
-`$$p_{ijk}=P(X=i,Y=j)P(Z=k)=p_{ij}+p_{++k},$$`
+`$$p_{ijk}=P(X=i,Y=j)P(Z=k)=p_{ij+}p_{++k},\quad \forall i,j,k$$`
 
 onde `\(\sum_i\sum_j p_{ij+}=1\)` e `\(\sum_k p_{++k}=1.\)`
 
@@ -537,13 +664,49 @@ class: animated, fadeIn
 #Independência Marginal
 
 As variáveis X e Y são marginalmente independentes se
-`$$p_{ij+}=p_{i++}p_{+j+}$$`
+`$$p_{ij+}=p_{i++}p_{+j+},\quad \forall i,j.$$`
 Considera-se a relação entre X e Y apenas, e se ignora `\(Z\)`. Controlar ou ajustar para os diferentes níveis de `\(Z\)` envolve a revisão das tabelas parciais.
 
 --
 
 &gt;Independência conjunta implica independência marginal, mas não o contrário. Por exemplo, se o modelo `\((XY, Z)\)` é adequado, isto implica que X é independente de Z, e Y é independente de Z. Mas, se X é independente de Z, e Y é independente de Z, isto não necessariamente implica que X e Y são conjuntamente independentes de Z.
 
+`$$\begin{align*}
+p_{ijk}&amp;=p_{ij+}p_{++k}\qquad \textrm{     (Independência conjunta)}\\
+p_{+jk}&amp;=\sum_i p_{ij+}p_{++k}\quad \textrm{(Somando ambos lados sobre X)}\\
+        &amp;=p_{+j+}p_{++k},
+\end{align*}$$`
+que é a independência marginal de `\(Y\)` e `\(Z\)`.
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - X
+
+
+```r
+XY &lt;- margin.table(UCBAdmissions, c(2,1))
+XY
+```
+
+```
+##         Admit
+## Gender   Admitted Rejected
+##   Male       1198     1493
+##   Female      557     1278
+```
+
+```r
+chisq.test(XY, correct=FALSE)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  XY
+## X-squared = 92.205, df = 1, p-value &lt; 2.2e-16
+```
 
 ---
 class: animated, fadeIn
@@ -574,7 +737,7 @@ class: animated, fadeIn
 
 As estimativas MV são dadas por
 
-`$$\widehat{p}_{i++}=n_{i++}/n,\quad \widehat{p}_{j|i}=n_{ij+}/n_{i++},\quad \widehat{p}_{k|i}=n_{i+k}.$$`
+`$$\widehat{p}_{i++}=n_{i++}/n,\quad \widehat{p}_{j|i}=n_{ij+}/n_{i++},\quad \widehat{p}_{k|i}=n_{i+k}/n_{i++}.$$`
 As frequências esperadas estimadas são
 `$$\widehat{E}=\frac{n_{ij+}n_{i+k}}{n_{i++}}.$$`
 
@@ -583,6 +746,79 @@ As frequências esperadas estimadas são
 &gt; Há duas formas de avaliar a independência condicional:
  - Estatística `\(\chi^2.\)`
  - Teste de Cochran-Mantel-Hanszel
+
+
+---
+class: animated, fadeIn
+
+#Independência Condicional - III
+
+**Em termos dos odds ratios**:
+
+ - O odds ratio para `\((X,Y)\)` pode ser expresso como 
+
+`$$\begin{align*}
+\textrm{OR}^{XY}&amp;=\dfrac{\textrm{P}[(X=1),(Y=1)]\textrm{P}[(X=2),(Y=2)]}{\textrm{P}[(X=1),(Y=2)]\textrm{P}[(X=2),(Y=1)]}\\
+  &amp;=\dfrac{[\mu_{11+}/\mu_{+++}][\mu_{22+}/\mu_{+++}]}{[\mu_{12+}/\mu_{+++}][\mu_{21+}/\mu_{+++}]}\\
+  &amp;=\dfrac{\mu_{11+}\mu_{22+}}{\mu_{12+}\mu_{21+}}
+\end{align*}$$`
+
+&gt;Se `\(\textrm{OR}^{XY}=1\)`, então `\(X\)` e `\(Y\)` são marginalmente independentes.
+
+
+---
+class: animated, fadeIn
+
+#Independência Condicional - IV
+
+ - O odds ratio para `\((X,Y)\)` dado `\(Z=k\)` pode ser escrito como
+`$$\begin{align*}
+\textrm{OR}_k^{XY|Z}&amp;=\dfrac{\textrm{P}[(X=1),(Y=1)|Z=k]\textrm{P}[(X=2),(Y=2)|Z=k]}{\textrm{P}[(X=1),(Y=2)|Z=k]\textrm{P}[(X=2),(Y=1)|Z=k]}\\
+&amp;=\dfrac{[\mu_{11k}/\mu_{++k}][\mu_{22k}/\mu_{++k}]}{[\mu_{12k}/\mu_{++k}][\mu_{21k}/\mu_{++k}]}\\
+&amp;=\dfrac{\mu_{11k}\mu_{22k}}{\mu_{12k}\mu_{21k}}
+\end{align*}$$`
+
+&gt;Se `\(\textrm{OR}_k^{XY|Z}=1\)` para todo `\(k\)`, então `\(X\)` e `\(Y\)` são condicionalmente independentes de `\(Z\)`.
+
+---
+class: animated, fadeIn
+
+#Efeito de Confundimento - I
+
+ - Diz-se que `\(Z\)` confunde a relação entre `\(X\)` e `\(Y\)` se
+ 
+`$$\begin{align*}
+\textrm{OR}^{XY}&amp;\neq \textrm{OR}^{XY|Z}_k\\
+\textrm{OR marginal}&amp;\neq \textrm{OR parcial}
+\end{align*}$$`
+
+ - Se `\(\textrm{OR}^{XY}=\textrm{OR}^{XY|Z}_k\)` para `\(k=1,2\)`, não há confundimento.
+ 
+ - Em particular, para que `\(Z\)` confunda a relação entre `\(X\)` e `\(Y\)`, a variável `\(Z\)` deve ser parcialmente relacionado com `\(X\)` e com `\(Y\)`, isto é
+
+`$$\begin{align*}
+\textrm{OR}^{XZ|Y}_j&amp;\neq 1\\
+\textrm{OR}^{YZ|X}_i&amp;\neq 1
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+
+#Efeito de Confundimento - II
+
+- Alternativamente, se
+
+  - `\(X\)` e `\(Z\)` são condicionalmente independentes dado `\(Y\)`, isto é
+`$$\textrm{OR}^{XZ|Y}_j= 1$$`
+
+ou
+
+  - `\(Y\)` e `\(Z\)` são condicionalmente independentes dado `\(X\)`, isto é
+`$$\textrm{OR}^{YZ|X}_j= 1,$$`
+
+então `\(Z\)` não é variável de confusão.
+
+
 
 
 ---
@@ -652,6 +888,30 @@ class: animated, fadeIn
 * Intervalo de confianza de `\(100(1-\alpha)\%\)` para `\(OR_{MH}\)`:
 
 `$$\exp(\log(\widehat{OR}_{MH}))\pm z_{1-\alpha/2}\sqrt{\widehat{\textrm{Var}}(\log (\widehat{OR}_{MH})}.$$`
+
+---
+class: animated, fadeIn
+
+#Exemplo 2 - XI
+
+
+```r
+mantelhaen.test(UCBAdmissions)
+```
+
+```
+## 
+## 	Mantel-Haenszel chi-squared test with continuity correction
+## 
+## data:  UCBAdmissions
+## Mantel-Haenszel X-squared = 1.4269, df = 1, p-value = 0.2323
+## alternative hypothesis: true common odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.7719074 1.0603298
+## sample estimates:
+## common odds ratio 
+##         0.9046968
+```
 
 
 ---
@@ -743,11 +1003,36 @@ class: animated, fadeIn
 ---
 class: animated, fadeIn
 
+#Exemplo 4  - V
+
+
+```r
+centros&lt;-array(c(29,14,16,31,37,24,8,21),dim=c(2,2,2), dimnames=list(c("Favorável","Não Favorável"),c("Novo","Padrão"),c("Centro 1","Centro 2")))
+mantelhaen.test(centros,correct=FALSE)
+```
+
+```
+## 
+## 	Mantel-Haenszel chi-squared test without continuity correction
+## 
+## data:  centros
+## Mantel-Haenszel X-squared = 18.411, df = 1, p-value = 1.781e-05
+## alternative hypothesis: true common odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  2.105716 7.708353
+## sample estimates:
+## common odds ratio 
+##          4.028846
+```
+
+---
+class: animated, fadeIn
+
 #Observações
 
 * Se houver independência marginal, as tabelas parciais podem ser somadas para obter-se uma tabela de duas entradas.
 
-* O teste `\(Q_{MH}\)` é também chamado teste de independência condicional.
+* O teste `\(Q_{MH}\)` é também chamado **&lt;span style="color:orange"&gt;teste de independência condicional&lt;/span&gt;**.
 
 * O teste é inapropriado quando a associação varia muito entre as tabelas parciais.
 
@@ -869,6 +1154,28 @@ class: animated, fadeIn
 
 
 ---
+class: animated, fadeIn
+
+#Exemplo 6  - III
+
+
+```r
+uso.pai&lt;-array(c(59,25,169,29,196,9,11,8,33,11,22,2),dim=c(2,3,2), dimnames=list(c("Não usa","Usa"),c("Mínima","Moderada","Substancial"),c("Não","Sim")))
+mantelhaen.test(uso.pai,correct=F)
+```
+
+```
+## 
+## 	Cochran-Mantel-Haenszel test
+## 
+## data:  uso.pai
+## Cochran-Mantel-Haenszel M^2 = 41.058, df = 2, p-value = 1.215e-09
+```
+
+
+
+
+---
 class: animated, bounceInDown
 
 #Associação Homogênea - I
@@ -915,8 +1222,44 @@ class: animated, fadeIn
  
  - Se a independência condicional de CMH for rejeitada, ainda será necessário testar associação homogênea.
  
- 
- 
+
+---
+class: animated, fadeIn
+
+#Associação Homogênea - IV
+
+
+####Exemplo 4
+
+
+```r
+library(DescTools)
+```
+
+```
+## 
+## Attaching package: 'DescTools'
+```
+
+```
+## The following object is masked from 'package:tables':
+## 
+##     Format
+```
+
+```r
+centros&lt;-array(c(29,14,16,31,37,24,8,21),dim=c(2,2,2), dimnames=list(c("Favorável","Não Favorável"),c("Novo","Padrão"),c("Centro 1","Centro 2")))
+BreslowDayTest(centros)
+```
+
+```
+## 
+## 	Breslow-Day test on Homogeneity of Odds Ratios
+## 
+## data:  centros
+## X-squared = 0.00015621, df = 1, p-value = 0.99
+```
+
 ---
 class: animated, hide-logo, bounceInDown
 ## Política de proteção aos direitos autorais
