@@ -11,6 +11,7 @@ description: Repositório exclusivo para a disciplina de Análise de Dados Categ
 * [Introdução](https://nataly-jm.github.io/aulas/categorizados/intro.html)
 * [Tabelas de Contingência](https://nataly-jm.github.io/aulas/categorizados/Tabelas_contingencia.html)
 * [Associação em Tabelas de Tripla Entrada](https://nataly-jm.github.io/aulas/categorizados/Tabelas_tripla_entrada.html)
+* [Regressão Logística](https://nataly-jm.github.io/aulas/categorizados/Modelo_logistico.html)
 
 
 <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script> <script> var x = document.getElementsByClassName("site-footer-credits"); setTimeout(() => { x[0].remove(); }, 10); </script>
