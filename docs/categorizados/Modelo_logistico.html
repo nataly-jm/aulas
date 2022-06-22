@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ANÁLISE DE DADOS CATEGORIZADOS STA13833</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# ANÁLISE DE DADOS CATEGORIZADOS STA13833
+]
+.subtitle[
+## Regressão Logística Binária
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+.date[
+### Vitória. ES - 21/06/2022
+]
+
+---
+
+class: animated, fadeIn
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+
+
+#Características
+
+* Melhor opção para o caso onde a variável dependente é binária.
+
+* Identifica-se o “sucesso” como o resultado mais importante da resposta ou aquele que se pretende relacionar com as demais variáveis de interesse.
+
+* Nos estudos de coorte, a resposta de interesse é a presença da doença, nos ensaios clínicos é a resposta ao tratamento e nos estudos caso-controle é a exposição à doença.
+
+* Os fatores de risco e de confusão e os grupos nos quais os pacientes são divididos são as variáveis explicativas ou covariáveis.
+
+* O modelo pode ser estendido quando a variável resposta qualitativa tem mais do que duas categorias. Por exemplo, pressão sanguínea classificada como alta, normal e baixa.
+
+
+---
+class: animated, fadeIn
+
+##Objetivos
+
+
+* Encontrar um modelo adequado e parcimonioso para descrever a relação entre uma variável resposta (dependente)  e um conjunto de variáveis independentes (preditoras). 
+
+* Variáveis independentes são frequentemente denominadas covariáveis.
+
+* O exemplo mais comum de modelagem é o modelo de regressão linear onde a variável resposta é contínua.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - I
+
+Em um estudo prospectivo para se quantificar a influência de fatores de risco na ocorrência de doenças cardíacas, a variável resposta será dicotômica (presença ou ausência da doença) e variáveis como peso relativo, idade, sexo, nível de colesterol, hemoglobina, consumo de cigarro serão controladas.
+
+* A análise estatística deve responder às perguntas
+
+ - Quais os fatores de risco são os mais importantes? 
+ 
+ - É possível prever com base neles se um paciente está mais ou menos susceptível a contrair uma doença cardíaca?    
+ 
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - II
+
+
+
+```r
+library(aplore3); head(chdage, n=20)
+```
+
+```
+##    id age agegrp chd
+## 1   1  20  20-39  No
+## 2   2  23  20-39  No
+## 3   3  24  20-39  No
+## 4   4  25  20-39  No
+## 5   5  25  20-39 Yes
+## 6   6  26  20-39  No
+## 7   7  26  20-39  No
+## 8   8  28  20-39  No
+## 9   9  28  20-39  No
+## 10 10  29  20-39  No
+## 11 11  30  30-34  No
+## 12 12  30  30-34  No
+## 13 13  30  30-34  No
+## 14 14  30  30-34  No
+## 15 15  30  30-34  No
+## 16 16  30  30-34 Yes
+## 17 17  32  30-34  No
+## 18 18  32  30-34  No
+## 19 19  33  30-34  No
+## 20 20  33  30-34  No
+```
+
+A tabela mostra os primeiros 20 casos de um conjunto de 100 indivíduos analisados em um estudo que relacionou a idade em anos (Age) com presença (1)/ausência (0) de evidências significantes de doença coronária (CDH).
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - III
+
+
+```r
+plot(as.integer(chd)-1 ~ age,
+pch = 20,
+main = "Diagrama de dispersão CHD x Idade",
+ylab = "Coronary heart disease",
+xlab = "Age (years)",
+data = chdage)
+```
+
+&lt;img src="Modelo_logistico_files/figure-html/unnamed-chunk-2-1.png" width="30%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - IV
+
+####Tabela de frequências relativas por grupo
+
+
+```
+## agegrp
+## 20-39 30-34 35-39 40-44 45-49 50-54 55-59 60-69   Sum 
+##    10    15    12    15    13     8    17    10   100
+```
+
+```
+##        chd
+## agegrp   No Yes Sum
+##   20-39   9   1  10
+##   30-34  13   2  15
+##   35-39   9   3  12
+##   40-44  10   5  15
+##   45-49   7   6  13
+##   50-54   3   5   8
+##   55-59   4  13  17
+##   60-69   2   8  10
+##   Sum    57  43 100
+```
+
+&gt;**Observação:**A medida que a idade aumenta, a proporção de indivíduos com evidências de doenças  coronárias aumenta.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - V
+
+####Gráfico das frequências relativas esperadas
+
+
+```
+##     20-39     30-34     35-39     40-44     45-49     50-54     55-59     60-69 
+## 0.1000000 0.1333333 0.2500000 0.3333333 0.4615385 0.6250000 0.7647059 0.8000000
+```
+
+&lt;img src="Modelo_logistico_files/figure-html/unnamed-chunk-4-1.png" width="25%" style="display: block; margin: auto;" /&gt;
+
+&gt;**Observação**: O gráfico assemelha-se ao da função de distribuição acumulada de uma variável aleatória.
+
+---
+class: animated, fadeIn
+
+##Observações - I
+
+* Em regressão, o principal interesse é relacionado ao valor médio da variável resposta, dado o valor da variável independente. Esta quantidade é a média condicional `\(E(Y|x)\)`, onde `\(Y\)` denota a variável resposta e `\(x\)` denota o valor da variável independente. 
+
+* Em regressão linear, assume-se que a média condicional pode ser expressa como uma equação linear em `\(x\)` (ou alguma transformação de `\(x\)` ou `\(Y\)`) tais que
+`$$\textrm{E}(Y|x)=\beta_0+\beta_1 x.$$`
+
+Isto implica que é possível assumir qualquer valor para `\(E(Y|x)\)` quando `\(x\)` varia entre `\(-\infty\)` e `\(\infty\)`.
+
+* A coluna “Mean” da Tabela providencia uma estimativa de `\(E(Y|x)\)`. Com dados dicotômicos a média condicional deve estar entre 0 e 1 `\((0\leq \textrm{E}(Y|x)\leq 1)\)`.
+
+
+---
+class: animated, fadeIn
+
+##Observações - II
+
+* Distribuições acumuladas de distribuições conhecidas têm sido  usadas para “fornecer” um modelo para `\(E(Y|x)\)` no caso em que `\(Y\)` é uma variável dicotômica. 
+
+* Neste caso particular considera-se a distribuição logística.
+
+* Considere-se a quantidade `\(\pi(x)=\textrm{E}(Y|x)\)` para representar a média condicional de `\(Y\)` dado `\(x\)`, quando a distribuição logística é usada. A forma específica do modelo de regressão logística que aqui se usa é: 
+`$$\pi(x)=\dfrac{e^{\beta_0+\beta_1 x}}{1+e^{\beta_0+\beta_1 x}}.$$`
+
+
+---
+class: animated, fadeIn
+
+##Transformação Logit
+
+A transformação de `\(\pi(x)\)` é denominada &lt;span style="color:orange"&gt;logit&lt;/span&gt;.
+
+Esta transformação é definida como
+`$$\begin{align*}
+  g(x)&amp;=\ln \left(\dfrac{\pi(x)}{1-\pi(x)}\right)\\
+  &amp;=\beta_0+\beta_1 x
+\end{align*}$$`
+
+&gt; **Observação**: A função `\(g(x)\)` tem várias propriedades desejáveis do modelo de regressão linear. O logit é linear em seus parâmetros, pode ser contínuo e pode variar de `\(-\infty\)` e `\(\infty\)`,  dependendo do domínio de valores de `\(x\)`.
+
+
+
+---
+class: animated, fadeIn
+
+##Distribuição condicional da variável resposta
+
+`$$y=E(Y|x)+\epsilon,$$`
+
+* **Modelo de regressão linear**: assume-se que `\(\epsilon\sim \textrm{N}(0,\sigma^2)\)`. Então a distribuição condicional da variável resposta dado `\(x\)` será `\(N(\textrm{E}(Y|x),\sigma^2)\)`.
+
+* **Modelo de regressão logístico**: o erro só pode assumir dois valores:
+`$$\begin{align*}
+\textrm{Se } y&amp;=1, \textrm{ então } \epsilon=1-\pi(x), \textrm{ com probabilidade } \pi(x)\\
+\textrm{Se } y&amp;=0, \textrm{ então } \epsilon=-\pi(x), \textrm{ com probabilidade } 1-\pi(x).
+\end{align*}$$`
+
+Então `\(\epsilon\)` tem distribuição com média zero e variância `\(\pi(x)(1-\pi(x))\)`. Ou seja, a distribuição condicional da variável resposta segue a distribuição binomial, com probabilidade dada pela média condicional `\(\pi(x)\)`.
+
+
+---
+class: animated, fadeIn
+
+##Regressão logística simples - I
+
+Consideramos o modelo logístico linear simples em que `\(\pi(x)\)`, a probabilidade de sucesso dado o valor `\(x\)` de uma variável explicativa qualquer, é definida tal que:
+`$$\ln \left(\dfrac{\pi(x)}{1-\pi(x)}\right)=\beta_0+\beta_1 x,$$`
+em que `\(\beta_0\)` e `\(\beta_1\)`  são parâmetros desconhecidos.
+
+Então,
+`$$\pi(x)=\dfrac{e^{\beta_0+\beta_1 x}}{1+e^{\beta_0+\beta_1 x}}.$$`
+---
+class: animated, fadeIn
+
+##Regressão logística simples - II
+
+**Observações**: 
+
+* Quando `\(x\rightarrow \infty\)`, `\(\pi(x)\uparrow 1\)`, se  `\(\beta_1 &gt; 0\)`.
+
+* Quando `\(x\rightarrow \infty\)`, `\(\pi(x)\downarrow 0\)`, se  `\(\beta_1 &lt; 0\)`.
+
+* Denomina-se &lt;span style="color:orange"&gt;chance&lt;/span&gt; o termo
+
+`$$\frac{\pi(x)}{1-\pi(x)}.$$`
+
+---
+class: animated, fadeIn
+
+##Relação entre a variável resposta e um preditor - I
+
+&lt;img src="images/logisticasimples.png" width="95%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+
+##Relação entre a variável resposta e um preditor - II
+
+* O modelo pode ser aplicado para analisar a associação entre uma determinada doença e a ocorrência ou não de um fato particular. 
+
+* São amostrados, independentemente, `\(n_1\)` indivíduos com presença do fator `\((x = 1)\)` e `\(n_2\)` indivíduos com ausência do fator `\((x = 0)\)`. `\(\pi(x)\)` é a probabilidade do desenvolvimento da doença após um certo período fixo. 
+
+* A chance de desenvolvimento da doença para um indivíduo com presença do fator fica dada por:
+`$$\dfrac{\pi(1)}{1-\pi(1)}=e^{\beta_0+\beta_1}$$`
+
+* A chance de desenvolvimento da doença para um indivíduo com ausência de fator é:
+`$$\dfrac{\pi(0)}{1-\pi(0)}=e^{\beta_0}$$`
+
+
+---
+class: animated, fadeIn
+
+##Relação entre a variável resposta e um preditor - III
+
+* A razão de chances é dada por
+`$$\Psi=\dfrac{\frac{\pi(1)}{1-\pi(1)}}{\frac{\pi(0)}{1-\pi(0)}}=\dfrac{\pi(1)(1-\pi(0))}{\pi(0)(1-\pi(1))}=e^{\beta_1}.$$`
+
+* Mesmo que a amostragem seja retrospectiva, isto é, mesmo que sejam amostrados `\(n_1\)` indivíduos doentes e `\(n_2\)` indivíduos não doentes, o resultado acima continua valendo.
+
+&gt;**Observação**: Essa é uma das grandes vantagens da regressão logística, a possibilidade de interpretação direta dos coeficientes como medidas de associação. 
+
+
+---
+class: animated, fadeIn
+
+##Verossimilhança - I
+
+A distribuição de probabilidade (Bernoulli) é dada por
+`$$f(Y_i|x_i)=\pi(x_i)^{y_i}(1-\pi(x_i))^{1-y_i},\quad y_i=0,1;\quad i=1,2,\ldots,n.$$`
+Dado que o pressuposto é de observações independentes, a função de verossimilhança fica dada por
+`$$\textrm{L}(\beta)=\prod_{i=1}^n \pi(x_i)^{y_i}(1-\pi(x_i))^{1-y_i}$$`
+Aplicando logaritmo tem-se
+`$$\log \textrm{L}(\beta)=\sum_{i=1}^n \left[y_i \log \left(\dfrac{\pi(x_i)}{1-\pi(x_i)}\right)\right]+\sum_{i=1}^n \log (1-\pi(x_i)).$$` 
+
+---
+class: animated, fadeIn
+
+##Verossimilhança - II
+
+Mas,
+`$$1-\pi(x_i)=(1+e^{\beta_0+\beta_1 x})^{-1}.$$`
+
+Dessa forma, 
+`$$\log \textrm{L}(\beta_0,\beta_1)=\sum_{i=1}^n y_i (\beta_0+\beta_1 x_i)-\sum_{i=1}^n \log (1+e^{\beta_0+\beta_1 x_i}).$$`
+
+---
+class: animated, fadeIn
+
+##Estimação dos parâmetros
+
+Não existe uma solução analítica para os valores  `\(\beta_0\)` e `\(\beta_1\)` que maximizam a função de verossimilhança. Métodos numéricos são necessários para encontrar as estimativas de máxima verossimilhança,  as quais denotamos,  respectivamente, por `\(\hat{\beta_0}\)` e  `\(\hat{\beta_1}\)`.
+
+O valor ajustado para o  i-ésimo valor é dado por:
+`$$\hat{\pi}(x_i)=\dfrac{e^{\hat{\beta}_0 + \hat{\beta}_1 x_i}}{1+e^{\hat{\beta}_0 + \hat{\beta}_1 x_i}}$$`
+O logit estimado é dado por
+`$$\hat{g}(x_i)=\hat{\beta}_0+\hat{\beta}_1 x_i.$$`
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - VI
+
+
+```
+## 
+## Call:
+## glm(formula = chd ~ age, family = binomial, data = chdage)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9718  -0.8456  -0.4576   0.8253   2.2859  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -5.30945    1.13365  -4.683 2.82e-06 ***
+## age          0.11092    0.02406   4.610 4.02e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 136.66  on 99  degrees of freedom
+## Residual deviance: 107.35  on 98  degrees of freedom
+## AIC: 111.35
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - VII
+
+* Estimativas de máxima verossimilhança:
+`$$\hat{\beta}_0=-5,30945\qquad \hat{\beta}_1=0,11092$$`
+
+* Valores ajustados:
+`$$\hat{\pi}(x)=\dfrac{e^{-5,30945+0,11092 Age}}{1+e^{-5,30945+0,11092 Age}}$$`
+
+O logit estimado é dado por
+`$$\hat{g}(x)=-5,30945+0,11092 Age$$`
+
+---
+class: animated, fadeIn
+
+##Significância dos parâmetros
+
+Há diversos testes que podem ser considerados para determinar se a variável independente no modelo é significativamente relacionada com a variável resposta. Aqui consideraremos:
+
+* Teste da razão de verossimilhanças
+
+* Teste de Wald
+
+* Teste de Score
+
+&gt;**Observação**: A questão de interesse quando testamos a significância de uma variável em qualquer modelo é: O modelo que inclui essa variável diz mais sobre a resposta do que o modelo sem ela?
+
+&gt;Em regressão logística esta questão é respondida comparando os valores observados e preditos com base na função de log-verossimilhança.
+
+
+---
+class: animated, fadeIn
+
+##Teste da razão de verossimilhanças
+
+A comparação de valores observados e preditos usando a função de verossimilhança é baseada na expressão:
+`$$D=-2\ln\left(\dfrac{\textrm{verossimilhança do modelo ajustado}}{\textrm{verossimilhança do modelo saturado}}\right).$$`
+
+Particularmente, em regressão logística:
+`$$D= -2\sum_{i=1}^n \left[y_i \ln \left(\dfrac{\hat{\pi}_i}{y_i}\right)+(1-y_i)\ln \left(\dfrac{1-\hat{\pi}_i}{1-y_i}\right)\right],$$`
+onde `\(\hat{\pi}_i=\hat{\pi}(x_i)\)`.
+
+&gt;**Observação**: A estatística `\(D\)` é chamada desvio &lt;span style="color:orange"&gt;deviance&lt;/span&gt; e faz o mesmo papel que a  soma dos quadrados dos resíduos na regressão linear, ou seja, é uma estatística que auxilia na comparação de valores observados e preditos.
+
+
+
+---
+class: animated, fadeIn
+
+##Modelo Saturado - I
+
+É o modelo mais complexo possível. Este modelo tem um parâmetro para cada observação e, portanto, tem um ajuste perfeito.
+
+Nesse caso, `\(\hat{\pi}_i=y_i\)` e a log-verossimilhança é dada por
+
+`$$\begin{align*}
+  \log (\textrm{modelo saturado})&amp;=\log\left(\prod_{i=1}^n y_i^{y_i}(1-y_i)^{1-y_i}\right)\\
+  &amp;=\sum_{i=1}^n y_i\log(1-y_i)+(1-y_i)\log(1-y_i)\\
+  &amp;=0
+\end{align*}$$`
+
+Daí, o desvio é
+`$$D=-2 \ln (\textrm{verossimilhança do modelo ajustado}).$$`
+
+
+---
+class: animated, fadeIn
+
+##Modelo Saturado - II
+
+Para estudar a significância de uma variável independente no modelo, comparamos o valor `\(D\)` obtido com e sem a variável independente na equação,
+`$$G=D(\textrm{modelo sem a variável})-D(\textrm{modelo com a variável})$$`
+`\(G\)` possui o mesmo papel do numerador no teste F parcial na regressão linear. Como a verossimilhança do modelo saturado é a mesma nos dois modelos, obtemos que:
+`$$G=-2\ln\left(\dfrac{\textrm{verossimilhança sem a variável}}{\textrm{verossimilhança com a variável}}\right).$$`
+Assintoticamente e sob a hipótese nula, tem-se que `\(G\)` tem uma distribuição qui-quadrado com 1 grau de liberdade.
+
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - VIII
+
+Verificamos se a variável "Age" é significativa para explicar "CHD" através do teste de razão de verossimilhanças.
+
+`$$\begin{align*}
+\textrm{H}_0: \beta_1&amp;=0\\
+\textrm{H}_1:\beta_1&amp;\neq 0
+\end{align*}$$`
+
+Logo,
+
+`$$\begin{align*}
+G&amp;=D(\textrm{modelo sem a variável})-D(\textrm{modelo com a variável})\\
+    &amp;=136,66-107,35\\
+    &amp;=29,31
+\end{align*}$$`
+ 
+Dado que `\(\textrm{P}(\chi^2_1&gt;29,31)=6,167658\times 10^{-8}\)`, rejeitamos H$_0$. Ou seja, a variável "Age" é significante para o modelo.
+
+---
+class: animated, fadeIn
+
+##Teste de Wald
+
+Para `\(\beta_1=0\)`,
+`$$W=\dfrac{\hat{\beta}_1}{\widehat{ep}(\hat{\beta}_1)}$$`
+O valor-p é definido como `\(\textrm{P}(|Z|&gt;|W|)\)`, onde `\(Z\)` denota uma variável aleatória com distribuição normal padrão.
+
+&gt;**Observação**: Hauck &amp; Donner (1977) estudaram o desempenho do teste e Wald e observaram que com frequência ele não rejeita a hipótese nula quando o coeficiente é significativo. Eles recomendam o uso do teste da razão de verossimilhança para verificar se realmente o coeficiente não é significativo quando o teste de Wald não rejeita a hipótese nula.
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - IX
+
+Verificamos se a variável "Age" é significativa para explicar "CHD" através do teste de razão Wald.
+
+`$$\begin{align*}
+\textrm{H}_0: \beta_1&amp;=0\\
+\textrm{H}_1:\beta_1&amp;\neq 0
+\end{align*}$$`
+
+Temos,
+
+`$$\begin{align*}
+\hat{\beta}_1&amp;=0,11092\\
+\widehat{ep}(\hat{\beta}_1)&amp;=0,02406
+\end{align*}$$`
+ Daí, `\(W=4,610\)`.
+ 
+O valor-p é `\(\textrm{P}(|Z|&gt;4,610)&lt;0,001\)`. Logo, confirmamos que a variável "Age" é importante para o modelo.
+
+---
+class: animated, fadeIn
+
+##Teste de Score
+
+Para `\(\beta_1=0\)`,
+`$$ST=\dfrac{\sum_{i=1}^n x_i(y_i-\bar{y})}{\sqrt{\bar{y}(1-\bar{y})\sum_{i=1}^n (x_i-\bar{x})^2}}$$`
+No caso univariado, este teste é baseado na distribuição condicional das equações de verossimilhança.
+
+O p-valor é definido como sendo `\(\textrm{P}(|Z|&gt;ST)\)`, onde Z denota uma variável aleatória com distribuição normal padrão.
+
+**Exemplo**: No caso do exemplo CHD de Hosmer &amp; Lemeshow, 
+`$$ST=\dfrac{296,66}{\sqrt{3333,742}}=5,14.$$`
+`\(\textrm{P}(|Z|&gt;5,14)&lt;0,0001\)`. Logo, a variável "Age" é significante para o modelo.
+
+
+---
+class: animated, fadeIn
+
+##Intervalos de confiança
+
+Os intervalos de confiança para os parâmetros são baseados em seus respectivos testes de Wald. Assim, 
+
+* O intervalo de `\(100(1-\alpha)\%\)` de confiança para `\(\beta_0\)` é dado por
+`$$\left[\hat{\beta}_0-z_{\alpha/2}\widehat{ep}(\hat{\beta}_0),\hat{\beta}_0+z_{\alpha/2}\widehat{ep}(\hat{\beta}_0)\right].$$`
+
+* O intervalo de `\(100(1-\alpha)\%\)` de confiança para `\(\beta_1\)` é dado por
+`$$\left[\hat{\beta}_1-z_{\alpha/2}\widehat{ep}(\hat{\beta}_1),\hat{\beta}_1+z_{\alpha/2}\widehat{ep}(\hat{\beta}_1)\right].$$`
+
+Onde `\(z_{\alpha/2}\)` é o quantil de uma normal padrão dado por `\(\textrm{P}(z&gt;z_{\alpha/2})=\alpha/2\)`, `\(\widehat{ep}(\hat{\beta}_0)\)` e `\(\widehat{ep}(\hat{\beta}_1)\)` denotam o estimador baseado no desvio padrão de `\(\hat{\beta}_0\)` e `\(\hat{\beta}_1\)`, respectivamente.
+
+---
+class: animated, fadeIn
+
+##Intervalo de confiança para o logit - I
+
+O logit é a parte linear do modelo de regressão logístico, dado por
+`$$\hat{g}(x)=\hat{\beta}_0+\hat{\beta}_1 x.$$`
+O estimador da variância do logit é dado por
+`$$\widehat{\textrm{Var}}\left[\hat{g}(x)\right]=\widehat{\textrm{Var}}(\hat{\beta_0})+x^2 \widehat{\textrm{Var}}(\hat{\beta_1})+2x\widehat{\textrm{Cov}}(\hat{\beta_0},\hat{\beta_1}),$$`
+onde a matriz de variância-covariância de `\(\hat{\beta}_0\)` e `\(\hat{\beta}_1\)` corresponde ao inverso da matriz de informação de Fisher, calculada em `\(\hat{\beta}_0\)` e `\(\hat{\beta}_1\)`.
+
+---
+class: animated, fadeIn
+
+##Intervalo de confiança para o logit - II
+
+**Intervalo de confiança de `\(100(1-\alpha)\%\)` para `\(g(x)\)`**:
+`$$\left[\hat{g}(x)-z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(x)]},\hat{g}(x)+z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(x)]}\right].$$`
+
+O intervalo de `\(100(1-\alpha)\%\)` de confiança para `\(\pi(x)\)` é dado por
+
+`$$\left[\frac{\exp \left[\hat{g}(x)-z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(x)]}\right]}{1+\exp \left[\hat{g}(x)-z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(x)]}\right]},\frac{\exp \left[\hat{g}(x)+z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(x)]}\right]}{1+\exp \left[\hat{g}(x)+z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(x)]}\right]}\right].$$`
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - X
+
+
+```r
+confint(mod1.3, level=.95, type="LR")
+```
+
+```
+## Waiting for profiling to be done...
+```
+
+```
+##                   2.5 %     97.5 %
+## (Intercept) -7.72587162 -3.2461547
+## age          0.06693158  0.1620067
+```
+
+```r
+exp(coef(mod1.3))[-1]
+```
+
+```
+##      age 
+## 1.117307
+```
+
+```r
+exp(confint(mod1.3))[-1, ]
+```
+
+```
+## Waiting for profiling to be done...
+```
+
+```
+##    2.5 %   97.5 % 
+## 1.069222 1.175868
+```
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - XI
+
+* Logit para uma pessoa de 50 anos:
+`$$\hat{g}(50)=-5,31 + 0,1111\times 50=0,240.$$`
+* Variância estimada:
+`$$\widehat{\textrm{Var}}\left[\hat{g}(50)\right]=1,2852+(50)^2 \times 0,00058+2(50)\times (-0,0267)=0,0650$$`
+
+* Intervalo de `\(95\%\)` de confiança para o logit:
+`$$0,240\pm 1,96\sqrt{0,0650}=[-0,260,0,740]$$`
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - XII
+
+Temos
+`$$\hat{\pi}(50)=\dfrac{e^{\hat{g}(50)}}{1+e^{\hat{g}(50)}}=\dfrac{e^{-5,31 + 0,1111\times 50}}{1+e^{-5,31 + 0,1111\times 50}}=0,56$$`
+O intervalo de confiança para o valor ajustado é dado por
+
+`$$\left[\frac{\exp \left[0,240-1,96\times 0,2550\right]}{1+\exp \left[0,240-1,96\times 0,2550\right]};\frac{\exp \left[0,240+1,96\times 0,2550\right]}{1+\exp \left[0,240+1,96\times 0,2550\right]}\right]$$`
+
+`$$\left[\frac{\exp \left[-0,260\right]}{1+\exp \left[-0,260\right]};\frac{\exp \left[0,740\right]}{1+\exp \left[0,740\right]}\right]$$`
+`$$\left[0,435;0,677\right]$$`
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
