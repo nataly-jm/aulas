@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ### LECON/DEST - UFES
 ]
 .date[
-### Vitória. ES - 22/06/2022
+### Vitória. ES - 29/06/2022
 ]
 
 ---
@@ -476,7 +476,7 @@ G&amp;=D(\textrm{modelo sem a variável})-D(\textrm{modelo com a variável})\\
     &amp;=29,31
 \end{align*}$$`
  
-Dado que `\(\textrm{P}(\chi^2_1&gt;29,31)=6,167658\times 10^{-8}\)`, rejeitamos H$_0$. Ou seja, a variável "Age" é significante para o modelo.
+Dado que `\(\textrm{P}(\chi^2_1&gt;29,31)=6,167658\times 10^{-8}\)`, rejeitamos `\(H_0\)`. Ou seja, a variável "Age" é significante para o modelo.
 
 ---
 class: animated, fadeIn
@@ -549,6 +549,7 @@ class: animated, fadeIn
 
 O logit é a parte linear do modelo de regressão logístico, dado por
 `$$\hat{g}(x)=\hat{\beta}_0+\hat{\beta}_1 x.$$`
+
 O estimador da variância do logit é dado por
 `$$\widehat{\textrm{Var}}\left[\hat{g}(x)\right]=\widehat{\textrm{Var}}(\hat{\beta_0})+x^2 \widehat{\textrm{Var}}(\hat{\beta_1})+2x\widehat{\textrm{Cov}}(\hat{\beta_0},\hat{\beta_1}),$$`
 onde a matriz de variância-covariância de `\(\hat{\beta}_0\)` e `\(\hat{\beta}_1\)` corresponde ao inverso da matriz de informação de Fisher, calculada em `\(\hat{\beta}_0\)` e `\(\hat{\beta}_1\)`.
@@ -633,6 +634,721 @@ O intervalo de confiança para o valor ajustado é dado por
 
 `$$\left[\frac{\exp \left[-0,260\right]}{1+\exp \left[-0,260\right]};\frac{\exp \left[0,740\right]}{1+\exp \left[0,740\right]}\right]$$`
 `$$\left[0,435;0,677\right]$$`
+
+---
+class: animated, bounceInDown
+
+#Regressão Logística com várias variáveis preditoras
+
+O logit do modelo de regressão logístico múltiplo é dado por:
+
+ `$$g(\mathbf{x})=\beta_0+\beta_1 x_1+\cdots +\beta_p x_p,$$`
+ em que `\(\mathbf{x}=(x_1,x_2,\ldots,x_p)^t\)` e o modelo de regressão logística é
+ 
+ `$$\pi(\mathbf{x})=\dfrac{e^{g(\mathbf{x})}}{1+e^{g(\mathbf{x})}}$$`
+
+
+---
+class: animated, fadeIn
+
+##Verossimilhança
+
+A obtenção da função de verossimilhança se dá de maneira similar à encontrada para o modelo de regressão logístico simples. Assim como naquele caso, em modelo de regressão logístico múltiplo, são necessários métodos 
+numéricos para obter as estimativas de máxima verossimilhança do vetor de parâmetros regressores.  
+A função resposta logística ajustada e os valores ajustados são dados por:
+
+`$$\begin{align*}
+\hat{\pi}(\mathbf{x})&amp;=\dfrac{\exp(\hat{\beta}^t\mathbf{x})}{1+\exp(\hat{\beta}^t\mathbf{x})}=[1+\exp(-\hat{\beta}^t\mathbf{x})]^{-1}\\
+\hat{\pi}(x_i)&amp;=\dfrac{\exp(\hat{\beta}^t x_i)}{1+\exp(\hat{\beta}^t x_i)}=[1+\exp(-\hat{\beta}^t x_i)]^{-1}
+\end{align*}$$`
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - I
+
+Um estudo está investigando um surto epidêmico de uma doença 
+transmitida por um mosquito, indivíduos foram aleatoriamente selecionados em dois setores de uma cidade para determinar se a pessoa tinha recentemente contraído a doença em estudo. Isto foi verificado por um entrevistador, que fez certas questões específicas para saber se o entrevistado apresentou sintomas da doença durante um período específico. A variável resposta  `\(Y\)`  foi codificada como 1 se a doença estava 
+presente, e 0 em caso contrário. Três variáveis preditoras foram incluídas no estudo: idade, status sócio-econômico da família e setor da cidade.  A idade `\((X_1)\)` é uma variável quantitativa. O status sócio-econômico é uma variável com 3 categorias. Esta variável é representada por duas 
+variáveis indicadoras, `\(X_2\)` e `\(X_3\)`, assim:
+
+| Classe  || `\(X_2\)`   |    `\(X_3\)`    ||
+|:-------:||--------:|:-----------:||
+| Alta    ||    0    |      0      ||
+| Média   ||    1    |      0      ||
+| Baixa   ||    0    |      1      ||
+
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - II
+
+A variável setor da cidade também é uma variável categorizada. Como existiam apenas dois setores na cidade, uma variável indicadora `\((X_4)\)` foi usada, definida  como `\(X=0\)` para o setor 1 e `\(X=1\)` para o setor 2.
+
+A razão para a escolha da classe social alta ser tomada como referência é que se espera que esta classe tenha as menores taxas de doença entre as classes sociais. Fazendo-se esta classe como referência, espera-se que a razão das chances associada aos coeficientes de regressão 2 e 3 sejam maiores do que 1, facilitando a interpretação. Pela mesma razão, o setor 1, onde a epidemia foi menos severa, foi escolhido como referência para a variável indicadora `\(X_4\)`.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - III
+
+####Modelo Ajustado
+
+`$$E(Y)=[1+\exp(-\beta^t \mathbf{X})]^{-1},$$`
+onde
+
+`$$\beta^t \mathbf{X}=\beta_0+\beta_1 X_1+\beta_2 X_2+\beta_3 X_3+\beta_4 X_4.$$`
+--
+
+&lt;img src="images/Estimativas_logistica.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - IV
+
+####Estimativa da matriz de variâncias-covariâncias aproximadas
+
+`$$\begin{align*}
+  \widehat{\textrm{Var}}(\hat{\beta})=
+  \left[\begin{array}{ccccc}
+    0,4129	&amp;	-0,0057	&amp;	-0,1836	&amp;	-0,2010	&amp;	-0,1632\\
+        		&amp;	0,000018&amp;	0,00115	&amp;	0,00073	&amp;	0,000034\\
+            &amp;			&amp;	0,3588	&amp;	0,1482	&amp;	0,0129\\
+            &amp;			&amp;			&amp;	0,3650	&amp;	0,0623\\
+            &amp;			&amp;			&amp;			&amp;	0,2516\\
+  \end{array}\right]
+\end{align*}$$`
+
+A função resposta logística estimada é dada por
+
+`$$\hat{\pi}=(1+\exp (2,3129-0,0298X_1-0,4088X_2+0,3053X_3-1,5747X_4))^{-1}.$$`
+--
+
+**Razões de chances**:
+
+* `\(\hat{\psi}=1,03\)` (A chance de uma pessoa estar doente aumenta cerca de 3\% com cada ano adicional de idade `\((X_1)\)`, para dado status sócio-econômico e setor da cidade (constantes).)
+
+* `\(\hat{\psi}=4,829\)` (A chance de uma pessoa no setor 2 `\((X_4)\)` que tenha contraído a doença é quase 5 vezes maior para uma pessoa do setor 1, dado a idade e o status sócio-econômico.)
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - V
+
+####Estimativa da matriz de variâncias-covariâncias aproximadas
+
+O valor ajustado para o caso `\(i=1\)`, onde `\(X_{11}=33\)`, `\(X_{12}=0\)`, `\(X_{13}=0\)`, `\(X_{14}=0\)` é `\(\hat{\pi}=0,209\)`.\\
+
+**Interpretação**: A probabilidade estimada de uma pessoa com 33 anos de idade, da classe alta, do setor 1, contrair a doença é de aproximadamente 0,21.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VI
+
+####Teste de razão de verossimilhanças
+
+As hipóteses de interesse são:
+`$$\begin{align*}
+\textrm{H}_0&amp;:\mathbf{\beta}=\mathbf{\beta}^0\\
+\textrm{H}_1&amp;:\mathbf{\beta}\neq\mathbf{\beta}^0,
+\end{align*}$$`
+
+em que `\(\mathbf{\beta}^0\)` é um vetor `\((p+1)-\)`dimensional.
+
+
+De forma similar ao modelo de regressão logístico simples, considera-se a estatística `\(G\)`. Para verificar a significância dos coeficientes, considera-se, sob a hipótese nula, o vetor `\(\mathbf{\beta}^0\)` igual `\(\mathbf{0}\)`.
+
+
+Assintoticamente, `\(G\)` tem distribuição qui-quadrado com `\(p+1\)` graus de liberdade. Daí, rejeita-se `\(H_0\)` se `\(P(\chi^2_{p+1}&gt;G)&lt;\alpha\)`.
+
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VII
+
+####Teste de Wald
+
+O análogo do Teste de Wald é obtido pela expressão
+
+`$$W=\mathbf{\beta}'\left[\widehat{\textrm{Var}}(\hat{\mathbf{\beta}})\right]^{-1}\mathbf{\beta}=\mathbf{\beta}'(\mathbf{X}\Sigma\mathbf{X})\mathbf{\beta},$$`
+onde `\(\Sigma\)` é dada por
+
+`$$\left[\begin{array}{cccc}
+\pi_1(1-\pi_1)&amp;0&amp;\cdots&amp;0\\
+0&amp;\pi_2(1-\pi_2)&amp;\cdots&amp;0\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+0&amp;0&amp;\cdots&amp;\pi_n(1-\pi_n)
+\end{array}\right].$$`
+--
+
+Sob `\(H_0\)` a estatística `\(W\)` possui distribuição qui-quadrado com `\(p+1\)` graus de liberdade. Como este teste exige a execução de operações matriciais e a obtenção de `\(\mathbf{\beta}\)`, então não há vantagens computacionais sobre o teste de razão de verossimilhança para testar a significância do modelo.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VIII
+
+####Intervalo de confiança para o logit
+
+`$$\hat{g}(\mathbf{X})=\hat{\mathbf{\beta}}\mathbf{X}.$$`
+
+O estimador da variância do logit é dado por
+
+`$$\widehat{\textrm{Var}}\left[\hat{g}(\mathbf{x})\right]=\sum_{j=0}^p x_j^2\widehat{\textrm{Var}}(\hat{\beta_j})+2\sum_{j=0}^p\sum_{k=j+1}^p x_jx_k\widehat{\textrm{Cov}}(\hat{\beta_j},\hat{\beta_k}).$$`
+
+Equivalentemente, 
+
+`$$\widehat{\textrm{Var}}\left[\hat{g}(\mathbf{x})\right]=\mathbf{x}'\widehat{\textrm{Var}}(\mathbf{\beta})\mathbf{x}=\mathbf{x}'(\mathbf{X}'\Sigma\mathbf{X})^{-1}\mathbf{x}.$$`
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - IX
+
+**Intervalo de confiança de `\(100(1-\alpha)\%\)` para `\(g(x)\)`**:
+`$$\left[\hat{g}(\mathbf{x})-z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(\mathbf{x})]},\hat{g}(\mathbf{x})+z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(\mathbf{x})]}\right].$$`
+
+O intervalo de `\(100(1-\alpha)\%\)` de confiança para `\(\pi(\mathbf{x})\)` é dado por
+
+`$$\left[\frac{\exp \left[\hat{g}(\mathbf{x})-z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(\mathbf{x})]}\right]}{1+\exp \left[\hat{g}(\mathbf{x})-z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(\mathbf{x})]}\right]},\frac{\exp \left[\hat{g}(\mathbf{x})+z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(\mathbf{x})]}\right]}{1+\exp \left[\hat{g}(\mathbf{x})+z_{\alpha/2}\sqrt{\widehat{\textrm{Var}}[\hat{g}(\mathbf{x})]}\right]}\right].$$`
+
+---
+class: animated, fadeIn
+
+##Seleção de Modelos - Stepwise
+
+* Baseia-se num algoritmo misto de inclusão e eliminação de covariáveis segundo a importância das mesmas de acordo com algum critério estatístico.
+
+* Esse grau de importância pode ser avaliado, por exemplo, pelo nível de significância do teste de razão de verossimilhanças entre os modelos que incluem ou excluem as covariáveis em questão.
+
+* Quanto menor for esse nível de significância, mais importante será considerada a covariável. 
+
+
+---
+class: animated, fadeIn
+
+##Método Akaike
+
+* Método foi proposto em 1974 por Akaike, é um processo de minimização que não envolve testes estatísticos.
+
+* O critério de seleção do modelo mais parcimonioso consiste em encontrar o modelo com AIC mínimo, onde
+`$$\textrm{AIC}=D^*(\mathbf{y};\widehat{\mathbf{\mu}})+2p,$$`
+
+em que `\(D^*(\mathbf{y};\widehat{\mathbf{\mu}})\)` denota o desvio do modelo e `\(p\)` é o número de parâmetros.
+
+
+**Observação**: No R, usa-se a função stepAIC(fit.model) do pacote MASS.
+
+
+
+---
+class: animated, fadeIn
+
+##Teste de qualidade de ajuste de Hosmer e Lemeshow - I
+
+* Definida comparando-se o número observado com o número esperado de sucessos de `\(g\)` grupos formados.
+
+* O primeiro grupo deve conter `\(n_1'\)` elementos correspondentes às `\(n_1'\)` menores probabilidades ajustadas, as quais são denotadas por `\(\hat{\pi}_{(1)}\leq \hat{\pi}_{(2)}\leq \ldots \leq \hat{\pi}_{(n_1')}\)`. O segundo grupo deve conter os `\(n_2'\)` elementos correspondentes às seguintes probabilidades ajustadas `\(\hat{\pi}_{(n_1'+1)}\leq \hat{\pi}_{(n_1'+2)}\leq \ldots \leq \hat{\pi}_{(n_1'+n_2')}\)`. E assim, até o último grupo, que deve conter as `\(n_g'\)` maiores probabilidades ajustadas `\(\hat{\pi}_{(n_1'+\ldots+n_{g-1}'+1)}\leq \hat{\pi}_{(n_1'+\ldots+n_{g-1}'+2)}\leq \ldots \leq \hat{\pi}_{(n)}\)`.
+
+
+---
+class: animated, fadeIn
+
+##Teste de qualidade de ajuste de Hosmer e Lemeshow - II
+
+* O número observado de sucessos no primeiro grupo formado é dado por `\(O_1=\sum_{j=1}^{n_1'} y_{(j)}\)`, em que `\(y_{(j)}=0\)` se o elemento correspondente é fracasso e `\(y_{(j)}=1\)` se é sucesso.
+
+* Em geral,
+`$$O_i=\sum_{j=n_1'+\ldots+n_{i-1}+1}^{n_1'+\ldots+n_{i}} y_{(j)},\quad 2\leq i\leq g.$$`
+
+* A estatística de Hosmer-Lemeshow é definida como
+
+`$$\hat{C}=\sum_{i=1}^g \dfrac{(O_i-n_i'\hat{\pi}_i)^2}{n_i'\hat{\pi}_i(1-\hat{\pi}_i)},$$`
+
+em que `\(\hat{\pi}_1=(1/n_1')\sum_{j=1}^{n_1'}\hat{\pi}_{(j)}\)` e
+`\(\hat{\pi}_i=(1/n_i')\sum_{n_1'+\cdots+n_{i-1}'+1}^{n_1'+\cdots+n_{i}'}\hat{\pi}_{(j)}\)`, `\(2\leq i\leq g\)`.
+
+
+---
+class: animated, fadeIn
+
+##Teste de qualidade de ajuste de Hosmer e Lemeshow - III
+
+* Hosmer e Lemeshow sugerem a formação de `\(g=10\)` grupos de mesmo tamanho (aproximadamente), de modo que o primeiro grupo contenha `\(n_1'\)` elementos correspondentes às `\((n/10)\)` menores probabilidades, e assim por diante até o último grupo com `\(n_{10}'\)` elementos correspondentes às `\((n/10)\)` maiores probabiidades.
+
+* Quando não há empates é relativamente simples montar os 10 grupos com tamanhos aproximadamente iguais.
+
+* Quando há empates, pode ser necessário que dois indivíduos com a mesma configuração de covariáveis sejam alocados em grupos adjacentes a fim de que os grupos formados  não tenham tamanhos muito desiguais.
+
+* A distribuição assintótica de `\(\hat{C}\)` é `\(\chi^2_{(g-2)}\)`.
+
+---
+class: animated, fadeIn
+
+##Diagnóstico do Modelo
+
+* Verificar se há afastamentos sérios das suposições feitas para a construção do modelo 
+
+ - Afastamento da suposição da distribuição da variável resposta.
+ 
+ - Ausência de alguma variável explicativa no modelo ou termos (quadrático, cúbico) de variáveis incluídas no modelo.
+ 
+ - Indícios de correlação entre as observações.
+ 
+ -  Adequação da função de ligação.
+
+* Detectar observações atípicas que destoam do conjunto
+
+
+ - Aberrantes: mal ajustadas, com resíduos altos.
+ 
+ - Alavanca: posicionadas em regiões remotas no subespaço de X.
+ 
+ - Influentes: com influência desproporcional nas estimativas dos coeficientes.
+
+
+---
+class: animated, fadeIn
+
+##Pontos Atípicos
+
+&lt;img src="images/pontos_atipicos.png" width="75%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+
+##Diagnóstico - Gráficos
+
+&lt;img src="images/atipicos_exemplo.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+
+##Envelope Simulado
+
+* È um outro gráfico relevante na detecçao de pontos atípicos. É uma banda de confiança empírica para detectar afastamentos da distribuição postulada. Serve também para verificar a presença de valores discrepantes na amostra.
+
+* Útil para verificar se algum valor do desvio (deviance) residual é discrepante (outlier), e para verificar se a parte linear do modelo de regressão logístico é adequada.
+
+
+---
+class: animated, fadeIn
+
+##Envelope Modelo Logístico
+
+&lt;img src="images/envelope_logistico.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+
+##Regressão Logística com Covariáveis Categóricas
+
+* Representação da covariáveis na forma de fatores no modelo ANOVA.
+
+* Variáveis dummies para representar as categorias das covariáveis.
+
+* Teste de Cochran-Mantel-Haenszel.
+
+* Teste de homogeneidade dos odds-ratios.
+
+
+
+---
+class: animated, fadeIn
+
+##Representação dos fatores no modelo ANOVA - I
+
+* `\(X\)` variável aleatória com `\(I\)` categorias.
+
+* `\(y_i\)` representa o número de sucessos em `\(n_i\)` ensaios ( `\(i-\)`ésima linha da tabela `\(I\times 2\)` ).
+
+* O logit do modelo com um fator é dado por
+
+`$$\begin{equation}\label{Eq_anova}
+  \ln\left(\dfrac{\pi_i}{1-\pi_i}\right)=\beta_0 + \beta_i.
+\end{equation}$$`
+
+* O lado direito da Equação anterior tem a forma de um modelo de médias em uma ANOVA de uma via. O fator tem igual número de parâmetros `\(\{\beta_i\}\)` e categorias, porém um deles é redundante.
+
+
+---
+class: animated, fadeIn
+
+##Representação dos fatores no modelo ANOVA - II
+
+* Com `\(I\)` categorias, `\(X\)` tem `\(I-1\)` parâmetros não redundantes.
+
+* Para todo `\(\{\pi_i&gt;0\}\)`, existe `\(\{\beta_i\}\)` que satisfaz o modelo.
+
+* O modelo tem `\(I\)` parâmetros `\(\Longrightarrow\)` Modelo Saturado.
+
+* Se o fator não tem efeito, `\(\beta_1=\beta_2=\cdots=\beta_I\)`.
+
+* Equivalente a `\(\pi_1=\pi_2=\cdots=\pi_I\)`.
+
+* O modelo com apenas o intercepto indica independência estatística de `\(X\)` e `\(Y\)`.
+
+
+---
+class: animated, fadeIn
+
+##Variáveis dummies
+
+Uma expressão equivalente à Equação anterior usa variáveis indicadoras. Seja `\(x_i=1\)` para a observação na linha `\(i\)` e `\(x=0\)` em outro caso, `\(i=1,\ldots,I-1\)`. O modelo é 
+
+`$$g(\mathbf{x})=\beta_0+\beta_1 x_1+\beta_2 x_2+\cdots+\beta_{I-1} x_{I-1}.$$`
+
+**Observação**:
+
+* A seleção da categoria de referência é arbitrária. Alguns softwares restringem `\(\beta_1=0\)`; isto corresponde a um modelo com variáveis dummies para as categorias `\(2,\ldots, I\)`.
+
+* Outra restrição usada é `\(\sum_i \beta_i=0\)`.
+
+* A reparametrização do modelo pode mudar as estimativas dos parâmetros mas não muda o ajuste do modelo nem os efeitos de interesse.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 3 - I
+
+Dados referentes a um estudo prospectivo da relação do consumo de álcool durante a gestação e problemas congênitos. Depois de três meses de gestação, as mulheres na amostra responderam um questionário sobre consumo de bebidas (número médio de bebidas por dia). Depois do nascimento dos bebês, foram coletadas informações sobre presença ou ausência de má-formação congênita no órgão sexual.
+
+| Má-formação  ||           |            |  Consumo   |            |            |
+|:------------:||----------:|:----------:|:----------:|:----------:|:----------:|
+| Ausente      ||    17066  |     14464  |      788   |   126      |    37      |
+| Presente     ||       48  |        38  |       5    |    1       |    1       |
+
+Para o modelo, tomamos a malformação como resposta e o consumo de álcool como fator. Independentemente da restrição para `\(\{\beta_i\}\)`, `\(\{\hat{\beta}_0+\hat{\beta}_i\}\)` são os logits amostrais, por exemplo:
+`$$g(\pi_1)=\hat{\beta}_0+\hat{\beta}_1=\ln(48/17066)=-5,87.$$`
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 3 - II
+
+| logit `\((\pi_1)\)`  ||   logit `\((\pi_2)\)`  |    logit `\((\pi_3)\)` |  logit `\((\pi_4)\)`  |   logit `\((\pi_5)\)` |
+|:----------------:||-------------------:|:------------------:|:-----------------:|:-----------------:|
+|     -5,87        ||      -5,94         |        -5,06       |      -4,84        |      -3,61        |
+
+* Se a restrição for `\(\beta_5=0\)`, `\(\hat{\beta}_0=-3,61\)` e `\(\hat{\beta}_1=-2,26\)`.
+
+* Se a restrição for `\(\beta_1=0\)`,  `\(\hat{\beta}_0=-5,87\)`.
+
+* Os logits e, portanto, as proporções amostrais, aumentam quando o consumo de álcool aumenta.
+
+
+O modelo mais simples com todos os `\(\beta_i=0\)` especifica independência. Nesse caso, `\(\hat{\beta}_0\)` é o logit para a proporção amostral global de malformações. Isto é
+`$$\ln(93/32481)=-5,86.$$`
+Para testar a hipótese de independência usamos a estatística Qui-quadrado de Pearson, cujo valor é
+$$\chi^2=12,1 \qquad \textrm{valor p}=0,03 $$
+&gt;**Observação**: Estas estatísticas ignoram a ordinalidade do fator.
+
+
+
+---
+class: animated, fadeIn
+
+##Modelo logístico linear para tabelas Ix2
+
+* O modelo apresentado trata o fator como nominal, ou seja é invariante à ordem das categorias.
+
+*  Para fatores com categorias ordenadas, há outros modelos mais parcimoniosos.
+
+* Por exemplo, sejam os scores `\(\{x_1,x_2,\ldots,x_I\}\)` que descrevem as distâncias entre as categorias de `\(X\)`. Quando se espera um efeito monótono de `\(X\)` em `\(Y\)`, o modelo logit natural é
+`$$g(x)=\beta_0+\beta_1 x_i$$`
+
+* Tem-se modelo de independência no caso `\(\beta_1=0\)`.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 3 - III
+
+
+O comportamento quase monótono nos logits indica que um modelo logit linear pode ajustar melhor que o modelo de independência.
+
+* Originalmente o consumo de álcool foi medido como uma variável contínua.
+
+* Podemos usar, por exemplo, os scores `\(\{x_1=0, x_2=0,5,x_3=1,5,x_4=4,0,x_5=7,0\}\)`. O último score é arbitrário. 
+\item O logit estimado é
+`$$g(x)=-5,9605+0,3166 x$$`
+
+* \textbf{Observação:} O efeito do incremento em uma unidade no consumo diário de álcool no odds de malformação é `\(\exp(0,317)=1,37\)`.
+
+
+---
+class: animated, fadeIn
+
+##Teste de tendência de Cochran-Armitage - I
+
+* Para tabelas `\(I\times 2\)` com linhas ordenadas e `\(I\)` variáveis `\(\{y_i\}\)` independentes `\(\textrm{bin}(n_i,\pi_i)\)`, Cochran &amp; Armitage propuseram uma estatística de tendência para testar independência particionando a estatística de Pearson para tal hipótese.
+
+* O modelo linear usado foi
+`$$\pi_i=\beta_0+\beta_1 x_i,$$`
+
+ajustado por mínimos quadrados ordinários. Para esse modelo, a hipótese nula de independência é `\(\textrm{H}_0: \beta_1=0\)`. Sejam `\(\bar{x}=\sum_i n_ix_i/n\)` e `\(p_i=y_i/n_i\)`. Seja `\(p=(\sum y_i)/n\)` que denota a proporção global de sucessos.
+
+
+A equação de predição é
+
+`$$\begin{equation}\label{proporcoes}
+  \hat{\pi}_i=p+b(x_i-\bar{x}),
+\end{equation}$$`
+
+onde
+
+`$$b=\dfrac{\sum_i n_i(p_i-p)(x_i-\bar{x})}{\sum_i n_i(x_i-\bar{x})^2}.$$`
+---
+class: animated, fadeIn
+
+##Teste de tendência de Cochran-Armitage - II
+
+Seja a estatística de Pearson denotada por `\(\chi^2(I)\)`. Para tabelas `\(I\times 2\)` com linhas ordenadas, tem-se
+
+`$$\chi^2(I)=\dfrac{1}{p(1-p)}\sum_i n_i(p_i-p)^2=z^2+\chi^2(L),$$`
+
+onde
+
+`$$\begin{align*}
+  \chi^2(L)&amp;=\dfrac{1}{p(1-p)}\sum_i n_i(p_i-\hat{\pi}_i)^2\\
+z^2&amp;=\dfrac{b^2}{p(1-p)}\sum_i n_i(x_i-\bar{x})^2=\left[\dfrac{\sum_i (x_i-\bar{x})y_i}{\sqrt{p(1-p)\sum_i n_i(x_i-\bar{x})^2}}\right]^2.
+\end{align*}$$`
+
+
+---
+class: animated, fadeIn
+
+##Teste de tendência de Cochran-Armitage - III
+
+Quando o modelo linear é adequado, `\(\chi^2(L)\)` é asintoticamente `\(\chi^2_{(I-2)}\)`. Esta estatística testa o ajuste do modelo.
+
+A estatística `\(z^2\)`, com 1 grau de liberdade, testa `\(\textrm{H}_0:\beta_1=0\)` para a tendência linear nas proporções. O teste de independência usando esta estatística é chamado &lt;span style="color:orange"&gt;Teste de tendência de Cochran-Armitage&lt;/span&gt;.
+
+**Observações**:
+
+* Essa estatística é equivalente à estatística score para testar `\(\textrm{H}_0: \beta_1=0\)` nesse modelo.
+
+* Quando `\(I=2\)`, `\(\chi^2(L)=0\)` e `\(z^2=\chi^2(I)\)`.
+
+* No R: Cochran.Armitage.Trend {TrialSize}.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 3 - IV
+
+Lembremos que `\(\chi^2(I)=12,1\)`. Usando os mesmos scores do modelo logit linear, o teste de tendência  é
+`$$z^2=6,6\quad \textrm{valor p}=0,010.$$`
+O teste sugere forte tendência de inclinação positiva. Adicionalmente,
+$$ \chi^2(I)=12,1=6,6+5,5,$$
+onde `\(\chi^2(L)=5,5\)` com 3 graus de liberdade. Esta estatística mostra ligeira evidência de desvios das proporções da linearidade.
+
+&gt;**Observação**: O teste de tendência usualmente fornece resultados similares aos dos testes de Wald ou razão de verossimilhanças para `\(\textrm{H}_0:\beta_1=0\)` no modelo logit linear.
+
+
+---
+class: animated, fadeIn
+
+##Regressão Logística Binária para tabelas de contingência em várias vias
+
+Sejam duas covariáveis binárias `\(X\)` e `\(Z\)`. Os dados correspondentes podem ser resumidos em uma tabela de contingência `\(2\times 2\times 2\)`. Sejam `\(x\)` e `\(z\)` as variáveis indicadoras que representam as duas categorias de cada variável.
+
+O logit do modelo dado por
+
+`$$\begin{align}
+  g(x)=\beta_0+\beta_1 x_i + \beta_2 z_k,
+\end{align}$$`
+
+estima efeitos principais para `\(x\)` e `\(z\)`. Para este caso, temos os logits para as quatro combinações dos valores das duas covariáveis.
+
+
+---
+class: animated, fadeIn
+
+##Logits gerados para o modelo
+
+| x  |  z    |  logit     |
+|:--:|------:|:-----------|
+| 0  |  0    |  `\(\beta_0\)`            |
+| 1  |  0    |  `\(\beta_0 + \beta_1\)`  |
+| 0  |  1    |  `\(\beta_0 + \beta_2\)`  |
+| 1  |  1    |  `\(\beta_0 + \beta_1 + \beta_2\)`  |
+
+**Observação**: Este modelo assume ausência de interação.  O efeito de um fator é o mesmo em cada categoria do outro fator. Na categoria fixa `\(z_k\)` de `\(Z\)`, o efeito no logit da variação de `\(x=0\)` para `\(x=1\)` é 
+  $$
+    [\beta_0+\beta_1 (1)+\beta_2 z_k]-[\beta_0+\beta_1 (0)+\beta_2 z_k]=\beta_1.
+  $$
+Essa diferença é igual ao logaritmo do odds ratio entre `\(X\)` e `\(Y\)`, fixando `\(Z\)`. Isto é, controlando por `\(Z\)`, o odds de sucesso em `\(x=1\)` é igual a `\(\exp(\beta_1)\)` vezes o odds de sucesso em `\(x=0\)`. Este odds ratio condicional é o mesmo para cada categoria de `\(Z\)`.
+  
+Há independência condicional entre `\(X\)` e `\(Y\)`, dado `\(Z\)`, se `\(\beta_1=0\)`. Nesse caso, o odds ratio comum é 1 e modelo é dado por `$$g(x)=\beta_0+ \beta_2 z_k.$$`
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 4 - I
+
+Os dados correspondem a um estudo descrito no The New York Times sobre os efeitos do AZT para retardar o desenvolvimento de sintomas de AIDS.
+
+
+| Raça    ||  Uso AZT   ||  Sintomas  |        |  
+|:-------:||-----------:||:----------:|:------:|
+|         ||            ||  Sim       | Não    |  
+| Branca  ||     Sim    ||  14        | 93     |
+|         ||     Não    ||  32        | 81     |
+| Negra   ||     Sim    ||  11        | 52     |
+|         ||     Não    ||  12        | 43     |
+
+
+Temos:
+
+* `\(X=\)` AZT ( `\(x_1=1\)` para uso imediato do AZT, `\(x_2=0\)`, outro caso)
+
+* `\(Z=\)` Raça ( `\(z_1=1\)` para brancos, `\(z_2=0\)` para negros)
+
+* `\(Y=\)` Sintomas (1=Sim; 0=Não)
+
+---
+class: animated, fadeIn
+
+##Exemplo 4 - II
+
+No modelo, seja `\(x=1\)` para aqueles que tomaram AZT e `\(x=0\)` em outro caso, e seja `\(z=1\)` para brancos e `\(z=0\)` para negros.
+
+**Modelo ajustado**
+
+`$$g(x)=-1,0736-0,7195 x + ,0555 z,$$`
+
+ * Odds ratio condicional estimado: `\(\exp(-0,7195)=0,49\)`. Para cada raça, o odds estimado de desenvolver sintomas para aqueles que tomaram AZT é a metade do odds para aqueles que não o fizeram.
+
+ * `\(\beta_0\)`: log odds de desenvolver sintomas de AIDS para veteranos negros sem uso imediato do AZT.
+
+ * `\(\beta_1\)`: Incremento no log odds para aqueles com uso imediato do AZT.
+
+ * `\(\beta_2\)`: Incremento no log odds para veteranos brancos.
+
+ * `\(H_0:\beta_1=0\)` é a hipótese de independência condicional do tratamento AZT e sintomas de AIDS. A estatística de Wald `\((\hat{\beta}_1/\textrm{ep}(\hat{\beta}_1))^2=6,65\)` indica associação das variáveis.
+
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 4 - III
+
+Estimativas dos parâmetros para três formas diferentes de definição dos fatores.
+
+
+| Parâmetro   ||                |     Definição   |              |  
+|:-----------:||---------------:|:---------------:|:------------:|
+|             ||  Último = zero | Primeiro =zero  | Soma = zero  |  
+| Intercepto  ||   -1,074       |   -1,738        |   -1,406     |
+| AZT Sim     ||   -0,720       |    0,000        |   -0,360     |
+| AZT Não     ||    0,000       |    0,720        |    0,360     |
+| Raça Branca ||    0,055       |    0,000        |    0,028     |
+| Raça Negra  ||    0,000       |   -0,055        |   -0,028     |
+
+
+&gt;Para cada esquema de codificação, em dadas combinações de uso de AZT e raça, a probabilidade estimada de desenvolvimento de sintomas é a mesma. Por exemplo, o intercepto estimado mais a estimativa para uso imediato de AZT	mais a estimativa de branco é `\(-1,738\)` para cada esquema. Assim, a probabilidade estimada de que veteranos brancos com uso imediato de AZT desenvolvam sintomas é de `\(\exp(-1,738)/(1+\exp(-1,738))=0,15\)`.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 5 - I
+
+Dados referentes a um estudo sobre aninhamento de caranguejos-ferradura. Cada fêmea tinha um caranguejo macho residente em seu ninho. O estudo investigou fatores que explicam quando a fêmea teria outros machos (chamados satélites) residindo perto. As variáveis explicativas usadas foram: cor da fêmea, condição da espinha, peso e largura da carapaça. A resposta para cada fêmea é seu número de satélites.
+
+Aqui usaremos comprimento e cor como covariáveis. A cor tem cinco categorias: claro, claro-médio, médio, escuro-médio, escuro. Esta variável substitui a idade, caranguejos mais velhos tendem a ser mais escuros. A amostra não contém animais de cor clara, daí o modelo usa apenas quatro categorias.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 5 - II
+
+**Variável Cor qualitativa**
+
+Modelo 1:
+`$$\begin{align}
+  g(c_1,c_2,c_3,x)=\beta_0+\beta_1 c_1+\beta_2 c_2+\beta_3 c_3+\beta_4 x,
+\end{align}$$`
+
+onde `\(x=\)`comprimento em centímetros, e
+
+* `\(c_1:\)` 1 para cor claro-médio e 0 em outro caso, 
+* `\(c_2:\)` 1 para cor médio e 0 em outro caso,
+* `\(c_3:\)` 1 para cor escuro-médio e 0 em outro caso.
+
+
+| Parâmetro   ||  Estimativa  |   Erro Padrão   | `\(\chi^2\)`   |  valor p   |  
+|:-----------:||-------------:|:---------------:|:----------:|:----------:|
+| Intercepto  ||  -12,7151    |      2,7618     |    21,20   |  `\(&lt;0,0001\)` |
+|     `\(c_1\)`   ||    1,3299    |      0,8525     |    2,43    |    0,1188  |
+|     `\(c_2\)`   ||    1,4023    |      0,5484     |    6,54    |    0,0106  |
+|     `\(c_3\)`   ||    1,1061    |      0,5921     |    3,49    |    0,0617  |
+|       X     ||    0,4680    |      0,1055     |   19,66    |  `\(&lt;0,0001\)` |
+
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 5 - III
+
+* Para caranguejos escuros:  `\(\hat{g}(c_1,c_2,c_3,x)=-12,715+0,468x\)`
+
+* Para caranguejos claro-médio:
+`$$\begin{align*}
+\hat{g}(c_1,c_2,c_3,x)&amp;=-12,715+1,330+0,468x\\
+&amp;=-11,385+0,486x
+\end{align*}$$`
+
+* No comprimento médio de 26,3 cm, `\(\widehat{\pi}=0,399\)` para os caranguejos escuros e `\(\widehat{\pi}=0,715\)` para os caranguejos claro-médio.
+
+* O modelo assume ausência de interação entre cor e comprimento. O comprimento tem o mesmo efeito para todas as cores. Ou seja, para cada cor, o incremento de 1 cm no comprimento tem um efeito de `\(\exp(0,480)=1,60\)` no odds de `\(Y=1\)`.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 5 - II
+
+**Variável Cor quantitativa**
+
+Modelo 2:
+`$$\begin{align}
+  g(c,x)=\beta_0+\beta_1 c+\beta_2 x,
+\end{align}$$`
+onde `\(c=\{1,2,3,4\}\)` é o vetor de scores para as categorias de cor e `\(x=\)`comprimento em centímetros.
+
+* `\(\beta_1=-0,509\)` (ep$=0,224$) e   `\(\beta_2=0,458\)` (ep$=0,104$).
+
+* Em um comprimento dado, para cada incremento de uma categoria na cor, o odds estimado de um satélite é `\(\exp(-0,509)=0,6\)`.
+
+* Estatística de razão de verossimilhança para comparar o modelo (\ref{modelo2}) com o modelo (\ref{modelo1}) é `\(1,7\)` com 2 graus de liberdade. O valor p$=0,44$ indica que a simplificação é razoável.
+
+* Modelo potencial: `\(x=\{1,1,1,0\}\)`. Ou seja, score$=0$ para caranguejos escuros e score$=1$, em outro caso.
+`$$g(c,x)=-12,980+1,300 c+0,478x,$$`
+
 
 
 ---
