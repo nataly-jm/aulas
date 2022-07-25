@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ### LECON/DEST - UFES
 ]
 .date[
-### Vitória. ES - 29/06/2022
+### Vitória. ES - 17/07/2022
 ]
 
 ---
@@ -1030,6 +1030,7 @@ Dados referentes a um estudo prospectivo da relação do consumo de álcool dura
 
 | Má-formação  ||           |            |  Consumo   |            |            |
 |:------------:||----------:|:----------:|:----------:|:----------:|:----------:|
+|              ||      0    |     1      |    1 - 2   |   3 - 5    |  `\(\geq 6\)`  |
 | Ausente      ||    17066  |     14464  |      788   |   126      |    37      |
 | Presente     ||       48  |        38  |       5    |    1       |    1       |
 
@@ -1183,7 +1184,7 @@ estima efeitos principais para `\(x\)` e `\(z\)`. Para este caso, temos os logit
 ---
 class: animated, fadeIn
 
-##Logits gerados para o modelo
+##Logits gerados para o modelo - I
 
 | x  |  z    |  logit     |
 |:--:|------:|:-----------|
@@ -1196,6 +1197,12 @@ class: animated, fadeIn
   $$
     [\beta_0+\beta_1 (1)+\beta_2 z_k]-[\beta_0+\beta_1 (0)+\beta_2 z_k]=\beta_1.
   $$
+
+---
+class: animated, fadeIn
+
+##Logits gerados para o modelo - II
+
 Essa diferença é igual ao logaritmo do odds ratio entre `\(X\)` e `\(Y\)`, fixando `\(Z\)`. Isto é, controlando por `\(Z\)`, o odds de sucesso em `\(x=1\)` é igual a `\(\exp(\beta_1)\)` vezes o odds de sucesso em `\(x=0\)`. Este odds ratio condicional é o mesmo para cada categoria de `\(Z\)`.
   
 Há independência condicional entre `\(X\)` e `\(Y\)`, dado `\(Z\)`, se `\(\beta_1=0\)`. Nesse caso, o odds ratio comum é 1 e modelo é dado por `$$g(x)=\beta_0+ \beta_2 z_k.$$`
@@ -1293,7 +1300,6 @@ Modelo 1:
 \end{align}$$`
 
 onde `\(x=\)`comprimento em centímetros, e
-
 * `\(c_1:\)` 1 para cor claro-médio e 0 em outro caso, 
 * `\(c_2:\)` 1 para cor médio e 0 em outro caso,
 * `\(c_3:\)` 1 para cor escuro-médio e 0 em outro caso.
@@ -1305,7 +1311,7 @@ onde `\(x=\)`comprimento em centímetros, e
 |     `\(c_1\)`   ||    1,3299    |      0,8525     |    2,43    |    0,1188  |
 |     `\(c_2\)`   ||    1,4023    |      0,5484     |    6,54    |    0,0106  |
 |     `\(c_3\)`   ||    1,1061    |      0,5921     |    3,49    |    0,0617  |
-|       X     ||    0,4680    |      0,1055     |   19,66    |  `\(&lt;0,0001\)` |
+|       x     ||    0,4680    |      0,1055     |   19,66    |  `\(&lt;0,0001\)` |
 
 
 
@@ -1340,14 +1346,15 @@ Modelo 2:
 \end{align}$$`
 onde `\(c=\{1,2,3,4\}\)` é o vetor de scores para as categorias de cor e `\(x=\)`comprimento em centímetros.
 
-* `\(\beta_1=-0,509\)` (ep$=0,224$) e   `\(\beta_2=0,458\)` (ep$=0,104$).
+* `\(\beta_1=-0,509\)` `\((ep=0,224)\)` e   `\(\beta_2=0,458\)` `\((ep=0,104)\)`.
 
 * Em um comprimento dado, para cada incremento de uma categoria na cor, o odds estimado de um satélite é `\(\exp(-0,509)=0,6\)`.
 
-* Estatística de razão de verossimilhança para comparar o modelo (\ref{modelo2}) com o modelo (\ref{modelo1}) é `\(1,7\)` com 2 graus de liberdade. O valor p$=0,44$ indica que a simplificação é razoável.
+* Estatística de razão de verossimilhança para comparar o modelo 2 com o modelo 1 é `\(1,7\)` com 2 graus de liberdade. O valor `\(p=0,44\)` indica que a simplificação é razoável.
 
-* Modelo potencial: `\(x=\{1,1,1,0\}\)`. Ou seja, score$=0$ para caranguejos escuros e score$=1$, em outro caso.
-`$$g(c,x)=-12,980+1,300 c+0,478x,$$`
+* Modelo potencial: `\(x=\{1,1,1,0\}\)`. Ou seja, score `\(=0\)` para caranguejos escuros e score `\(=1\)`, em outro caso.
+`$$g(c,x)=-12,980+1,300 c+0,478x.$$`
+
 
 
 

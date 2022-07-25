@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ANÁLISE DE DADOS CATEGORIZADOS STA13833</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="libs/jszip/jszip.min.js"></script>
+    <script src="libs/pdfmake/pdfmake.js"></script>
+    <script src="libs/pdfmake/vfs_fonts.js"></script>
+    <link href="libs/dt-ext-buttons/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="libs/dt-ext-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.html5.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.colVis.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.print.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# ANÁLISE DE DADOS CATEGORIZADOS STA13833
+]
+.subtitle[
+## Regressão Logística Multinomial
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+.date[
+### Vitória. ES - 25/07/2022
+]
+
+---
+
+class: animated, fadeIn
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+
+
+#Características
+
+* Também chamada Regressão Logística Politômica.
+
+* Para respostas nominais se usam modelos logit binários separados para cada par de categorias da resposta.
+
+* Para respostas ordinais usam-se, entre outros, logits das probabilidades acumulativas.
+
+* Testes como o de independência condicional e Cochran-Mantel-Haenszel são generalizados para resposta multinomial.
+
+
+---
+class: animated, fadeIn
+
+##Resposta Nominal - I
+
+
+Seja `\(Y\)` a resposta com `\(J\)` categorias. O modelo logit politômico para resposta nominal descreve simultâneamente o `\(\log\)` odds para todos os `\(\binom J 2\)` pares de categorias.
+
+**Logit de categoria-base**:
+
+Seja `\(\pi_j(\mathbf{x})=P(Y=j|\mathbf{x})\)` no arranjo `\(\mathbf{x}\)` das covariáveis, com `\(\sum_j \pi_j(\mathbf{x})=1\)`. Para as observações nesse arranjo, tratam-se as contagens nas `\(J\)` categorias de `\(Y\)` como multinomiais com probabilidades `\(\{\pi_1(\mathbf{x}),\ldots,\pi_J(\mathbf{x})\}\)`. 
+
+
+---
+class: animated, fadeIn
+
+##Resposta Nominal - II
+
+O modelo
+`$$\log\left[\dfrac{\pi_j(\mathbf{x})}{\pi_J(\mathbf{x})}\right]=\alpha_j+\mathbf{\beta}_j'\mathbf{x},\quad j=1,\ldots,J-1.$$`
+descreve simultaneamente os efeitos de `\(\mathbf{x}\)` nesses `\(J-1\)` logits. 
+
+As `\(J-1\)` equações determinam parâmetros para logits com outros pares de categorias da resposta, pois
+
+`$$\log\left[\dfrac{\pi_a(\mathbf{x})}{\pi_b(\mathbf{x})}\right]=\log\left[\dfrac{\pi_a(\mathbf{x})}{\pi_J(\mathbf{x})}\right]-\log\left[ \dfrac{\pi_b(\mathbf{x})}{\pi_J(\mathbf{X})}\right].$$`
+
+Para este caso, as estatísticas de qualidade do ajuste podem ser usadas.
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - I
+
+Os dados correspondem a um estudo sobre os fatores que influenciam na seleção de alimento dos jacarés. A resposta nominal é o tipo de alimento primário, em volume, encontrado no estômago de jacarés. As categorias são: peixes, invertebrados, répteis, pássaros, outros. Os dados também foram classificados de acordo com: lago (L: Hancock, Oklawaha, Trafford, George), Gênero (G: macho, fêmea) e tamanho (S: `\(\leq 2,3\)` metros, `\(&gt;2,3\)` metros).
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - II
+
+&lt;img src="images/ex_alligator.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - III
+
+|         Logit         || `\(\alpha_j\)`  ||  Tamanho  `\(&lt;2,3\)` ||    Hancock   |    Oklawaha   |    Trafford  ||
+|:---------------------:||------------:||:----------------:||:------------:|:-------------:|:------------:||
+| `\(\log (\pi_I/\pi_F)\)`  ||    -1,55    ||     1,46 (0,40)  ||  -1,66 (0,61)|    0,94 (0,47)|  1,12 (0,49) ||
+| `\(\log (\pi_R/\pi_F)\)`  ||    -3,31    ||    -0,35 (0,58)  ||   1,24 (1,19)|    2,46 (1,12)|  2,94 (1,12) ||
+| `\(\log (\pi_B/\pi_F)\)`  ||    -2,09    ||    -0,63 (0,64)  ||   0,70 (0,78)|   -0,65 (1,20)|  1,09 (0,84) ||
+| `\(\log (\pi_O/\pi_F)\)`  ||    -1,90    ||     0,33 (0,45)  ||   0,83 (0,56)|    0,01 (0,78)|  1,52 (0,62) ||
+
+--
+
+&gt; **Observações**:
+* Em um lago fixo, para jacarés pequenos, o odds de que o alimento primário seja um invertebrado é `\(\exp(1,46)=4,3\)` vezes o odds estimado dos jacarés grandes.
+&gt;* Intervalo de 95\% de confiança: `\(\exp[1,46\pm 1,96\times(0,396)]=(2,0;9,3)\)`.
+
+--
+
+`$$\begin{align*}
+\log(\hat{\pi}_I/\hat{\pi}_O)=&amp;\log(\hat{\pi}_I/\hat{\pi}_F)-\log(\hat{\pi}_O/\hat{\pi}_F)\\
+=&amp;(-1,55+1,46s-1,66z_H+0,94z_O+1,12z_T)\\
+&amp;-(-1,90+0,33s+0,83z_H+0,01z_O+1,52z_T)\\
+=&amp;0,35+1,13s-2,48z_H+0,93z_O-0,39z_T.
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+
+##Probabilidades de resposta
+
+`$$\pi_j(\mathbf{x})=\dfrac{\exp(\alpha_j+\mathbf{\beta}_j'\mathbf{x})}{1+\sum_{h=1}^{J-1}\exp(\alpha_h+\mathbf{\beta}_h'\mathbf{x})},$$`
+com `\(\alpha_J=0\)` e `\(\mathbf{\beta}_J=\mathbf{0}\)`.
+
+--
+
+**No exemplo**:
+
+`$$\begin{align*}
+  \hat{\pi}_I&amp;=\dfrac{e^{-1,55-1,66}}{1+e^{-1,55-1,66}+e^{-3,31+1,24}+e^{-2,09+0.70}+e^{-1,90+0.83}}\\
+  &amp;=0,023
+\end{align*}$$`
+
+As probabilidades estimadas para répteis, pássaros, outros e peixes são: 0,072; 0,141; 0,194; 0,570.
+
+
+
+---
+class: animated, bounceInDown
+
+##Resposta Ordinal - I
+
+###Logits de categorias adjacentes
+
+Definidos como
+
+`$$\begin{align*}
+L_1 &amp;=\log\left(\dfrac{\pi_1}{\pi_2}\right)\\
+L_2 &amp;=\log\left(\dfrac{\pi_2}{\pi_3}\right)\\
+&amp;\vdots\\
+L_{r-1} &amp;=\log\left(\dfrac{\pi_{r-1}}{\pi_r}\right)
+\end{align*}$$`
+
+Este modelo é similar ao modelo de categoria-base, só que a categoria base muda de uma categoria para a seguinte.
+
+
+---
+class: animated, fadeIn
+
+##Resposta Ordinal - II
+
+Assumindo que  o efeito de uma covariável em cada equação das categorias adjacentes é o mesmo, tem-se:
+
+`$$\begin{align*}
+L_1 &amp;=\alpha_1+\beta_{1}x_1+\cdots+\beta_{p}x_p\\
+L_2 &amp;=\alpha_2+\beta_{1}x_1+\cdots+\beta_{p}x_p\\
+&amp;\vdots\\
+L_{r-1} &amp;=\alpha_{r-1}+\beta_{1}x_1+\cdots+\beta_{p}x_p
+\end{align*}$$`
+
+--
+
+&gt;**Observações**: 
+
+&gt;* A relação entre `\(x_1\)` e a resposta, permanecendo as outras covariáveis constantes, pode ser descrita como um conjunto de `\(r-1\)` odds ratios para cada par de categorias adjacentes da resposta. 
+
+&gt;* `\(\beta_1\)` é a mudança no log-odds de estar na categoria `\(j+1\)` versus a categoria `\(j\)` quando `\(x_1\)` aumenta em uma unidade, permanecendo as outras variáveis constantes.
+
+
+---
+class: animated, fadeIn
+
+##Modelo Logit cumulativo - I
+
+* É um dos modelos mais populares para dados ordinais.
+
+* O modelo usa probabilidades cumulativas até um limiar, tornando binário todo o intervalo das categorias ordinais nesse limiar.
+
+Seja `\(Y=1,2,\ldots,J\)` a resposta ordinal. Sejam as probabilidades associadas dadas por `\(\{\pi_1,\pi_2,\ldots,\pi_J\}\)` e seja `\(P(Y\leq j)=\pi_1+\ldots+\pi_j\)` a probabilidade acumulada de uma resposta ser menor ou igual a `\(j\)`.
+
+O logit cumulativo é definido como
+
+`$$\begin{align*}
+  \log\left[\dfrac{P(Y\leq j)}{P(Y&gt;j)}\right]&amp;=\log\left[\dfrac{P(Y\leq j)}{1-P(Y\leq j)}\right]\\
+  &amp;=\log\left[\dfrac{\pi_1+\ldots+\pi_j}{\pi_{j+1}+\ldots+\pi_J}\right]
+\end{align*}$$`
+
+
+---
+class: animated, fadeIn
+
+##Modelo Logit cumulativo - II
+
+A sequência de logits cumulativos pode ser definida como
+
+`$$\begin{align*}
+L_1 &amp;=\log\left(\dfrac{\pi_1}{\pi_2+\ldots+\pi_r}\right)\\
+L_2 &amp;=\log\left(\dfrac{\pi_1+\pi_2}{\pi_3+\ldots+\pi_r}\right)\\
+&amp;\vdots\\
+L_{J-1} &amp;=\log\left(\dfrac{\pi_1+\pi_2+\ldots+\pi_{J-1}}{\pi_J}\right)
+\end{align*}$$`
+
+--
+
+&gt;**Observação**: `\(L_j\)` é o log-odds de estar em alguma categoria até `\(j\)` versus estar acima da mesma.
+
+
+---
+class: animated, fadeIn
+
+##Modelo Logit cumulativo - III
+
+Incorporando as covariáveis no modelo, tem-se
+
+`$$\begin{align}
+L_1 &amp;=\alpha_1+\beta_1x_1+\cdots+\beta_px_p\\
+L_2 &amp;=\alpha_2+\beta_1x_1+\cdots+\beta_px_p\\
+&amp;\vdots\\
+L_{J-1} &amp;=\alpha_{J-1}+\beta_1x_1+\cdots+\beta_px_p
+\end{align}$$`
+
+Este modelo é chamado &lt;span style="color:orange"&gt;logit cumulativo de odds proporcionais&lt;/span&gt;. Tem um total de `\((J-1)\)` interceptos mais `\(p\)` inclinações, para um total de `\(J+p-1\)` parâmetros a serem estimados.
+
+--
+
+&gt;**Observação**: 
+
+&gt;* Note-se que este modelo não é uma reparametrização linear do modelo de categoria-base, pois os logits não são simples diferenças entre logits das categorias-base.
+
+&gt;* Os interceptos são diferentes, mas a inclinação para cada variável permanece igual nas diferentes equações. Pode-se pensar como um conjunto de linhas (ou hiperplanos) paralelas com diferentes interceptos.
+
+
+---
+class: animated, fadeIn
+
+##Modelo Logit cumulativo - IV
+
+* O intercepto `\(\alpha_j\)` é o log-odds de estar em categoria menor ou igual a `\(j\)` quando `\(x_1=\cdots=x_p=0\)`.
+
+* O parâmetro `\(\beta_k\)` descreve o efeito de `\(x_k\)` em `\(Y\)`. É o incremento no log-odds de estar em qualquer categoria menor ou igual de `\(Y\)` associado a um incremento em uma unidade de `\(x_k\)`, permanecendo todas as outras variáveis constantes.
+
+* Se `\(\beta_1=\cdots=\beta_p\)`, o efeito de `\(X_k\)` é o mesmo para todas as `\(J-1\)` formas de dicotomizar a resposta.
+
+--
+
+Por simplicidade, consideremos `\(\textrm{logit}[P(Y\leq j)]=\alpha_j+\beta x\)`. As probabilidades acumuladas são dadas por: 
+
+`$$P(Y\leq j)=\dfrac{\exp(\alpha_j+\beta x)}{1+\exp(\alpha_j+\beta x)},$$`
+dado que `\(\beta\)` é contante, as curvas de probabilidades acumuladas versus `\(x\)` são paralelas.
+
+--
+
+&gt;**Observação**: O odds-ratio é proporcional à diferença entre `\(x_1\)` e `\(x_2\)` onde `\(\beta\)` é a constante de proporcionalidade: `\(\exp[\beta(x_1-x_2)]\)`, daí o nome &lt;span style="color:orange"&gt;modelo de odds proporcional&lt;/span&gt;.
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - I
+
+Um grupo de pessoas foi aleatoriamente selecionado para degustar um de quatro diferentes tipos de queijos. As categorias de resposta são: 1=Não gostou nada, até 9=Gostou fortemente.
+
+|  Queijo  ||     |     |      |     |  Resposta   |      |     |      |    ||
+|:--------:||----:|:---:|:----:|:---:|:-----------:|:----:|:---:|:---:|:---:||
+|          ||  1  |  2  |   3  |  4  |      5      |   6  |  7  |  8  |  9  ||
+|     A    ||  0  |  0  |   1  |  7  |      8      |   8  | 19  |  8  |  1  ||
+|     B    ||  6  |  9  |  12  | 11  |      7      |   6  |  1  |  0  |  0  ||
+|     C    ||  1  |  1  |   6  |  8  |     23      |   7  |  5  |  1  |  0  ||
+|     D    ||  0  |  0  |   0  |  1  |      3      |   7  | 14  | 16  | 11  ||
+
+&gt;**Observações:**
+
+&gt;* O queijo D é o favorito e o queijo B é o pior avaliado.
+
+&gt;* O modelo de odds-cumulativos tem 8 interceptos e 3 inclinações (há três variáveis dummies para representar os queijos).
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - II
+
+<div id="htmlwidget-fd74380c6954237ade25" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fd74380c6954237ade25">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[3,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,9,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,6,6,6,6,6,6,7,1,1,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,7,7,7,7,7,8,4,5,5,5,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9],["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D"]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Nota<\/th>\n      <th>Queijo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"queijos"},{"extend":"excel","filename":"queijos"},{"extend":"pdf","filename":"queijos"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - III
+
+
+```r
+ftable(xtabs(~ Queijo + Nota, data = dados))
+```
+
+```
+##        Nota  1  2  3  4  5  6  7  8  9
+## Queijo                                
+## A            0  0  1  7  8  8 19  8  1
+## B            6  9 12 11  7  6  1  0  0
+## C            2  0  6  8 23  7  5  1  0
+## D            0  0  0  1  3  7 14 16 11
+```
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - IV
+
+Os logits são dados por:
+
+`$$\begin{align*}
+  \log\left[\dfrac{P(Y\leq 1)}{P(Y&gt;1)}\right]&amp;=\alpha_1+\beta_1 x_1+\beta_2 x_2+\beta_3 x_3\\
+ \log\left[\dfrac{P(Y\leq 2)}{P(Y&gt;2)}\right]&amp;=\alpha_2+\beta_1 x_1+\beta_2 x_2+\beta_3 x_3\\
+ &amp;\vdots\\
+ \log\left[\dfrac{P(Y\leq 8)}{P(Y&gt;8)}\right]&amp;=\alpha_8+\beta_1 x_1+\beta_2 x_2+\beta_3 x_3,
+\end{align*}$$`
+
+onde `\(x_1=1\)` para o queijo B e 0 em outro caso, `\(x_2=1\)` para o queijo C e zero em outro caso, e `\(x_3=1\)` para o queijo D e 0 em outro caso.
+
+&gt; `\(\beta&gt;0\)` indica que um incremento no valor de `\(X\)` tende a diminuir as categorias de resposta (ou seja, produz maior rejeição).
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - V
+
+
+```r
+require(MASS)
+m &lt;- polr(factor(Nota) ~ Queijo, data = dados, Hess=TRUE)
+m
+```
+
+```
+## Call:
+## polr(formula = factor(Nota) ~ Queijo, data = dados, Hess = TRUE)
+## 
+## Coefficients:
+##   QueijoB   QueijoC   QueijoD 
+## -3.338959 -1.712961  1.612735 
+## 
+## Intercepts:
+##        1|2        2|3        3|4        4|5        5|6        6|7        7|8 
+## -5.3207982 -4.4173604 -3.3125279 -2.2435742 -0.9077636  0.0441993  1.5458552 
+##        8|9 
+##  3.1057138 
+## 
+## Residual Deviance: 712.2283 
+## AIC: 734.2283
+```
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VI
+
+
+```r
+ctable &lt;- coef(summary(m))
+p &lt;- pnorm(abs(ctable[, "t value"]), lower.tail = FALSE) * 2
+(ctable &lt;- cbind(ctable, "p value" = p))
+```
+
+```
+##              Value Std. Error     t value      p value
+## QueijoB -3.3389591  0.4282113  -7.7974563 6.316749e-15
+## QueijoC -1.7129607  0.3716417  -4.6091725 4.042747e-06
+## QueijoD  1.6127349  0.3805401   4.2380154 2.255043e-05
+## 1|2     -5.3207982  0.5059467 -10.5165200 7.250220e-26
+## 2|3     -4.4173604  0.4283188 -10.3132544 6.138670e-25
+## 3|4     -3.3125279  0.3700738  -8.9509926 3.523000e-19
+## 4|5     -2.2435742  0.3267006  -6.8673703 6.539618e-12
+## 5|6     -0.9077636  0.2833378  -3.2038210 1.356168e-03
+## 6|7      0.0441993  0.2645605   0.1670669 8.673174e-01
+## 7|8      1.5458552  0.3016753   5.1242354 2.987476e-07
+## 8|9      3.1057138  0.4057319   7.6545967 1.939198e-14
+```
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VII
+
+
+```r
+(ci &lt;- confint(m))
+```
+
+```
+##              2.5 %    97.5 %
+## QueijoB -4.1995855 -2.518454
+## QueijoC -2.4542910 -0.994726
+## QueijoD  0.8793633  2.374629
+```
+
+```r
+exp(cbind(OR = coef(m), ci))
+```
+
+```
+##                 OR      2.5 %      97.5 %
+## QueijoB 0.03547386 0.01500179  0.08058409
+## QueijoC 0.18033110 0.08592409  0.36982477
+## QueijoD 5.01651229 2.40936512 10.74702446
+```
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VIII
+
+**Observações**:
+
+* O modelo estimado pode ser escrito como:
+`$$\begin{align*}
+  \log\left[\dfrac{P(Y\leq 1)}{P(Y&gt;1)}\right]&amp;=-5,32-3,34 x_1-1,713 x_2+1,613 x_3\\
+ \log\left[\dfrac{P(Y\leq 2)}{P(Y&gt;2)}\right]&amp;=-4,42-3,34 x_1-1,713 x_2+1,613 x_3\\
+ &amp;\vdots\\
+ \log\left[\dfrac{P(Y\leq 8)}{P(Y&gt;8)}\right]&amp;=3,11-3,34 x_1-1,713 x_2+1,613 x_3,
+\end{align*}$$`
+
+* O queijo B está associado a uma menor avaliação, quando comparado com o queijo A. 
+
+* A chance de atribuir uma nota 1 é `\(\exp(-5.3207982)=0.0048\)` vezes a chance de se atribuir qualquer outra nota.
+
+* A chance de atribuir uma nota menor ou igual a 7 é `\(\exp(1.5458552)=4,69\)` vezes a chance de se atribuir nota 8 ou 9.
+
+
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
