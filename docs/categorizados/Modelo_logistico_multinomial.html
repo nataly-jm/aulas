@@ -114,6 +114,131 @@ class: animated, fadeIn
 
 ##Exemplo 1 - III
 
+
+```r
+require('vcdExtra')
+data(Alligator)
+allitable &lt;- xtabs(count~lake+sex+size+food, data=Alligator)
+structable(food~lake+sex+size, allitable)
+```
+
+```
+##                       food bird fish invert other reptile
+## lake     sex    size                                     
+## George   female large         0    8      1     1       0
+##                 small         0    3      9     1       1
+##          male   large         1    9      0     2       0
+##                 small         2   13     10     2       0
+## Hancock  female large         2    3      0     3       1
+##                 small         2   16      3     3       2
+##          male   large         1    4      0     2       0
+##                 small         0    7      1     5       0
+## Oklawaha female large         1    0      1     0       0
+##                 small         0    3      9     2       1
+##          male   large         0   13      7     0       6
+##                 small         0    2      2     1       0
+## Trafford female large         0    0      1     0       0
+##                 small         1    2      4     4       1
+##          male   large         3    8      6     5       6
+##                 small         0    3      7     1       1
+```
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - IV
+
+
+```r
+require(nnet)
+	mod &lt;- multinom(food ~ lake+size, data=Alligator, weights=count)
+```
+
+```
+## # weights:  30 (20 variable)
+## initial  value 352.466903 
+## iter  10 value 271.161880
+## iter  20 value 270.060188
+## final  value 270.040139 
+## converged
+```
+
+```r
+	summary(mod)
+```
+
+```
+## Call:
+## multinom(formula = food ~ lake + size, data = Alligator, weights = count)
+## 
+## Coefficients:
+##         (Intercept) lakeHancock lakeOklawaha lakeTrafford sizesmall
+## fish      2.0929906  -0.6951466    0.6529211  -1.08764377 0.6308607
+## invert    0.5439613  -2.3535280    1.5901541   0.03435528 2.0890800
+## other     0.1887161   0.1310280    0.6585231   0.42873394 0.9624274
+## reptile  -1.2215892   0.5476069    3.1118287   1.84765700 0.2796424
+## 
+## Std. Errors:
+##         (Intercept) lakeHancock lakeOklawaha lakeTrafford sizesmall
+## fish      0.6622265   0.7812640     1.201951    0.8416809 0.6424896
+## invert    0.7311028   0.9337166     1.227642    0.8631658 0.6939177
+## other     0.7902850   0.8919688     1.368459    0.9383104 0.7127188
+## reptile   1.2076995   1.3715178     1.585926    1.3173360 0.8062363
+## 
+## Residual Deviance: 540.0803 
+## AIC: 580.0803
+```
+
+---
+class: animated, fadeIn
+
+##Exemplo 1 - V
+
+
+```r
+food1&lt;-factor(Alligator$food, levels=c("fish","invert","bird","reptile","other"))
+	mod1 &lt;- multinom(food1 ~ lake+size, data=Alligator, weights=count)
+```
+
+```
+## # weights:  30 (20 variable)
+## initial  value 352.466903 
+## iter  10 value 271.607785
+## iter  20 value 270.046051
+## final  value 270.040140 
+## converged
+```
+
+```r
+	summary(mod1)
+```
+
+```
+## Call:
+## multinom(formula = food1 ~ lake + size, data = Alligator, weights = count)
+## 
+## Coefficients:
+##         (Intercept) lakeHancock lakeOklawaha lakeTrafford  sizesmall
+## invert    -1.549021  -1.6581178  0.937237973     1.122002  1.4581457
+## bird      -2.093358   0.6954256 -0.652622721     1.088098 -0.6306329
+## reptile   -3.314512   1.2428408  2.458913302     2.935262 -0.3512702
+## other     -1.904343   0.8263115  0.005792737     1.516461  0.3315514
+## 
+## Std. Errors:
+##         (Intercept) lakeHancock lakeOklawaha lakeTrafford sizesmall
+## invert    0.4249185   0.6128466    0.4719035    0.4905122 0.3959418
+## bird      0.6622972   0.7813123    1.2020025    0.8417085 0.6424863
+## reptile   1.0530577   1.1854031    1.1181000    1.1163844 0.5800207
+## other     0.5258313   0.5575446    0.7765655    0.6214371 0.4482504
+## 
+## Residual Deviance: 540.0803 
+## AIC: 580.0803
+```
+---
+class: animated, fadeIn
+
+##Exemplo 1 - VI
+
 |         Logit         || `\(\alpha_j\)`  ||  Tamanho  `\(&lt;2,3\)` ||    Hancock   |    Oklawaha   |    Trafford  ||
 |:---------------------:||------------:||:----------------:||:------------:|:-------------:|:------------:||
 | `\(\log (\pi_I/\pi_F)\)`  ||    -1,55    ||     1,46 (0,40)  ||  -1,66 (0,61)|    0,94 (0,47)|  1,12 (0,49) ||
@@ -311,8 +436,8 @@ class: animated, fadeIn
 
 ##Exemplo 2 - II
 
-<div id="htmlwidget-fd74380c6954237ade25" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fd74380c6954237ade25">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[3,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,9,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,6,6,6,6,6,6,7,1,1,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,7,7,7,7,7,8,4,5,5,5,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9],["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D"]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Nota<\/th>\n      <th>Queijo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"queijos"},{"extend":"excel","filename":"queijos"},{"extend":"pdf","filename":"queijos"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-7b40b96f207729058313" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7b40b96f207729058313">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[3,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,9,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,6,6,6,6,6,6,7,1,1,3,3,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,7,7,7,7,7,8,4,5,5,5,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9],["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","B","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D","D"]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Nota<\/th>\n      <th>Queijo<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"queijos"},{"extend":"excel","filename":"queijos"},{"extend":"pdf","filename":"queijos"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
