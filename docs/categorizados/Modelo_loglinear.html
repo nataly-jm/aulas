@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ### LECON/DEST - UFES
 ]
 .date[
-### Vitória. ES - 03/08/2022
+### Vitória. ES - 08/08/2022
 ]
 
 ---
@@ -803,6 +803,7 @@ class: animated, fadeIn
 ##Exemplo 2 - III
 
 
+
 ```r
 berkeley&lt;-as.data.frame(UCBAdmissions)
 berkeley$Gender = relevel(berkeley$Gender, ref='Female')
@@ -895,6 +896,318 @@ que corresponde à estatística `\(\chi^2\)` `\((0.62^2=0.38)\)` com valor `\(p=
 * A estatística `\(z\)` indica que o odds ratio SA para o departamento A é significativamente diferente do odds ratio SA no departamento F.
 
 * O modelo saturado se torna mais complicado na medida em que o número de variáves aumenta.
+
+
+
+---
+class: animated, fadeIn
+
+##Modelo de Independência Completa
+
+* É o modelo mais restritivo. Todas as variáveis são assumidas conjuntamente independentes, independentemente de qualquer condicionamento. 
+
+* Assume-se que as `\(N=J\times J\times K\)` contagens nas caselas são observações independentes de uma variável aleatória Poisson.
+
+* Assume-se também que não há interações parciais `\(\lambda_{ij}^{AB}=\lambda_{ik}^{AC}=\lambda_{jk}^{BC}\)`, para todo `\(i,j,k\)`; nem interações triplas `\(\lambda_{ijk}^{ABC}=0\)`, para todo `\(i,j,k.\)`
+
+* Restrições devem ser impostas para evitar a superparametrização.
+
+
+* A estrutura do modelo é dada por
+
+`$$\log(\mu_{ijk})=\lambda + \lambda_i^A + \lambda_j^B + \lambda_k^C.$$`
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VI
+
+
+
+```r
+berkeley.ind = glm(Freq~Admit + Gender + Dept, family=poisson(), data=berkeley)
+summary(berkeley.ind)
+```
+
+```
+## 
+## Call:
+## glm(formula = Freq ~ Admit + Gender + Dept, family = poisson(), 
+##     data = berkeley)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -18.170   -7.719   -1.008    4.734   17.153  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)    4.72072    0.04553 103.673  &lt; 2e-16 ***
+## AdmitRejected  0.45674    0.03051  14.972  &lt; 2e-16 ***
+## GenderMale     0.38287    0.03027  12.647  &lt; 2e-16 ***
+## DeptA          0.26752    0.04972   5.380 7.44e-08 ***
+## DeptB         -0.19927    0.05577  -3.573 0.000352 ***
+## DeptC          0.25131    0.04990   5.036 4.74e-07 ***
+## DeptD          0.10368    0.05161   2.009 0.044533 *  
+## DeptE         -0.20098    0.05579  -3.602 0.000315 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 2650.1  on 23  degrees of freedom
+## Residual deviance: 2097.7  on 16  degrees of freedom
+## AIC: 2272.7
+## 
+## Number of Fisher Scoring iterations: 5
+```
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VII
+
+
+```r
+berkeley.ind$dev
+```
+
+```
+## [1] 2097.671
+```
+
+O Deviance do modelo, com 16 graud de liberdade indica que o modelo não ajusta bem. Se o modelo ajustasse adequadamente, a razão "Deviance/gl" seria próxima de 1.
+
+
+---
+class: animated, fadeIn
+
+##Independência Conjunta
+
+* Com três variáveis, há três formas de obter independência conjunta. O pressuposto é que uma variável é independente das outras duas, mas essas duas podem ter qualquer associação arbitrária.
+
+* Se A é cojuntamente independente de B e C, denotado por (A, BC), então A é independente de B e de C, e podemos fatorar a distribuição conjunta como o produto da distribuiçao marginal de A e da conjunta de (B, C).
+
+* Sem perda de generalidade, para o caso (A, BC), assume-se que as `\(N=I\times J\times K\)` contagens são observações de uma variável aleatória Poisson.
+
+* Assume-se também que não há interações envolvendo A: `\(\lambda_{ij}^{AB}=\lambda_{ik}^{AC}=0\)`, para todo `\(i, j, k\)`; nem ha interação tripla `\(\lambda_{ijk}^{ABC}\)`, para todo `\(i,j,k.\)`
+
+* A estrutura do modelo é dada por
+
+`$$\log(\mu_{ijk})=\lambda + \lambda_i^A + \lambda_j^B + \lambda_k^C + \lambda_{jk}^{BC}.$$`
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - VIII
+
+Consideremos o modelo onde a admissão é conjuntamente independente de departamento e sexo, denotado por (A, DS):
+
+
+```r
+berkeley.conj = glm(Freq~Admit + Gender + Dept + Gender*Dept, family=poisson(), data=berkeley)
+berkeley.conj$coef
+```
+
+```
+##      (Intercept)    AdmitRejected       GenderMale            DeptA 
+##       4.88451279       0.45673941       0.08969594      -1.14975125 
+##            DeptB            DeptC            DeptD            DeptE 
+##      -2.61300665       0.55331192       0.09504355       0.14192713 
+## GenderMale:DeptA GenderMale:DeptB GenderMale:DeptC GenderMale:DeptD 
+##       1.94355622       3.01936502      -0.69106516       0.01646425 
+## GenderMale:DeptE 
+##      -0.81123213
+```
+
+```r
+berkeley.conj$dev
+```
+
+```
+## [1] 877.0564
+```
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - IX
+
+* O modelo implica que a associação entre D e S não depende do nível da variável A. Dessa forma, a associação entre o departamento e sexo é independente da decisão de aceitar ou rejeitar.
+
+* O primeiro coeficiente estimado para a associação DS indica que o odds ratio estimado entre sexo e departamento (especificamente A vs F) é  `\(\exp(1.9436)=6,98\)` com IC de 95% dado por 
+`$$\left[\exp(1.695);\exp(2.192)\right]=(5,45; 8,95).$$`
+
+* A estatística de bondade do ajuste (Deviance=877.06) indica que o modelo não ajusta bem, pois o valor "Deviance/gl" é muito maior que 1.
+
+
+
+---
+class: animated, fadeIn
+
+##Modelo de independência Condicional
+
+* Para três variáveis, há três formas de obter independência condicional. Assume-se que duas variáveis são independentes, dada a terceira variável. Por exemplo, se A e B são condicionalmente independentes, dado C, denotado por (AC, BC), então a distribuição  de (AB), dado C, pode ser fatorada como o produto das duas marginais, dado C.
+
+* Sem perda de generalidade, para o caso (AC, BC), assume-se que as `\(N=I\times J\times K\)` contagens são observações de uma variável aleatória Poisson.
+
+* Assume-se também que não há interação parcial entre A e B: `\(\lambda_{ij}^{AB}=0\)`, para todo `\(i, j\)`; nem ha interação de três vias `\(\lambda_{ijk}^{ABC}\)`, para todo `\(i,j,k.\)`
+
+* A estrutura do modelo é dada por
+
+`$$\log(\mu_{ijk})=\lambda + \lambda_i^A + \lambda_j^B + \lambda_k^C + \lambda_{ik}^{AC} + \lambda_{jk}^{BC}.$$`
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - X
+
+Consideremos o modelo onde a admissão e departamento são conjuntamente independentes, dado o sexo, denotado por (AS, DS):
+
+
+```r
+berkeley.cond = glm(Freq~Admit + Gender + Dept + Admit*Gender + Dept*Gender, family=poisson(), data=berkeley)
+berkeley.cond$coef
+```
+
+```
+##              (Intercept)            AdmitRejected               GenderMale 
+##               4.63964796               0.83048640               0.47267109 
+##                    DeptA                    DeptB                    DeptC 
+##              -1.14975125              -2.61300665               0.55331192 
+##                    DeptD                    DeptE AdmitRejected:GenderMale 
+##               0.09504355               0.14192713              -0.61035238 
+##         GenderMale:DeptA         GenderMale:DeptB         GenderMale:DeptC 
+##               1.94355622               3.01936502              -0.69106516 
+##         GenderMale:DeptD         GenderMale:DeptE 
+##               0.01646425              -0.81123213
+```
+
+```r
+berkeley.cond$dev
+```
+
+```
+## [1] 783.607
+```
+
+
+
+
+---
+class: animated, fadeIn
+
+##Associação Homogênea
+
+* O modelo de associações homogêneas também é conhecido como **Modelo sem interações triplas**. Denotado por (AB, AC, BC), a única restrição que esse modelo impõe é que nenhuma associação condicional por pares depende  do valor da terceira variável. Por exemplo, o odds ratio condicional entre A e B, dado que C está no primeiro nível, deve ser o mesmo odds ratio condicional entre A e B, dado C no segundo nível, e assim por diante.
+
+
+* Assume-se que as `\(N=I\times J\times K\)` contagens são observações de uma variável aleatória Poisson.
+
+* Não há interação tripla `\(\lambda_{ijk}^{ABC}\)`, para todo `\(i,j,k.\)`
+
+* O modelo é dado por
+
+`$$\log(\mu_{ijk})=\lambda + \lambda_i^A + \lambda_j^B + \lambda_k^C + \lambda_{ij}^{AB} + \lambda_{jk}^{BC} + \lambda_{ik}^{AC}.$$`
+
+---
+##Exemplo 2 - XI
+
+
+```r
+berkeley.homog = glm(Freq~(Admit + Gender + Dept)^2, family=poisson(), data=berkeley)
+berkeley.homog$coef
+```
+
+```
+##              (Intercept)            AdmitRejected               GenderMale 
+##              3.137357882              2.624558572             -0.003730812 
+##                    DeptA                    DeptB                    DeptC 
+##              1.135552319             -0.342488552              2.222782088 
+##                    DeptD                    DeptE AdmitRejected:GenderMale 
+##              1.743871669              1.480917951              0.099870088 
+##      AdmitRejected:DeptA      AdmitRejected:DeptB      AdmitRejected:DeptC 
+##             -3.306480056             -3.263082125             -2.043882034 
+##      AdmitRejected:DeptD      AdmitRejected:DeptE         GenderMale:DeptA 
+##             -2.011873587             -1.567174318              2.002319157 
+##         GenderMale:DeptB         GenderMale:DeptC         GenderMale:DeptD 
+##              3.077139541             -0.662813561              0.043994838 
+##         GenderMale:DeptE 
+##             -0.792866728
+```
+
+```r
+berkeley.homog$dev
+```
+
+```
+## [1] 20.20428
+```
+
+
+---
+##Exemplo 2 - XII
+
+* O modelo implica que a associação condicional entre sexo  e departamento não depende o valor fixado de admissão. A associação condicional entre sexo e admissão não dependem do departamento fixado, e a associação entre departamento e admissão não dependem do sexo.
+
+* O interesse está nas interações de ordem superior. Por exemplo, o primeiro coeficiente do cunjunto "AdmitRejected:GenderMale", é o log odds ratio condicional entre sexo e admissão. Nesse caso, para um departamento fixado, o odds de um homem ser rejeitado é `\(\exp(0.0999)=1.1506\)` vezes o odds de uma mulher ser rejeitada. 
+
+* Embora nessa interpretação o departamento esteja fixado (dessa forma a comparação é feita entre indivíduos no mesmo departamento), não interessa em qual departamento estamos focando, pois todos conduzem ao mesmo resultado sob esse modelo.
+
+* O modelo ainda não parece ajustar adequadamente (Deviance = 20.204, com 5 gl). Mas comparado com os anteriores, parece ser melhor.
+
+
+
+---
+class: animated, fadeIn
+
+##Seleção do Modelo
+
+* Considerando que os modelos aqui estudados são hierárquicos, onde cada um é caso especial de outro, usamos a estatística de razão de verossimilhanças para medir a redução no ajuste do modelo menor (hipótese nula), com respeito ao modelo maior (hipótese alternativa). Os graus de liberdade desses testes são a diferença entre os números de parâmetros envolvidos nos dois modelos.
+
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - XIII
+
+Resumo de todos os possíveis modelos
+
+|    Modelo   |      gl    |    `\(G^2\)`   |   valor p  |
+|:-----------:|:----------:|:----------:|:----------:|
+|  (D, S, A)  |     16     | 2097.671   |   &lt;0.01    |
+|  (DS, A)    |     11     | 877.056    |   &lt;0.01    |
+|  (D, SA)    |     15     | 2004.222   |   &lt;0.01    |
+|  (DA, S)    |     11     | 1242.350   |   &lt;0.01    |
+|  (DS, SA)   |     10     | 783.607    |   &lt;0.01    |
+|  (DS, DA)   |     6      |  21.736    |   &lt;0.01    |
+|  (DA, SA)   |     10     |  1148.901  |   &lt;0.01    |
+|  (DS, DA, SA) |     5      |  20.204    |   &lt;0.01    |
+|  (DSA)      |     0      |  0.00    |            |
+
+
+---
+class: animated, fadeIn
+
+##Exemplo 2 - XIV
+
+**Observações:**
+ * O modelo saturado seria o melhor, considerando que o qualquer modelo reduzido tem ajuste significativamente pior.
+
+ * Por exemplo, para testar (DS, DA), que assume que sexo e admissão são condicionalmente independentes, dado o departamento, as hipóteses seriam
+`$$\begin{align*}
+H_0&amp;: (DS, DA)\\
+H_1&amp;: (DS, DA, SA)
+\end{align*}$$`
+
+ A estatística de teste pode ser calculada diretamente das estatísticas deviance dos modelos ajustados. Neste caso,
+`$$G^2=783.607-20.204=763.4$$`
+Com distribuição `\(\chi^2\)` com `\(10-5=5\)` graus de liberdade, que é altamente significante.
+
+ Caso o modelo de independência condicional não tivesse sido rejeitado, esse poderia ser colocado na hipótese alternativa para testar o modelo reducido de independência conjunta (DS, A), e assim por diante.
 
 
 ---
