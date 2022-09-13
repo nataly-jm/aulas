@@ -14,11 +14,21 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # PLANEJAMENTO DE EXPERIMENTOS I STA13827
+]
+.subtitle[
 ## Plano de Ensino
+]
+.author[
 ### Nátaly A. Jiménez Monroy
+]
+.institute[
 ### LECON/DEST - UFES
-### Vitória. ES - 17/04/2022
+]
+.date[
+### Vitória. ES - 12/09/2022
+]
 
 ---
 
@@ -44,7 +54,7 @@ class: animated, slideInRight
 
 
 # Plano de Ensino
-  * **Horário:** Ter - Qui / 09:00 - 11:00
+  * **Horário:** Ter - Qui / 09:00h - 11:00h
   
   * **Ementa:** Etapas e princípios no planejamento de experimentos – Experimentos completamente
 aleatorizados – Análise de Variância – Blocos aleatorizados e quadrados latinos –
@@ -98,50 +108,37 @@ class: animated, slideInRight
 **Observação:** Por favor consultar a bibliografía complementar no Plano de Ensino.
 
 ---
-class: inverse, hide-logo, center, middle, animated, bounceInDown
-
-# Avaliação
-
-
----
 class: animated, slideInRight
 
 # Avaliação
-A avaliação consistirá de três provas escritas ( `\(P_1\)`, `\(P_2\)` e `\(P_3\)` ) e atividades avaliativas ( `\(AA\)` ). A média final ( `\(MF\)` ) será calculada como:
-`$$MF=0.6\times \bar{P} + 0.4\times AA,$$`
-onde `\(\bar{P}=\frac13\sum_{i=1}^3P_i\)`.
+
+A avaliação consistirá de três provas escritas ( `\(P_1\)`, `\(P_2\)` e `\(P_3\)` ) e um trabalho final ( `\(TF\)` ). A média final ( `\(MF\)` ) será calculada como:
+`$$MF=0.7\times \overline{P} + 0.3\times TF,$$`
+onde `\(\overline{P}=\frac13\sum_{i=1}^3P_i\)`.
 
 Alunos que não obtiverem nota final igual ou superior a `\(7.0\)` (sete) ao final do período letivo ficarão de prova final.
 
-
----
-class: inverse, hide-logo, middle, center
-
-# Metodologia
-
----
-class: animated, slideInRight
-# Aulas síncronas
-
-As aulas síncronas serão ministradas às terças-feiras das 09:00 às 11:00h, respeitando o mínimo de `\(25\%\)` da carga horária total da disciplina, como disposto no §2&lt;sup&gt;o&lt;/sup&gt; do Art. 4&lt;sup&gt;o&lt;/sup&gt; da Resolução No. 30/2020.
-
-* **Frequência:** Será computada considerando a devolução das atividades avaliativas, provas e participação nas aulas síncronas. Independente da nota, o aluno que não tiver frequência igual ou superior a `\(75\%\)` será &lt;ins&gt;**reprovado por faltas**&lt;/ins&gt;.
+&gt; Independente da nota, o aluno que não tiver frequência igual ou superior a `\(75\%\)` será &lt;ins&gt;**reprovado por faltas**&lt;/ins&gt;.
 
 ---
 class: animated, slideInRight
 # Datas importantes
 
-- **Inicio das aulas:** Quinta-feira 04/11/2021 
+- **Inicio das aulas:** Terça-feira 13/09/2022 
 
-&gt; **Prova 1:** Quinta-feira 09/12/2021
+&gt; **Prova 1:** Terça-feira 04/10/2022
 
-&gt; **Prova 2:** Quinta-feira 10/02/2022
+&gt; **Prova 2:** Quinta-feira 03/11/2022
 
-&gt; **Prova 3:** Quinta-feira 24/03/2022
+&gt; **Prova 3:** Terça-feira 24/01/2023
 
-- **Fim das aulas:** Terça-feira 26/03/2022
+&gt; **Entrega trabalho final:** Terça-feira 31/01/2023
 
-- **Prova final:** Quinta-feira 31/03/2022
+&gt; **Seminário trabalho final:** Quinta-feira 02/02/2023
+
+- **Fim das aulas:** Quinta-feira 09/02/2023
+
+- **Prova final:** Terça-feira 14/02/2023
 
 ---
 
@@ -220,6 +217,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
