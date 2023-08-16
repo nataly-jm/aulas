@@ -10,10 +10,10 @@ description: Repositório exclusivo para a disciplina de planejamento de experim
   
 * [Programa da disciplina](https://nataly-jm.github.io/aulas/planejamento/Plano_Ensino.html)
 * [Introdução](https://nataly-jm.github.io/aulas/planejamento/intro.html)
-#* [Experimentos com um Fator](https://nataly-jm.github.io/aulas/planejamento/Exp_um_fator_ANOVA.html)
-#* [Experimentos em Blocos Aleatorizados](https://nataly-jm.github.io/aulas/planejamento/Experimentos_em_Blocos.html)
-#* [Experimentos em Quadrados Latinos](https://nataly-jm.github.io/aulas/planejamento/Experimentos_em_Quadrado_Latino.html)
-#* [Experimentos Fatoriais](https://nataly-jm.github.io/aulas/planejamento/Experimentos_fatoriais.html)
+ [Experimentos com um Fator](https://nataly-jm.github.io/aulas/planejamento/Exp_um_fator_ANOVA.html)
+ [Experimentos em Blocos Aleatorizados](https://nataly-jm.github.io/aulas/planejamento/Experimentos_em_Blocos.html)
+ [Experimentos em Quadrados Latinos](https://nataly-jm.github.io/aulas/planejamento/Experimentos_em_Quadrado_Latino.html)
+ [Experimentos Fatoriais](https://nataly-jm.github.io/aulas/planejamento/Experimentos_fatoriais.html)
 
 
 
