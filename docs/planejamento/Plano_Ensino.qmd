@@ -1,0 +1,125 @@
+---
+title: "PLANEJAMENTO DE EXPERIMENTOS I   STA13827"
+subtitle: "Plano de Ensino"
+author: "Nátaly A. Jiménez Monroy"
+institute: "LECON/DEST - UFES"
+format: 
+  revealjs:
+    theme: beige
+editor: visual
+incremental: true  
+---
+
+# Plano de Ensino {transition="fade" transition-speed="slow"}
+
+---
+
+**Horário:** Ter - Qui / 07:00h - 09:00h
+
+**Ementa:** Etapas e princípios no planejamento de experimentos -- Experimentos completamente aleatorizados -- Análise de Variância -- Blocos aleatorizados e quadrados latinos -- Experimentos com dois fatores -- Planejamentos fatoriais do tipo $2^k$.
+
+---
+
+## Objetivos
+
+ - Apresentar os princípios básicos relacionados com o planejamento de experimentos;
+
+ - Estudar a metodologia de análise de variância na comparação de um número qualquer de médias populacionais;
+
+ - Estudar os conceitos básicos que envolvem os blocos aleatorizados e quadrados latinos e experimentos com dois fatores;
+
+ - Aplicar as metodologias apresentadas por meio do uso de programas computacionais estatísticos.
+
+. . .
+
+**Pré-requisitos:** STA13824 ANÁLISE DE REGRESSÃO
+
+---
+
+# Programa{transition="fade" transition-speed="fast"}
+
+---
+
+* INTRODUÇÃO
+
+* EXPERIMENTOS COM UM FATOR - ANÁLISE DE VARIÂNCIA (ANOVA): 
+  * Pressupostos básicos para a aplicação da ANOVA; 
+  * Modelo de efeitos fixos; 
+  * Estimação dos parâmetros do modelo; 
+  * Verificação do modelo.
+
+---
+
+* BLOCOS ALEATORIZADOS E QUADRADOS LATINOS: 
+  * Planejamentos Completamente Aleatorizados; 
+  * Planejamentos em Blocos Completos Aleatorizados; 
+  * Planejamento usando o Quadrado Latino; 
+  * Planejamento usando o Quadrado Grego-Latino.
+
+* EXPERIMENTOS COM DOIS FATORES: 
+  * Modelo de efeitos fixos; 
+  * Estimação dos parâmetros do modelo; 
+  * Verificação do modelo; 
+  * Introdução às curvas e superfícies de resposta.
+
+---
+
+* PLANEJAMENTOS FATORIAIS DO TIPO $2^k$: 
+  * Planejamentos Fatoriais $2^2$; 
+  * Planejamentos Fatoriais $2^3$; 
+  * O planejamento $2^k$ geral.
+  
+---
+
+# Bibliografia Básica
+
+---
+
+* MONTGOMERY, Douglas C. Design and analysis of experiments. 6th ed. Hoboken New Jersey: Wiley, 2005.
+
+* BOX, George E. P.; HUNTER, J. Stuart; HUNTER, William G. Statistics for experimenters: an introduction to design, data analysis, and model building. New York: John Wiley, c1978. 653 p.
+
+* GOMES,  F. P. Curso de estatística experimental. 12. ed. Piracicaba, SP: Universidade de São Paulo, 1987
+
+. . .
+
+**Observação:** Consultar a bibliografía complementar no Plano de Ensino.
+  
+----
+  
+# Avaliação
+
+---
+
+A avaliação consistirá de duas provas escritas ($P_1$ e $P_2$), um seminário ($S$) e um trabalho final ($TF$). A média final ($MF$) será calculada como:
+
+$$MF=0.6\times \bar{P} + 0.1\times S + 0.3\times TF,$$
+onde $\bar{P}=\frac12\sum_{i=1}^2P_i$.
+
+. . .
+
+**Observação**
+
+Alunos que não obtiverem nota final igual ou superior a $7.0$ (sete) ao final do período letivo ficarão de prova final.
+  
+---
+
+# Datas importantes
+
+---
+
+- **Inicio das aulas:** Terça-feira 15/08/2023 
+
+- **Prova 1:** Quinta-feira 28/09/2023
+
+- **Prova 2:** Quinta-feira 23/11/2023
+
+- **Seminário:** Terça-feira 24/10/2023
+
+- **Entrega do trabalho final:** Terça-feira 05/12/2023
+
+- **Seminário do trabalho final:** Quinta-feira 07/12/2023
+
+- **Fim das aulas:** Terça-feira 12/12/2023
+
+- **Prova final:** Terça-feira 19/12/2023
