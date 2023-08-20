@@ -5,22 +5,30 @@ author: "Nátaly A. Jiménez Monroy"
 institute: "LECON/DEST - UFES"
 format: 
   revealjs:
-    theme: beige
+    theme: moon
+    logo: C:\Users\nataly.monroy\Documents\Disciplinas\aulas\docs\planejamento\images\logo_lecon.png
 editor: visual
 incremental: true  
 ---
 
 # Plano de Ensino {transition="fade" transition-speed="slow"}
 
-------------------------------------------------------------------------
+---
 
-**Horário:** Ter - Qui / 07:00h - 09:00h
+## Horário
 
-**Ementa:** Etapas e princípios no planejamento de experimentos -- Experimentos completamente aleatorizados -- Análise de Variância -- Blocos aleatorizados e quadrados latinos -- Experimentos com dois fatores -- Planejamentos fatoriais do tipo $2^k$.
+Ter - Qui / 07:00h - 09:00h
 
-------------------------------------------------------------------------
 
-## Objetivos
+## Ementa
+
+Etapas e princípios no planejamento de experimentos -- Experimentos completamente aleatorizados -- Análise de Variância -- Blocos aleatorizados e quadrados latinos -- Experimentos com dois fatores -- Planejamentos fatoriais do tipo $2^k$.
+
+---
+
+# Objetivos
+
+---
 
 -   Apresentar os princípios básicos relacionados com o planejamento de experimentos;
 
@@ -34,11 +42,11 @@ incremental: true
 
 **Pré-requisitos:** STA13824 ANÁLISE DE REGRESSÃO
 
-------------------------------------------------------------------------
+---
 
 # Programa {transition="fade" transition-speed="fast"}
 
-------------------------------------------------------------------------
+---
 
 -   INTRODUÇÃO
 
@@ -49,7 +57,7 @@ incremental: true
     -   Estimação dos parâmetros do modelo;
     -   Verificação do modelo.
 
-------------------------------------------------------------------------
+---
 
 -   BLOCOS ALEATORIZADOS E QUADRADOS LATINOS:
     -   Planejamentos Completamente Aleatorizados;
@@ -62,18 +70,18 @@ incremental: true
     -   Verificação do modelo;
     -   Introdução às curvas e superfícies de resposta.
 
-------------------------------------------------------------------------
+---
 
 -   PLANEJAMENTOS FATORIAIS DO TIPO $2^k$:
     -   Planejamentos Fatoriais $2^2$;
     -   Planejamentos Fatoriais $2^3$;
     -   O planejamento $2^k$ geral.
 
-------------------------------------------------------------------------
+---
 
 # Bibliografia Básica
 
-------------------------------------------------------------------------
+---
 
 -   MONTGOMERY, Douglas C. Design and analysis of experiments. 6th ed. Hoboken New Jersey: Wiley, 2005.
 
@@ -83,13 +91,15 @@ incremental: true
 
 . . .
 
-**Observação:** Consultar a bibliografía complementar no Plano de Ensino.
+**Observação** 
 
-------------------------------------------------------------------------
+Consultar a bibliografía complementar no Plano de Ensino diponível no sistema.
+
+---
 
 # Avaliação
 
-------------------------------------------------------------------------
+---
 
 A avaliação consistirá de duas provas escritas ($P_1$ e $P_2$), um seminário ($S$) e um trabalho final ($TF$). A média final ($MF$) será calculada como:
 
@@ -101,11 +111,11 @@ $$MF=0.6\times \bar{P} + 0.1\times S + 0.3\times TF,$$ onde $\bar{P}=\frac12\sum
 
 Alunos que não obtiverem nota final igual ou superior a $7.0$ (sete) ao final do período letivo ficarão de prova final.
 
-------------------------------------------------------------------------
+---
 
 # Datas importantes
 
-------------------------------------------------------------------------
+---
 
 -   **Inicio das aulas:** Terça-feira 15/08/2023
 
