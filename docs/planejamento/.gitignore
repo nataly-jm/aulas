@@ -541,6 +541,10 @@ vignettes/*.pdf
 *.knit.md
 *.Rmd
 
+# Quarto files
+/.quarto/
+*.qmd
+
 # R Environment Variables
 .Renviron
 
