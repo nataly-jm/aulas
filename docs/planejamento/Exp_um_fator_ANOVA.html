@@ -7,7 +7,7 @@
 <link href="Exp_um_fator_ANOVA_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="Exp_um_fator_ANOVA_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="Exp_um_fator_ANOVA_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Exp_um_fator_ANOVA_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="Exp_um_fator_ANOVA_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Nátaly A. Jiménez Monroy">
@@ -56,44 +56,44 @@
         -khtml-user-select: none; -moz-user-select: none;
         -ms-user-select: none; user-select: none;
         padding: 0 4px; width: 4em;
+        color: #aaaaaa;
       }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
     div.sourceCode
-      { color: #f8f8f2;  }
+      { color: #003b4f; background-color: #f1f3f5; }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span { color: #f8f8f2; } /* Normal */
-    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
-    code span.an { color: #d4d0ab; } /* Annotation */
-    code span.at { color: #00e0e0; } /* Attribute */
-    code span.bn { color: #d4d0ab; } /* BaseN */
-    code span.bu { color: #abe338; } /* BuiltIn */
-    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #abe338; } /* Char */
-    code span.cn { color: #ffd700; } /* Constant */
-    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
-    code span.cv { color: #ffd700; } /* CommentVar */
-    code span.do { color: #f8f8f2; } /* Documentation */
-    code span.dt { color: #ffa07a; } /* DataType */
-    code span.dv { color: #d4d0ab; } /* DecVal */
-    code span.er { color: #f07178; text-decoration: underline; } /* Error */
-    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
-    code span.fl { color: #d4d0ab; } /* Float */
-    code span.fu { color: #ffa07a; } /* Function */
-    code span.im { color: #abe338; } /* Import */
-    code span.in { color: #d4d0ab; } /* Information */
-    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
-    code span.op { color: #ffa07a; } /* Operator */
-    code span.ot { color: #00e0e0; } /* Other */
-    code span.pp { color: #dcc6e0; } /* Preprocessor */
-    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
-    code span.sc { color: #abe338; } /* SpecialChar */
-    code span.ss { color: #abe338; } /* SpecialString */
-    code span.st { color: #abe338; } /* String */
-    code span.va { color: #00e0e0; } /* Variable */
-    code span.vs { color: #abe338; } /* VerbatimString */
-    code span.wa { color: #dcc6e0; } /* Warning */
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="Exp_um_fator_ANOVA_files/libs/revealjs/dist/theme/quarto.css">
   <link href="Exp_um_fator_ANOVA_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -384,22 +384,18 @@
       margin-right: 0; 
     }
   </style>
-  
   <script src="Exp_um_fator_ANOVA_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
   <script src="Exp_um_fator_ANOVA_files/libs/plotly-binding-4.10.2/plotly.js"></script>
   <script src="Exp_um_fator_ANOVA_files/libs/typedarray-0.1/typedarray.min.js"></script>
-  <script src="Exp_um_fator_ANOVA_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="Exp_um_fator_ANOVA_files/libs/jquery-3.5.1/jquery.min.js"></script>
   <link href="Exp_um_fator_ANOVA_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
   <script src="Exp_um_fator_ANOVA_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
   <link href="Exp_um_fator_ANOVA_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
   <script src="Exp_um_fator_ANOVA_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
-  <link href="Exp_um_fator_ANOVA_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-  <script src="Exp_um_fator_ANOVA_files/libs/datatables-binding-0.28/datatables.js"></script>
-  <link href="Exp_um_fator_ANOVA_files/libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="Exp_um_fator_ANOVA_files/libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
-  <script src="Exp_um_fator_ANOVA_files/libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+  <link href="Exp_um_fator_ANOVA_files/libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+  <script src="Exp_um_fator_ANOVA_files/libs/tabwid-1.1.3/tabwid.js"></script>
 </head>
-<body class="quarto-dark">
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
@@ -429,10 +425,19 @@ Nátaly A. Jiménez Monroy
 <div style="text-align: justify">
 
 <p>A análise de variância consiste em decompor a variação total das observações do experimento em partes que podem ser atribuídas a causas conhecidas (tratamentos, blocos, etc) e em partes atribuídas a causas não controladas e/ou não controláveis (erro experimental ou resíduo).</p>
-<p>Em resumo:</p>
-<div class="fragment fade-in">
-<div class="fragment highlight-red">
-<p>Variação Total= Variação controlada + Variação não-controlada</p>
+<div class="fragment">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Em resumo…</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Variação Total= Variação controlada + Variação não-controlada</strong></p>
+</div>
+</div>
 </div>
 </div>
 </div></section>
@@ -614,7 +619,7 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 
 <div style="text-align: justify">
 
-<p>Considerem-se as seguintes produções médias diárias (kg) de leite a 4% de gordura das vacas submetidas a administração de raízes e tubérculos, como suplementação de inverno na alimentação de vacas em lactação.</p>
+<p>Consideremos as produções médias diárias (kg) de leite a 4% de gordura das vacas submetidas a administração de raízes e tubérculos, como suplementação de inverno na alimentação de vacas em lactação.</p>
 <table>
 <thead>
 <tr class="header">
@@ -742,8 +747,8 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 <p>Testar se há diferença na produção média de leite de acordo com o tipo de suplementação.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-19761c1232d168d58a4b" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-19761c1232d168d58a4b">{"x":{"visdat":{"45743ee076b1":["function () ","plotlyVisDat"]},"cur_data":"45743ee076b1","attrs":{"45743ee076b1":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":80,"l":60,"t":80,"r":50,"pad":4},"xaxis":{"domain":[0,1],"automargin":true,"range":["S","M","A","B"],"title":"Tipo de Suplemento","type":"category","categoryorder":"array","categoryarray":["A","B","M","S"]},"autosize":true,"showlegend":false,"yaxis":{"domain":[0,1],"automargin":true,"title":"Producao"},"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","x":["S","A","B","M","B","M","M","M","M","B","B","B","S","S","A","A","A","B","A","M","A","S","S","S"],"y":[22.809999999999999,35.189999999999998,20.370000000000001,21.559999999999999,24.370000000000001,23.399999999999999,25.120000000000001,24.359999999999999,22.940000000000001,26.539999999999999,22.149999999999999,24.059999999999999,23.539999999999999,25.420000000000002,32.469999999999999,34.479999999999997,33.789999999999999,19.539999999999999,35.039999999999999,22.370000000000001,35.420000000000002,23.43,21.07,19.579999999999998],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3051548aaf6c9d27e542" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-3051548aaf6c9d27e542">{"x":{"visdat":{"312460e04947":["function () ","plotlyVisDat"]},"cur_data":"312460e04947","attrs":{"312460e04947":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":80,"l":60,"t":80,"r":50,"pad":4},"xaxis":{"domain":[0,1],"automargin":true,"range":["S","M","A","B"],"title":"Tipo de Suplemento","type":"category","categoryorder":"array","categoryarray":["A","B","M","S"]},"autosize":true,"showlegend":false,"yaxis":{"domain":[0,1],"automargin":true,"title":"Producao"},"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","x":["S","A","B","M","B","M","M","M","M","B","B","B","S","S","A","A","A","B","A","M","A","S","S","S"],"y":[22.809999999999999,35.189999999999998,20.370000000000001,21.559999999999999,24.370000000000001,23.399999999999999,25.120000000000001,24.359999999999999,22.940000000000001,26.539999999999999,22.149999999999999,24.059999999999999,23.539999999999999,25.420000000000002,32.469999999999999,34.479999999999997,33.789999999999999,19.539999999999999,35.039999999999999,22.370000000000001,35.420000000000002,23.43,21.07,19.579999999999998],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div></section>
@@ -751,17 +756,13 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 
 <p>Medidas descritivas:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">datasummary</span>(Suplemento<span class="sc">~</span>Producao<span class="sc">*</span>(Mean <span class="sc">+</span> SD), <span class="at">data=</span>dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d2659ddae9687a37e909" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d2659ddae9687a37e909">{"x":{"filter":"none","vertical":false,"data":[["Producao"],["34.40"],["1.11"],["22.84"],["2.65"],["23.29"],["1.30"],["22.64"],["2.05"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>A / Mean<\/th>\n      <th>A / SD<\/th>\n      <th>B / Mean<\/th>\n      <th>B / SD<\/th>\n      <th>M / Mean<\/th>\n      <th>M / SD<\/th>\n      <th>S / Mean<\/th>\n      <th>S / SD<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="tabwid"><style>.cl-74de6d52{}.cl-74d37c76{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-74d7edba{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-74d80b7e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-74d80b88{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-74d80b89{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-74de6d52"><thead><tr style="overflow-wrap:break-word;"><th class="cl-74d80b7e"><p class="cl-74d7edba"><span class="cl-74d37c76">Suplemento</span></p></th><th class="cl-74d80b7e"><p class="cl-74d7edba"><span class="cl-74d37c76">Mean</span></p></th><th class="cl-74d80b7e"><p class="cl-74d7edba"><span class="cl-74d37c76">SD</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">A</span></p></td><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">34.40</span></p></td><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">1.11</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">B</span></p></td><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">22.84</span></p></td><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">2.65</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">M</span></p></td><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">23.29</span></p></td><td class="cl-74d80b88"><p class="cl-74d7edba"><span class="cl-74d37c76">1.30</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-74d80b89"><p class="cl-74d7edba"><span class="cl-74d37c76">S</span></p></td><td class="cl-74d80b89"><p class="cl-74d7edba"><span class="cl-74d37c76">22.64</span></p></td><td class="cl-74d80b89"><p class="cl-74d7edba"><span class="cl-74d37c76">2.05</span></p></td></tr></tbody></table></div>
 </div>
 </div>
-</section>
-<section class="slide level2">
-
-<div style="text-align: justify">
-
 <h3 id="análise">Análise</h3>
 <p>Aplicar o teste <span class="math inline">\(t\)</span> para amostras independentes e analisar todos os pares de médias.</p>
 <ul>
@@ -769,7 +770,7 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
   \textrm{H}_0: \mu_1-\mu_2=0\quad \textrm{vs. } \textrm{H}_1: \mu_1-\mu_2\neq 0.
   \]</span></li>
 </ul>
-</div></section>
+</section>
 <section class="slide level2">
 
 <ul>
@@ -784,7 +785,7 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 
 <h3 id="resultados">Resultados</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">with</span>(dados,<span class="fu">pairwise.t.test</span>(Producao, Suplemento, <span class="at">p.adjust.method =</span> <span class="st">"none"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">with</span>(dados,<span class="fu">pairwise.t.test</span>(Producao, Suplemento, <span class="at">p.adjust.method =</span> <span class="st">"none"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pairwise comparisons using t tests with pooled SD 
@@ -870,14 +871,316 @@ P value adjustment method: none </code></pre>
 </div>
 <div class="fragment">
 <p>Suponha que seja testada a igualdade das quatro médias usando comparações pareadas. Há 6 pares possíveis e, se a probabilidade de aceitar corretamente a hipótese nula para cada par testado é de <span class="math inline">\((1-\alpha)=0,95\)</span>, então a probabilidade de aceitar corretamente a hipótese nula para todos os 6 pares é <span class="math inline">\((0,95)^6=0,7359\)</span>, se os testes forem independentes.</p>
-<p><img src="C:\Users\nataly.monroy\Documents\Disciplinas\aulas\docs\planejamento\images\logo_lecon.png" class="slide-logo"></p>
+</div>
+</div></section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Solução apropriada para testar a igualdade de várias médias</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Análise de Variância</strong></p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="modelo-estatístico" class="title-slide slide level1 center">
+<h1>Modelo estatístico</h1>
+<div style="text-align: justify">
+
+<p>O modelo para descrever os dados de um experimento pode ser escrito como</p>
+<p><span class="math display">\[\begin{equation}
+y_{ij}=\mu_i+\epsilon_{ij}, \quad i=1,\ldots,a,\quad j=1,\ldots,n,\qquad \text{(1)}
+\end{equation}\]</span></p>
+<p>onde</p>
+<ul>
+<li class="fragment"><span class="math inline">\(y_{ij}\)</span> representa a <span class="math inline">\(ij-\)</span>ésima observação</li>
+<li class="fragment"><span class="math inline">\(\mu_i\)</span> é a média do <span class="math inline">\(i-\)</span>ésimo nível do fator ou tratamento</li>
+</ul>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<ul>
+<li class="fragment"><span class="math inline">\(\epsilon_{ij}\)</span> é o erro aleatório, que incorpora todas as outras fontes de variabilidade no experimento (medição, fatores não controlados, diferenças entre unidades experimentais, ruídos, etc). Assume-se que <span class="math inline">\(\textrm{E}(\epsilon_{ij})=0\)</span>, de modo que <span class="math inline">\(\textrm{E}(y_{ij})=\mu_{i}\)</span>.</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p><strong>Observação</strong>: Esse modelo é chamado <strong><span style="color:orange">Modelo de Médias.</span></strong></p>
+</blockquote>
+</div>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+</div></section>
+<section id="forma-alternativa" class="slide level2">
+<h2>Forma alternativa</h2>
+<p>Seja</p>
+<p><span class="math display">\[\mu_i=\mu+\tau_i,\qquad i=1,2,\ldots,a.\]</span> A Equação (1) torna-se o <strong><span style="color:orange">Modelo de Efeitos</span></strong>, escrito como</p>
+<p><span class="math display">\[\begin{align*}
+y_{ij}=\mu+\tau_i+\epsilon_{ij}, \qquad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots, n,
+\end{align*}\]</span></p>
+</section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<p>onde</p>
+<ul>
+<li class="fragment"><span class="math inline">\(y_{ij}\)</span> é o valor observado na unidade <span class="math inline">\(j\)</span> que recebeu o tratamento <span class="math inline">\(i\)</span></li>
+<li class="fragment"><span class="math inline">\(\mu\)</span> é um parâmetro constante, comum a todos os tratamentos, chamado média geral (quando os dados são balanceados)</li>
+<li class="fragment"><span class="math inline">\(\tau_i\)</span> é um parâmetro único que representa o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento</li>
+<li class="fragment"><span class="math inline">\(\epsilon_{ij}\)</span> é um componente do erro aleatório, associado à <span class="math inline">\(j-\)</span>ésima repetição do <span class="math inline">\(i-\)</span>ésimo tratamento.</li>
+</ul>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+</div></section>
+<section id="objetivo-1" class="slide level2">
+<h2>Objetivo</h2>
+<ul>
+<li class="fragment">Se os <span class="math inline">\(a\)</span> tratamentos foram selecionados especificamente pelo experimentador, o interesse é testar hipóteses sobre as médias dos tratamentos e as conclusões aplicam apenas aos níveis do fator considerados na análise. Interessa também estimar os parâmetros do modelo <span class="math inline">\((\mu, \tau_i,\sigma^2)\)</span> <span class="math inline">\(\Longrightarrow\)</span> <strong><span style="color:orange">Modelo de Efeitos Fixos.</span></strong></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<ul>
+<li class="fragment">Se os <span class="math inline">\(a\)</span> tratamentos foram selecionados como uma amostra aleatória de uma população maior de tratamentos, o interesse é estender as conclusões a todos os tratamentos na população. Nesse caso, os <span class="math inline">\(\tau_i\)</span> são variáveis aleatórias e os testes de hipóteses recaem sobre a variabilidade de <span class="math inline">\(\tau_i\)</span> tentando-se estimar essa variabilidade <span class="math inline">\(\Longrightarrow\)</span> <strong><span style="color:orange">Modelo de Efeitos Aleatórios</span></strong> ou <strong><span style="color:orange">Modelo de Componentes de Variância.</span></strong></li>
+</ul>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+</div></section>
+<section id="modelo-de-efeitos-aleatórios" class="slide level2">
+<h2>Modelo de Efeitos Aleatórios</h2>
+<p><span class="math display">\[\begin{align}
+y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
+\end{align}\]</span></p>
+<div class="fragment">
+<p>onde</p>
+<ul>
+<li class="fragment"><span class="math inline">\(y_{ij}\)</span> é a observação do <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental (variável resposta);</li>
+<li class="fragment"><span class="math inline">\(\mu\)</span> é a média global;</li>
+<li class="fragment"><span class="math inline">\(\tau_i\)</span> é o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento;</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<ul>
+<li class="fragment"><span class="math inline">\(\epsilon_{ij}\)</span> é o erro associado ao <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental. Incorpora todas as fontes de variabilidade não controladas no experimento.</li>
+<li class="fragment">Tem-se que <span class="math inline">\(\tau_i\)</span> e <span class="math inline">\(\epsilon_{ij}\)</span> são variáveis aleatórias independentes entre si, com <span class="math inline">\(\tau_i\sim N(0,\sigma_{\tau}^2)\)</span> e <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span>.</li>
+</ul>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>A condição <span class="math inline">\(E(\tau_i)=0\)</span> é similar à condição <span class="math inline">\(\sum_{i=1}^a \tau_i=0\)</span>.</p>
+<p>Estabelece que o efeito esperado do <span class="math inline">\(i-\)</span>ésimo nível, considerado como um desvio de <span class="math inline">\(\mu\)</span>, é zero.</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>Se a variância dos efeitos dos tratamentos <span class="math inline">\(\tau_i\)</span> é <span class="math inline">\(\sigma_{\tau}^2\)</span>, a variância da resposta é dada por</p>
+<p><span class="math display">\[\text{var}(y_{ij})=\sigma_{\tau}^2+\sigma^2.\]</span></p>
+<p>As variâncias <span class="math inline">\(\sigma_{\tau}^2\)</span> e <span class="math inline">\(\sigma^2\)</span> são chamadas <strong><span style="color:orange">Componentes de variância.</span></strong></p></li>
+</ul>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<ul>
+<li class="fragment">No modelo de efeitos aleatórios, os efeitos têm interpretação diferente. As hipóteses testadas são:</li>
+</ul>
+<div class="fragment">
+<div class="math">
+<span class="math display">\[\begin{cases}
+\text{H}_0:&amp; \sigma_{\tau}^2=0\\
+\text{H}_1:&amp; \sigma_{\tau}^2&gt;0.
+\end{cases}\]</span>
+</div>
+</div>
+<div class="fragment">
+<p>Se <span class="math inline">\(\sigma_{\tau}^2=0\)</span>, todos os tratamentos são idênticos, mas se <span class="math inline">\(\sigma_{\tau}&gt;0\)</span>, há variabilidade entre os tratamentos.</p>
+</div>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<h3 id="exemplos">Exemplos</h3>
+<ul>
+<li class="fragment"><p>Para estudar o efeito de diferentes operadores sobre o tempo de execução de uma tarefa, em uma determinada máquina, seleciona-se uma amostra de cinco operadores de um grupo de <span class="math inline">\(N\)</span> operadores possíveis.</p></li>
+<li class="fragment"><p>Para estudar o efeito dos trilhos usados nas estradas de ferro, sobre o tempo de percurso de certo tipo de onda resultante da pressão longitudinal dos trilhos, selecionaram-se aleatoriamente seis trilhos e são feitas três medições.</p></li>
+</ul>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+</div></section>
+<section id="modelo-de-efeitos-fixos" class="slide level2">
+<h2>Modelo de Efeitos Fixos</h2>
+<p><span class="math display">\[\begin{align}
+y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
+\end{align}\]</span></p>
+<p>onde</p>
+<ul>
+<li class="fragment"><span class="math inline">\(y_{ij}\)</span> é a observação do <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental (variável resposta);</li>
+<li class="fragment"><span class="math inline">\(\mu\)</span> é a média geral, comum a todos os tratamentos;</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<ul>
+<li class="fragment"><span class="math inline">\(\tau_i\)</span> representa o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento;</li>
+<li class="fragment"><span class="math inline">\(\epsilon_{ij}\)</span> é o erro associado ao <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental. Incorpora todas as fontes de variabilidade não controladas no experimento.</li>
+</ul>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+</div></section>
+<section id="pressupostos-da-anova" class="slide level2">
+<h2>Pressupostos da ANOVA</h2>
+<ul>
+<li class="fragment"><p>Os efeitos principais devem ser aditivos: Nos experimentos, cada observação segue um modelo linear aditivo <span class="math inline">\(y_{ij}=\mu+\tau_i+\epsilon_{ij}\)</span>.</p></li>
+<li class="fragment"><p>Os erros de observação são independentes: <span class="math display">\[\text{cov}(\epsilon_{ij},\epsilon_{ij}')=0.\]</span></p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<ul>
+<li class="fragment"><p>Os erros são homoscedásticos: Cada tratamento deve ter aproximadamente a mesma variância.</p></li>
+<li class="fragment"><p>Os erros são normalmente distribuídos: Para que a ANOVA seja válida, os erros devem ser originários da mesma população.</p></li>
+</ul>
+<div class="fragment">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Em resumo…</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\epsilon_{ij}\sim N(0,\sigma^2).\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+</div></section>
+<section id="hipóteses" class="slide level2">
+<h2>Hipóteses</h2>
+<p>O objetivo é, em geral, verificar se existe diferença significativa entre, pelo menos, duas médias de tratamentos. As hipóteses testadas são:</p>
+<div class="math">
+<p><span class="math display">\[\begin{align*}
+\textrm{H}_0&amp;: \mu_1=\mu_2=\cdots=\mu_a\\
+\textrm{H}_1&amp;: \mu_i\neq \mu_i' \quad \textrm{para pelo menos um } i\neq i'.
+\end{align*}\]</span></p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Forma equivalente</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="math display">\[\begin{align*}
+\textrm{H}_0&amp;: \tau_1=\tau_2=\cdots=\tau_a=0\\
+\textrm{H}_1&amp;: \tau_i\neq 0 \quad \textrm{para pelo menos um } i.
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<h3 id="estimação-dos-parâmetros---mqo">Estimação dos Parâmetros - MQO</h3>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Funções de Parâmetros Completamente Estimáveis</strong></p>
+</div>
+<div class="callout-content">
+<p>Uma função dos parâmetros de qualquer modelo linear é dita <strong><span style="color:orange">estimável</span></strong> se, e somente se, pode ser escrita como o valor esperado de uma combinação linear das variáveis resposta. Apenas funções estimáveis dos parâmetros têm estimativas lineares não-viesadas únicas. Para o modelo de análise de variância de uma via, cada função estimável tem a forma <span class="math display">\[\begin{align*}
+\mathbb{E}\left[\sum_{i=1}^a \sum_{j=1}^n a_{ij}y_{ij}\right]&amp;=\sum_{i=1}^a \sum_{j=1}^n a_{ij}\mathbb{E}[y_{ij}]\\
+&amp;=\sum_{i=1}^a \sum_{j=1}^n a_{ij} (\mu + \tau_i)=\sum_{i=1}^a b_i(\mu + \tau_i),
+\end{align*}\]</span> onde <span class="math inline">\(b_i=\sum_{j=1}^n a_{ij}\)</span> e os <span class="math inline">\(a_{ij}\)</span> são números reais.</p>
+</div>
+</div>
+</div>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+<blockquote>
+<p><strong>Observação</strong>: Claramente <span class="math inline">\(\mu+\tau_1\)</span> é estimável, pois pode ser obtida fixando <span class="math inline">\(b_1=1\)</span> e <span class="math inline">\(b_2=b_3=\cdots=b_a=0\)</span>. Da mesma forma, cada <span class="math inline">\(\mu+\tau_i\)</span> é estimável.</p>
+</blockquote>
+</div></section>
+<section class="slide level2">
+
+<div style="text-align: justify">
+
+</div></section>
+<section id="política-de-proteção-aos-direitos-autorais" class="slide level2">
+<h2>Política de proteção aos direitos autorais</h2>
+<p><font size="5">O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser o detentor dos direitos sobre o conteúdo disponível na plataforma, o <strong>LECON</strong> e o <strong>NEAEST</strong> detém direito exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5<sup>o</sup>, inciso XXVII, da Constituição Federal e os Artigos 7<sup>o</sup> e 28<sup>o</sup>, da Lei 9.610/98. A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do <strong>LECON</strong> e o <strong>NEAEST</strong>, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo caracterizar conduta criminosa, conforme Artigo 184<sup>o</sup>, §1<sup>o</sup> a 3<sup>o</sup>, do Código Penal. É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer conteúdo disponível na plataforma.</font></p><font size="5">
+<p><img src="images\logo_lecon.png" class="slide-logo"></p>
 <div class="footer footer-default">
-<p>Material elaborado pela equipe LECON/NEAEST: Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi e Nátaly A. Jiménez M.</p>
+<p>Material elaborado pela equipe LECON/NEAEST</p>
 </div>
-</div>
-</div></section></section>
-    </div>
-  </div>
+</font></section></section><font size="5">
+    </font></div><font size="5">
+  </font></div><font size="5">
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="Exp_um_fator_ANOVA_files/libs/revealjs/dist/reveal.js"></script>
@@ -1273,4 +1576,4 @@ P value adjustment method: none </code></pre>
     </script>
     
 
-</body></html>
+</font></body></html>
