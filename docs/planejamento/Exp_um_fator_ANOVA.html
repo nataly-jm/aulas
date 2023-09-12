@@ -415,13 +415,8 @@ Nátaly A. Jiménez Monroy
 </div>
 
 </section>
-<section>
-<section id="análise-de-variância-anova" class="title-slide slide level1 center">
-<h1>Análise de variância (ANOVA)</h1>
-
-</section>
-<section class="slide level2">
-
+<section id="análise-de-variância-anova" class="slide level2">
+<h2>Análise de variância (ANOVA)</h2>
 <div style="text-align: justify">
 
 <p>A análise de variância consiste em decompor a variação total das observações do experimento em partes que podem ser atribuídas a causas conhecidas (tratamentos, blocos, etc) e em partes atribuídas a causas não controladas e/ou não controláveis (erro experimental ou resíduo).</p>
@@ -446,12 +441,12 @@ Nátaly A. Jiménez Monroy
 <div style="text-align: justify">
 
 <p>Assume-se que há <span class="math inline">\(a\)</span> tratamentos ou diferentes níveis de um único fator a serem comparados.</p>
-<table>
+<table style="width:100%;">
 <colgroup>
 <col style="width: 20%">
-<col style="width: 43%">
-<col style="width: 15%">
-<col style="width: 21%">
+<col style="width: 38%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -501,11 +496,9 @@ Nátaly A. Jiménez Monroy
 
 <ul>
 <li class="fragment"><p><span class="math inline">\(y_{ij}\)</span> representa a <span class="math inline">\(j-\)</span>ésima observação do nível ou do tratamento <span class="math inline">\(i\)</span>.</p></li>
-<li class="fragment"><div class="math">
-<span class="math display">\[\begin{align*}
-y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{y_{ij}}{n},\\ \bar{y}_{\cdot\cdot}&amp;=\sum_{i=1}^a\sum_{j=1}^n \frac{y_{ij}}{an}.
-\end{align*}\]</span>
-</div></li>
+<li class="fragment"><p><span class="math display">\[\begin{align*}
+   y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{y_{ij}}{n},\\ \bar{y}_{\cdot\cdot}&amp;=\sum_{i=1}^a\sum_{j=1}^n \frac{y_{ij}}{an}.
+   \end{align*}\]</span></p></li>
 </ul>
 </div></section>
 <section class="slide level2">
@@ -515,10 +508,10 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 
 <p>Considere um experimento cujo objetivo é verificar se a inclusão de raízes e tubérculos, como suplementação de inverno na alimentação de vacas em lactação, aumenta a produção de leite. Consideram-se 24 animais, três tipos de suplementos e uma testemunha (placebo), que são:</p>
 <ul>
-<li class="fragment">Sem suplemento (S)</li>
-<li class="fragment">Mandioca (M)</li>
-<li class="fragment">Araruta (A)</li>
-<li class="fragment">Batata doce (B).</li>
+<li class="fragment"><p>Sem suplemento (S)</p></li>
+<li class="fragment"><p>Mandioca (M)</p></li>
+<li class="fragment"><p>Araruta (A)</p></li>
+<li class="fragment"><p>Batata doce (B).</p></li>
 </ul>
 </div></section>
 <section class="slide level2">
@@ -534,10 +527,10 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 
 <p>Utilizando um gerador de números aleatórios, aloca-se o animal a cada tipo de suplemento. Suponha que a sequência de números aleatórios sorteada, tenha sido</p>
 <p><span class="math display">\[24\,\, 23\,\, 22\,\, 14\,\, 1\,\, 13\quad 6\,\, 20\,\, 8\,\, 7\,\, 9\,\, 4\]</span> <span class="math display">\[21\,\, 15\,\, 17\,\, 16\,\, 19\,\, 2\quad 11\,\, 5\,\, 10\,\, 3\,\, 18\,\, 12\]</span></p>
-<p>Assim, temos a configuração do experimento a seguir:</p>
 </div></section>
 <section class="slide level2">
 
+<p>Assim, temos a configuração do experimento a seguir:</p>
 <table>
 <thead>
 <tr class="header">
@@ -706,9 +699,9 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 <p>Seja <span class="math inline">\(y_{ij}\)</span> o valor da produção de leite da <span class="math inline">\(j-\)</span>ésima vaca que recebeu o <span class="math inline">\(i-\)</span>ésimo tratamento. Os valores das produções (kg) de leite a 4% de gordura das vacas que participaram do estudo podem ser resumidos na forma:</p>
 <table>
 <colgroup>
-<col style="width: 30%">
-<col style="width: 47%">
-<col style="width: 22%">
+<col style="width: 15%">
+<col style="width: 69%">
+<col style="width: 15%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -749,8 +742,8 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 <p>Testar se há diferença na produção média de leite de acordo com o tipo de suplementação.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6de56e98e142cf58f6d1" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-6de56e98e142cf58f6d1">{"x":{"visdat":{"14e8191c1f15":["function () ","plotlyVisDat"]},"cur_data":"14e8191c1f15","attrs":{"14e8191c1f15":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":80,"l":60,"t":80,"r":50,"pad":4},"xaxis":{"domain":[0,1],"automargin":true,"range":["S","M","A","B"],"title":"Tipo de Suplemento","type":"category","categoryorder":"array","categoryarray":["A","B","M","S"]},"autosize":true,"showlegend":false,"yaxis":{"domain":[0,1],"automargin":true,"title":"Producao"},"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","x":["S","A","B","M","B","M","M","M","M","B","B","B","S","S","A","A","A","B","A","M","A","S","S","S"],"y":[22.809999999999999,35.189999999999998,20.370000000000001,21.559999999999999,24.370000000000001,23.399999999999999,25.120000000000001,24.359999999999999,22.940000000000001,26.539999999999999,22.149999999999999,24.059999999999999,23.539999999999999,25.420000000000002,32.469999999999999,34.479999999999997,33.789999999999999,19.539999999999999,35.039999999999999,22.370000000000001,35.420000000000002,23.43,21.07,19.579999999999998],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6f49efd3b32e677b3223" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-6f49efd3b32e677b3223">{"x":{"visdat":{"c40256b5f17":["function () ","plotlyVisDat"]},"cur_data":"c40256b5f17","attrs":{"c40256b5f17":{"x":{},"y":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":80,"l":60,"t":80,"r":50,"pad":4},"xaxis":{"domain":[0,1],"automargin":true,"range":["S","M","A","B"],"title":"Tipo de Suplemento","type":"category","categoryorder":"array","categoryarray":["A","B","M","S"]},"autosize":true,"showlegend":false,"yaxis":{"domain":[0,1],"automargin":true,"title":"Producao"},"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(31,119,180,0.5)","x":["S","A","B","M","B","M","M","M","M","B","B","B","S","S","A","A","A","B","A","M","A","S","S","S"],"y":[22.809999999999999,35.189999999999998,20.370000000000001,21.559999999999999,24.370000000000001,23.399999999999999,25.120000000000001,24.359999999999999,22.940000000000001,26.539999999999999,22.149999999999999,24.059999999999999,23.539999999999999,25.420000000000002,32.469999999999999,34.479999999999997,33.789999999999999,19.539999999999999,35.039999999999999,22.370000000000001,35.420000000000002,23.43,21.07,19.579999999999998],"type":"box","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div></section>
@@ -762,7 +755,7 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">datasummary</span>(Suplemento<span class="sc">~</span>Producao<span class="sc">*</span>(Mean <span class="sc">+</span> SD), <span class="at">data=</span>dados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div class="tabwid"><style>.cl-c5712d76{}.cl-c56417da{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c5696064{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c56977fc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c5697806{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c5697810{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-c5712d76"><thead><tr style="overflow-wrap:break-word;"><th class="cl-c56977fc"><p class="cl-c5696064"><span class="cl-c56417da">Suplemento</span></p></th><th class="cl-c56977fc"><p class="cl-c5696064"><span class="cl-c56417da">Mean</span></p></th><th class="cl-c56977fc"><p class="cl-c5696064"><span class="cl-c56417da">SD</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">A</span></p></td><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">34.40</span></p></td><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">1.11</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">B</span></p></td><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">22.84</span></p></td><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">2.65</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">M</span></p></td><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">23.29</span></p></td><td class="cl-c5697806"><p class="cl-c5696064"><span class="cl-c56417da">1.30</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c5697810"><p class="cl-c5696064"><span class="cl-c56417da">S</span></p></td><td class="cl-c5697810"><p class="cl-c5696064"><span class="cl-c56417da">22.64</span></p></td><td class="cl-c5697810"><p class="cl-c5696064"><span class="cl-c56417da">2.05</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-2fd036e4{}.cl-2fc4e71c{font-family:'Arial';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2fc953ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2fc96fd0{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2fc96fda{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2fc96fdb{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-2fd036e4"><thead><tr style="overflow-wrap:break-word;"><th class="cl-2fc96fd0"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">Suplemento</span></p></th><th class="cl-2fc96fd0"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">Mean</span></p></th><th class="cl-2fc96fd0"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">SD</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">A</span></p></td><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">34.40</span></p></td><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">1.11</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">B</span></p></td><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">22.84</span></p></td><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">2.65</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">M</span></p></td><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">23.29</span></p></td><td class="cl-2fc96fda"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">1.30</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2fc96fdb"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">S</span></p></td><td class="cl-2fc96fdb"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">22.64</span></p></td><td class="cl-2fc96fdb"><p class="cl-2fc953ce"><span class="cl-2fc4e71c">2.05</span></p></td></tr></tbody></table></div>
 </div>
 </div>
 </section>
@@ -771,19 +764,14 @@ y_{i\cdot}&amp;=\sum_{j=1}^n y_{ij},\\ \bar{y}_{i\cdot}&amp;=\sum_{j=1}^n \frac{
 <h3 id="análise">Análise</h3>
 <p>Aplicar o teste <span class="math inline">\(t\)</span> para amostras independentes e analisar todos os pares de médias.</p>
 <ul>
-<li class="fragment">Hipóteses: <span class="math display">\[
+<li class="fragment"><p>Hipóteses: <span class="math display">\[
   \textrm{H}_0: \mu_1-\mu_2=0\quad \textrm{vs. } \textrm{H}_1: \mu_1-\mu_2\neq 0.
-  \]</span></li>
-</ul>
-</section>
-<section class="slide level2">
-
-<ul>
-<li class="fragment">Estatística de teste: <span class="math display">\[
+  \]</span> —</p></li>
+<li class="fragment"><p>Estatística de teste: <span class="math display">\[
   t_{0}=\dfrac{(\bar{y}_1-\bar{y}_2)-(\mu_1-\mu_2)}{S_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}},
   \]</span> onde <span class="math display">\[
   S_p^2=\sqrt{\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}}
-  \]</span></li>
+  \]</span></p></li>
 </ul>
 </section>
 <section class="slide level2">
@@ -870,16 +858,12 @@ P value adjustment method: none </code></pre>
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p>Esta solução é <strong><span style="color:orange">INCORRETA</span></strong>, pois leva a uma distorção do Erro Tipo I.</p>
+<p>Esta solução é <span style="color:orange"><strong>INCORRETA</strong></span>, pois leva a uma distorção do Erro Tipo I.</p>
 </div>
 </div>
 </div>
 <div class="fragment">
 <p>Suponha que seja testada a igualdade das quatro médias usando comparações pareadas. Há 6 pares possíveis e, se a probabilidade de aceitar corretamente a hipótese nula para cada par testado é de <span class="math inline">\((1-\alpha)=0,95\)</span>, então a probabilidade de aceitar corretamente a hipótese nula para todos os 6 pares é <span class="math inline">\((0,95)^6=0,7359\)</span>, se os testes forem independentes.</p>
-</div>
-</div></section>
-<section class="slide level2">
-
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -893,20 +877,24 @@ P value adjustment method: none </code></pre>
 </div>
 </div>
 </div>
-</section></section>
+</div>
+</div></section>
+<section class="slide level2">
+
+</section>
 <section>
 <section id="modelo-estatístico" class="title-slide slide level1 center">
 <h1>Modelo estatístico</h1>
 <div style="text-align: justify">
 
 <p>O modelo para descrever os dados de um experimento pode ser escrito como</p>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 y_{ij}=\mu_i+\epsilon_{ij}, \quad i=1,\ldots,a,\quad j=1,\ldots,n,\qquad \text{(1)}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>onde</p>
 <ul>
-<li class="fragment"><span class="math inline">\(y_{ij}\)</span> representa a <span class="math inline">\(ij-\)</span>ésima observação</li>
-<li class="fragment"><span class="math inline">\(\mu_i\)</span> é a média do <span class="math inline">\(i-\)</span>ésimo nível do fator ou tratamento</li>
+<li class="fragment"><p><span class="math inline">\(y_{ij}\)</span> representa a <span class="math inline">\(ij-\)</span>ésima observação</p></li>
+<li class="fragment"><p><span class="math inline">\(\mu_i\)</span> é a média do <span class="math inline">\(i-\)</span>ésimo nível do fator ou tratamento</p></li>
 </ul>
 </div></section>
 <section class="slide level2">
@@ -926,7 +914,7 @@ y_{ij}=\mu_i+\epsilon_{ij}, \quad i=1,\ldots,a,\quad j=1,\ldots,n,\qquad \text{(
 <p><strong>Observação</strong></p>
 </div>
 <div class="callout-content">
-<p>Esse modelo é chamado <strong><span style="color:orange">Modelo de Médias.</span></strong></p>
+<p>Esse modelo é chamado <span style="color:orange"><strong>Modelo de Médias.</strong></span></p>
 </div>
 </div>
 </div>
@@ -937,7 +925,7 @@ y_{ij}=\mu_i+\epsilon_{ij}, \quad i=1,\ldots,a,\quad j=1,\ldots,n,\qquad \text{(
 <div style="text-align: justify">
 
 <p>Seja</p>
-<p><span class="math display">\[\mu_i=\mu+\tau_i,\qquad i=1,2,\ldots,a.\]</span> A Equação (1) torna-se o <strong><span style="color:orange">Modelo de Efeitos</span></strong>, escrito como</p>
+<p><span class="math display">\[\mu_i=\mu+\tau_i,\qquad i=1,2,\ldots,a.\]</span> A Equação (1) torna-se o <span style="color:orange"><strong>Modelo de Efeitos</strong></span>, escrito como</p>
 <p><span class="math display">\[\begin{align*}
 y_{ij}=\mu+\tau_i+\epsilon_{ij}, \qquad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots, n,
 \end{align*}\]</span></p>
@@ -948,10 +936,10 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij}, \qquad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots, n,
 
 <p>onde</p>
 <ul>
-<li class="fragment"><span class="math inline">\(y_{ij}\)</span> é o valor observado na unidade <span class="math inline">\(j\)</span> que recebeu o tratamento <span class="math inline">\(i\)</span></li>
-<li class="fragment"><span class="math inline">\(\mu\)</span> é um parâmetro constante, comum a todos os tratamentos, chamado média geral (quando os dados são balanceados)</li>
-<li class="fragment"><span class="math inline">\(\tau_i\)</span> é um parâmetro único que representa o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento</li>
-<li class="fragment"><span class="math inline">\(\epsilon_{ij}\)</span> é um componente do erro aleatório, associado à <span class="math inline">\(j-\)</span>ésima repetição do <span class="math inline">\(i-\)</span>ésimo tratamento.</li>
+<li class="fragment"><p><span class="math inline">\(y_{ij}\)</span> é o valor observado na unidade <span class="math inline">\(j\)</span> que recebeu o tratamento <span class="math inline">\(i\)</span></p></li>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> é um parâmetro constante, comum a todos os tratamentos, chamado média geral (quando os dados são balanceados)</p></li>
+<li class="fragment"><p><span class="math inline">\(\tau_i\)</span> é um parâmetro único que representa o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento</p></li>
+<li class="fragment"><p><span class="math inline">\(\epsilon_{ij}\)</span> é um componente do erro aleatório, associado à <span class="math inline">\(j-\)</span>ésima repetição do <span class="math inline">\(i-\)</span>ésimo tratamento.</p></li>
 </ul>
 </div></section>
 <section id="objetivo-1" class="slide level2">
@@ -959,7 +947,7 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij}, \qquad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots, n,
 <div style="text-align: justify">
 
 <ul>
-<li class="fragment">Se os <span class="math inline">\(a\)</span> tratamentos foram selecionados especificamente pelo experimentador, o interesse é testar hipóteses sobre as médias dos tratamentos e as conclusões aplicam apenas aos níveis do fator considerados na análise. Interessa também estimar os parâmetros do modelo <span class="math inline">\((\mu, \tau_i,\sigma^2)\)</span> <span class="math inline">\(\Longrightarrow\)</span> <strong><span style="color:orange">Modelo de Efeitos Fixos.</span></strong></li>
+<li class="fragment">Se os <span class="math inline">\(a\)</span> tratamentos foram selecionados especificamente pelo experimentador, o interesse é testar hipóteses sobre as médias dos tratamentos e as conclusões aplicam apenas aos níveis do fator considerados na análise. Interessa também estimar os parâmetros do modelo <span class="math inline">\((\mu, \tau_i,\sigma^2)\)</span> <span class="math inline">\(\Longrightarrow\)</span> <span style="color:orange"><strong>Modelo de Efeitos Fixos.</strong></span></li>
 </ul>
 </div></section>
 <section class="slide level2">
@@ -967,22 +955,23 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij}, \qquad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots, n,
 <div style="text-align: justify">
 
 <ul>
-<li class="fragment">Se os <span class="math inline">\(a\)</span> tratamentos foram selecionados como uma amostra aleatória de uma população maior de tratamentos, o interesse é estender as conclusões a todos os tratamentos na população. Nesse caso, os <span class="math inline">\(\tau_i\)</span> são variáveis aleatórias e os testes de hipóteses recaem sobre a variabilidade de <span class="math inline">\(\tau_i\)</span> tentando-se estimar essa variabilidade <span class="math inline">\(\Longrightarrow\)</span> <strong><span style="color:orange">Modelo de Efeitos Aleatórios</span></strong> ou <strong><span style="color:orange">Modelo de Componentes de Variância.</span></strong></li>
+<li class="fragment">Se os <span class="math inline">\(a\)</span> tratamentos foram selecionados como uma amostra aleatória de uma população maior de tratamentos, o interesse é estender as conclusões a todos os tratamentos na população. Nesse caso, os <span class="math inline">\(\tau_i\)</span> são variáveis aleatórias e os testes de hipóteses recaem sobre a variabilidade de <span class="math inline">\(\tau_i\)</span> tentando-se estimar essa variabilidade <span class="math inline">\(\Longrightarrow\)</span> <span style="color:orange"><strong>Modelo de Efeitos Aleatórios</strong></span> ou <span style="color:orange"><strong>Modelo de Componentes de Variância.</strong></span></li>
 </ul>
 </div></section>
 <section id="modelo-de-efeitos-aleatórios" class="slide level2">
 <h2>Modelo de Efeitos Aleatórios</h2>
 <div style="text-align: justify">
 
-<p><span class="math display">\[\begin{align}
+
+<span class="math display">\[\begin{align}
 y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
-\end{align}\]</span></p>
+\end{align}\]</span>
 <div class="fragment">
 <p>onde</p>
 <ul>
-<li class="fragment"><span class="math inline">\(y_{ij}\)</span> é a observação do <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental (variável resposta);</li>
-<li class="fragment"><span class="math inline">\(\mu\)</span> é a média global;</li>
-<li class="fragment"><span class="math inline">\(\tau_i\)</span> é o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento;</li>
+<li class="fragment"><p><span class="math inline">\(y_{ij}\)</span> é a observação do <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental (variável resposta);</p></li>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> é a média global;</p></li>
+<li class="fragment"><p><span class="math inline">\(\tau_i\)</span> é o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento;</p></li>
 </ul>
 </div>
 </div></section>
@@ -991,8 +980,8 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 <div style="text-align: justify">
 
 <ul>
-<li class="fragment"><span class="math inline">\(\epsilon_{ij}\)</span> é o erro associado ao <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental. Incorpora todas as fontes de variabilidade não controladas no experimento.</li>
-<li class="fragment">Tem-se que <span class="math inline">\(\tau_i\)</span> e <span class="math inline">\(\epsilon_{ij}\)</span> são variáveis aleatórias independentes entre si, com <span class="math inline">\(\tau_i\sim N(0,\sigma_{\tau}^2)\)</span> e <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span>.</li>
+<li class="fragment"><p><span class="math inline">\(\epsilon_{ij}\)</span> é o erro associado ao <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental. Incorpora todas as fontes de variabilidade não controladas no experimento.</p></li>
+<li class="fragment"><p>Tem-se que <span class="math inline">\(\tau_i\)</span> e <span class="math inline">\(\epsilon_{ij}\)</span> são variáveis aleatórias independentes entre si, com <span class="math inline">\(\tau_i\sim N(0,\sigma_{\tau}^2)\)</span> e <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span>.</p></li>
 </ul>
 </div></section>
 <section class="slide level2">
@@ -1015,9 +1004,9 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 </div>
 <ul>
 <li class="fragment"><p>Se a variância dos efeitos dos tratamentos <span class="math inline">\(\tau_i\)</span> é <span class="math inline">\(\sigma_{\tau}^2\)</span>, a variância da resposta é dada por</p>
-<p><span class="math display">\[\text{var}(y_{ij})=\sigma_{\tau}^2+\sigma^2.\]</span></p>
-<p>As variâncias <span class="math inline">\(\sigma_{\tau}^2\)</span> e <span class="math inline">\(\sigma^2\)</span> são chamadas <strong><span style="color:orange">Componentes de variância.</span></strong></p></li>
+<p><span class="math display">\[\text{var}(y_{ij})=\sigma_{\tau}^2+\sigma^2.\]</span></p></li>
 </ul>
+<p>As variâncias <span class="math inline">\(\sigma_{\tau}^2\)</span> e <span class="math inline">\(\sigma^2\)</span> são chamadas <span style="color:orange"><strong>Componentes de variância.</strong></span></p>
 </div></section>
 <section class="slide level2">
 
@@ -1050,13 +1039,14 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 <h2>Modelo de Efeitos Fixos</h2>
 <div style="text-align: justify">
 
-<p><span class="math display">\[\begin{align}
+
+<span class="math display">\[\begin{align}
 y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
-\end{align}\]</span></p>
+\end{align}\]</span>
 <p>onde</p>
 <ul>
-<li class="fragment"><span class="math inline">\(y_{ij}\)</span> é a observação do <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental (variável resposta);</li>
-<li class="fragment"><span class="math inline">\(\mu\)</span> é a média geral, comum a todos os tratamentos;</li>
+<li class="fragment"><p><span class="math inline">\(y_{ij}\)</span> é a observação do <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental (variável resposta);</p></li>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> é a média geral, comum a todos os tratamentos;</p></li>
 </ul>
 </div></section>
 <section class="slide level2">
@@ -1064,8 +1054,8 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 <div style="text-align: justify">
 
 <ul>
-<li class="fragment"><span class="math inline">\(\tau_i\)</span> representa o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento;</li>
-<li class="fragment"><span class="math inline">\(\epsilon_{ij}\)</span> é o erro associado ao <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental. Incorpora todas as fontes de variabilidade não controladas no experimento.</li>
+<li class="fragment"><p><span class="math inline">\(\tau_i\)</span> representa o efeito do <span class="math inline">\(i-\)</span>ésimo tratamento;</p></li>
+<li class="fragment"><p><span class="math inline">\(\epsilon_{ij}\)</span> é o erro associado ao <span class="math inline">\(i-\)</span>ésimo tratamento na <span class="math inline">\(j-\)</span>ésima unidade experimental. Incorpora todas as fontes de variabilidade não controladas no experimento.</p></li>
 </ul>
 </div></section>
 <section id="pressupostos-da-anova" class="slide level2">
@@ -1074,11 +1064,8 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 
 <ul>
 <li class="fragment"><p>Os efeitos principais devem ser aditivos: Nos experimentos, cada observação segue um modelo linear aditivo <span class="math inline">\(y_{ij}=\mu+\tau_i+\epsilon_{ij}\)</span>.</p></li>
-<li class="fragment"><p>Os erros de observação são independentes: <span class="math display">\[\text{cov}(\epsilon_{ij},\epsilon_{ij}')=0.\]</span></p></li>
+<li class="fragment"><p>Os erros de observação são independentes: <span class="math display">\[\text{cov}(\epsilon_{ij},\epsilon_{ij}')=0.\]</span> —</p></li>
 </ul>
-</div></section>
-<section class="slide level2">
-
 <div style="text-align: justify">
 
 <ul>
@@ -1100,16 +1087,16 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 </div>
 </div>
 </div>
-</div></section>
+</div></div></section>
 <section id="hipóteses" class="slide level2">
 <h2>Hipóteses</h2>
 <div style="text-align: justify">
 
 <p>O objetivo é, em geral, verificar se existe diferença significativa entre, pelo menos, duas médias de tratamentos. As hipóteses testadas são:</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
 \textrm{H}_0&amp;: \mu_1=\mu_2=\cdots=\mu_a\\
 \textrm{H}_1&amp;: \mu_i\neq \mu_i' \quad \textrm{para pelo menos um } i\neq i'.
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -1120,10 +1107,10 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 <p><strong>Forma equivalente</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
 \textrm{H}_0&amp;: \tau_1=\tau_2=\cdots=\tau_a=0\\
 \textrm{H}_1&amp;: \tau_i\neq 0 \quad \textrm{para pelo menos um } i.
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 </div>
 </div>
 </div>
@@ -1143,7 +1130,7 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 <p><strong>Funções de Parâmetros Completamente Estimáveis</strong></p>
 </div>
 <div class="callout-content">
-<p>Uma função dos parâmetros de qualquer modelo linear é dita <strong><span style="color:orange">estimável</span></strong> se, e somente se, pode ser escrita como o valor esperado de uma combinação linear das variáveis resposta. Apenas funções estimáveis dos parâmetros têm estimativas lineares não-viesadas únicas. Para o modelo de análise de variância de uma via, cada função estimável tem a forma <span class="math display">\[\begin{align*}
+<p>Uma função dos parâmetros de qualquer modelo linear é dita <span style="color:orange"><strong>estimável</strong></span> se, e somente se, pode ser escrita como o valor esperado de uma combinação linear das variáveis resposta. Apenas funções estimáveis dos parâmetros têm estimativas lineares não-viesadas únicas. Para o modelo de análise de variância de uma via, cada função estimável tem a forma <span class="math display">\[\begin{align*}
 \mathbb{E}\left[\sum_{i=1}^a \sum_{j=1}^n a_{ij}y_{ij}\right]&amp;=\sum_{i=1}^a \sum_{j=1}^n a_{ij}\mathbb{E}[y_{ij}]\\
 &amp;=\sum_{i=1}^a \sum_{j=1}^n a_{ij} (\mu + \tau_i)=\sum_{i=1}^a b_i(\mu + \tau_i),
 \end{align*}\]</span> onde <span class="math inline">\(b_i=\sum_{j=1}^n a_{ij}\)</span> e os <span class="math inline">\(a_{ij}\)</span> são números reais.</p>
@@ -1228,10 +1215,10 @@ y_{ij}=\mu+\tau_i+\epsilon_{ij},\quad i&amp;=1,\ldots,a,\\ j&amp;=1,\ldots,n,
 </div>
 <div class="callout-content">
 <p>Impor a restrição: <span class="math display">\[\sum_{i=1}^a \hat\tau_i=0\]</span> Nessas condições:</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
   \hat\mu&amp;=\overline{y}_{\cdot\cdot}\\
   \hat{\tau}_i&amp;=\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot}, \quad i=1,\ldots,a.
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 </div>
 </div>
 </div>
@@ -1314,13 +1301,13 @@ SQE&amp;=SQT-SQTr
 <h3 id="tabela-de-análise-de-variância---anova">Tabela de Análise de Variância - ANOVA</h3>
 <div style="text-align: justify">
 
-<table style="width:100%;">
+<table>
 <colgroup>
-<col style="width: 48%">
 <col style="width: 15%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 38%">
+<col style="width: 15%">
+<col style="width: 15%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1351,13 +1338,10 @@ SQE&amp;=SQT-SQTr
 <td style="text-align: center;"><span class="math inline">\(N-1\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(\sum_{i=1}^a\sum_{j=1}^n y_{ij}^2-\frac{y_{\cdot\cdot}^2}{N}\)</span></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">—</td>
 </tr>
 </tbody>
 </table>
-</div></section>
-<section class="slide level2">
-
 <h3 id="exemplo---continuação">Exemplo - Continuação</h3>
 <div style="text-align: justify">
 
@@ -1373,7 +1357,7 @@ Residuals   20   70.7    3.53
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-</div></section>
+</div></div></section>
 <section class="slide level2">
 
 <h4 id="verificação-do-modelo">Verificação do Modelo</h4>
@@ -1475,19 +1459,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li class="fragment"><p>Gráfico quantil-quantil dos resíduos padronizados.</p></li>
 <li class="fragment"><p>Testes de normalidade: Shapiro-Wilks, Anderson-Darling, Lilliefors, etc.</p></li>
 </ul>
-</div></section>
-<section class="slide level2">
-
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="fu">plot</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="Exp_um_fator_ANOVA_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:85.0%"></p>
+</figure>
 </div>
-<img data-src="Exp_um_fator_ANOVA_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:85.0%" class="r-stretch quarto-figure-center"></section></section>
-<section>
-<section id="a-hipótese-nula-foi-rejeitadae-agora" class="title-slide slide level1 center">
-<h1>A hipótese nula foi rejeitada…e agora?</h1>
-
+</div>
+</div>
+</div></section>
+<section id="a-hipótese-nula-foi-rejeitadae-agora" class="slide level2">
+<h2>A hipótese nula foi rejeitada…e agora?</h2>
 </section>
 <section class="slide level2">
 
@@ -1801,6 +1786,7 @@ F_{0j}&amp;=\left(\frac{C_j-E(C_j)}{\sqrt{(a-1)\widehat{\text{var}}(C_j)}}\right
 <h3 id="exemplo---continuação-3">Exemplo - Continuação</h3>
 <div style="text-align: justify">
 
+
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ScheffeTest</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1860,7 +1846,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 id="exemplo---continuação-4">Exemplo - Continuação</h3>
 <div style="text-align: justify">
 
-
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>pair<span class="ot">&lt;-</span>dados<span class="sc">%&gt;%</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">pairwise_t_test</span>(Producao<span class="sc">~</span>Suplemento, <span class="at">pool.sd=</span><span class="cn">FALSE</span>, <span class="at">p.adjust.method=</span><span class="st">"bonferroni"</span>)</span>
@@ -1911,6 +1896,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h3 id="exemplo---continuação-5">Exemplo - Continuação</h3>
 <div style="text-align: justify">
 
+
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>tukey.test <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(fit)</span>
 <span id="cb11-2"><a href="#cb11-2"></a>tukey.test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1935,7 +1921,6 @@ S-M  -0.6500000  -3.687229  2.387229 0.9311689</code></pre>
 
 <h3 id="exemplo---continuação-6">Exemplo - Continuação</h3>
 <div style="text-align: justify">
-
 
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">plot</span>(tukey.test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1963,17 +1948,16 @@ S-M  -0.6500000  -3.687229  2.387229 0.9311689</code></pre>
 <h3 id="exemplo---continuação-7">Exemplo - Continuação</h3>
 <div style="text-align: justify">
 
-
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">with</span>(dados,<span class="fu">pairw.anova</span>(<span class="at">y=</span>Producao,<span class="at">x=</span>Suplemento,<span class="at">control=</span><span class="st">"S"</span>,<span class="at">method=</span><span class="st">"dunnett"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 95% Dunnett confidence intervals 
 
-             Diff     Lower     Upper  Decision
-muA-muS 11.759644  9.001981 14.517306 Reject H0
-muB-muS  0.193663 -2.564573    2.9519    FTR H0
-muM-muS  0.648335 -2.109362  3.406032    FTR H0</code></pre>
+             Diff     Lower    Upper  Decision
+muA-muS 11.759235   9.00168 14.51679 Reject H0
+muB-muS  0.195941 -2.561798  2.95368    FTR H0
+muM-muS  0.650376 -2.108259 3.409011    FTR H0</code></pre>
 </div>
 </div>
 </div></section>
@@ -2012,7 +1996,7 @@ muM-muS  0.648335 -2.109362  3.406032    FTR H0</code></pre>
 <ul>
 <li class="fragment"><p>Este método precisa de alguma estimativa prévia da variabilidade da resposta.</p></li>
 <li class="fragment"><p>Pode determinar-se a diferença mínima significativa (d) que se deseja encontrar entre os tratamentos do experimento.</p></li>
-<li class="fragment"><p>O número de repetições é dado por: <span class="math display">\[ n=\frac{q^2\widehat{s}^2F_{(n_1,n_2;\alpha)}}{d^2},\]</span></p></li>
+<li class="fragment"><p>O número de repetições é dado por: <span class="math display">\[n=\frac{q^2\widehat{s}^2F_{(n_1,n_2;\alpha)}}{d^2},\]</span></p></li>
 </ul>
 </div></section>
 <section class="slide level2">
@@ -2044,7 +2028,7 @@ muM-muS  0.648335 -2.109362  3.406032    FTR H0</code></pre>
 <div style="text-align: justify">
 
 <p>Testando 5 tratamentos com 5 repetições, inicialmente temos 4 g.l. para tratamentos e 20 g.l. para o resíduo.</p>
-<p>Considerando <span class="math inline">\(\alpha=0,05\)</span> temos <span class="math inline">\(q=4,23\)</span> e <span class="math inline">\(F_{(20,60;0,05)}=1,81\)</span>. Assim: <span class="math display">\[n=\frac{(4,23)^2(7,4)^2(1,81)}{(15)^2}=8,3.\]</span> Logo, o valor de <span class="math inline">\(n\)</span> adequado é de <strong><span style="color:orange">aproximadamente 9 repetições</span></strong>.</p>
+<p>Considerando <span class="math inline">\(\alpha=0,05\)</span> temos <span class="math inline">\(q=4,23\)</span> e <span class="math inline">\(F_{(20,60;0,05)}=1,81\)</span>. Assim: <span class="math display">\[n=\frac{(4,23)^2(7,4)^2(1,81)}{(15)^2}=8,3.\]</span> Logo, o valor de <span class="math inline">\(n\)</span> adequado é de <span style="color:orange"><strong>aproximadamente 9 repetições</strong></span>.</p>
 </div></section>
 <section class="slide level2">
 
@@ -2081,7 +2065,6 @@ muM-muS  0.648335 -2.109362  3.406032    FTR H0</code></pre>
 
 <h4 id="exemplo-2">Exemplo</h4>
 <div style="text-align: justify">
-
 
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
