@@ -7,8 +7,8 @@ description: Repositório exclusivo para a disciplina de Análise de Dados Categ
 
 # Slides
   
-* [Programa da disciplina](https://nataly-jm.github.io/aulas/categorizados/Plano_Ensino_cat.html)
-* [Introdução](https://nataly-jm.github.io/aulas/categorizados/intro_cat.html)
+* [Programa da disciplina](https://nataly-jm.github.io/aulas/categorizados/Plano_Ensino.html)
+* [Introdução](https://nataly-jm.github.io/aulas/categorizados/intro.html)
 * [Tabelas de Contingência](https://nataly-jm.github.io/aulas/categorizados/Tabelas_contingencia.html)
 * [Associação em Tabelas de Tripla Entrada](https://nataly-jm.github.io/aulas/categorizados/Tabelas_tripla_entrada.html)
 * [Regressão Logística Binária](https://nataly-jm.github.io/aulas/categorizados/Modelo_logistico.html)
