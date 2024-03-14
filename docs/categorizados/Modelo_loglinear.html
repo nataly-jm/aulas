@@ -25,7 +25,7 @@ class: center, middle, inverse, title-slide
 ### LECON/DEST - UFES
 ]
 .date[
-### Vitória. ES - 08/08/2022
+### Vitória. ES
 ]
 
 ---
@@ -496,10 +496,6 @@ summary(modelo.ind)
 ## glm(formula = dados1$Freq ~ dados1$Tratamento + dados1$Resfriado, 
 ##     family = poisson())
 ## 
-## Deviance Residuals: 
-##       1        2        3        4  
-##  1.3484  -1.4918  -0.6487   0.6382  
-## 
 ## Coefficients:
 ##                        Estimate Std. Error z value Pr(&gt;|z|)    
 ## (Intercept)            3.181632   0.156179  20.372   &lt;2e-16 ***
@@ -659,7 +655,7 @@ modelo.sat
 ## 
 ## Degrees of Freedom: 3 Total (i.e. Null);  0 Residual
 ## Null Deviance:	    135.5 
-## Residual Deviance: 2.22e-16 	AIC: 31.13
+## Residual Deviance: -1.021e-14 	AIC: 31.13
 ```
 
 
@@ -818,9 +814,6 @@ summary(berkeley.sat)
 ## glm(formula = Freq ~ Admit * Gender * Dept, family = poisson(), 
 ##     data = berkeley)
 ## 
-## Deviance Residuals: 
-##  [1]  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
-## 
 ## Coefficients:
 ##                                Estimate Std. Error z value Pr(&gt;|z|)    
 ## (Intercept)                     3.17805    0.20412  15.569  &lt; 2e-16 ***
@@ -853,7 +846,7 @@ summary(berkeley.sat)
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
 ##     Null deviance: 2.6501e+03  on 23  degrees of freedom
-## Residual deviance: 1.4788e-13  on  0  degrees of freedom
+## Residual deviance: 1.2612e-13  on  0  degrees of freedom
 ## AIC: 207.06
 ## 
 ## Number of Fisher Scoring iterations: 3
@@ -935,10 +928,6 @@ summary(berkeley.ind)
 ## Call:
 ## glm(formula = Freq ~ Admit + Gender + Dept, family = poisson(), 
 ##     data = berkeley)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -18.170   -7.719   -1.008    4.734   17.153  
 ## 
 ## Coefficients:
 ##               Estimate Std. Error z value Pr(&gt;|z|)    
@@ -1232,8 +1221,7 @@ conteúdo disponível na plataforma.&lt;/span&gt;
 ]
 &lt;br&gt;&lt;/br&gt;
 .center[
-[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
-]
+[https://lecon.ufes.br](https://lecon.ufes.br/)]
 
 &lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
 Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
@@ -1342,33 +1330,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   }
   preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
 })(document);</script>
-<style>
-.logo {
-  background-image: url(images/logo_neaest.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  width: 150px;
-  height: 168px;
-  z-index: 0;
-}
-</style>
-
-<script>
-document
-  .querySelectorAll(
-    '.remark-slide-content' +
-    ':not(.title-slide)' +
-    // add additional classes to exclude here, e.g.
-    // ':not(.inverse)' +
-    ':not(.hide-logo)'
-  )
-  .forEach(el => {
-    el.innerHTML += '<div class="logo"></div>';
-  });
-</script>
 
 <script>
 slideshow._releaseMath = function(el) {
