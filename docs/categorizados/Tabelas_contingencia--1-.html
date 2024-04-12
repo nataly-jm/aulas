@@ -1,0 +1,2802 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ANÁLISE DE DADOS CATEGORIZADOS STA13833</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# ANÁLISE DE DADOS CATEGORIZADOS STA13833
+]
+.subtitle[
+## Tabelas de Contingência
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+.date[
+### Vitória. ES - 12/04/2024
+]
+
+---
+
+class: animated, fadeIn
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+
+#Conceitos fundamentais
+
+ * **Prevalência**: Proporção de indivíduos de uma população que apresentam uma condição clínica num determinado momento no tempo.
+ 
+ * **Incidência**: Proporção de um grupo inicialmente livre de uma condição clínica, e que a desenvolve depois de um período determinado de tempo.
+ 
+ * **Risco Relativo**: Razão entre a prevalência da doença nos indivíduos que possuem o fator em estudo e a prevalência da doença nos que não o possuem, podendo, assim, ser também chamado **&lt;span style="color:orange"&gt;prevalência relativa&lt;/span&gt;**.
+
+---
+class: animated, bounceInDown
+
+#Probabilidade Condicional
+
+Dados dois eventos quaisquer `\(A\)` e `\(B\)`, sendo `\(P(B)&gt;0\)`, a probabilidade condicional de `\(A\)` dado que `\(B\)` ocorreu é dada por `$$P(A|B)=\dfrac{P(A\cap B)}{P(B)}.$$`
+
+--
+
+* Regra do produto de probabilidades: `$$P(A\cap B)=P(A|B)P(B)$$` ou `$$P(A\cap B)=P(B|A)P(A)$$`.
+
+--
+
+* Independência entre eventos: Dois eventos `\(A\)` e `\(B\)` são independentes se, e somente se, `$$P(A\cap B)=P(A)\times P(B)$$`.
+
+
+---
+class: animated, bounceInDown
+
+#Qualidade dos Testes Diagnósticos
+O bom uso de um teste diagnóstico requer conhecimento das medidas que caracterizam sua qualidade intrínseca:
+	
+* Sensibilidade (s)
+* Especificidade (e)
+* Valor Preditivo Positivo (VPP)
+* Valor Preditivo Negativo (VPN)
+* Curva ROC (Receiver Operating Characteristic)
+
+&gt;Esquema padrão de síntese dos dados de testes diagnósticos:
+
+|     Doença        |          Resultado     |      do Teste         |   Total |
+|:-----------------:|:----------------------:|:---------------------:|:--------:|
+|                   |    Positivo ( `\(T_+\)` )  |  Negativo ( `\(T_-\)` )   |          |
+|Presente ( `\(D_+\)` ) |  `\(n_{11}\)`              | `\(n_{12}\)`              | `\(n_{1+}\)` |        
+|Ausente ( `\(D_-\)`  ) |  `\(n_{21}\)`              | `\(n_{22}\)`              | `\(n_{2+}\)` |
+|        Total      |  `\(n_{+1}\)`              | `\(n_{+2}\)`              | `\(n_{++}\)` |
+
+
+
+---
+class: animated, fadeIn
+
+##Sensibilidade
+
+Mede a capacidade de reação do teste em um paciente doente. Dada por
+`$$s=P(T_+|D_+)=\dfrac{P(T_+ \cap D_+)}{P(D_+)}=\dfrac{n_{11}}{n_{1+}},$$`
+ou seja, é a probabilidade de o teste ser positivo sabendo-se que o paciente examinado está doente.
+
+--
+
+**Exemplo**: Se a sensibilidade de um determinado teste para anticorpos do HIV é 95%, isto significa que para cada 100 pessoas com anticorpos do HIV, o teste é positivo para 95 e negativo para as 5 restantes.
+
+
+---
+class: animated, fadeIn
+
+##Especificidade
+
+Mede a capacidade de não reação do teste em um paciente não portador da doença, ou seja, o teste é específico para a doença em questão. Dada por
+`$$e=P(T_-|D_-)=\dfrac{P(T_- \cap D_-)}{P(D_-)}=\dfrac{n_{22}}{n_{2+}},$$`
+ou seja, é a probabilidade de o teste ser negativo sabendo-se que o paciente examinado não está doente.
+
+--
+
+**Exemplo**: Se a especificidade de um determinado teste para anticorpos do HIV é 99%, isto significa que para cada 100 pessoas sem anticorpos do HIV, o teste é negativo para 99 e positivo para 1.
+
+
+---
+class: animated, fadeIn
+
+###Limitações
+
+ * Sensibilidade e especificidade são índices provenientes de uma situação em que há certeza total sobre o diagnóstico (padrão ouro), o que geralmente não acontece.
+ 
+ * Os pacientes são classificados apenas como doentes e não doentes, não se admitindo estágios intermediários.
+ 
+ * Não ajudam à decisão da equipe médica que, recebendo um paciente com resultado positivo, precisa avaliar se o paciente está ou não doente.
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 1 - I
+
+Dados de pacientes com diagnóstico renal.
+
+|   Doença Renal    |          Resultado     |      do Teste         |   Total  |
+|:-----------------:|:----------------------:|:---------------------:|:--------:|
+|                   |    Positivo ( `\(T_+\)` )  |  Negativo ( `\(T_-\)` )   |          |
+|Presente ( `\(D_+\)` ) |  44                    | 23                    | 67       |        
+|Ausente ( `\(D_-\)`  ) |  10                    | 60                    | 70       |
+|        Total      |  54                    | 83                    | 137      |
+
+--
+
+Sensibilidade = ??
+
+Especificidade = ??
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 1 - II
+
+**No R**:
+
+
+```r
+require(epiR)
+dados&lt;-matrix(c(44, 10, 23, 60),nrow = 2,dimnames =list(Doenca= c("Presente", "Ausente"),Teste = c("Positivo","Negativo")))
+dados
+```
+
+```
+##           Teste
+## Doenca     Positivo Negativo
+##   Presente       44       23
+##   Ausente        10       60
+```
+
+---
+class: animated, fadeIn
+
+###Exemplo 1 - III
+
+
+```r
+epi.tests(dados)
+```
+
+```
+##           Outcome +    Outcome -      Total
+## Test +           44           23         67
+## Test -           10           60         70
+## Total            54           83        137
+## 
+## Point estimates and 95% CIs:
+## --------------------------------------------------------------
+## Apparent prevalence *                  0.49 (0.40, 0.58)
+## True prevalence *                      0.39 (0.31, 0.48)
+## Sensitivity *                          0.81 (0.69, 0.91)
+## Specificity *                          0.72 (0.61, 0.82)
+## Positive predictive value *            0.66 (0.53, 0.77)
+## Negative predictive value *            0.86 (0.75, 0.93)
+## Positive likelihood ratio              2.94 (2.03, 4.26)
+## Negative likelihood ratio              0.26 (0.14, 0.46)
+## False T+ proportion for true D- *      0.28 (0.18, 0.39)
+## False T- proportion for true D+ *      0.19 (0.09, 0.31)
+## False T+ proportion for T+ *           0.34 (0.23, 0.47)
+## False T- proportion for T- *           0.14 (0.07, 0.25)
+## Correctly classified proportion *      0.76 (0.68, 0.83)
+## --------------------------------------------------------------
+## * Exact CIs
+```
+
+
+---
+class: animated, slideInRight
+
+##Valor Preditivo Positivo
+
+É a probabilidade de o paciente realmente doente quando o resultado do teste é positivo. Ou seja:
+
+`$$VPP=P(D_+|T_+)=\dfrac{P(D_+ \cap T_+)}{P(T_+)}=\dfrac{sp}{sp+(1-p)(1-e)},$$`
+onde `\(p=P(D_+)\)` a prevalência da doença na população de interesse, isto é, a probabilidade de pessoas doentes ou a probabilidade de ocorrência darequire(DescTooks) doença pré-teste (a priori), `\(s\)` é a sensibilidade do teste e `\(e\)` é a especificidade.
+
+
+---
+class: animated, slideInRight
+
+##Valor Preditivo Negativo
+
+É a probabilidade de o paciente não estar doente, quando o resultado do teste é negativo. Isto é:
+`$$VPN=P(D_-|T_-)=\dfrac{P(D_- \cap T_-)}{P(T_-)}=\dfrac{e(1-p)}{e(1-p)+(1-s)p}$$`
+onde `\(p=P(D_+)\)` a prevalência da doença na população de interesse, `\(s\)` é a sensibilidade do teste e `\(e\)` é a especificidade.
+
+---
+class: animated, slideInRight
+
+**Vecchio (1966)**
+
+|  População |  Proporção  |      Resultado     |      do Teste         |
+|:----------:|:-----------:|:------------------:|:---------------------:|
+|            |             | Positivo ( `\(T_+\)` ) |  Negativo ( `\(T_-\)` )   |
+| Doente     |  `\(p\)`        | `\(ps\)`               | `\(p(1-s)\)`              |
+| Sadia      |  `\(1-p\)`      | `\((1-p)(1-e)\)`       | `\((1-p)e\)`              |
+| Total      |  1          | `\(ps+(1-p)(1-e)\)`    | `\(p(1-s)+(1-p)e\)`       |
+
+---
+class: animated, slideInRight
+
+###Exemplo 2 - I
+
+Lind &amp; Singer (1986) estudaram a qualidade da tomografia computadorizada para o diagnóstico de metástase de carcinoma de fígado. Um total de 150 pacientes foram submetidos a dois exames: a tomografia computadorizada e a laparotomia. A laparotomia é o padrão ouro (classifica o paciente sem erro) para este caso.
+
+--
+
+Resultados da tomografia computadorizada em 67 pacientes com metástase e 83 sem metástase do carcinoma hepático
+
+|  Metástase |      Tomografia   |  Computadorizada     |  Total |
+|:----------:|:-----------------:|:--------------------:|:------:|
+|            |Positiva ( `\(T_+\)` ) |  Negativa ( `\(T_-\)` )  |        |
+| Presente   |   52              | 15                   |   67   |
+| Ausente    |   9               | 74                   |   83   |
+| Total      |   61              | 89                   |  150   |
+
+ &gt;Fonte: Lind, S.E. &amp; Singer, D.E., Diagnosing liver metastases: a Bayesian analysis. Journal of Clinical Oncology. v.3, p. 379-88, 1986.
+
+
+---
+class: animated, slideInRight
+
+###Exemplo 2 - II
+
+`$$s=\dfrac{52}{67}=0,776$$`
+`$$e=\dfrac{74}{83}=0,892.$$`
+Para uma população cuja prevalência de metástase de carcinoma de fígado é de 2%, os valores preditivos da tomografia computadorizada são:
+
+`$$\text{VPP}=\dfrac{0,02\times 0,78}{0,02\times 0,78+(1-0,02)(1-0,89)}=0,13$$`
+`$$\text{VPN}=\dfrac{(1-0,02)\times 0,89}{(1-0,02)\times 0,89+0,02(1-0,78)}=0,99.$$`
+
+---
+class: animated, slideInRight
+
+###Exemplo 2 - III
+**No R:**
+
+```r
+dados&lt;-matrix(c(52, 15, 9, 74),nrow = 2)
+epi.tests(dados)
+```
+
+```
+##           Outcome +    Outcome -      Total
+## Test +           52            9         61
+## Test -           15           74         89
+## Total            67           83        150
+## 
+## Point estimates and 95% CIs:
+## --------------------------------------------------------------
+## Apparent prevalence *                  0.41 (0.33, 0.49)
+## True prevalence *                      0.45 (0.37, 0.53)
+## Sensitivity *                          0.78 (0.66, 0.87)
+## Specificity *                          0.89 (0.80, 0.95)
+## Positive predictive value *            0.85 (0.74, 0.93)
+## Negative predictive value *            0.83 (0.74, 0.90)
+## Positive likelihood ratio              7.16 (3.81, 13.44)
+## Negative likelihood ratio              0.25 (0.16, 0.39)
+## False T+ proportion for true D- *      0.11 (0.05, 0.20)
+## False T- proportion for true D+ *      0.22 (0.13, 0.34)
+## False T+ proportion for T+ *           0.15 (0.07, 0.26)
+## False T- proportion for T- *           0.17 (0.10, 0.26)
+## Correctly classified proportion *      0.84 (0.77, 0.89)
+## --------------------------------------------------------------
+## * Exact CIs
+```
+
+---
+class: animated, slideInRight
+
+###Exemplo 2 - IV
+
+**Observações:**
+
+ * O valor preditivo positivo é baixo, enquanto que o valor preditivo negativo é bastante alto.
+ 
+ * Se o resultado da tomografia computadorizada é negativo, a chance de não haver metástase é de 99%.
+ 
+ * Se, antes de qualquer informação, o paciente tinha uma chance de 2% de apresentar a doença, após o resultado do teste negativo esta chance é de apenas 1%.
+ 
+ * Probabilidade de Falso Positivo:
+`$$\text{PFP}=P(D_-|T_+)=1-P(D_+|T_+)=1-\text{VPP}.$$`
+
+ * Probabilidade de Falso Negativo:
+`$$\text{PFN}=P(D_+|T_-)=1-P(D_-|T_-)=1-\text{VPN}.$$`
+
+---
+class: animated, slideInRight
+
+###Escolha entre testes diagnósticos
+
+ * Idealmente, os testes utilizados devem ter alta sensibilidade e especificidade.
+ 
+ * Na prática nem sempre existem testes disponíveis com características ótimas.
+ 
+ * É comum a situação em que há mais de um teste ou os valores da sensibilidade e especificidade podem ser calibrados. 
+ * Desta forma, surge a necessidade da comparação entre eles para uma escolha mais adequada de acordo com o seu objetivo.
+ 
+* O objetivo muitas vezes pode ser visto como triagem (prevalência baixa) ou consultório médico (prevalência alta).
+
+* Quando a prevalência é baixa, VPP é mais influenciado pela especificidade.
+
+ * VPN é pouco influenciado tanto pela sensibilidade quanto pela especificidade.
+
+* Para prevalência alta, VPP é próximo de 1, independente dos valores da sensibilidade e da especificidade. 
+
+ * VPN é influenciado mais pela sensibilidade do que pela especificidade.
+
+
+---
+class: animated, slideInRight
+
+###Em conclusão...
+
+ * Um teste com alta especificidade deve ser usado quando a prevalência da doença é relativamente baixa (doença
+rara), mesmo que o teste tenha relativamente baixa sensibilidade.
+
+* Um teste com alta sensibilidade deve ser usado quando a prevalência da doença é alta (doença comum), mesmo que o teste tenha relativamente baixa especificidade.
+
+---
+class: animated, fadeIn
+
+#Testes diagnósticos baseados em variáveis contínuas
+
+**Ponto de corte**
+
+* Os índices usados até aqui requerem que o resultado do teste seja positivo ou negativo e que a classificação do
+diagnóstico também seja dicotômica.
+
+* Para dados contínuos, tais como dosagens, é preciso estabelecer um valor a partir do qual o teste é considerado positivo ou negativo.
+
+* Esse limite é chamado **&lt;span style="color:orange"&gt;valor de referência&lt;/span&gt;** ou ponto de referência.
+
+* Cada teste clínico é caracterizado por um valor de referência e variando-se este ponto de corte, a sensibilidade e especificidade variam. Para cada situação é preciso escolher o valor que fornece a melhor combinação das duas medidas anteriores.
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 3 - I
+
+Verificação da qualidade de teste de intoxicação digitálica. Os digitálicos constituem um grupo de fármacos usados no
+tratamento de doença do coração, entre elas as arritmias e insuficiências cardiacas.
+
+--
+
+**Benefício**: Redução do batimento cardíaco, aumento da força de contração do miocárdio.
+
+**Efeitos adversos**: Intoxicação, que ocorre em 5% a 30% de pacientes hospitalizados que fazem uso de digitálicos.
+
+**Dificuldade**: Apesar de ser usado para corrigir arritmias, altas doses de digitálicos também causam arritmia.
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 3 - II
+
+| Digoxina (ng/mL) | Intoxicados  |  Não Intoxicados  |
+|:----------------:|:------------:|:-----------------:|
+|     [0,0; 0,5) |        2       |         6         |
+|     [0,5; 1,0) |        1       |         18        |
+|     [1,0; 1,5) |        4       |         30        |
+|     [1,5; 2,0) |        4       |         8         |
+|     [2,0; 2,5) |        5       |         0         |
+|     [2,5; 3,0) |        1       |         0         |
+|     [3,0; 3,5) |        1       |         0         |
+|     [3,5; 4,0) |        1       |         0         |
+|     [4,0; 4,5) |        1       |         0         |
+|     [4,5; 5,0) |        1       |         0         |
+|     Total	     |        21      |         62        |
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 3 - III
+
+**Critério 1**: Positivo acima de 1ng/mL
+
+| Classificação de Toxicidade| Teste Positivo  |  Teste Negativo  |  Total  |
+|:--------------------------:|:---------------:|:----------------:|:-------:|
+|     Intoxicado             |        18       |         3        |    21   |
+|     Não-intoxicado         |        38       |         24       |    62   |
+|         Total              |        56       |         27       |    83   |
+
+--
+
+**Critério 2**: Positivo acima de 2ng/mL
+
+| Classificação de Toxicidade| Teste Positivo  |  Teste Negativo  |  Total  |
+|:--------------------------:|:---------------:|:----------------:|:-------:|
+|     Intoxicado             |        10       |         11       |    21   |
+|     Não-intoxicado         |         0       |         62       |    62   |
+|         Total              |        10       |         73       |    83   |
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 3 - IV
+
+**Critério 3**: Positivo acima de 1,5ng/mL
+
+| Classificação de Toxicidade| Teste Positivo  |  Teste Negativo  |  Total  |
+|:--------------------------:|:---------------:|:----------------:|:-------:|
+|     Intoxicado             |        14       |         7        |    21   |
+|     Não-intoxicado         |         8       |         54       |    62   |
+|         Total              |        22       |         61       |    83   |
+
+--
+
+**Resumo dos critérios:**
+
+| Critério | Sensibilidade (Detecção)  |  Especificidade (Exclusão) |
+|:--------:|:-------------------------:|:--------------------------:|
+|  1       |            0,86           |         0,39               |
+|  2       |            0,48           |         1,00               |
+|  3       |            0,67           |         0,87               |
+
+--
+
+**Observação:** Variando-se o ponto de corte, a sensibilidade e especificidade também variam.
+
+&gt; Como escolher o ponto de corte? Analisando as curvas características de operação (ROC). 
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - I
+
+Desenvolvida no contexto de detecção de sinais eletrônicos e problemas com radares. O objetivo era quantificar a habilidade dos operadores dos radares (receiver operators) em distinguir um sinal de um ruído. Quando o radar detectava algo se aproximando, cabia ao operador decidir se o que foi captado era, por exemplo, um avião inimigo (o sinal) ou algum outro objeto voador irrelevante, como uma nuvem ou um bando de aves (o ruído).
+
+--
+
+**Vantagens**:
+
+*  A curva ROC pode conter todos os possíveis pontos de corte e identificar problemas de má-classificação.
+
+*  É independente da prevalência da doença na população.
+
+* Dois ou mais testes diagnósticos podem ser comparados em uma mesma figura.
+
+* Descreve quantitativamente o desempenho de um teste diagnóstico cujo resultado pode ser tratado como uma variável aleatória contínua ou categórica nominal.
+
+* Algumas vezes a sensibilidade é mais importante que a especificidade para o pesquisador (ou vice-versa) e a curva ROC pode ser usada para discussões fundamentadas nos dados e mostrar o valor da sensibilidade necessário para um valor de especificidade fixado.
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - II
+
+###Formalmente:
+
+Seja `\(T\)` uma variável aleatória que representa o resultado de um teste e seja uma regra de decisão baseada em um valor `\(t_0\)` tal que, se `\(T&gt;t_0\)`, o indivíduo é classificado como positivo (doente) e, se `\(T&lt;t_0\)`, o indivíduo é classificado como negativo (não doente).
+
+Para um ponto de corte particular `\(t_0\)`, temos `\(s=\textrm{P}(\textrm{Y}&gt;t_0)\)` e `\(e=\textrm{P}(\textrm{X}\leq t_0)\)`, onde X e Y são variáveis aleatórias que se referem aos possíveis resultados do teste diagnóstico para, respectivamente, os indivíduos não doentes e doentes.
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - III
+
+&lt;img src="images/Superposicao_distribuicoes.png" width="27%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - IV
+
+**Observações**:
+
+* Valores de corte elevados conduzem a um teste pouco sensível e muito específico.
+
+* Valores de corte baixo conduzem a um teste muito sensível e pouco específico.
+
+--
+
+O ideal é escolher um ponto de corte que gere `\(s\)` e `\(e\)` simultaneamente grandes, mas isso nem sempre é adequado:
+
+* Não se pode correr o risco de não diagnosticar, por exemplo, câncer em estágios iniciais ( `\(\uparrow s\)` ).
+
+* Em um grupo de baixo risco, especificidade elevada é necessária para o teste diagnóstico. Se, por exemplo, o exame subsequente é caro e invasivo; faz com que o paciente não sofra dor desnecessária ( `\(\uparrow e\)` ).
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - V
+
+A curva ROC é uma função contínua de `\(s\)` versus `\((1 − e)\)` para diversos valores `\(t_0\)` obtidos dentro do espaço amostral de `\(T\)`, ligados por linhas retas
+
+&lt;img src="images/CurvaROC.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+--
+
+**A - Critério Estrito**: Caso no qual a sensibilidade é "baixa" e especificidade "alta". Designa o paciente positivo quando a evidência da doença é muito forte. Situa-se no canto inferior esquerdo da curva.
+
+
+---
+class: animated, fadeIn
+
+##Curva ROC (Receiver Operating Characteristic) - VI
+
+ * Um teste que discrimina perfeitamente indivíduos doentes e não doentes teria, para algum ponto de corte, `\(s\)` e `\(e\)` de 1, o qual seria representado no canto superior esquerdo da curva ROC.
+ 
+* Um teste incapaz de discriminar indivíduos doentes e não doentes produziria uma curva ROC representada por pontos que estariam contidos em uma reta que partiria da origem do gráfico até o canto superior direito. Ou seja, o teste sob investigação teria a mesma proporção de resultados positivos tanto para doentes como para não doentes.
+
+* A curva ROC não sofre mudanças se as observações amostrais forem submetidas a transformações monótonas, como logaritmo, raiz quadrada ou funções lineares com coeficientes positivos.
+
+
+
+---
+class: animated, fadeIn
+
+###Área sob a curva - AUC
+
+* Medida efetiva que combina a sensibilidade e a especificidade para assegurar a validade de um teste diagnóstico.
+
+* AUC é uma medida de **&lt;span style="color:orange"&gt;acurácia&lt;/span&gt;** geral de um teste diagnóstico.
+
+* Valor máximo de AUC=1. Nesse caso, o teste é perfeito em diferenciar doentes de não-doentes. Isto implica que sensibilidade e especificidade são iguais a `\(1\)`.
+
+* Quanto maior o valor de AUC, melhor a discriminação do teste com respeito a doentes e não doentes.
+
+
+---
+class: animated, fadeIn
+
+###Obtenção da área sob a curva - I
+
+* Método não-paramétrico: Não exige o conhecimento de qualquer distribuição e, portanto, a curva ROC é chamada de curva empírica. Metodologia: Regra de Simpson (trapezoidal).
+
+* Método Paramétrico: É usado quando a distribuição estatística dos valores do teste diagnóstico entre doentes e não-doentes é conhecida. A distribuição Binormal é bastante usada nesse contexto.
+
+--
+
+
+* **Observação**: Diferentes testes podem produzir valores similares de AUC, no entanto, isto não significa que as curvas são idênticas.
+
+
+---
+class: animated, fadeIn
+
+###Obtenção da área sob a curva - II
+
+&lt;img src="images/Comparacao_CurvaROC.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+--
+
+**Observações**
+
+ * Na situação (b), o teste A é melhor do que o teste B e sua curva está mais próxima da discriminação perfeita.
+ 
+ * Na situação (c), o teste B é melhor do que o teste A onde alta sensibilidade é exigida; e o teste A é melhor do que o teste B onde alta especificidade é necessária.
+
+---
+class: animated, fadeIn
+
+###Métodos para encontrar o ponto limiar ótimo - I
+
+&lt;img src="images/Metodos_pontolimiar.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+
+###Métodos para encontrar o ponto limiar ótimo - II
+
+* **Ponto na curva mais próximo do valor `\((0,1)\)`**: Distância entre `\((0, 1)\)` e qualquer ponto da curva ROC é `\(d^2 = (1 − s)^2 + (1 − e)^2\)`. Para obter o ponto de corte devemos definir diversos pontos de corte `\((n)\)` e associá-los a `\(n\)` distâncias. O valor mínimo de `\(d\)` resultará no valor ótimo de corte.
+
+--
+
+* **Índice de Youden**: Ponto na curva ROC mais distante da diagonal do quadrado unitário. Bastante utilizado.
+
+--
+
+* **Critério de minimização de custos**: Pouco usado na literatura médica porque é difìcil implementá-lo
+
+
+---
+class: animated, fadeIn
+
+###Exemplo 4 - I
+
+O nível sérico de creatinina (composto químico encontrado no sangue) foi usado como ferramenta de diagnóstico para se detectar a rejeição potencial de um transplante de rim, no qual foram realizados aloenxertos renais. Um nível aumentado de creatinina é frequentemente associado com falha orgânica subsequente. 
+
+|  Creatinina Sérica (mg%) |  Sensibilidade   |  Especificidade ||  Creatinina Sérica (mg%) |  Sensibilidade   |  Especificidade |
+|:----------:|:-----------------:|:--------------------:|:------:|:-:|:----------:|:-----------------:|:--------------------:|:------:|
+|    1,2    | 0,939     | 0,123 ||    2,1    | 0,485     | 0,773 |
+|    1,3    | 0,939     | 0,203 ||    2,2    | 0,485     | 0,803 |
+|    1,4    | 0,909     | 0,281 ||    2,3    | 0,394     | 0,811 |
+|    1,5    | 0,818     | 0,380 ||    2,4    | 0,394     | 0,843 |
+|    1,6    | 0,758     | 0,461 ||    2,5    | 0,364     | 0,870 |
+|    1,7    | 0,727     | 0,535 ||    2,6    | 0,333     | 0,891 |
+|    1,8    | 0,636     | 0,649 ||    2,7    | 0,333     | 0,894 |
+|    1,9    | 0,636     | 0,711 ||    2,8    | 0,333     | 0,896 |
+|    2,0    | 0,545     | 0,766 ||    2,9    | 0,303     | 0,909 |
+
+---
+class: animated, fadeIn
+
+###Exemplo 4 - II
+
+**Observações:**
+
+* Se for usado um nível maior que 2,9 mg% como indicador de rejeição iminente, o teste tem uma sensibilidade de 0,303 e uma especificidade de 0,909. Para aumentar a sensibilidade, pode-se baixar o ponto de corte arbitrário que diferencia um resultado de teste positivo de um negativo.
+
+--
+
+* Se for usado 1,2 mg%, por exemplo, uma proporção maior dos resultados seria designada positiva. Nesse caso, dificilmente haveria falha em identificar um paciente que rejeitasse o órgão. Ao mesmo tempo, aumentaria a probabilidade de um falso positivo por esse meio, o que diminui a especificidade.
+
+--
+
+* Ao aumentar a especificidade, rigorosamente sempre classificaríamos mal uma pessoa que não rejeitasse o órgão e diminuiríamos a sensibilidade.
+
+
+---
+class: animated, bounceInDown
+#Delineamentos Amostrais
+
+Aqui consideramos experimentos com informações coletadas apenas para variáveis binárias. Os valores obtidos desses experimentos são representados na forma de uma tabela de contingência `\(2\times 2\)` da forma
+
+|  Covariável   ||    Resposta   |              ||   Total  |
+|:-------------:||:-------------:|:------------:||:--------:|
+|               ||    `\(C_1\)`      |  `\(C_2\)`       ||          |
+|    `\(A_1\)`      ||  `\(n_{11}\)`     | `\(n_{12}\)`     || `\(n_{1+}\)` |        
+|    `\(A_2\)`      ||  `\(n_{21}\)`     | `\(n_{22}\)`     || `\(n_{2+}\)` |
+|        Total  ||  `\(n_{+1}\)`     | `\(n_{+2}\)`     || `\(n\)`      |
+
+
+  * Totais marginais:  `\(n_{1+}\)`, `\(n_{2+}\)`, `\(n_{+1}\)`, `\(n_{+2}\)`.
+  
+  * Total geral ou tamanho amostral: `\(n\)`.
+  
+  &gt; A forma como esses totais são considerados (fixos ou aleatórios) define o modelo probabilístico que será considerado.
+
+
+
+---
+class: animated, fadeIn
+##Modelo Produto de Binomiais Independentes - I
+
+* Experimento planejado de forma que duas amostras aleatórias `\((A_1 \text{ e } A_2)\)` de tamanhos `\(n_{1+}\)` e `\(n_{2+}\)`, respectivamente, sejam obtidas a partir de duas populações independentes.
+
+* Observa-se, para os elementos em `\(A_1\)` e `\(A_2\)`, quantos classificam na categoria `\(C_1\)` e quantos em `\(C_2\)`. 
+
+* Definem-se as variáveis aleatórias 
+  * `\(N_{11}\)` com distribuição `\(Bin(n_{1+},p_{11})\)`, associada à primeira linha da tabela, em que `\(p_{11}\)` representa a probabilidade de qualquer elemento da população `\(A_1\)` ser classificado na categoria `\(C_1\)`. 
+  * `\(N_{21}\)` com distribuição `\(Bin(n_{2+},p_{21})\)`, associada à segunda linha da tabela, em que `\(p_{21}\)` representa a probabilidade de qualquer elemento da população `\(A_2\)` ser classificado na categoria `\(C_1\)`.
+
+--
+
+* **Observação:** `\(\sum_{j=1}^2 p_{1j}=1\)` e `\(\sum_{j=1}^2 p_{2j}=1\)`.
+
+
+---
+class: animated, fadeIn
+##Modelo Produto de Binomiais Independentes - II
+
+* A distribuição conjunta associada à tabela é o produto de duas binomiais independentes:
+
+`$$P(N_{11}=n_{11},N_{21}=n_{21})={n_{1+}\choose n_{11}} p_{11}^{n_{11}}(1-p_{11})^{n_{1+}-n_{11}}{n_{2+}\choose n_{21}} p_{21}^{n_{21}}(1-p_{21})^{n_{2+}-n_{21}}.$$`
+--
+
+* Caso a variável resposta apresente mais de duas categorias `\((r&gt;2)\)`, a distribuição associada será o produto de multinomias independentes, sendo uma multinomial associada a cada linha da tabela.
+
+--
+
+* Esse esquema amostral é equivalente a um delineamento amostral estratificado.
+
+---
+class: animated, fadeIn
+##Modelo Produto de Binomiais Independentes - III
+
+Na literatura há controvérsias sobre qual verossimilhança usar: a expressão do produto de binomiais independentes, ou a verossimilhança condicional proveniente da distribuição obtida ao se considerar que ambas as marginais da tabela são fixas. Fisher, Cox, Yates, Mantel e outros advogam pela **&lt;span style="color:orange"&gt;abordagem condicional&lt;/span&gt;**:
+Para obter a verossimilhança condicional temos de calcular:
+`$$\textrm{P}(X=n_{11}|n_{1+},n_{2+},n_{+1},n_{+2},n)=\textrm{P}(X=n_{11}|X+Y=n_{+1}),$$`
+onde `\(X\sim \textrm{bin}(n_{1+},p_{11})\)` e `\(Y\sim \textrm{bin}(n_{2+},p_{21})\)`. Então
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+  \textrm{P}&amp;(X=n_{11}|X+Y=n_{+1})=\dfrac{\textrm{P}(X=n_{11},X+Y=n_{+1})}{\textrm{P}(X+Y=n_{+1})}\\
+  						&amp;=\dfrac{\textrm{P}(X=n_{11},Y=n_{+1}-n_{11})}{\textrm{P}(X+Y=n_{+1})}\\
+                        &amp;=\dfrac{\textrm{P}(X=n_{11})\textrm{P}(Y=n_{+1}-n_{11})}{\sum_{i=1}^{n_{+1}}\textrm{P}(X=i,Y=n_{+1}-i)}\\
+                        &amp;=\dfrac{\binom{n_{1+}}{n_{11}}p_{11}^{n_{11}}(1-p_{11})^{n_{1+}-n_{11}}\binom{n_{2+}}{n_{+1}-n_{11}}p_{21}^{n_{+1}-n_{11}}(1-p_{21})^{n_{2+}-n_{+1}+n_{11}}}{\sum_i\binom{n_{1+}}{i}p_{11}^i(1-p_{11})^{n_{1+}-i}\binom{n_{2+}}{n_{+1}-i}p_{21}^{n_{+1}-i}(1-p_{21})^{n_{2+}-n_{+1}+i}},
+\end{align*}\]
+&lt;/div&gt;
+
+onde o somatório varia de `\(\textrm{Máx}(0,n_{+1}-n_{2+})\)` a `\(\textrm{Min}(n_{+1},n_{1+})\)`.
+
+---
+class: animated, fadeIn
+##Modelo Produto de Binomiais Independentes - IV
+
+Fazendo `\(q_{11}=1-p_{11}\)` e `\(q_{21}=1-p_{21}\)`, temos
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+  \textrm{P}(X=n_{11}|X+Y=n_{+1})&amp;=\dfrac{\binom{n_{1+}}{n_{11}}p_{11}^{n_{11}}q_{11}^{-n_{11}}\binom{n_{2+}}{n_{+1}-n_{11}}p_{21}^{-n_{11}}q_{21}^{n_{11}}}{\sum_i\binom{n_{1+}}{i}p_{11}^i q_{11}^{-i}\binom{n_{2+}}{n_{+1}-i}p_{21}^{-i}q_{21}^i}\\
+  						&amp;=\dfrac{\binom{n_{1+}}{n_{11}}\binom{n_{2+}}{n_{+1}-n_{11}}\psi^a}{\sum_i\binom{n_{1+}}{i}p_{11}^i \binom{n_{2+}}{n_{+1}-i}\psi^i},
+\end{align*}\]
+&lt;/div&gt;
+
+onde `\(\psi=\dfrac{p_{11}q_{21}}{p_{21}q_{11}}\)`. Sob `\(H_0\)`, `\(\psi=1\)` e
+`$$\textrm{P}(X=n_{11}|X+Y=n_{+1})=\dfrac{\binom{n_{1+}}{n_{11}}\binom{n_{2+}}{n_{+1}-n_{11}}}{\binom{n}{n_{+1}}},$$`
+que é uma **&lt;span style="color:orange"&gt;Distribuição Hipergeométrica&lt;/span&gt;**.
+
+
+---
+class: animated, fadeIn
+##Modelo Multinomial
+
+* Experimento delineado de forma que se obtenha uma amostra aleatória de tamanho `\(n\)` fixo de uma população.
+
+* Observa-se quantos elementos dessa amostra classificam-se em cada uma das possíveis combinações da tabela: `\((A_1,C_1)\)`, `\((A_1,C_2)\)`, `\((A_2,C_1)\)` ou `\((A_2,C_2)\)`.
+
+--
+
+* O modelo associado é dado por:
+
+`$$P(N_{11}=n_{11}, N_{12}=n_{12}, N_{21}=n_{21}, N_{22}=n_{22})=n!\prod_{i,j=1}^2 \frac{p_{ij}^{n_{ij}}}{n_{ij}!},$$`
+
+ onde `\(n_{ij}\geq 0\)`, `\(\sum_{i=1}^2 n_{ij}= n\)` e `\(p_{ij}=1\)`.
+
+--
+
+* Este delineamento amostral é equivalente ao processo de amostragem aleatória simples, em que se seleciona uma amostra aleatória de tamanho `\(n\)` a partir de uma população suficientemente grande.
+
+
+---
+class: animated, fadeIn
+##Modelo Produto de Poisson
+
+* Experimento delineado de forma que apenas a duração do experimento é estabelecida.
+
+* Os tamanhos amostrais são aleatórios, dado que serão conhecidos apenas ao final do experimento.
+
+* Assume-se `\(N_{ij}\)`, `\((i,j=1,2)\)`, independentes com distribuição de Poisson de média `\(\mu_{ij}=t\lambda_{ij}\)`. A taxa média por unidade de tempo é representada por `\(\lambda_{ij}\)` e a duração do tempo representada por `\(t\)`.
+
+--
+
+* O modelo probabilístico associado é
+`$$P(N_{11}=n_{11}, N_{12}=n_{12}, N_{21}=n_{21}, N_{22}=n_{22})=\prod_{i,j=1}^2 \frac{e^{-\mu_{ij}}\mu_{ij}^{n_{ij}}}{n_{ij}!}\quad \mu_{ij}&gt;0.$$`
+
+
+---
+class: animated, fadeIn
+##Modelo Hipergeométrico
+
+* Considerado em situações em que os indivíduos são inicialmente alocados aleatoriamente em dois grupos considerados equivalentes, observando-se para cada um deles uma resposta binária.
+
+* Assumindo que os dois grupos não diferem significativamente, `\(n_{+1}\)` é considerado fixo.
+
+* Dessa forma, `\(n_{1+}\)`, `\(n_{2+}\)` e `\(n_{+2}\)` são fixos. Dado o condicionamento nas marginais fixas, o conhecimento de qualquer uma das frequências `\(n_{ij}\)` determina as restantes.
+
+--
+
+* Sob essa suposição, o modelo probabilístico associado é dado por
+`$$P(N_{11}=n_{11})=\frac{{n_{1+}\choose n_{11}}{n_{2+}\choose n_{+1}-n_{11}}}{{n\choose n_{+1}}}$$`
+
+
+---
+class: animated, fadeIn
+###Observações
+
+ * Os esquemas amostrais anteriores são os mais comuns.
+ 
+ * Nem todas as tabelas de contingência são geradas sob esses esquemas amostrais.
+ 
+ * Por exemplo, há casos em que as amostras não são independentes. Ou casos em que sequer é considerada uma amostra aleatória.
+ 
+ 
+---
+class: animated, bounceInDown
+#Estudos Clínicos e Modelos Associados
+
+Os delineamentos amostrais mais frequentes resultam de experimentos que podem ser:
+
+* Observacionais:
+  * descritivo;
+  * coorte;
+  * caso-controle;
+  * transversal.
+  
+* Experimentais:
+ * Ensaio clinico aleatorizado.
+  
+--
+
+&gt;Dependendo do objetivo, os estudos podem ser prospectivos ou retospectivos. 
+
+
+---
+class: animated, fadeIn
+##Estudos Descritivos
+
+* Estudo de caso (minuciosa descrição do diagnóstico e evolução da doença em um pequeno número de pacientes)
+
+* Estudo de uma série de casos (clínicos usam dados de arquivos de suas instituições para produzir artigos)
+
+* Dados institucionais (Instituições estatais)
+
+
+---
+class: animated, fadeIn
+##Exemplo 5 - I
+
+&lt;img src="images/Estudodecasos.png" width="48%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Exemplo 5 - II
+
+ - **Sintomas dos animais**: diarréia, falta de   apetite, vômito e barriga inchada. 
+
+ - **Descriçao do estudo**: Maria da Glória disse que começou a investigar o caso quando registrou o quarto óbito em um mês. “Passei a desconfiar que havia algo errado. Na ficha de registro, todos eram alimentados com rações Magnus Fórmula Natural para animais de pequeno porte. Fiz análises nos cães mortos e descobri que todos haviam tido uma espécie de hepatite. Exames mostraram a presença da substância aflatoxina, encontrada no milho, que provoca o amarelamento do fígado, a redução do órgão e o endurecimento até a paralisação total do funcionamento", detalhou.
+
+ - **Conclusão**: Dois lotes contaminados. 
+
+---
+class: animated, fadeIn
+##Exemplo 6 - I
+
+###Estudo de uma série de casos
+
+- **Caso**: Oftalmologista N. Gregg (Sydney, Austrália) observou, no primeiro semestre de 1941, vários recém-nascidos com catarata congênita. 
+
+- **Análise dos casos (descrição)**: Procurou as mães dos bebês e verificou que haviam sido acometidas por rubéola, exatamente durante o primeiro trimestre das gestações.
+
+- **Conclusão**: As observações clínicas do Dr. Gregg criaram as condições para que várias pesquisas posteriores concluíssem hoje, além de qualquer dúvida razoável, haver associação entre rubéola no primeiro trimestre da gravidez e defeitos congênitos. 
+
+&gt;Essa constatação e o desenvolvimento de vacinas determinaram a introdução do procedimento de vacinação das mulheres em idade fértil. 
+
+
+---
+class: animated, fadeIn
+##Estudos de Coorte - I
+
+####Caracterização
+
+- O estudo avança no tempo e dá ênfase ao fator de risco. 
+
+- Identifica-se um grupo exposto ao fator e um grupo controle, constituído de pessoas que não foram expostas ao fator.
+
+- Os dois grupos são acompanhados por um período de tempo e as taxas de incidência da doença calculadas.
+
+- Estuda a associação entre a doença e o fator.
+
+- O pesquisador tem a possibilidade de usar critérios uniformes, tanto na identificação da presença ou não do
+fator de risco no início do estudo, quanto na verificação da ocorrência da doença nos exames de acompanhamento.
+
+- Liberdade na escolha do que medir e como medir.
+
+- Permite obter diretamente uma estimativa de magnitude do risco relativo.
+
+- Os estudos são longos, grandes e normalmente caros. 
+
+- Do ponto de vista teórico o estudo de coorte é melhor que o estudo caso-controle
+
+
+---
+class: animated, fadeIn
+##Estudos de Coorte - II
+
+&lt;img src="images/Coorte1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Estudos de Coorte - III
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (D)\)`  |  `\(j=2\, (\overline{D})\)` ||          |
+| `\(i=1 \, (E)\)`           ||                 |                         || `\(n_{1+}\)` |        
+| `\(i=2 \, (\overline{E})\)`||                 |                         || `\(n_{2+}\)` |
+|          Total         ||                 |                         ||     .   |
+
+--
+
+`$$p_{(i)j}=P(Y=j|X=i)$$`
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (D)\)`  |  `\(j=2\, (\overline{D})\)` ||          |
+| `\(i=1 \, (E)\)`           ||     `\(p_{(1)1}\)`  |       `\(p_{(1)2}\)`        ||    `\(1\)`   |        
+| `\(i=2 \, (\overline{E})\)`||     `\(p_{(2)1}\)`  |       `\(p_{(2)2}\)`        ||    `\(1\)`   |
+|          Total         ||     `\(p_{+1}\)`    |         `\(p_{+2}\)`        ||          |
+
+
+---
+class: animated, fadeIn
+##Estudos de Coorte - III
+
+* `\(p_{(1)1}\)`: Incidência entre os expostos.
+
+* `\(p_{(2)1}\)`: Incidência entre os não-expostos.
+
+Temos
+`$$\begin{cases} 
+N_{11}&amp;\sim \textrm{Bin}(n_{1+},p_{(1)1})\\
+N_{21}&amp;\sim \textrm{Bin}(n_{2+},p_{(2)1})\\
+\end{cases}$$`
+
+--
+
+* Modelo probabilístico: Produto de Binomiais.
+
+* As probabilidades `\(p_{(i)j}\)` são estimadas por
+`$$\widehat{p}_{(i)j}=\frac{n_{ij}}{n_{i+}}.$$`
+
+
+---
+class: animated, fadeIn
+##Exemplo 7 - I
+
+Estudo da associação entre exercício físico e mortalidade por coronariopatia em adultos de meia idade.
+
+&lt;img src="images/TabelaCoorte.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Exemplo 7 - II
+
+**Medida usada**: Risco Relativo
+
+`$$\widehat{RR}=\frac{\hat{p}_{(1)1}}{\hat{p}_{(2)1}}=\frac{400/5000}{80/2000}=2.$$`
+--
+
+&gt;O **&lt;span style="color:orange"&gt;risco&lt;/span&gt;** de morrer por doença coronária no grupo sedentário é duas vezes maior do que o grupo não sedentário.
+
+--
+
+**Observação:**
+
+`$$\text{Chance}=\frac{\hat{p}_{(1)1}}{1-\hat{p}_{(1)1}}=\frac{400/5000}{4600/5000}=\frac{0,08}{0,92}=0,087.$$`
+&gt;Para cada pessoa que sobrevive em uma população de 100 sedentários, aproximadamente 9 pessoas morrem por coronariopatia.
+
+
+---
+class: animated, slideInRight
+
+###Exemplo 7 - III
+
+**No R:**
+
+```r
+require(epiR)
+dados &lt;- c(400,4600,80,1920)
+epi.2by2(dat = dados, method = "cohort.count", digits = 2,conf.level = 0.95, units = 100, interpret = FALSE, outcome = "as.columns")
+```
+
+```
+##              Outcome +    Outcome -      Total                 Inc risk *
+## Exposed +          400         4600       5000        8.00 (7.26 to 8.79)
+## Exposed -           80         1920       2000        4.00 (3.18 to 4.95)
+## Total              480         6520       7000        6.86 (6.28 to 7.47)
+## 
+## Point estimates and 95% CIs:
+## -------------------------------------------------------------------
+## Inc risk ratio                                 2.00 (1.58, 2.53)
+## Inc odds ratio                                 2.09 (1.63, 2.67)
+## Attrib risk in the exposed *                   4.00 (2.86, 5.14)
+## Attrib fraction in the exposed (%)            50.00 (36.79, 60.45)
+## Attrib risk in the population *                2.86 (1.81, 3.90)
+## Attrib fraction in the population (%)         41.67 (29.08, 52.02)
+## -------------------------------------------------------------------
+## Uncorrected chi2 test that OR = 1: chi2(1) = 35.787 Pr&gt;chi2 = &lt;0.001
+## Fisher exact test that OR = 1: Pr&gt;chi2 = &lt;0.001
+##  Wald confidence limits
+##  CI: confidence interval
+##  * Outcomes per 100 population units
+```
+
+
+---
+class: animated, slideInRight
+
+###Exemplo 7 - IV
+
+
+```r
+epi.2by2(dat = dados, method = "cohort.count", digits = 2,conf.level = 0.95, units = 100, interpret = TRUE, outcome = "as.columns")
+```
+
+```
+##              Outcome +    Outcome -      Total                 Inc risk *
+## Exposed +          400         4600       5000        8.00 (7.26 to 8.79)
+## Exposed -           80         1920       2000        4.00 (3.18 to 4.95)
+## Total              480         6520       7000        6.86 (6.28 to 7.47)
+## 
+## Point estimates and 95% CIs:
+## -------------------------------------------------------------------
+## Inc risk ratio                                 2.00 (1.58, 2.53)
+## Inc odds ratio                                 2.09 (1.63, 2.67)
+## Attrib risk in the exposed *                   4.00 (2.86, 5.14)
+## Attrib fraction in the exposed (%)            50.00 (36.79, 60.45)
+## Attrib risk in the population *                2.86 (1.81, 3.90)
+## Attrib fraction in the population (%)         41.67 (29.08, 52.02)
+## -------------------------------------------------------------------
+## Uncorrected chi2 test that OR = 1: chi2(1) = 35.787 Pr&gt;chi2 = &lt;0.001
+## Fisher exact test that OR = 1: Pr&gt;chi2 = &lt;0.001
+##  Wald confidence limits
+##  CI: confidence interval
+##  * Outcomes per 100 population units 
+## 
+##  Measures of association strength:
+##  The outcome incidence risk among the exposed was 2 (95% CI 1.58 to 2.53) times the outcome incidence risk among the unexposed: exposure increased the outcome incidence risk among the exposed. 
+##  
+##  The outcome incidence odds among the exposed was 2.09 (95% CI 1.63 to 2.67) times the outcome incidence odds among the unexposed: exposure increased the outcome incidence odds among the exposed. 
+## 
+##  Measures of effect in the exposed:
+##  Exposure changed the outcome incidence risk in the exposed by 4 (95% CI 2.86 to 5.14) per 100 population units. 50% of outcomes in the exposed were attributable to exposure (95% CI 36.8% to 60.4%). 
+## 
+##  Number needed to treat for benefit (NNTB) and harm (NNTH):
+##  Exposure increased the outcome incidence risk in the exposed. The number needed to treat (expose) to increase the outcome frequency by one was 25 (95% CI 19 to 35). 
+## 
+##  Measures of effect in the population:
+##  Exposure changed the outcome incidence risk in the population by 2.86 (95% CI 1.81 to 3.9) per 100 population units. 41.7% of outcomes in the population were attributable to exposure (95% CI 29.1% to 52%).
+```
+
+
+---
+class: animated, fadeIn
+##Fatores de confundimento
+
+* Quando a contribuição de um fator identificada em uma análise individual pode ser total ou parcialmente atribuída a outro, dizemos que existe confundimento de efeitos.
+
+* Para se afirmar que uma variável é um fator de risco para uma doença é preciso produzir evidências de que não existem fatores de confundimento, isto é, variáveis associadas ao fator e a doença que explicam a associação observada.
+
+* Para controlar os fatores de confusão podem ser adotadas duas estratégias:
+
+  - Usar na fase de planejamento de estudo a **&lt;span style="color:orange"&gt;aleatorização&lt;/span&gt;** (para os ensaios clínicos) ou a **&lt;span style="color:orange"&gt;homogeneização&lt;/span&gt;** (para estudos observacionais): a aleatorização faz com que os outros fatores além do tratamento tenham a mesma distribuição nos diversos grupos. A homogeinização consiste em selecionar indivíduos com características semelhantes em relação aos fatores que afetam a resposta de tal forma que a única diferença relevante entre os grupos seja o tratamento.
+
+ - Usar técnicas estatísticas na análise dos dados que permitam isolar a contribuição específica de cada fator (Só controlam o efeito de fatores conhecidos).
+
+---
+class: animated, fadeIn
+##Hipóteses - I
+
+Hipótese de homogeneidade:
+`$$\begin{cases}
+\textrm{H}_0:&amp; p_{(1)1}=p_{(2)1}\\
+\textrm{H}_1:&amp; p_{(1)1}\neq p_{(2)1}\\
+\end{cases}$$`
+
+Estatística de teste:
+`$$Q_p=\sum_{i=1}^2 \sum_{j=1}^2\dfrac{(n_{ij}-e_{ij})^2}{e_{ij}}\sim \chi^2_{(1)},$$`
+onde `\(e_{ij}=\dfrac{(n_{i+})(n_{+j})}{n}\)`.
+
+Sob `\(H_0: \textrm{E}(N_{i1})=n_{i+}p_{+1}\,\)` e `\(\,\textrm{E}(N_{i2})=n_{i+}p_{+2}.\)`
+
+&gt;**Para tabelas `\(2\times 2\)`**:
+`$$Q_p=\dfrac{n(n_{11}n_{22}-n_{12}n_{21})^2}{n_{1+}m_{2+}n_{+1}n_{+2}}.$$`
+
+---
+class: animated, fadeIn
+##Hipóteses - II
+
+**Correção de continuidade (Yates):** O objetivo é reduzir o erro de aproximação e evitar a superestimação da significância quando a amostra é pequena.
+
+`$$Q_p=\sum_{i=1}^2\sum_{j=1}^2 \dfrac{(|n_{ij}-e_{ij}|-0,5)^2}{e_{ij}}.$$`
+Para tabelas `\(2\times 2\)`,
+`$$Q_p=\dfrac{n(|n_{11}n_{22}-n_{12}n_{21}|-n/2)^2}{n_{1+}n_{2+}n_{+1}n_{+2}}.$$`
+&gt;A correção de Yates tem sido criticada por tender a sobrecorrigir e aumentar o erro tipo II do teste.
+
+---
+class: animated, fadeIn
+##Hipóteses - III
+
+**Observações**:
+
+* A distribuição de `\(Q_p\)` apenas se aproxima de uma distribuição `\(\chi^2\)` com  1 grau de liberdade de maneira satisfatória quando as frequências esperadas são todas maiores do que 5 `\((e_{ij}&gt;5)\)`.
+
+* Cochran (1954) estabeleceu que:
+	- O teste `\(\chi^2\)` só pode ser aplicado quando `\(n&gt;20\)`.
+	
+  - Quando `\(20&lt;n\leq 40\)`, o teste só pode ser aplicado se todas as frequências esperadas forem maiores que 5.
+  
+  - Se `\(n\geq 40\)`, a frequência esperada mínima não pode ser menor que 1.
+
+&gt;Se as condições não forem satisfeitas, a alternativa é aplicar o Teste Exato de Fisher .
+
+---
+class: animated, fadeIn
+##Hipóteses - IV
+####Outras formas de expressar a hipótese de homogeneidade
+
+- `\(\textrm{H}_0: p_{(1)1}-p_{(2)1}=0\)` (Risco atribuível)
+
+- `\(\textrm{H}_0: \dfrac{p_{(1)1}}{p_{(2)1}}=1\)` (Risco relativo)
+
+- `\(\textrm{H}_0: \dfrac{p_{(1)1}/(1-p_{(1)1})}{p_{(2)1}/(1-p_{(2)1})}=1\)` (razão de chances - **&lt;span style="color:orange"&gt;odds ratio&lt;/span&gt;**).
+
+&gt;**Observação:**
+`$$\begin{align*}
+  \textrm{OR}_{E|\overline{E}}&amp;=\dfrac{odds_E}{odds_{\overline{E}}}=\dfrac{p_{(1)1}p_{(2)2}}{p_{(1)2}p_{(2)1}}\\
+  						 &amp;=\dfrac{n_{11}n_{22}}{n_{12}n_{21}}.
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+##Estimação Intervalar das medidas de associação - I
+
+###Risco Relativo:
+`$$\textrm{IC}_{\textrm{RR}}: \textrm{exp}\left(\hat{f}\pm z_{\alpha/2}\sqrt{\widehat{Var}(f)}\right),$$`
+onde: 
+
+- `\(f=\ln (\textrm{RR})=\ln (p_{(1)1})-\ln (p_{(2)1})\)`
+
+- `\(\widehat{Var}(f)=\dfrac{(1-p_{(1)1})}{(n_{1+})(p_{(1)1})}+\dfrac{(1-p_{(2)1})}{(n_{2+})(p_{(2)1})}\)`
+
+- `\(Z_{\alpha/2}\)` é o percentil `\(100(1-\alpha/2)\)` da distribuição Normal Padrão.
+
+
+---
+class: animated, fadeIn
+##Estimação Intervalar das medidas de associação - II
+
+###Odds Ratio:
+`$$\textrm{IC}_{\textrm{OR}}: \textrm{exp}\left(\hat{f}\pm z_{\alpha/2}\sqrt{\widehat{Var}(f)}\right),$$`
+onde: 
+
+- `\(f=\ln (\textrm{OR})\)`
+
+- `\(\widehat{Var}(f)=\left(\dfrac{1}{n_{11}}+\dfrac{1}{n_{12}}+\dfrac{1}{n_{21}}+\dfrac{1}{n_{22}}\right)\)`
+
+- `\(Z_{\alpha/2}\)` é o percentil `\(100(1-\alpha/2)\)` da distribuição Normal Padrão.
+
+
+---
+class: animated, fadeIn
+##Teste Exato de Fisher - I
+
+* Baseado na abordagem condicional dos experimentos em que os totais das linhas e colunas são fixados.
+
+* Considerado nos casos em que o tamanho da amostra é pequeno ou quando há frequências esperadas muito baixas (próximas de zero ou zero).
+
+* Calcula-se a probabilidade de ocorrência de todas as configurações possíveis da tabela de contingência original, com os totais de linha e coluna preservados, que sejam pelo menos tão favoráveis a `\(H_1\)`, em relação á tabela observada, considerando a distribuição Hipergeométrica.
+
+* Pode-se testar
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p_{11}=p_{21}\\
+  \textrm{H}_1&amp;: \begin{cases}
+  p_{11}&gt; p_{21}\textrm{ ou }\\
+  p_{11}&lt; p_{21}\textrm{ ou }\\
+  p_{11}\neq p_{21}
+  \end{cases}
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+##Teste Exato de Fisher - II
+
+**Cálculo do valor p**
+
+Sejam 
+`$$\begin{cases}
+  N_{11}&amp;\sim \textrm{Bin}(n_{1+},p_{11})\\
+  N_{21}&amp;\sim \textrm{Bin}(n_{2+},p_{21})
+  \end{cases}$$`
+
+* Se `\(\textrm{H}_1: p_{11}&gt;p_{21}\)`, 
+`$$\begin{align*}
+\textrm{valor p}&amp;=\textrm{P}(N_{11}\geq n_{11}|N_{11}+N_{21}=n_{+1})\\
+&amp;=\sum_{k\geq n_{11}} \dfrac{\binom{n_{1+}}{k}\binom{n_{++}-n_{1+}}{n_{+1}-k}}{\binom{n_{++}}{n_{+1}}}
+\end{align*}$$`
+
+* Se `\(\textrm{H}_1: p_{11}&lt;p_{21}\)`, 
+`$$\begin{align*}
+\textrm{valor p}&amp;=\textrm{P}(N_{11}\leq n_{11}|N_{11}+N_{21}=n_{+1})\\
+&amp;=\sum_{k\leq n_{11}} \dfrac{\binom{n_{1+}}{k}\binom{n_{++}-n_{1+}}{n_{+1}-k}}{\binom{n_{++}}{n_{+1}}}
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+##Exemplo 8 - I
+
+Sir Ronald A. Fisher descreveu o seguinte experimento: ele convidou uma colega para distinguir se, na preparação do chá (bebida muito apreciada pelos ingleses), foi adicionado primeiro leite ou o próprio chá. A mulher experimentou oito xícaras de chá, sendo que em quatro delas o leite foi adicionado primeiro, e nas outras quatro, o chá foi adicionado primeiro. Para cada uma das xícaras, foi perguntado a ela o que foi primeiramente adicionado. Ela sabia que existiam quatro xícaras de cada tipo sem, no entanto, saber quais eram. O interesse foi determinar se havia concordância positiva entre a opinião dela e a verdadeira ordem.
+
+**Resultados do experimento:**
+
+| Primeiro Ingreditente  || Resposta   |            ||   Total    |
+|:----------------------:||-----------:|:-----------:||:----------:|
+|                        ||   Leite    |      Chá    ||            |
+| Leite                  ||   3        |        1    || `\(n_{1+}=4\)` |        
+| Chá                    ||   1        |        3    || `\(n_{2+}=4\)` |
+|          Total         || `\(n_{+1}=4\)` |  `\(n_{+2}=4\)` ||  `\(n=8\)`   |
+
+
+---
+class: animated, fadeIn
+##Exemplo 8 - II
+
+* Hipóteses:
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p_{11}=p_{21}\\
+  \textrm{H}_1&amp;: p_{11}&gt; p_{21}
+\end{align*}$$`
+
+--
+
+* `\(N_{11}\sim \textrm{Hipergeométrica}(8,4,4)\)`.
+
+--
+
+* A única tabela mais favorável à hipótese alternativa, sob as restrições é:
+
+| Primeiro Ingreditente  || Resposta   |            ||   Total    |
+|:----------------------:||-----------:|:-----------:||:---------:|
+|                        ||   Leite    |      Chá    ||           |
+| Leite                  ||   4        |        0    || 4         |        
+| Chá                    ||   0        |        4    || 4         |
+|          Total         ||   4        |        4    || 8         |
+
+--
+
+`$$\begin{align*}
+\textrm{valor p}&amp;=\textrm{P}(N_{11}=3|N_{11}+N_{21}=4)+\textrm{P}(N_{11}=4|N_{11}+N_{21}=4)\\
+&amp;=0,22864+0,0143=0,2428.
+\end{align*}$$`
+
+
+
+---
+class: animated, slideInRight
+
+###Exemplo 8 - III
+
+
+```r
+Cha&lt;-matrix(c(3, 1, 1, 3),nrow = 2,dimnames =list(Indicado = c("Leite", "Chá"),Real = c("Leite","Chá")))
+fisher.test(Cha, alternative = "greater")
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  Cha
+## p-value = 0.2429
+## alternative hypothesis: true odds ratio is greater than 1
+## 95 percent confidence interval:
+##  0.3135693       Inf
+## sample estimates:
+## odds ratio 
+##   6.408309
+```
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - I
+
+Forma de pesquisa que verifica se indivíduos selecionados porque têm uma doença/característica (os casos) diferem significativamente em relação à exposição a um dado fator de risco de um grupo de indivíduos comparáveis, mas que não possuem a doença/característica (os controles).
+
+####Caracterização
+
+- Os **&lt;span style="color:orange"&gt;casos&lt;/span&gt;** devem ser todos os que ocorreram durante um período de tempo em uma população definida.
+
+- Os **&lt;span style="color:orange"&gt;controles&lt;/span&gt;** devem ser pessoas comparáveis aos casos mas sem a doença/característica, ou seja, pessoas que caso adquirissem a doença/característica seriam escolhidas como casos.
+
+- Não há dificuldades éticas para sua implementação se os dados usados são de seres humanos.
+
+- O tempo gasto e os custos associados são relativamente pequenos, já que normalmente são utilizados dados pré-existentes.
+
+- Particularmente adequados ao estudo de doenças/características raras. 
+
+- Definição de regras claras para a escolha dos casos e controles. Deve-se tomar cuidado com os vícios de seleção
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - II
+
+&lt;img src="images/CasoControle.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - III
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (C)\)`  |  `\(j=2\, (\overline{C})\)` ||          |
+| `\(i=1 \, (E)\)`           ||                 |                         ||          |        
+| `\(i=2 \, (\overline{E})\)`||                 |                         ||          |
+|          Total         ||    `\(n_{+1}\)`     |         `\(n_{+2}\)`        ||    `\(n\)`   |
+
+--
+
+`$$p_{i(j)}=P(X=i|Y=j)$$`
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (C)\)`  |  `\(j=2\, (\overline{C})\)` ||          |
+| `\(i=1 \, (E)\)`           ||     `\(p_{1(1)}\)`  |       `\(p_{1(2)}\)`        || `\(p_{1+}\)` |        
+| `\(i=2 \, (\overline{E})\)`||     `\(p_{2(1)}\)`  |       `\(p_{2(2)}\)`        || `\(p_{2+}\)` |
+|          Total         ||       `\(1\)`       |         `\(1\)`             ||          |
+
+
+---
+class: animated, fadeIn
+##Estudos de Caso-controle - IV
+
+Temos
+`$$\begin{cases}
+  N_{11}&amp;\sim \textrm{Bin}(n_{+1},p_{1(1)})\\
+  N_{12}&amp;\sim \textrm{Bin}(n_{+2},p_{2(1)})\\
+  \end{cases}$$`
+
+* Modelo probabilístico: Produto de Binomiais.
+
+--
+
+* As probabilidades `\(p_{i(j)}\, j=1,2\)` são estimadas por
+`$$\widehat{p}_{i(j)}=\frac{n_{ij}}{n_{+j}}.$$`
+
+* Se a suposição de independência entre casos e controles não for razoável, deve-se usar metodologias mais apropriadas.
+
+
+---
+class: animated, fadeIn
+##Exemplo 9 - I
+
+Estudo da associação entre fumo e câncer de pulmão em pacientes do sexo masculino.
+
+&lt;img src="images/TabelaCasoControle.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Exemplo 9 - II
+
+
+```r
+require(epiR)
+dados &lt;- c(647,622,2,27)
+epi.2by2(dat = dados, method = "case.control", digits = 2,conf.level = 0.95, units = 100, interpret = FALSE, outcome = "as.columns")
+```
+
+```
+##              Outcome +    Outcome -      Total                       Odds
+## Exposed +          647          622       1269        1.04 (0.93 to 1.16)
+## Exposed -            2           27         29        0.07 (0.00 to 0.21)
+## Total              649          649       1298        1.00 (0.90 to 1.11)
+## 
+## Point estimates and 95% CIs:
+## -------------------------------------------------------------------
+## Exposure odds ratio                            14.04 (3.33, 59.30)
+## Attrib fraction (est) in the exposed (%)      92.87 (71.42, 99.18)
+## Attrib fraction (est) in the population (%)   92.59 (68.98, 98.23)
+## -------------------------------------------------------------------
+## Uncorrected chi2 test that OR = 1: chi2(1) = 22.044 Pr&gt;chi2 = &lt;0.001
+## Fisher exact test that OR = 1: Pr&gt;chi2 = &lt;0.001
+##  Wald confidence limits
+##  CI: confidence interval
+```
+
+
+---
+class: animated, fadeIn
+##Hipóteses - I
+
+Hipótese de homogeneidade:
+`$$\begin{cases}
+\textrm{H}_0:&amp; p_{1(1)}=p_{1(2)}\\
+\textrm{H}_1:&amp; p_{1(1)}\neq p_{1(2)}\\
+\end{cases}$$`
+Estatística de teste:
+`$$Q_p=\sum_{i=1}^2 \sum_{j=1}^2\dfrac{(n_{ij}-e_{ij})^2}{e_{ij}}\sim \chi^2_{(1)},$$`
+onde `\(e_{ij}=\dfrac{(n_{i+})(n_{+j})}{n}\)`.
+
+Sob `\(H_0: \textrm{E}(N_{1j})=n_{+j}p_{1+}\,\)` e `\(\,\textrm{E}(N_{2j})=n_{+j}p_{2+}.\)`
+
+---
+class: animated, fadeIn
+##Hipóteses - II
+
+A hipótese `\(\textrm{H}_0:p_{1(1)}=p_{1(2)}\)` também pode ser expressa por:
+`$$\textrm{H}_0: \dfrac{p_{1(1)}/(1-p_{1(1)})}{p_{1(2)}/(1-p_{1(2)})}=\dfrac{p_{1(1)}p_{2(2)}}{p_{2(1)}p_{1(2)}}=1.$$`
+
+&gt;**Observação**:
+* `\(\textrm{RR}=\dfrac{\textrm{P}(C|E)}{\textrm{P}(C|\bar{E})}\)` NÃO SE APLICA a esses estudos.
+* `\(\textrm{OR}_{C|\bar{C}}=\dfrac{n_{11}n_{22}}{n_{12}n_{21}}\)`
+
+---
+class: animated, fadeIn
+##Relação entre RR e OR
+
+* Se os casos de interesse forem raros (por exemplo, doença rara), os estudos de coorte são INVIÁVEIS.
+
+* Nesses casos são mais comuns os estudos de casos e controles.
+
+ **&lt;span style="color:orange"&gt;Se doença rara &lt;/span&gt;** `\(\Longrightarrow\)` RR `\(\approx\)` OR:
+
+`$$\begin{align*}
+\textrm{RR}&amp;=\dfrac{p_{(1)1}}{p_{(2)1}}=\dfrac{P(D|E)}{P(D|\overline{E})}\\
+			&amp;=\dfrac{P(D)P(E|D)/[P(D)P(E|D)+P(\overline{D})P(E|\overline{D})]}{P(D)P(\overline{E}|D)/[P(D)P(\overline{E}|D)+P(\overline{D})P(\overline{E}|\overline{D})]}\\
+            &amp;=\dfrac{P(E|D)\{P(\overline{E}|\bar{D})+P(D)[P(\overline{E}|D)-P(\overline{E}|\overline{D})]\}}{P(\overline{E}|D)\{P(E|\overline{D})+P(D)[P(E|D)-P(E|\overline{D})]\}}.
+\end{align*}$$`
+Mas, `\(P(D)\rightarrow 0\)`, então
+`$$\textrm{RR}\approx \dfrac{P(E|D)P(\overline{E}|\overline{D})}{p(\overline{E}|D)P(E|\overline{D})}=\dfrac{p_{1(1)}p_{2(2)}}{p_{2(1)}p_{1(2)}}=\textrm{OR}.$$`
+
+---
+class: animated, fadeIn
+##Exemplo 10 - I
+
+Em um estudo de caso-controle, realizado para estudar fatores de risco para câncer de mama em mulheres atendidas pelo Hospital das Clínicas da UFMG, observou entre os casos 14 pacientes expostas e 4 não expostas ao fator: histórico familiar, em primeiro grau, de câncer de mama. Entre as pacientes usadas como controles, 233 haviam sido expostas e 281 não tiveram exposição.
+
+
+|     Doença   || Exposição  |        ||   Total  |
+|:------------:||:----------:|:------:||:--------:|
+|              ||  Sim       |   Não  ||          |
+| Caso         ||   14       |  4     ||  18      |        
+| Controle     ||   233      |  281   ||  514     |
+| Total        ||   247      |  285   ||  532     |
+
+* Hipoteses:
+`$$\begin{align*}
+ \textrm{H}_0 &amp;: p_{11}=p_{21}\\
+ \textrm{H}_1 &amp;: p_{11}\neq p_{21},
+\end{align*}$$`
+
+---
+class: animated, fadeIn
+##Exemplo 10 - II
+
+Considerando-se as marginais fixas testamos a hipótese a través do Teste exato de Fisher. Assumindo que `\(H_0\)` é verdadeira, temos
+
+`$$\textrm{P}(X=n_{11}|N_{11}+N_{21}=247)=\dfrac{\binom{18}{n_{11}}\binom{514}{247-n_{11}}}{\binom{532}{247}}.$$`
+
+Mantidas as marginais fixas, apenas 19 tipos diferentes de tabelas podem ser gerados `\((n_{11}=0,1,2,\ldots,18)\)`.
+
+Assumindo que `\(H_0\)` é verdadeira, calcula-se a probabilidade de ocorrência de cada tabela, por exemplo, para a tabela inicial, temos
+`$$\textrm{P}(N_{11}=14|N_{11}+N_{21}=247)=\dfrac{\binom{18}{14}\binom{514}{247-a}}{\binom{532}{247}}=0,0049$$`
+
+---
+class: animated, fadeIn
+##Exemplo 10 - III
+
+&lt;img src="images/Exemplo_TEF.png" width="32%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Exemplo 10 - IV
+
+Para obter o p-valor do teste exato de Fisher, consideramos as tabelas cujas probabilidades sejam menores ou iguais à probabilidade da tabela observada no experimento.
+
+Neste caso, isto consiste em somar as probabilidades relativas às tabelas 1, 2, 3, 15, 16, 17, 18, 19. Daí, p-valor=0,0095.
+
+&gt;Forte evidência de associação entre histórico familiar e câncer de mama.
+
+
+---
+class: animated, fadeIn
+##Exemplo 10 - V
+
+
+```r
+dados &lt;- c(14,233,4,281)
+epi.2by2(dat = dados, method = "case.control", digits = 2,conf.level = 0.95, units = 100, interpret = FALSE, outcome = "as.columns")
+```
+
+```
+##              Outcome +    Outcome -      Total                       Odds
+## Exposed +           14          233        247        0.06 (0.03 to 0.10)
+## Exposed -            4          281        285        0.01 (0.00 to 0.03)
+## Total               18          514        532        0.04 (0.02 to 0.05)
+## 
+## Point estimates and 95% CIs:
+## -------------------------------------------------------------------
+## Exposure odds ratio                            4.22 (1.37, 13.00)
+## Attrib fraction (est) in the exposed (%)      76.25 (23.03, 94.38)
+## Attrib fraction (est) in the population (%)   59.35 (3.18, 82.93)
+## -------------------------------------------------------------------
+## Uncorrected chi2 test that OR = 1: chi2(1) = 7.361 Pr&gt;chi2 = 0.007
+## Fisher exact test that OR = 1: Pr&gt;chi2 = 0.008
+##  Wald confidence limits
+##  CI: confidence interval
+```
+
+---
+class: animated, fadeIn
+##Estudos Transversais - I
+
+* Semelhantes aos estudos de coorte, no entanto, todas as medições são feitas num único momento.
+
+* Os dados representam um corte transversal ou "fotografia"das características da população em estudo.
+
+* Investiga-se causa e efeito de maneira simultânea para averiguar, por exemplo, associação entre exposição ou
+não à doença/característica.
+
+* Medida usada: Prevalência.
+
+* Estes estudos são também chamados **&lt;span style="color:orange"&gt;Estudos de prevalência&lt;/span&gt;**.
+
+* Rápidos, geralmente baratos, fáceis em termos logísticos e não sensíveis a problemas como as perdas de
+seguimento e outros, característicos dos estudos longitudinais.
+
+* Podem ser realizados como a primeira etapa de um estudo de coorte ou ensaio clínico sem grandes custos adicionais. Os resultados definem as características demográficas e clínicas de base da amostra em estudo e podem, por vezes, revelar associações de interesse para o restante do estudo.
+
+---
+class: animated, fadeIn
+##Estudos Transversais - II
+
+###Desvantagens
+
+* Impossibilidade de estabelecer relações causais por não provarem a existência de uma sequência
+temporal entre exposição ao fator e o subsequente desenvolvimento da doença.
+
+* Impossibilidade de estabelecer relações causais por não provarem a existência de uma sequência temporal entre
+exposição ao fator e o subsequente desenvolvimento da doença.
+
+* Partilham as desvantagens dos estudos observacionais em geral.
+
+* Pouco práticos no estudo de doenças raras, uma vez que obrigam à selecção de amostras muito numerosas.
+
+* Este tipo de estudos são susceptíveis aos chamados viéses de prevalência/incidência que acontecem quando o efeito de determinados factores relacionados com a duração da doença é confundido com um efeito na ocorrência da doença.
+
+
+---
+class: animated, fadeIn
+##Estudos Transversais - III
+
+&lt;img src="images/EsquemaTransversal.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+---
+class: animated, fadeIn
+##Estudos Transversais - IV
+
+Tem-se uma variável resposta `\((Y)\)` e uma variável explicativa `\((X)\)`.
+
+|             X   ||    Y      |        ||   Total  |
+|:---------------:||----------:|:------:||:--------:|
+|                 ||    `\(j=1\)`  |  `\(j=2\)` ||          |
+| `\(i=1\)`           ||           |        ||          |        
+| `\(i=2\)`           ||           |        ||          |
+|   Total         ||           |        ||    `\(n\)`   |
+
+
+--
+
+`$$p_{ij}=P(X=i,Y=j)$$`
+
+|             X   ||    Y      |           ||   Total  |
+|:---------------:||----------:|:---------:||:--------:|
+|                 ||    `\(j=1\)`  |  `\(j=2\)`    ||          |
+| `\(i=1\)`           ||  `\(p_{11}\)` |  `\(p_{12}\)` || `\(p_{1+}\)` |        
+| `\(i=2\)`           ||  `\(p_{21}\)` |  `\(p_{22}\)` || `\(p_{2+}\)` |
+|   Total         ||  `\(p_{+1}\)` |  `\(p_{+2}\)` ||    `\(1\)`   |
+
+
+---
+class: animated, fadeIn
+##Estudos Transversais - V
+
+* Modelo Probabilístico: Multinomial
+
+* Probabilidades `\(p_{ij}\)` estimadas por
+`$$\widehat{p}=\dfrac{n_{ij}}{n}.$$`
+
+---
+class: animated, fadeIn
+##Hipóteses
+
+* Hipótese de Independência
+
+`$$\begin{align*}
+\textrm{H}_0&amp;:p_{ij}=(p_{i+})(p_{+j})\quad \textrm{para } i,j=1,2\\
+\textrm{H}_1&amp;:p_{ij}\neq (p_{i+})(p_{+j})\quad \textrm{para pelo menos um par }(i,j)
+\end{align*}$$`
+
+--
+
+Dado que o modelo é Multinomial:
+
+* Frequências esperadas: `\(E(N_{ij})=n(p_{ij})\)`, `\(i,j=1,2.\)`
+
+* Sob `\(H_0\)`: `\(E(N_{ij})=n(p_{i+})(p_{+j})\)`, `\(i,j=1,2\)`.
+
+* Estimativas
+
+`$$e_{ij}=n\left(\dfrac{n_{i+}}{n}\right)\left(\dfrac{n_{+j}}{n}\right), i,j=1,2.$$`
+
+* Estatística de teste: `\(Q_p\)`.
+
+---
+class: animated, fadeIn
+##Medidas de associação
+
+* Risco relativo e odds ratio: Não são apropriadas.
+
+* Prevalência: proporção de indivíduos que estão doentes em um determinado tempo específico (momento de observação).
+
+* Incidência: porporção de indivíduos que se tornaram doentes no decorrer de um período de tempo de acompanhamento.
+
+* Se os totais `\(n_{i+}\)` forem condicionados, com os devidos cuidados na interpretação, pode-se usar o odds ratio e a razão de prevalências:
+
+`$$OR=\dfrac{n_{11}n_{22}}{n_{12}n_{21}}\qquad RP=\dfrac{n_{11}/n_{1+}}{n_{21}/n_{2+}}.$$`
+
+---
+class: animated, fadeIn
+##Ensaio Clínico Aleatorizado - I
+
+* Permite decidir entre dois ou mais tratamentos qual é o mais efetivo. 
+
+* Metodologia apropriada para a comparação de tratamentos. 
+
+* Usado também quando é incerto o valor de uma nova terapia ou os méritos da terapia existente estão em disputa. 
+
+* A alocação aleatória dos participantes aos grupos permite obter grupos semelhantes em todas as suas características
+medidas ou não.
+
+* Técnicas estatísticas são usadas para se decidir se há ou não diferença na eficácia das terapias envolvidas.
+
+* Forma experimental de pesquisa.
+
+* Está sujeito a constrangimentos éticos, disciplinados pela convenção de Helsinque.
+
+* Estudos cegos e estudos duplo-cego eliminam o efeito placebo.
+
+---
+class: animated, fadeIn
+##Ensaio Clínico Aleatorizado - II
+
+&lt;img src="images/EsquemaECA.png" width="65%" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: animated, fadeIn
+##Ensaio Clínico Aleatorizado - III
+
+|             X          ||          Y      |                         ||   Total  |
+|:----------------------:||----------------:|:-----------------------:||:--------:|
+|                        ||    `\(j=1\, (Com)\)`|  `\(j=2\, (Sem)\)`          ||          |
+| `\(i=1 \, (Tratamento)\)`  ||     `\(p_{(1)1}\)`  |       `\(p_{(1)2}\)`        ||    `\(1\)`   |        
+| `\(i=2 \, (Controle)\)`    ||     `\(p_{(2)1}\)`  |       `\(p_{(2)2}\)`        ||    `\(1\)`   |
+|          Total         ||     `\(p_{+1}\)`    |         `\(p_{+2}\)`        ||          |
+
+--
+
+* Similar ao delineamento de coorte.
+
+--
+
+
+&gt;**Diferença:** 
+ * Estudos de Coorte: Observacionais
+ * Ensaios clínicos: Experimentais
+
+--
+
+* Modelo Probabilístico: Produto de Binomiais.
+
+
+---
+class: animated, fadeIn
+##Exemplo 11 - I
+
+Fisher et al. (1987) publicaram o primeiro relato de um ensaio clínico que comprovou a eficácia de zidovudina (AZT) para prolongar a vida de pacientes com AIDS. O estudo conduzido foi um ensaio clínico aleatorizado com 24 semanas de
+tratamento.
+
+|      Grupo   ||   Situação|        ||   Total  |
+|:------------:||----------:|:------:||:--------:|
+|              ||   Vivo    |  Óbito ||          |
+| AZT          ||   144     |    1   ||   145    |        
+| Placebo      ||   121     |   16   ||   137    |
+|   Total      ||   265     |   17   ||   282    |
+
+--
+
+* Proporção de pacientes vivos que tomaram AZT:
+
+`$$\widehat{p}_{11}=\dfrac{144}{145}=0,993.$$`
+* Proporção de pacientes vivos que tomaram o placebo:
+
+`$$\widehat{p}_{21}=\dfrac{121}{137}=0,883.$$`
+
+---
+class: animated, fadeIn
+##Exemplo 11 - II
+
+Tabela de valores esperados: 
+
+|      Grupo   ||   Situação   |        ||   Total  |
+|:------------:||-------------:|:------:||:--------:|
+|              ||   Vivo       |  Óbito ||          |
+|   AZT        ||   136,26     |  8,74  ||   145    |        
+| Placebo      ||   128,74     |  8,26  ||   137    |
+|   Total      ||   265,00     |  17,00 ||   282    |
+
+--
+
+`$$\begin{align*}
+  Q_{p(Yates)}&amp;=\dfrac{n(|n_{11}n_{22}-n_{21}n_{12}|-n/2)^2}{n_{1+}n_{2+}n_{+1}n_{+2}}\\
+  					 &amp;=\dfrac{282(|144\times 16-1\times 121|-282/2)^2}{145\times 137\times 265\times 17}\\
+             &amp;=14,74.
+\end{align*}$$`
+
+
+Sob `\(H_0\)`, `\(\textrm{P}(\chi^2_1&gt;q_c)=0,05\Rightarrow q_c=3,841\)`. Então, rejeita-se a hipótese de igualdade entre os grupos AZT e Placebo.
+
+
+---
+class: animated, fadeIn
+##Exemplo 11 - III
+
+
+```r
+dados&lt;-matrix(c(144, 121, 1, 16), nrow = 2, dimnames = list(Grupo = c("AZT", "Placebo"), Situacao = c("Vivo", "Óbito")))
+dados
+```
+
+```
+##          Situacao
+## Grupo     Vivo Óbito
+##   AZT      144     1
+##   Placebo  121    16
+```
+
+```r
+fisher.test(dados)
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  dados
+## p-value = 6.564e-05
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##    2.856659 800.904923
+## sample estimates:
+## odds ratio 
+##   18.91139
+```
+
+---
+class: animated, fadeIn
+#Teste de McNemar - I
+
+* Usado quando o interesse é comparar as proporções em amostras onde a mesma unidade amostral é avaliada sob condições diferentes (observadores, momentos, tratamentos, etc). Essas são as chamadas **&lt;span style="color:orange"&gt;Amostras pareadas&lt;/span&gt;**.
+
+&gt;Também podem ser observados pares de indivíduos com aproximadamente as mesmas características.
+
+
+ |  Amostra II     || Amostra I |           ||   Total  |
+ |:---------------:||----------:|:---------:||:--------:|
+ |                 ||   Sucesso |  Fracasso ||          |
+ |    Sucesso      ||  `\(n_{11}\)` | `\(n_{12}\)`  || `\(n_{1+}\)` |        
+ |    Fracasso     ||  `\(n_{21}\)` | `\(n_{22}\)`  || `\(n_{2+}\)` |
+ |      Total      ||  `\(n_{+1}\)` | `\(n_{+2}\)`  || `\(n\)`      |
+
+
+* Modelo probabilístico: Multinomial
+
+
+
+---
+class: animated, fadeIn
+#Teste de McNemar - II
+
+* Hipóteses:
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p_{i+}=p_{+j}, \forall i=j \Longrightarrow \textrm{ concordância marginal}\\
+  \textrm{H}_1&amp;: p_{i+}\neq p_{+j} \textrm{ para pelo menos um par.}
+\end{align*}$$`
+
+Nesse caso, basta testar
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p_{1+}=p_{+1},\\
+  \textrm{H}_1&amp;: p_{1+}\neq p_{+1},
+\end{align*}$$`
+
+dado que `\(p_{1+}=1-p_{2+}\)` e `\(p_{+1}=1-p_{+2}\)`.
+
+---
+class: animated, fadeIn
+#Teste de McNemar - III
+
+**Observação:**
+
+`$$\begin{align*}
+\textrm{H}_0: p_{1+}=p_{+1}&amp;\Leftrightarrow p_{11}+p_{12}=p_{11}+p_{21}\Leftrightarrow p_{12}+p_{12}=p_{21}+p_{12}\\
+  &amp;\Leftrightarrow \dfrac{p_{12}}{p_{12}+p_{21}}=\dfrac{1}{2}\Leftrightarrow \dfrac{np_{12}}{np_{12}+np_{21}}=\dfrac{1}{2}\\
+  &amp;\Leftrightarrow \dfrac{\mu_{12}}{\mu_{12}+\mu_{21}}=\dfrac{1}{2}\Leftrightarrow p=\dfrac{1}{2},
+\end{align*}$$`
+
+onde `\(p=\dfrac{p_{12}}{p_{12}+p_{21}}=\dfrac{\mu_{12}}{\mu_{12}+\mu_{21}}\)` e `\(\mu_{ij}=np_{ij}\)`.
+
+--
+
+Assim, as hipóteses anteriores podem ser escritas como
+
+`$$\begin{align*}
+  \textrm{H}_0&amp;: p=1/2,\\
+  \textrm{H}_1&amp;: p\neq 1/2
+\end{align*}$$`
+
+
+
+
+---
+class: animated, fadeIn
+#Teste de McNemar - IV
+
+**Aspectos Relevantes:**
+
+Suposição razoável: `\(n\)` não foi fixado. Logo,
+
+`$$N_{ij}\sim \textrm{Poisson}(\mu_{ij})$$`
+* `\(N_{12}|(N_{12}+N_{21})=s\sim \textrm{Bin}(s,p)\)`
+
+* Sob `\(H_0: p=1/2\)`,
+
+`$$\textrm{P}(N_{12}=n_{12}|(N_{12}+N_{21})=s)=\binom{s}{n_{12}} \left(\frac{1}{2}\right)^s$$`
+
+
+---
+class: animated, fadeIn
+#Teste de McNemar - VI
+
+**Teste Exato**
+
+Seja `\(n_{12}=a\)` o número de pares discordantes do tipo 1.
+
+* Se `\(H_1: p&lt;1/2\)`, então
+`$$\textrm{valor p}=\textrm{P}(N_{12}\leq a|N_{12}+N_{21}=s)=\left(\dfrac{1}{2}\right)^s\sum_{k=0}^a \binom{s}{k}$$`
+
+* Se `\(H_1: p&gt;1/2\)`, então
+`$$\textrm{valor p}=\textrm{P}(N_{12}\geq a|N_{12}+N_{21}=s)=\left(\dfrac{1}{2}\right)^s\sum_{k=a}^s \binom{s}{k}$$`
+
+* Se `\(H_1: p\neq 1/2\)`, então
+`$$\textrm{valor p}=2\left(\dfrac{1}{2}\right)^s\min\left\{\sum_{k=a}^s \binom{s}{k}\sum_{k=0}^a \binom{s}{k}\right\}$$`
+
+
+&gt;Observação: O Teste de McNemar, definido como anteriormente, também é conhecido como **&lt;span style="color:orange"&gt;Teste dos Sinais&lt;/span&gt;**.
+
+
+---
+class: animated, fadeIn
+#Teste de McNemar - VII
+
+**Teste Assintótico**
+
+Seja `\(Y=N_{12}|(N_{12}+N_{21})=s\)`. Daí, sob `\(H_0\)`.
+`$$Y\sim \textrm{Bin}(s,1/2).$$` 
+Seja `\(Z_t=\dfrac{Y-s/2}{\sqrt{s/4}}\)`. Para `\(n\)` suficientemente grande, `\(Z_t\sim N(0,1)\)` e, consequentemente, 
+`$$Q_t=Z_t^2\approx \chi_1^2.$$`
+A estatística `\(Q_t\)` pode ser usada como estatística de teste. 
+
+
+---
+class: animated, fadeIn
+##Teste de McNemar - VIII
+
+**Teste assintótico para n moderado/pequeno**
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+Q_{McN}&amp;=\dfrac{\left(|n_{12}-\frac{n_{12}+n_{21}}{2}|-\frac{1}{2}\right)^2}{\frac{n_{12}+n_{21}}{2}}+\dfrac{\left(|n_{21}-\frac{n_{12}+n_{21}}{2}|-\frac{1}{2}\right)^2}{\frac{n_{12}+n_{21}}{2}}\\
+			&amp;=\dfrac{(|n_{12}-n_{21}|-1)^2}{n_{12}+n_{21}}
+\end{align*}
+\]
+&lt;/div&gt;
+
+
+Sob `\(H_0\)`, 
+
+`$$Q_{McN}\sim \chi^2_{(1)}.$$`
+
+
+Portanto, rejeita-se `\(H_0\)` quando `\(Q_{McN}&gt;\chi^2_{(1,1-\alpha)}\)`, onde `\(\chi^2_{(1,1-\alpha)}\)` é  percentil de ordem `\(1-\alpha\)` da distribuição `\(\chi^2\)` com 1 grau de liberdade.
+
+
+---
+class: animated, fadeIn
+##Exemplo 12 - I
+
+**Associação entre Quimioterapia e câncer de mama:** 
+
+Foram observados pares de pacientes com aproximadamente mesma idade e condições clínicas por um período de 5 anos.
+
+* Grupos:
+
+ - A: Tratamento quimioterápico durante 6 meses (início na 1ª semana após mastectomia).
+ - B: Tratamento quimioterápico na 1ª semana.
+ 
+
+ |  Tratamento || Sobrevivência |           ||   Total  |
+ |:-----------:||:-------------:|:---------:||:--------:|
+ |             ||     Sim       |     Não   ||          |
+ |    A        ||      526      |    95     ||   621    |        
+ |    B        ||      515      |    106    ||   621    |
+ |   Total     ||     1041      |    201    ||  1242    |
+
+Observamos que as proporções de sobrevivência após 5 anos de pacientes dos dois grupos são bastante similares.
+
+
+---
+class: animated, fadeIn
+##Exemplo 12 - II
+
+**Problema**: Estes cálculos não consideram o pareamento. Faz-se necessário verificar a informação na forma de pares:
+
+
+ |  Tratamento A || Tratamento B  |           ||   Total  |
+ |:-----------:||:---------------:|:---------:||:--------:|
+ |             ||       Sim       |     Não   ||          |
+ |    Sim      ||        510      |    16     ||   526    |        
+ |    Não      ||          5      |     90    ||    95    |
+ |   Total     ||       515       |    106    ||   621    |
+
+--
+
+`$$\begin{align*}
+Q_{McN}&amp;=\dfrac{(|16-5|-1)^2}{16+5}=4,76\\
+\textrm{valor p}&amp;: 0,02919
+\end{align*}$$`
+
+--
+
+&gt;Há evidência estatística de diferença entre os tratamentos. Em particular, o tratamento A fornece melhores resultados.
+
+---
+class: animated, fadeIn
+##Exemplo 12 - III
+
+
+```r
+dados&lt;-matrix(c(510, 5, 16, 90), nrow = 2, dimnames = list(Trat_A = c("Sim", "Não"), Trat_B = c("Sim", "Não"))) 
+dados
+```
+
+```
+##       Trat_B
+## Trat_A Sim Não
+##    Sim 510  16
+##    Não   5  90
+```
+
+```r
+mcnemar.test(dados, correct = T)
+```
+
+```
+## 
+## 	McNemar's Chi-squared test with continuity correction
+## 
+## data:  dados
+## McNemar's chi-squared = 4.7619, df = 1, p-value = 0.0291
+```
+
+---
+class: animated, fadeIn
+##Exemplo 13 - I
+
+Dados coletados por um pesquisador para determinar se um novo método, mais simples, para detecção de cáries é mais eficiente que o metodo convencional. Selecionou-se uma amostra aleatória simples sem reposição de 97 pacientes. Em cada um deles foram aplicadas as duas técnicas. A tabela a seguir apresenta os resultados de uma subamostra de 24 pacientes.
+
+ | Simplificado ||  Convencional   |           ||   Total  |
+ |:------------:||:---------------:|:---------:||:--------:|
+ |              ||       Baixo     |    Alto   ||          |
+ |     Baixo    ||        11       |     0     ||    11    |        
+ |     Alto     ||         2       |     11    ||    13    |
+ |    Total     ||        13       |     11    ||    24    |
+ 
+--
+
+Neste caso: `\(s=2\)`, `\(n_{12}=0\)`, `\(H_1: p \neq 1/2\)`. Assim,
+`$$\textrm{valor p}=2\left(\dfrac{1}{2}\right)^2\min\left\{\sum_{k=0}^2 \binom{s}{k}\sum_{k=0}^0 \binom{s}{k}\right\}=0,5.$$`
+Assim, há indícios de que existe concordância marginal entre os métodos de detecção de cáries.
+ 
+
+---
+class: animated, fadeIn
+##Exemplo 13 - II
+
+
+```r
+dados&lt;-matrix(c(11, 2, 0, 11), nrow = 2, dimnames = list(Simplificado = c("Baixo", "Alto"), Convencional = c("Baixo", "Alto"))) 
+dados
+```
+
+```
+##             Convencional
+## Simplificado Baixo Alto
+##        Baixo    11    0
+##        Alto      2   11
+```
+
+```r
+mcnemar.test(dados, correct = T)
+```
+
+```
+## 
+## 	McNemar's Chi-squared test with continuity correction
+## 
+## data:  dados
+## McNemar's chi-squared = 0.5, df = 1, p-value = 0.4795
+```
+
+---
+class: animated, fadeIn
+##Exercício
+
+**Medicamentos para cefaleia:**
+
+Um estudo avaliou 100 doentes com cefaleias frequentes. Os mesmos 100 doentes tomaram durante um mês o medicamento A e no mês seguinte o medicamento B. Solicitou-se aos doentes que registassem se durante cada mês tiveram ou não dores de cabeça. Os resultados são resumidos a seguir:
+
+
+ |  Medicamento A || Medicamento B  |               ||   Total  |
+ |:--------------:||:--------------:|:-------------:||:--------:|
+ |                ||  Sem Cefaleia  |  Com Cefaleia ||          |
+ | Sem Cefaleia   ||        45      |         4     ||    49    |        
+ | Com Cefaleia   ||        17      |        34     ||    51    |
+ |   Total        ||        62      |        38     ||   100    |
+ 
+
+Podemos afirmar que os dois medicamentos têm o mesmo efeito?
+
+---
+class: animated, bounceInDown
+
+#Tabelas `\(r\times s\)`
+
+**Estrutura:**
+
+ |  X        ||          |    Y      |           |           ||   Total   |
+ |:---------:||:--------:|:---------:|:---------:|:---------:||:---------:|
+ |           || `\(j=1\)`    |   `\(j=2\)`   | `\(\cdots\)`  | `\(j=s\)`     ||           |
+ | `\(i=1\)`     || `\(n_{11}\)` | `\(n_{12}\)`  | `\(\cdots\)`  | `\(n_{1s}\)`  || `\(n_{1+}\)`  |        
+ | `\(i=2\)`     || `\(n_{21}\)` | `\(n_{22}\)`  | `\(\cdots\)`  | `\(n_{2s}\)`  || `\(n_{2+}\)`  |        
+ | `\(\vdots\)`  || `\(\vdots\)` | `\(\vdots\)`  | `\(\vdots\)`  | `\(\vdots\)`  || `\(\vdots\)`  |        
+ | `\(i=r\)`     || `\(n_{r1}\)` | `\(n_{r2}\)`  | `\(\cdots\)`  | `\(n_{rs}\)`  || `\(n_{r+}\)`  | 
+ |  Total    || `\(n_{+1}\)` | `\(n_{+2}\)`  | `\(\cdots\)`  | `\(n_{+s}\)`  ||   `\(n\)`     |        
+
+
+
+---
+class: animated, fadeIn
+##Variáveis X e Y  Nominais
+
+* Hipóteses:
+
+ - Se `\(n_{i+}\)` fixos `\(\Longrightarrow\)` Hipótese de homogeneidade.
+ 
+ - Se `\(n\)` fixo `\(\Longrightarrow\)` Hipótese de independência.
+ 
+ - Se totais aleatórios `\(\Longrightarrow\)` Hipótese de multiplicatividade
+
+* Estatística de Teste:
+
+`$$Q_P=\sum_{i=1}^s\sum_{j=1}^r\dfrac{(n_{ij}-e_{ij})^2}{e_{ij}}\sim \chi^2_{(s-1)(r-1)},$$`
+com `\(e_{ij}=\dfrac{(n_{i+})(n_{+j})}{n}\)`, `\(i=1,\ldots,s\)` e `\(j=1,\ldots,r\)`.
+
+---
+class: animated, fadeIn
+##Exemplo 14 - I
+
+ |  Partido     ||     |  Moradia  |      |      ||   Total   |
+ |:------------:||:---:|:---------:|:----:|:----:||:---------:|
+ |              ||  A  |    B      |  C   |  D   ||           |
+ | Democrata    || 221 |   160     | 360  | 140  ||   881     |        
+ | Independente || 200 |   291     | 160  | 311  ||   962     |        
+ | Republicano  || 208 |   106     | 316  |  97  ||   727     |        
+ |  Total       || 629 |   557     | 836  | 548  ||   2570    |        
+
+--
+
+* Modelo associado `\(\Longrightarrow\)`  Multinomial
+
+`$$\begin{align*}
+  \textbf{H}_0&amp;: p_{ij}=(p_{i+})(p_{+j}),\quad i=1,2,3 \textrm{ e } j=1,\ldots,4\\
+  \textbf{H}_1&amp;: p_{ij}\neq (p_{i+})(p_{+j}),\quad \textrm{para pelo menos um par } (i,j)
+\end{align*}$$`
+
+* `\(Q_P=273,92\Longrightarrow\)` há evidência de associação entre partido político e local de moradia.
+
+---
+class: animated, fadeIn
+##Exemplo 14 - II
+
+
+```r
+dados&lt;-matrix(c(221, 200, 208, 100, 291, 106, 300, 160, 316, 140, 311, 97), nrow = 3, ncol = 4, dimnames = list(Partido=c("Democrata", "Independente", "Republicano"), Moradia=c("A", "B", "C", "D")))
+dados
+```
+
+```
+##               Moradia
+## Partido          A   B   C   D
+##   Democrata    221 100 300 140
+##   Independente 200 291 160 311
+##   Republicano  208 106 316  97
+```
+
+```r
+chisq.test(dados)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  dados
+## X-squared = 282.21, df = 6, p-value &lt; 2.2e-16
+```
+
+
+---
+class: animated, fadeIn
+##Variável Y ordinal e X Nominal com totais `\(n_{i+}\)` fixos
+
+**Alternativa:** Atribuir escores `\(\textbf{a}=(a_1,\ldots,a_r)\)` para as categorias de Y e definir um escore médio `\(\bar{F}_i\)` para cada subpopulação, tal que
+
+`$$\bar{F}_i=\sum_{j=1}^r a_j(p_{(i)j}),\quad i=1,\ldots,s.$$`
+ Particularmente, se `\(s=2\)`, `\(H_0: \bar{F}_1=\bar{F}_2\)`.
+ 
+* `\(\bar{f}_i=\sum_{j=1}^r a_j(\hat{p}_{(i)j})=\sum_{j=1}^r a_j \left(\frac{n_{ij}}{n_{i+}}\right)\)`, `\(i=1,2\)`
+ 
+* `\(E(\bar{f}_1|\textrm{H}_0)=\sum_{j=1}^r a_j\left(\frac{\textrm{E}(N_{1j})}{n_{1+}}\right)=\sum_{j=1}^r a_j\left(\frac{n_{+j}}{n}\right)=\mu_a\)`
+
+* `\(\textrm{Var}(\bar{f}_1|\textrm{H}_0)=\frac{(n-n_{1+})}{(n_{1+})(n_{+1})}\sum_{j=1}^r (a_j-\mu_a)^2\left(\frac{n_{+j}}{n}\right)=\frac{(n-n_{1+})}{(n_{1+})(n_{+1})}V_a\)`
+
+
+
+---
+class: animated, bounceInDown
+
+#Medidas de Associação
+
+* Há famílias de medidas de associação para tabelas `\((r\times s)\)`.
+
+* Em geral, essas medidas são baseadas na estatística `\(Q_P=\sum_{i=1}^r\sum_{j=1}^s \dfrac{(n_{ij}-e_{ij})^2}{e_{ij}}\)`.
+
+* Busca-se construir estatísticas com suporte limitado (intervalo `\((0,a)\)`, `\(a&gt;0\)`) de tal forma que quanto maior/menor seja seu valor, maior/menor e o grau de independência.
+
+* A fórmula geral é `\(M=g(Q_P)/T\)`, em que `\(T\)` serve para limitar superiormente a estatística `\(M\)`. Assim, quanto mais próximo de zero for o valor de `\(M\)`, menor será a magnitude da associação e quanto mais próximo desse limitante, maior será a magnitude dessa associação.
+
+
+---
+class: animated, fadeIn
+##Coeficiente Phi -I
+
+A correlação pode ser usada como medida de associação entre duas variáveis, definida como
+ $$
+  \rho=\frac{\textrm{E}(XY)-\textrm{E}(X)\textrm{E}(Y)}{\sqrt{\textrm{Var}(X)\textrm{Var}(Y)}}.
+ $$
+
+  - Se `\(X\)` e `\(Y\)` são independentes, `\(\textrm{E}(XY)-\textrm{E}(X)\textrm{E}(Y)=0\)` e, portanto, `\(\rho=0\)`.
+  
+  - Se as duas variáveis são idênticas (opostas),isto é, `\(X=Y\)` `\((X=1-Y)\)`, então `\(\rho=1\, (-1)\)`.
+ 
+ &gt; **Observação**: A corelação de Pearson é uma estimativa da correlação, substituindo os momentos amostrais no lugar dos parâmetros respectivos.
+ 
+ 
+---
+class: animated, fadeIn
+##Coeficiente Phi - II
+
+ Em particular, quando `\(X\)` e `\(Y\)` são binárias, os momentos são dados por
+ 
+`$$\begin{align*}
+ \widehat{\textrm{E}(XY)}&amp;=\dfrac{n_{11}}{n},\quad \widehat{\textrm{E}(X)}=\dfrac{n_{1+}}{n},\quad \widehat{\textrm{E}(Y)}=\dfrac{n_{+1}}{n},\\
+ \widehat{\textrm{Var}(X)}&amp;=\dfrac{n_{1+}n_{2+}}{n^2},\quad \widehat{\textrm{Var}(Y)}=\dfrac{n_{+1}n_{+2}}{n^2}
+ \end{align*}$$`
+ 
+ 
+ Daí,
+ 
+`$$\begin{align*}
+ \widehat{\rho}&amp;=\dfrac{n_{11}n_{22}-n_{12}n_{21}}{\sqrt{n_{1+}n_{2+}n_{+1}n_{+2}}}\\
+ &amp;=\sqrt{Q_P/n}=\Phi \Longrightarrow \textbf{Coeficiente Phi}
+ \end{align*}$$`
+ 
+ &gt;**Observação**:  O coeficiente Phi não é muito apropriado para tabelas maiores do que `\(2\times 2\)`.
+ 
+
+---
+class: animated, fadeIn
+##Coeficiente V de Cramer
+
+É uma alternativa para o coeficiente Phi.
+
+`$$V=\sqrt{\dfrac{\Phi^2}{\textrm{min}(r,s)}}.$$`
+
+ &gt; **Vantagem**: Pode ser usado em tabelas de dimensão `\((r\times s)\)`. Em particular, quando `\(r=s=2\)`, os coeficientes `\(V\)` e `\(\Phi\)` são iguais.
+ 
+ 
+---
+class: animated, fadeIn
+##Coeficiente de contingência de Pearson
+
+`$$C=\sqrt{\dfrac{Q_P}{Q_P+n}}.$$`
+
+O coeficiente `\(C\)` não alcança o valor 1, sendo usualmente apresentado na sua forma ajustada para atingir o máximo 1.
+
+`$$C^*=C\sqrt{\dfrac{\textrm{min}(r,s)}{\textrm{min}(r,s)-1}}.$$`
+
+
+---
+class: animated, fadeIn
+##Medidas para variáveis ordinais
+
+* Quando ambas as variáveis são ordinais, outras medidas podem ser mais apropriadas, principalmente dependendo das hipóteses de  interesse.
+
+* Nesses casos, interessa mais medir concordância do que dependência, embora tais conceitos possam estar relacionados.
+
+* A idéia é comparar a quantidade de observações concordantes com as discordantes.
+
+&gt;**Observação**: Define-se:
+ - C: Número de pares concordantes
+ - D: Número de pares discordantes
+
+ 
+---
+class: animated, fadeIn
+##Coeficiente Gamma de Kruskall-Goodman
+
+Definido como a diferença entre a probabilidade de pares concordantes `\((p_c)\)` e discordantes `\((p_d)\)`, condicionada em todos os pares concordantes e discordantes. Isto é
+
+`$$\gamma=\dfrac{p_c-p_d}{p_c+p_d},$$`
+ onde `\(p_c=\frac{C}{n^2}\)` e `\(p_d=\frac{D}{n^2}\)`. Daí,
+ 
+`$$\widehat{\gamma}=\dfrac{C-D}{C+D}.$$`
+ &gt; O coeficiente `\(\gamma\)` toma valores entre `\(-1\)` e `\(1\)`.
+
+---
+class: animated, fadeIn
+##Coeficiente `\(\tau_b\)` de Kendall
+
+É similiar ao coeficiente `\(\gamma\)`, mas neste caso os empates são considerados. O coeficiente é calculado pela razão da diferença de probabilidades de concordâncias e discordâncias sobre a média geométrica da probabilidade de não haver nenhum empate entre `\(X\)` e `\(Y\)`.
+
+Assim,
+`$$\tau_b=\dfrac{p_c-p_d}{\sqrt{(1-\sum_i p_{i+}^2)(1-\sum_j p_{+j}^2)}}.$$`
+ Estimando os parâmetros com dados da tabela, obtem-se
+ 
+`$$\widehat{\tau}_b=\dfrac{C-D}{\sqrt{(n^2-\sum_i n^2_{i+})(n^2-\sum_j n^2_{+j})}},$$`
+ onde `\(n^2-\sum_i n^2_{i+}\)` e `\(n^2-\sum_j n^2_{+j}\)` representam o número de pares sem empates em `\(X\)` e `\(Y\)`, respectivamente.
+
+
+---
+class: animated, fadeIn
+##Coeficiente `\(\tau_c\)` de Kendall-Stuart
+
+Coeficiente relacionado com o `\(\gamma\)`. Também baseado na diferença das probabilidades de concordâncias e discordâncias, ajustando de acordo com o tamanho da tabela.
+
+Seja `\(m=\min(r,s)\)`. Pode mostrar-se que os máximos de `\(p_c\)` e de `\(p_d\)` são iguais a `\(\frac{m-1}{m}\)`. O coeficiente `\(\tau_c\)` define-se como:
+
+`$$\tau_c=\dfrac{p_c-p_d}{(m-1)/m}.$$`
+ Estimado por:
+ 
+`$$\widehat{\tau}_c=\dfrac{m(C-D)}{(m-1)n^2}.$$`
+
+---
+class: animated, fadeIn
+##Exemplo 15
+
+Dados coletados por um pesquisador para determinar se um novo método, mais simples, para detecção de cárie é mais eficiente que o metodo convencional. Selecionou-se uma amostra aleatória simples sem reposição de 97 pacientes. Em cada um deles foram aplicadas as duas técnicas. 
+
+ | Simplificado ||                 | Convencional  |            ||   Total  |
+ |:------------:||:---------------:|:------------ :|:----------:||:--------:|
+ |              ||       Baixo     |     Médio     |   Alto     ||          |
+ |     Baixo    ||        11       |      5        |    0       ||    16    |        
+ |     Médio    ||        14       |      34       |    7       ||    55    |
+ |     Alto     ||         2       |      13       |    11      ||    26    |
+ |    Total     ||        27       |      52       |    18      ||    97    |
+
+&gt; O interesse é verificar o grau de concordância absoluta entre os dois métodos.
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` de Cohen - I
+
+O coeficiente `\(\kappa\)`, diferentemente do coeficiente `\(\tau\)` de Kendall, compara a proporção (total) de concordância conjunta com a proporção (total) esperada de concordância conjunta.
+
+ Sejam
+ 
+* `\(p_0=\sum_{i=1}^r p_{ii}\)`: Proporção (total) de concordância conjunta.
+
+* `\(p_e=\sum_{i=1}^r p_{i+}p_{+i}\)`: Proporção (total) esperada de concordância sob independência.
+
+
+O coeficiente de concordância `\(\kappa\)` de Cohen é definido como
+
+`$$\kappa=\dfrac{p_0-p_e}{1-p_e}$$`
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` de Cohen - II
+
+**Concordância absoluta**
+
+ | Simplificado ||                 | Convencional  |            ||   Total   |
+ |:------------:||:---------------:|:------------ :|:----------:||:---------:|
+ |              ||       Baixo     |     Médio     |   Alto     ||           |
+ |     Baixo    ||    `\(p_{11}\)`     |      0        |    0       || `\(p_{1+}\)`  |        
+ |     Médio    ||        0        |    `\(p_{22}\)`   |    0       || `\(p_{2+}\)`  |
+ |     Alto     ||        0        |      0        |  `\(p_{33}\)`  || `\(p_{3+}\)`  |
+ |    Total     ||    `\(p_{+1}\)`     |    `\(p_{+2}\)`   |  `\(p_{+3}\)`  ||    `\(1\)`    |
+
+
+--
+
+Ou seja, `\(p_{i+}=p_{+j}=p_{ij}, \forall i=j\)` `\(\Longrightarrow\)` Concordância absoluta.
+
+
+&gt;**Observação**: A independência é incompatível com essa situação.
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` de Cohen - III
+
+* O coeficiente `\(\kappa\)` mensura a concordância conjunta (e não a concordância marginal).
+
+* Quanto menor (maior) for a quantidade de pares concordantes menor (maior) será o coeficiente `\(\kappa\)` (podendo ser negativo).
+
+* Quanto maior for a concordância entre os métodos, esperamos que `\(p_0\)` seja não apenas diferente, mas sim, maior do que do que `\(p_e\)`.
+
+--
+
+**Estimadores associados ao coeficiente `\(\kappa\)`**
+
+* Estimador pontual: 
+
+`\(\widehat{\kappa}=\dfrac{\widehat{p}_0-\widehat{p}_e}{1-\widehat{p}_e}\)`, em que `\(\widehat{p}_0=\sum_{i=1}^r \widehat{p}_{ii}\)` e `\(\widehat{p}_e=\sum_{i=1}^r \widehat{p}_{i+}\widehat{p}_{+i}\)`, `\(\widehat{p}_{ii}=\dfrac{n_{ii}}{n}\)`, `\(\widehat{p}_{i+}=\dfrac{n_{i+}}{n}\)` e `\(\widehat{p}_{+i}=\dfrac{n_{+i}}{n}\)`.
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` de Cohen - IV
+
+
+* Estimador do erro padrão assintótico:
+
+ `$$\widehat{ep}(\widehat{\kappa})=\dfrac{\sqrt{A+B-C}}{(1-\widehat{p}_e)\sqrt{n}},$$`
+ 
+em que
+
+`$$\begin{align*}
+  A&amp;=\sum_{i=1}^r \widehat{p}_{ii}\left[1-(\widehat{p}_{i+}+\widehat{p}_{+i})(1-\widehat{\kappa})\right]^2\\
+  B&amp;=(1-\widehat{\kappa})^2\sum_{i=1}^r\sum_{j\neq i} \widehat{p}_{ij} (\widehat{p}_{+i}+\widehat{p}_{j+})^2\\
+ C&amp;=\left[\widehat{\kappa}-\widehat{p}_e(1-\widehat{\kappa})\right]^2
+  \end{align*}$$`
+
+
+
+---
+class: animated, fadeIn
+##Exemplo 16
+
+Admitamos que dois especialistas (A e B) tenham que aceitar ou rejeitar um conjunto de 50 projetos de pesquisa.
+
+ |  Especialista A || Especialista B  |               ||   Total  |
+ |:---------------:||:---------------:|:-------------:||:--------:|
+ |                 ||     Aceitar     |     Rejeitar  ||          |
+ |    Aceitar      ||        20       |         5     ||    25    |        
+ |    Rejeitar     ||        10       |        15     ||    25    |
+ |   Total         ||        30       |        20     ||    50    |
+
+--
+
+Temos
+
+`$$\begin{align*}
+  \widehat{p}_0&amp;=\dfrac{20+15}{50}=0,7\\
+  \widehat{p}_e&amp;=\dfrac{25}{50}\times \dfrac{30}{50}+\dfrac{25}{50}\times \dfrac{20}{50}=0,3+0,2=0,5
+ \end{align*}$$`
+ 
+ Logo `\(\widehat{\kappa}=\dfrac{0,7-0,5}{1-0,5}=0,4 \Longrightarrow \textrm{ Concordância razoável}.\)`
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` ponderado - I
+
+* O coeficiente `\(\kappa\)` anteriormente apresentado  é apropriado para variáveis nominais e não leva em  consideração os pares discordantes.
+
+* Quando as categorias são ordinais, é importante considerar alguma "distância" entre elas.
+
+* Nesse caso é mais apropriado usar o **&lt;span style="color:orange"&gt;coeficiente de concordância ponderado&lt;/span&gt;**  `\((\kappa_w)\)`.
+
+* Algumas opções de pesos:
+ - Pesos lineares (igualmente espaçados):
+ 
+`$$w_{ij}=1-\dfrac{|i-j|}{r-1}.$$`
+ 
+ - Pesos quadráticos ("Fleiss-Cohen"):
+ 
+`$$w_{ij}=1-\dfrac{(i-j)^2}{(r-1)^2}.$$`
+ 
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` ponderado - II
+
+* Estimador pontual:
+
+ `$$\widehat{\kappa}_w=\dfrac{\widehat{p}_{0_w}-\widehat{p}_{e_w}}{1-\widehat{p}_{e_w}},$$` em que `\(\widehat{p}_{0_w}=\sum_{i=1}^r\sum_{j=1}^r w_{ij}\widehat{p}_{ij}\)` e `\(\widehat{p}_{e_w}=\sum_{i=1}^r\sum_{j=1}^r w_{ij}\widehat{p}_{i+}\widehat{p}_{+j}\)`.
+
+* Estimador do erro-padrão assintótico:
+
+ `$$\widehat{ep}(\widehat{\kappa}_w)=\dfrac{\sqrt{A-B}}{(1-\widehat{p}_e)\sqrt{n}},$$`
+ em que
+ 
+`$$\begin{align*}
+ A&amp;=\sum_{i=1}^r\sum_{j=1}^r \widehat{p}_{ij}\left[w_{ij}-(w_{i+}+w_{+j})(1-\widehat{\kappa}_w)\right]^2\quad
+ B=\left[\widehat{\kappa}_w-\widehat{p}_{e_w}(1-\widehat{\kappa}_w)\right]^2
+ \end{align*}$$`
+ 
+ e `\(w_{i+}=\sum_{j=1}^r w_{ij}\widehat{p}_{+j}\)` e `\(w_{+j}=\sum_{i=1}^r w_{ij}\widehat{p}_{i+}\)`.
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` ponderado - III
+
+* Para `\(n_{ij}\)`, suficientemente grandes, as distribuições de `\(\kappa\)` e `\(\kappa_w\)` aproximam-se de normais com suas respectivas medias e variâncias.
+
+* Portanto, podem ser testadas hipóteses de interesse e serem construídos intervalos de confiança, ambos assintóticos.
+
+* Os coeficientes `\(\kappa\)` e `\(\kappa_w\)` devem ser utilizados somente em tabelas quadradas.
+
+--
+
+De acordo com Landis &amp; Koch (1977), podemos classificar os valores dos coeficiente `\(\kappa\)` e `\(\kappa_w\)`, de acordo com
+
+ |      Valor      || Nível de Concordância    |
+ |:---------------:||:------------------------:|
+ |    `\(&lt;0\)`         ||   Nula (aleatório)       |
+ |    `\(0,0-0,2\)`    ||   Concordância mínima    |
+ |   `\(0,21-0,4\)`	   || Concordância razoável    |
+ |   `\(0,41-0,6\)`	   || Concordância moderada    |
+ |   `\(0,61-0,8\)`	   || Concordância substancial |
+ |   `\(0,81-1,0\)`	   || Concordância quase perfeita |
+
+
+
+---
+class: animated, fadeIn
+##Coeficiente de concordância `\(\kappa\)` ponderado - IV
+
+**Coeficientes para os dados do Exemplo 15**
+
+ |  Coeficiente    || Estimativa    |  ep   |    IC (95%)  |
+ |:---------------:||:-------------:|:-----:|:-------------|
+ |  `\(\kappa\)`			 ||	  0,296       | 0,083 | (0,134;0,458)|
+ | `\(\kappa_w\)` (pesos lineares)		|| 0,372 | 0,077 | (0,221;0,522)|
+ | `\(\kappa_w\)` (pesos quadráticos)	|| 0,471 | 0,077 | (0,320;0,623)|
+ 
+ 
+ &gt;Há uma concordância de razoável a moderada entre os métodos.
+
+---
+class: animated, fadeIn
+##Exemplo 15 - II
+
+
+```r
+dados&lt;-matrix(c(11, 14, 2, 5, 34, 13, 0, 7, 11), nrow = 3, ncol = 3, dimnames = list(Simplificado=c("Baixo", "Médio", "Alto"), Convencional=c("Baixo", "Médio", "Alto")))
+epi.kappa(dados,method="cohen")
+```
+
+```
+## $prop.agree
+##         obs       exp
+## 1 0.5773196 0.3996174
+## 
+## $pabak
+##         est       lower     upper
+## 1 0.1546392 -0.05442645 0.3540033
+## 
+## $kappa
+##         est         se    lower     upper
+## 1 0.2959816 0.08354111 0.132244 0.4597192
+## 
+## $z
+##   test.statistic      p.value
+## 1       3.542945 0.0003956846
+```
+
+```r
+epi.kappa(dados,method="fleiss")
+```
+
+```
+## $prop.agree
+##         obs       exp
+## 1 0.5773196 0.3996174
+## 
+## $pabak
+##         est       lower     upper
+## 1 0.1546392 -0.05442645 0.3540033
+## 
+## $kappa
+##         est         se    lower     upper
+## 1 0.2959816 0.07196796 0.154927 0.4370362
+## 
+## $z
+##   test.statistic      p.value
+## 1       4.112686 3.910826e-05
+```
+
+---
+class: animated, fadeIn
+##Exemplo 15 - III
+
+
+```r
+epi.kappa(dados,method="fleiss")
+```
+
+```
+## $prop.agree
+##         obs       exp
+## 1 0.5773196 0.3996174
+## 
+## $pabak
+##         est       lower     upper
+## 1 0.1546392 -0.05442645 0.3540033
+## 
+## $kappa
+##         est         se    lower     upper
+## 1 0.2959816 0.07196796 0.154927 0.4370362
+## 
+## $z
+##   test.statistic      p.value
+## 1       4.112686 3.910826e-05
+```
+
+---
+class: animated, fadeIn
+##Exemplo 15 - IV
+
+
+```r
+require(vcd)
+```
+
+```
+## Carregando pacotes exigidos: vcd
+```
+
+```
+## Carregando pacotes exigidos: grid
+```
+
+```r
+Kappa(dados)
+```
+
+```
+##             value     ASE     z  Pr(&gt;|z|)
+## Unweighted 0.2960 0.08266 3.581 3.427e-04
+## Weighted   0.3717 0.07667 4.849 1.243e-06
+```
+
+```r
+confint(Kappa(dados))
+```
+
+```
+##             
+## Kappa              lwr       upr
+##   Unweighted 0.1339713 0.4579919
+##   Weighted   0.2214727 0.5220127
+```
+
+
+---
+class: animated, fadeIn
+##Coeficiente D de Somer
+
+Similiar ao coeficiente `\(\tau_b\)` de Kendall. Entretanto, o coeficiente D de Somer ajusta por empates nas variáveis X e Y individualmente, criando dois índices:
+
+`$$\begin{align*}
+ D(Y|X)&amp;=\dfrac{p_c-p_d}{1-\sum_{i=1}^s p_{i+}^2}\\
+ D(X|Y)&amp;=\dfrac{p_c-p_d}{1-\sum_{j=1}^r p_{+j}^2}.
+ \end{align*}$$`
+ 
+ Logo, `\((D(Y|X)- (D(X|Y))\)` é a diferença entre as probabilidades de concordâncias e discordâncias, dado que não há empates nas filas de `\(X\)` (colunas de `\(Y\)` ). Esses coeficientes variam entre `\(-1\)` e `\(1\)`.
+
+--
+
+**Estimadores**
+
+`$$\begin{align*}
+ \widehat{D}(Y|X)&amp;=\dfrac{C-D}{n^2-\sum_{i=1}^s n_{i+}^2}\\
+ \widehat{D}(X|Y)&amp;=\dfrac{C-D}{1-\sum_{j=1}^r n_{+j}^2}.
+ \end{align*}$$`
+
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
