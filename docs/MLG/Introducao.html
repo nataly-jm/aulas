@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>MODELOS LINEARES GENERALIZADOS STA13829</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# MODELOS LINEARES GENERALIZADOS STA13829
+]
+.subtitle[
+## Familia Exponencial de Distribuições
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+# Introdução
+
+- Nelder e Wedderburn (1972), propuseram os Modelos Lineares Generalizados (MLGs), que são uma extensão dos modelos normais lineares. 
+
+--
+
+- A idéia básica consiste em abrir o leque de opções para a distribuição da variável resposta, permitindo que a mesma pertença à família exponencial de distribuições, bem como dar maior flexibilidade para a relação funcional entre a média da variável resposta ( `\(\mu\)` ) e o preditor linear `\(\eta\)`;
+
+--
+
+- A ligação entre a média e o preditor linear não é necessariamente a identidade, podendo assumir qualquer forma monótona não-linear.  
+
+--
+
+- Nelder e Wedderburn (1972) propuseram também um processo iterativo para a estimação dos parâmetros e introduziram o conceito de desvio que tem sido largamente utilizado na avaliação da qualidade do ajuste dos MLGs, bem como no desenvolvimento de resíduos e medidas de diagnóstico.  
+
+--
+
+- Estudos abrangentes sobre MLGs são encontrados nos livros de McCullagh e Nelder (1989), Cordeiro (1986), Dobson (1990) e Paula (2024).
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Família Exponencial de Distribuições
+
+- Muitas das distribuições conhecidas podem ser reunidas em uma família denominada família  exponencial de distribuições. 
+
+--
+
+- Por exemplo, pertencem a essa família as distribuições normal, binomial, gama, Poisson, normal inversa, multinomial, beta, logarítmica, entre outras. 
+
+--
+
+- Essa classe de distribuições foi proposta independentemente por Koopman, Pitman e Darmois através do estudo de propriedades de suficiência estatística.
+
+--
+
+- Posteriormente, muitos outros aspectos dessa família foram estudados e tornaram-se importantes na teoria moderna de Estatística. O conceito de família exponencial foi introduzido na Estatística por Fisher mas os modelos da família exponencial apareceram na Mecânica Estatística
+no final do século XIX e foram desenvolvidos por Maxwell, Boltzmann e Gibbs. 
+
+--
+
+- A importância da família exponencial de distribuições teve maior destaque, na área
+dos modelos de regressão, a partir do trabalho pioneiro de Nelder e Wedderburn
+(1972) que definiram os modelos lineares generalizados. Na década de 80, esses modelos popularizaram-se, inicialmente, no Reino Unido, e, posteriormente, nos Estados
+Unidos e na Europa.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Família exponencial uniparamétrica
+
+**Definição**
+
+A família exponencial uniparamétrica é caracterizada por uma função (de probabilidade ou densidade) da forma
+
+\begin{equation}
+f(y; \theta) = h(y) \exp[\eta(\theta) t(y) - b(\theta)], \label{eq:fam_exp_uni}
+\end{equation}
+
+em que as funções `\(\eta(\theta), b(\theta), t(y)\)` e `\(h(y)\)` assumem valores em subconjuntos dos reais.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Observações
+
+As funções `\(\eta(\theta), b(\theta), t(y)\)` não são únicas. Por exemplo, `\(\eta(\theta)\)` pode ser multiplicada por uma constante `\(k\)` e `\(t(y)\)` pode ser dividida pela mesma constante.
+
+--
+
+- Várias distribuições importantes podem ser escritas na forma da equação \ref{eq:fam_exp_uni}, tais
+como: Poisson, binomial, Rayleigh, normal, gama e normal inversa (as três últimas com a suposição de que um dos parâmetros é conhecido).
+
+--
+
+- No artigo de Cordeiro et al. (1995), são apresentadas 24 distribuições na forma da equação \ref{eq:fam_exp_uni}.
+
+--
+
+- O suporte da família exponencial não pode depender de `\(\theta\)`. Assim, a distribuição uniforme em (0, `\(\theta)\)` não é um modelo da família exponencial.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Família exponencial uniparamétrica na forma canônica - I
+
+**Definição**
+
+   A família exponencial uniparamétrica na *forma canônica* é definida à partir de  (\ref{eq:fam_exp_uni}) considerando que as funções `\(\eta(\theta)\)` e `\(t(y)\)` são iguais a identidade, de forma que 
+
+\begin{equation}
+f(y; \theta) = h(y) \exp[\theta y - b(\theta)]. \label{eq:fam_exp_uni_2}
+\end{equation}
+
+&gt; **Observação**:
+
+&gt; Na parametrização apresentada em (\ref{eq:fam_exp_uni_2}), `\(\theta\)` é chamado de parâmetro canônico. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Família exponencial uniparamétrica na forma canônica - II
+
+A partir da família exponencial uniparamétrica na forma canônica (\ref{eq:fam_exp_uni_2}), podemos introduzir um parâmetro de perturbação `\(\phi &gt; 0\)`, fazendo com que seja possível incorporar  distribuições biparamétricas à família exponencial. Sendo assim, a função densidade (ou de probabilidade) na família exponencial será da forma (Paula, 2024).
+
+\begin{equation}
+f(y; \theta, \phi) = exp[\phi \{ \theta y - b(\theta)\} + c(y, \phi)]. \label{eq:fam_exp_uni_3}
+\end{equation}		
+
+em que `\(b(\cdot)\)` e `\(c(\cdot)\)` são funções conhecidas. Para o modelo em (\ref{eq:fam_exp_uni_3}), valem as seguintes relações:
+
+.center[
+`\(E(Y) = \mu = b'(\theta), \qquad  Var(Y) = \phi^{-1}V\)`,
+]
+
+sendo `\(\phi^{-1} &gt; 0\)` ( `\(\phi &gt; 0\)` ) o parâmetro de dispersão (precisão) e `\(V = V(\mu) = \partial\mu/\partial\theta\)` é a função de variância. 
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Família exponencial uniparamétrica na forma canônica - III
+
+**Observações**
+
+- A função de variância desempenha um papel importante na família exponencial, uma vez que a mesma caracteriza a distribuição. Isto é, dada a função de variância, tem-se uma classe de distribuições correspondentes, e vice-versa. Essa propriedade permite a comparação de distribuições através de testes simples para a função de variância.
+
+--
+
+- Quando `\(\phi\)` é conhecido, a família de distribuições (\ref{eq:fam_exp_uni_3}) é idêntica à família exponencial na forma canônica (\ref{eq:fam_exp_uni_2}). 
+
+--
+
+- O suporte da família exponencial como definida em (\ref{eq:fam_exp_uni_3}) não pode depender de `\(\theta\)`. 
+
+--
+
+- A família de distribuições (\ref{eq:fam_exp_uni_3}) permite incorporar dados que exibem assimetria, dados de natureza discreta ou contínua e dados que são restritos a um intervalo do conjunto dos reais, conforme bem exemplificam as distribuições dadas na Tabela 1 a ser vista adiante.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Casos particulares de distribuições na família exponencial
+
+### Poisson
+
+Seja `\(Y\)` uma variável aleatória com distribuição Poisson de taxa média `\(\mu\)`.
+
+--
+
+A função de probabilidade de `\(Y\)` é expressa na forma
+
+`$$\frac{e^{-\mu} \mu^y}{y!}  = exp\left\{y \; \log \; \mu - \mu - \log \; y!\right\},$$`
+
+em que `\(\mu &gt; 0\)` e `\(y  = 0, 1, \cdots\)`.
+
+--
+
+Logo, 
+
+$$ \log(\mu) = \theta, \;\; b(\theta) = e^{\theta}, \;\; \phi = 1, \;\; c(y, \phi) = - \log \; y!. $$
+
+A função de variância é dada por `\(V(\mu) = \mu.\)`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Normal
+
+Seja `\(Y\)` uma variável aleatória com distribuição normal de média `\(\mu\)` e variância `\(\sigma^2\)`, `\(Y \sim N(\mu, \sigma^2)\)`. 
+
+--
+
+A função densidade de `\(Y\)` é expressa na forma
+
+ &lt;div class="math"&gt;
+\[\begin{align*}
+&amp;\frac{1}{\sigma \sqrt{2 \pi}} \exp\left\{-\frac{1}{2 \sigma^2} (y - \mu^2) \right\} \\
+&amp;=\exp \left\{ \frac{1}{\sigma^2} \left[\mu y - \frac{\mu^2}{2} \right]  - \frac{1}{2} \left[ \log(2 \pi \sigma^2) + \frac{y^2}{\sigma^2} \right] \right\},
+\end{align*}\]
+&lt;/div&gt;
+
+em que `\(y \in \mathbb{R}\)`, `\(\mu \in \mathbb{R}\)`, `\(\sigma^2 \in \mathbb{R^*_+}.\)`
+
+--
+
+Logo, 
+
+$$ \theta = \mu, \;\; b(\theta) = {\theta^2}/2, \;\; \phi = \sigma^{-2}, \;\; c(y, \phi) = \frac{1}{2} \log \frac{\phi}{2 \pi} - \frac{\phi y^2}{2}. $$
+
+A função de variância é dada por `\(V(\mu) = 1.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Binomial
+
+Seja `\(Y^*\)` a proporção de sucessos em `\(n\)` ensaios independentes, cada um com probabilidade de ocorrência `\(\mu\)`. Assumimos que `\(n Y^* \sim Bin(n, \mu)\)`. 
+
+--
+
+A função probabilidade de `\(Y^*\)` é expressa na forma
+
+ &lt;div class="math"&gt;
+\[\begin{align*} 
+&amp;\binom{n}{n y^*} \mu^{n y^*} (1 - \mu)^{n - n y^*} \\
+&amp;= exp \left\{ \log \binom{n}{n y^*} + n y^* \; \log\left( \frac{\mu}{1-\mu} \right) + n \log(1  - \mu)\right\}
+\end{align*}\]
+&lt;/div&gt;
+
+em que `\(0 &lt; \mu, y^* &lt; 1\)`.
+
+--
+
+Logo, 
+
+`$$\theta = \log\left( \frac{\mu}{1-\mu} \right), \;\; b(\theta) = \log(1 + e^\theta), \;\; \phi = n, \;\; c(y^*, \phi) = \binom{\phi}{\phi y^*}.$$`
+
+A função de variância é dada por `\(V(\mu) = \mu (1-\mu).\)`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### .
+
+**Tabela 1.** Principais distribuições pertencentes à família exponencial.
+
+|Distribuição   |       `\(b(\theta)\)`    |        `\(\theta\)`     |      `\(\phi\)`   |  `\(V(\mu)\)`   |
+|:--------------|:--------------------:|:-------------------:|:-------------:|:-----------:|
+|Normal         |       `\({\theta^2}/2\)` |         `\(\mu\)`       | `\(\sigma^{-2}\)` |        1    |
+|Poisson        |     `\(e^{\theta}\)`     |          `\(\log \mu\)` |        1      |     `\(\mu\)`   |
+|Binomial       | `\(\log(1 + e^\theta)\)` | `\(\log(\mu/(1-\mu))\)` |      `\(n\)`      | `\(\mu(1-\mu)\)`|
+|Normal Inversa |  `\(-\sqrt{-2 \theta}\)` |     `\(-1/{2 \mu^2}\)`  |    `\(\phi\)`     |    `\(\mu^3\)`  |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Função geradora de momentos - I
+
+A função geradora de momentos (f.g.m.) da família exponencial em (\ref{eq:fam_exp_uni_3}) é dada por:
+\begin{equation}
+M_Y(t; \theta, \phi) = E(e^{tY}) = \exp\{\phi[b(\phi^{-1} t + \theta) - b(\theta)]\}.
+\end{equation}
+
+&gt;**Prova**
+
+&gt;A prova será feita apenas para o caso de variáveis aleatórias contínuas. Lembrando-se que:
+$$ \int f(y; \theta, \phi) \; \partial y = 1, $$
+então
+$$ \int exp[\phi \{ \theta y - b(\theta)\} + c(y, \phi)] \; \partial y = 1, $$
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Função geradora de momentos - II
+
+&gt;obtendo-se
+\begin{equation}
+ \int \exp[\phi \; \theta \; y  + c(y, \phi)] \; \partial y = \exp[\phi \; b(\theta)].
+ \label{eq:result}
+\end{equation}
+Logo, 
+&lt;div class="math"&gt;
+\[\begin{align} 
+M_Y(t; \theta, \phi) &amp;= E(e^{tY}) = \int \exp(t y) f(y) \; \partial y\\ \nonumber
+&amp; =  \int \exp(t y) \exp[\phi \{ \theta y - b(\theta)\} + c(y, \phi)] \; \partial y\\ \nonumber
+&amp; =  \int \exp[\phi \{ (\phi^{-1} t + \theta) y - b(\theta) \} + c(y, \phi)] \; \partial y\\ \nonumber
+&amp; =  \frac{1}{\exp[\phi b(\theta)]} \int \exp[\phi \{ (\phi^{-1} t + \theta) y \} + c(y, \phi)] \; \partial y
+\end{align}\]
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Função geradora de momentos - III
+
+&gt;e, usando-se (\ref{eq:result}), tem-se que:
+\begin{equation}
+M_Y(t; \theta, \phi) = \frac{1}{\exp[\phi \; b(\theta)]} \exp[\phi \; b(\phi^{-1} t + \theta)],
+\end{equation}
+ou ainda
+\begin{equation}
+M_Y(t; \theta, \phi) = \exp\{\phi \; [b(\phi^{-1} t + \theta) - b(\theta)]\}.
+\end{equation}
+`\(\blacksquare\)`
+
+Vamos demonstrar a partir da f.g.m. que se uma variável aleatória `\(Y\)` pertence à família exponencial parametrizada com `\(\theta\)` e `\(\phi\)`, então 
+
+.center[
+`\(E(Y) = \mu = b'(\theta), \qquad Var(Y) = \phi^{-1}V\)`,
+]
+
+sendo `\(\phi^{-1} &gt; 0\)` ( `\(\phi &gt; 0\)` ) o parâmetro de dispersão (precisão) e `\(V = V(\mu) = \partial\mu/\partial\theta\)` é a função de variância.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Estatística Suficiente
+
+Sejam `\(\mathbf{Y} = (Y_1, Y_2, \cdots, Y_n)\)` uma amostra aleatória da variável aleatória `\(Y\)` com função de densidade ou de probabilidade `\(f(y \mid \theta)\)`. Quando resumimos a informação que os dados contêm sobre `\(\theta\)`, utilizando uma estatística, é importante que não haja perda de informação sobre `\(\theta\)`. Ou seja, a estatística deve, dentro do possível, conter toda a informação sobre `\(\theta\)` presente na amostra. Em outras palavras, se pudermos usar uma estatística `\(T = T(\mathbf{Y})\)` para extrairmos toda a informação que a amostra `\((Y_1, Y_2, \cdots, Y_n)\)` contém sobre  `\(\theta\)`, então dizemos que `\(T\)` (que pode ser um vetor) é suficiente para `\(\theta\)`. Dessa forma, o conhecimento apenas de `\(T\)` (e não necessariamente da amostra completa `\((Y_1, Y_2, \cdots, Y_n)\)` é suficiente para que sejam feitas inferências sobre `\(\theta\)`. 
+
+--
+
+&gt;**Definição**
+&gt;Dizemos que a estatística `\(T = T(\mathbf{Y})\)` é suficiente para um parâmetro `\(\theta\)`, quando a distribuição condicional de `\(\mathbf{Y}\)` dada a estatística `\(T = T(\mathbf{Y})\)` for independente de `\(\theta\)`.
+
+--
+
+A Definição acima permite, apenas, que possamos verificar se determinada estatística é ou não suficiente. Contudo não pode ser utilizada como um método para a obtenção de estatísticas suficientes. Um procedimento para a obtenção de estatística suficientes é o critério da fatoração que apresentamos a seguir. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Critério da Fatoração de Neyman
+
+&gt;**Proposição**
+Sejam `\((Y_1, Y_2,\cdots,Y_n)\)` uma amostra aleatória da distribuição da variável aleatória `\(Y\)` com função de densidade (ou de probabilidade) `\(f(y\mid\theta)\)` e função de verossimilhança `\(L(\theta; y)\)`. temos, então, que a estatística `\(T = T(Y_1, Y_2, \cdots, Y_n)\)` é suficiente para `\(\theta\)`, se, e somente se, pudermos escrever
+&lt;div class="math"&gt;
+\[\begin{align} 
+L(\theta;y)=h(y_1,y_2,\cdots,y_n) g_{\theta}(T(y_1,y_2,\cdots,y_n)),    
+\end{align}\]
+&lt;/div&gt;
+
+&gt;onde `\(h(y_1,y_2,\cdots,y_n)\)`  é uma função que depende apenas de `\(y_1, y_2,\cdots,y_n\)` (não depende de `\(\theta\)` ) e `\(g_{\theta}(T(y_1,y_2,\cdots,y_n))\)` depende de `\(\theta\)` e de `\((y_1, y_2, \cdots, y_n)\)` somente através de `\(T\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Estatística Suficiente na Família Exponencial - I
+
+Sejam `\((Y_1, Y_2, \cdots, Y_n)\)` uma amostra aleatória de uma distribuição que pertence à família exponencial. Sendo assim, 
+
+&lt;div class="math"&gt;
+\[\begin{align}
+L(\theta; y) &amp;= \prod_{i = 1}^n f(y_i; \theta, \phi)\\ \nonumber
+&amp;= \prod_{i = 1}^n \exp[\phi \{ \theta y_i - b(\theta)\} + c(y_i, \phi)]\\ \nonumber
+&amp;= \exp\left[\phi \left\{ \theta \sum_{i = 1}^n y_i - n \; b(\theta)\right\}\right] \exp\left[\sum_{i = 1}^n c(y_i, \phi)\right].
+\end{align}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Estatística Suficiente na Família Exponencial - II
+
+Pelo Teorema de Fatoração de Neyman e supondo `\(\phi\)` conhecido, tem-se que `\(T =  \sum_{i = 1}^n y_i\)` é uma estatística suficiente para `\(\theta\)` pois
+
+\begin{equation}
+ L(\theta; y) = g(t, \theta) h(y_1, y_2, \cdots, y_n),   
+\end{equation}
+
+sendo que `\(g(t, \theta)\)` depende de `\(\theta\)` e dos `\(y's\)` apenas através de `\(t\)` e `\(h(y_1, \cdots, y_n)\)` independe de `\(\theta\)`. 
+
+--
+
+Isso mostra que, se uma distribuição pertence a família exponencial uniparamétrica, então existe uma estatística suficiente.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Família Exponencial Multiparamétrica
+
+A família exponencial multiparamétrica de dimensão `\(k\)` é caracterizada por uma função (de probabilidade ou densidade) da forma
+
+\begin{equation}
+f(\mathrm{y}; \boldsymbol{\theta}) = h(\mathrm{y})\exp\left[ \sum_{i = 1}^k \eta_i(\boldsymbol{\theta})t_i(\mathrm{y}) - b(\boldsymbol{\theta})  \right],
+\label{eq:fam:exp:multi}
+\end{equation}
+
+em que `\(\boldsymbol{\theta}\)` é um vetor de parâmetros, usualmente, de dimensão `\(k\)`, e as funções `\(\eta_i(\boldsymbol{\theta})\)`, `\(b(\boldsymbol{\theta})\)`, `\(t_i(\mathrm{y})\)` e `\(h(\mathrm{y})\)` assumem valores em subconjuntos dos reais. Obviamente, a forma dada em (\ref{eq:fam_exp_uni}) é um caso especial de (\ref{eq:fam:exp:multi}).
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Observações
+
+- Pelo teorema da fatoração, o vetor
+`\(\boldsymbol{T} = [T_1(\boldsymbol{Y}), \cdots, T_k(\boldsymbol{Y})]^T\)`; é suficiente para o vetor de parâmetros `\(\boldsymbol{\theta}\)`.
+
+- Quando `\(\eta_i(\boldsymbol{\theta}) = \theta_i\)`, `\(i = 1, \cdots, k\)`, obtém-se a família exponencial na forma canônica com parâmetros canônicos `\(\theta_1, \cdots, \theta_k\)` e estatísticas canônicas `\(T_1(\boldsymbol{Y}), \cdots, T_k(\boldsymbol{Y})\)`. Têm-se que
+
+&lt;div class="math"&gt;
+\[\begin{align}
+f(\mathrm{y}; \boldsymbol{\theta}) = h(\mathrm{y})\exp\left[ \sum_{i = 1}^k \theta_i t_i(\mathrm{y}) - b(\boldsymbol{\theta})  \right], \label{eq:fam:exp:multi_2}
+\end{align}\]
+&lt;/div&gt;
+
+- Considere a família exponencial parametrizada de acordo com (\ref{eq:fam_exp_uni_3}). Se `\(\phi\)` não for conhecido, a família (\ref{eq:fam_exp_uni_3}) pode, ou não, pertencer à família exponencial biparamétrica em (\ref{eq:fam:exp:multi_2}). 
+
+- Para `\(\phi\)` desconhecido, as distribuições normal, gama e normal inversa pertencem à família exponencial dada em (\ref{eq:fam:exp:multi_2}).
+
+- É possível mostrar que a distribuição beta pertence à família exponencial biparamétrica canônica (\ref{eq:fam:exp:multi_2}), com `\(k = 2\)`. 
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
