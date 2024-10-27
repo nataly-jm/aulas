@@ -8,7 +8,7 @@ description: Repositório exclusivo para a disciplina de modelos lineares genera
 
 # Slides
   
-* [Programa da disciplina](https://nataly-jm.github.io/aulas/MLG/Plano_Ensino.html)
+* [Programa da disciplina](https://nataly-jm.github.io/aulas/MLG/Plano de Ensino.html)
 * [Introdução](https://nataly-jm.github.io/aulas/MLG/Familia_exponencial.html)
 
 
