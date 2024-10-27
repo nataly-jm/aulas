@@ -9,6 +9,8 @@ description: Repositório exclusivo para as disciplinas do curso de Estatística
 
 # [Dados Categorizados](https://nataly-jm.github.io/aulas/categorizados){:target="_blank"}
 
+# [Modelos Lineares Generalizados](https://nataly-jm.github.io/aulas/MLG){:target="_blank"}
+
 
 
 
