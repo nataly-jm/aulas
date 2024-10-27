@@ -1,2 +1,2 @@
-# Planejamento de Experimentos I
-Material da disciplina Planejamento de Experimentos I
+# Modelos Lineares Generalizados
+Material da disciplina Modelos Lineares Generalizados
