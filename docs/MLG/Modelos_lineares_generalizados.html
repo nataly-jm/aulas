@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>MODELOS LINEARES GENERALIZADOS STA13829</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# MODELOS LINEARES GENERALIZADOS STA13829
+]
+.subtitle[
+## Modelos Lineares Generalizados
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+# Introdução - I
+
+- Nelder e Wedderburn (1972) mostraram que uma série de técnicas estatísticas, comumente estudadas separadamente, podem ser formuladas, de uma maneira unificada, como uma classe de modelos de regressão. A essa teoria unificadora de modelagem estatística, uma extensão dos modelos clássicos de regressão,
+deram o nome de **&lt;span style="color:orange"&gt;modelos lineares generalizados&lt;/span&gt;** (MLG). Esses modelos envolvem uma variável resposta univariada, variáveis explanatórias e uma amostra aleatória de `\(n\)` observações independentes, sendo que: 
+
+--
+
+ - a variável resposta, **&lt;span style="color:orange"&gt;componente aleatório&lt;/span&gt;** do modelo, tem uma distribuição pertencente a família de distribuições apresentada na Equação (3) que engloba as distribuições normal, gama e normal inversa para dados contínuos; binomial para proporções; Poisson para contagens;
+--
+
+ - as variáveis explanatórias entram na forma de uma estrutura linear, constituindo o **&lt;span style="color:orange"&gt;componente sistemático&lt;/span&gt;** do modelo;
+
+--
+
+ - a ligação entre os componentes aleatório e sistemático é feita através de uma
+função adequada como, por exemplo, logarítmica para os modelos log-lineares, chamada **&lt;span style="color:orange"&gt;função de ligação&lt;/span&gt;**.  
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Introdução - II
+
+O componente sistemático é estabelecido durante o planejamento (fundamental para a obtenção de conclusões confiáveis) do experimento, resultando em modelos de regressão (linear simples, múltipla, não linear, etc). O componente aleatório é estabelecido assim que são definidas as medidas a serem feitas, que podem ser contínuas ou discretas, exigindo o ajuste de distribuições diferentes. A partir de um mesmo experimento podem ser obtidas medidas de diferentes tipos, como por exemplo, dados de altura de plantas, número de lesões por planta e proporção de plantas doentes.
+
+--
+
+No modelo de regressão clássico, tem-se 
+
+$$ \boldsymbol{Y  = \mu + \epsilon}, $$
+
+sendo `\(\boldsymbol{Y}\)` o vetor, de dimensão `\(n \times 1\)`, da variável resposta, `\(\boldsymbol{\mu} = E(\boldsymbol{Y}) = \boldsymbol{X \beta}\)`, o componente sistemático, `\(\boldsymbol{X}\)` a matriz do modelo, de dimensões `\(n \times p\)`, `\(\boldsymbol{\beta} = (\beta_1, \; \beta_2, \; \cdots, \; \beta_p)^T\)`, o vetor dos parâmetros, `\(\boldsymbol{\epsilon} = (\epsilon_1, \; \cdots, \; \epsilon_n)^T\)` , o componente aleatório com `\(\epsilon_i \sim N(0, \sigma^2)\)`, `\(i = 1, ..., n\)`. 
+
+Nesse caso, tem-se que `\(\boldsymbol{Y} \sim N_p(\boldsymbol{\mu}, \sigma^2 \boldsymbol{I})\)`  e o vetor de médias `\(\boldsymbol{\mu}\)` da distribuição normal, que define o componente aleatório, é igual ao preditor linear que representa o componente sistemático. Essa é a forma mais simples de ligação entre esses dois componentes, sendo denominada **&lt;span style="color:orange"&gt;função de ligação identidade&lt;/span&gt;**.  
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estruturação matemática de um MLG - I
+
+Os modelos lineares generalizados podem ser usados quando se tem uma única variável aleatória `\(Y\)` associada a um conjunto de variáveis explanatórias `\(x_1, \cdots, x_p\)`. Para uma amostra de `\(n\)` observações, `\((y_i; \boldsymbol{x}_i)\)` em que `\(\boldsymbol{x}_i = (x{i_1}, \cdots, x_{ip})^T\)` é o vetor coluna de variáveis explicativas, o MLG envolve os três componentes.
+
+--
+
+- **Componente aleatório**: representado por um conjunto de variáveis aleatórias independentes `\(Y_1, \cdots, Y_n\)` provenientes de uma mesma distribuição que faz parte da família de distribuições na Equação (3) com médias `\(\mu_1, \cdots, \mu_n\)`, ou seja,
+    
+$$
+E(Y_i) = \mu_i, \quad i = 1, \cdots, n, 
+$$
+    
+sendo `\(\phi&gt; 0\)` um parâmetro de dispersão e o parâmetro `\(\theta_i\)` denominado parâmetro canônico. Então, a função de probabilidade de `\(Y_i\)` é dada por:
+
+--
+
+`\begin{equation}
+f(y_i; \theta_i, \phi) = exp[\phi \{ \theta_i y_i - b(\theta_i)\} + c(y_i, \phi)],
+\label{eq:fam_exp_uni_33}
+\end{equation}`
+
+em que `\(b(\cdot)\)` e `\(c(\cdot)\)` são funções conhecidas. 
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estruturação matemática de um MLG - II
+
+Conforme visto, valem as seguintes relações: 
+
+.center[
+`\(E(Y_i) = \mu_i = b'(\theta_i), \;\;\; Var(Y_i) = \phi^{-1}V_i\)`,
+]
+
+sendo `\(\phi^{-1} &gt; 0\)` ($\phi &gt; 0$) o parâmetro de dispersão (precisão) e `\(V_i = V(\mu_i) = \partial\mu_i/\partial\theta_i\)` é a função de variância que depende unicamente da média `\(\mu_i\)`.
+
+--
+
+O parâmetro natural `\(\theta_i\)` pode ser expresso como
+
+$$ \theta_i = \int V_i^{-1} \partial \mu_i = q(\mu_i), \;\; \mbox{pois} \;\;\; \frac{\partial \theta_i}{ \partial \mu_i}  = \frac{1}{V_i} = q(\mu_i), $$
+
+sendo `\(q(\mu_i)\)` uma função conhecida da média `\(\mu_i\)`.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estruturação matemática de um MLG - III
+
+- **Componente sistemático**: As variáveis explicativas entram na forma de uma soma linear de seus efeitos
+    
+`$$\eta_i = \sum_{r = 1}^p x_{ir} \beta_r =  \boldsymbol{x}_i^T \boldsymbol{\beta}\;\;\; \mbox{ou} \; \boldsymbol{\eta = X \beta},$$`
+    
+sendo `\(\boldsymbol{X} = (\boldsymbol{x}_1, \cdots, \boldsymbol{x}_n)^T\)` a matriz do modelo, `\(\boldsymbol{\beta} = (\beta_1, \cdots, \beta_p)^T\)` o vetor de parâmetros e `\(\boldsymbol{\eta} = (\eta_1, \eta_2, \cdots, \eta_n)^T\)` o preditor linear. Se uma parâmetro tem valor conhecido, o termo correspondente na estrutura linear é chamado *offset*.
+
+--
+
+- **Função de ligação**: uma função que **relaciona** o componente aleatório ao componente sistemático, ou seja, vincula a média ao preditor linear, isto é, 
+    
+`$$\eta_i = g(\mu_i),$$`
+    
+sendo `\(g(\cdot)\)` uma função monótona e diferenciável.
+    
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Observações
+
+- Os parâmetros `\(\theta_i\)` da família de distribuições (\ref{eq:fam_exp_uni_33}) não são de interesse direto (pois há um para cada observação).
+
+--
+
+- Temos interesse sim em um conjunto menor de parâmetros, `\(\beta_1, \cdots, \beta_p\)` tais que uma combinação linear dos `\(\beta's\)` seja igual a alguma função do valor esperado de `\(Y_i\)`. 
+
+--
+
+- Pelo menos em teoria, cada observação pode ter uma função de ligação diferente.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Funções de ligação - I
+
+Supondo `\(\phi\)` conhecido, o logaritmo da função de  verossimilhança de um MLG com respostas independentes pode ser expresso na forma:
+
+`$$L(\boldsymbol{\beta}) = \sum_{i = 1}^n \phi \{ y_i \theta_i - b(\theta_i) \} + \sum_{i = 1}^n c(y_i, \phi).$$`
+
+--
+
+Um caso particular importante ocorre quando o parâmetro canônico `\((\theta)\)` coincide com o preditor linear, isto é, quando `\(\theta_i = \eta_i = \sum_{j = 1}^p x_{ij} \beta_j\)`. Nesse caso, `\(L(\boldsymbol{\beta})\)` fica dado por:
+
+`$$L(\boldsymbol{\beta}) = \sum_{i = 1}^n \phi \left\{ y_i \sum_{j = 1}^p x_{ij} \beta_j - b\left(\sum_{j = 1}^p x_{ij} \beta_j \right) \right\} + \sum_{i = 1}^n c(y_i, \phi).$$`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Funções de ligação - II
+
+Definindo a estatística `\(S_j = \sum_{i = 1}^n Y_i x_{ij}\)`, temos que `\(L(\boldsymbol{\beta})\)` fica re-expresso por:
+
+`$$L(\boldsymbol{\beta}) = \phi \sum_{j = 1}^p s_j \beta_j - \phi  \sum_{i = 1}^n b\left(\sum_{j = 1}^p x_{ij} \beta_j \right) + \sum_{i = 1}^n c(y_i, \phi).$$`
+
+Logo, pelo teorema de fatoração, a estatística `\(\boldsymbol{S} = (S_1, \cdots, S_p)^T\)` é suficiente para o vetor `\(\boldsymbol{\beta} = (\beta_1, \cdots, \beta_p)^T\)` e tem dimensão mínima `\(p\)` e, portanto, ocorre uma redução na dimensão das estatísticas suficientes de `\(n\)` (o número de observações) para `\(p\)` (o número de parâmetros a serem estimados). 
+
+--
+
+As estatísticas `\(S_1, \cdots, S_p\)` correspondem à maior redução que os dados podem alcançar, sem qualquer perda de informação relevante para se fazer inferência sobre o vetor de parâmetros desconhecidos `\(\boldsymbol{\beta}\)`.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Observações
+
+- As ligações que correspondem a tais estatísticas suficientes `\(S_1, \cdots, S_p\)` são chamadas de ligações canônicas e desempenham um papel importante na teoria dos MLG's. 
+
+--
+
+- As ligações canônicas mais comuns são
+
+|  |Distribuição Normal | Binomial | Poisson | Gama | N.Inversa|
+|--|:------------------:|:--------:|:-------:|:----:|:--------:|
+|   Ligação   | `\(\mu = \eta\)` | `\(\log\left( \frac{\mu}{1-\mu}\right) = \eta\)` | `\(\log \mu = \eta\)` | `\(\mu^{-1} = \eta\)` | `\(\mu^{-2} = \eta\)`|
+
+
+&gt;**Importante**: As funções de ligação canônicas produzem propriedades estatísticas de interesse para o modelo, tais como, suficiência, facilidade de cálculo, unicidade das estimativas de máxima verossimilhança e, em alguns casos, interpretação simples.
+
+--
+
+- Deve ser lembrado, porém, que embora as funções de ligação canônicas conduzam a propriedades estatísticas desejáveis para o modelo, principalmente, no caso de amostras pequenas, não há nenhuma razão a priori para que os efeitos sistemáticos do modelo devam ser aditivos na escala dada por tais funções.
+
+--
+
+- Para ligações não-canônicas, Wedderburn (1976) discute condições à existência da concavidade de `\(L(\boldsymbol{\beta}; y)\)`.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Outras ligações
+
+- Potência: `\(\eta = \mu^{\lambda}\)`, onde `\(\lambda\)` é um número real, principalmente para dados com média positiva;
+
+--
+
+- Probit: `\(\eta = \Phi^{-1}(\mu)\)`, em que `\(\mu\)` é a proporção de sucessos de uma distribuição binomial e `\(\Phi(\cdot)\)` é a função de distribuição acumulada da distribuição normal padrão;
+
+--
+
+- Logito:  `\(\eta = \log[\mu/(1-\mu)]\)`, é a proporção de sucessos de uma distribuição binomial;
+
+--
+
+- Complemento log-log:  `\(\eta = \log[-\log(1-\mu)]\)`, é a proporção de sucessos de uma distribuição binomial; 
+--
+
+- Logaritmo:  `\(\eta = \log[\mu]\)`, para dados com média positiva;
+
+
+--
+
+- Box-Cox:  `\(\eta = (\mu^{\lambda}-1)/\lambda\)`.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Ligação de Aranda-Ordaz
+
+Uma outra transformação importante foi proposta por Aranda-Ordaz (1981) para dados binários. A transformação é dada por
+
+`$$\eta = \log\left[ \frac{(1-\pi)^{-\alpha} - 1}{\alpha} \right],$$`
+
+em que `\(0 &lt; \mu &lt; 1\)` e `\(\alpha\)` é uma constante desconhecida positiva.
+
+--
+
+
+**Casos particulares**:
+
+
+- Quando `\(\alpha = 1\)` temos a função de ligação logito.
+
+--
+
+- Quando `\(\alpha \rightarrow 0\)` temos a função de ligação complemento log-log.
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
