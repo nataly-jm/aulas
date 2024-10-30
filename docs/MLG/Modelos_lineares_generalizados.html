@@ -116,7 +116,7 @@ sendo `\(\phi&gt; 0\)` um parâmetro de dispersão e o parâmetro `\(\theta_i\)`
 --
 
 `\begin{equation}
-f(y_i; \theta_i, \phi) = exp[\phi \{ \theta_i y_i - b(\theta_i)\} + c(y_i, \phi)],
+f(y_i; \theta_i, \phi) = \exp[\phi \{ \theta_i y_i - b(\theta_i)\} + c(y_i, \phi)],
 \label{eq:fam_exp_uni_33}
 \end{equation}`
 
@@ -134,7 +134,7 @@ Conforme visto, valem as seguintes relações:
 `\(E(Y_i) = \mu_i = b'(\theta_i), \;\;\; Var(Y_i) = \phi^{-1}V_i\)`,
 ]
 
-sendo `\(\phi^{-1} &gt; 0\)` ($\phi &gt; 0$) o parâmetro de dispersão (precisão) e `\(V_i = V(\mu_i) = \partial\mu_i/\partial\theta_i\)` é a função de variância que depende unicamente da média `\(\mu_i\)`.
+sendo `\(\phi^{-1} &gt; 0\)` `\((\phi &gt; 0)\)` o parâmetro de dispersão (precisão) e `\(V_i = V(\mu_i) = \partial\mu_i/\partial\theta_i\)` é a função de variância que depende unicamente da média `\(\mu_i\)`.
 
 --
 
@@ -225,9 +225,9 @@ class: animated, fadeIn
 
 - As ligações canônicas mais comuns são
 
-|  |Distribuição Normal | Binomial | Poisson | Gama | N.Inversa|
-|--|:------------------:|:--------:|:-------:|:----:|:--------:|
-|   Ligação   | `\(\mu = \eta\)` | `\(\log\left( \frac{\mu}{1-\mu}\right) = \eta\)` | `\(\log \mu = \eta\)` | `\(\mu^{-1} = \eta\)` | `\(\mu^{-2} = \eta\)`|
+|Distribuição |         Normal     | Binomial | Poisson | Gama | N.Inversa|
+|:-----------:|:------------------:|:--------:|:-------:|:----:|:--------:|
+|   Ligação   |    `\(\mu = \eta\)`    | `\(\log\left( \frac{\mu}{1-\mu}\right) = \eta\)` | `\(\log \mu = \eta\)` | `\(\mu^{-1} = \eta\)` | `\(\mu^{-2} = \eta\)`|
 
 
 &gt;**Importante**: As funções de ligação canônicas produzem propriedades estatísticas de interesse para o modelo, tais como, suficiência, facilidade de cálculo, unicidade das estimativas de máxima verossimilhança e, em alguns casos, interpretação simples.
@@ -276,7 +276,7 @@ class: animated, fadeIn
 
 Uma outra transformação importante foi proposta por Aranda-Ordaz (1981) para dados binários. A transformação é dada por
 
-`$$\eta = \log\left[ \frac{(1-\pi)^{-\alpha} - 1}{\alpha} \right],$$`
+`$$\eta = \log\left[ \frac{(1-\mu)^{-\alpha} - 1}{\alpha} \right],$$`
 
 em que `\(0 &lt; \mu &lt; 1\)` e `\(\alpha\)` é uma constante desconhecida positiva.
 

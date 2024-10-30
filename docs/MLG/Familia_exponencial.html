@@ -116,9 +116,9 @@ class: animated, fadeIn
 
 A família exponencial uniparamétrica é caracterizada por uma função (de probabilidade ou densidade) da forma
 
-\begin{equation}
+`\begin{equation}
 f(y; \theta) = h(y) \exp[\eta(\theta) t(y) - b(\theta)], \label{eq:fam_exp_uni}
-\end{equation}
+\end{equation}`
 
 em que as funções `\(\eta(\theta), b(\theta), t(y)\)` e `\(h(y)\)` assumem valores em subconjuntos dos reais.
 
@@ -154,9 +154,9 @@ class: animated, fadeIn
 
    A família exponencial uniparamétrica na *forma canônica* é definida à partir de  (\ref{eq:fam_exp_uni}) considerando que as funções `\(\eta(\theta)\)` e `\(t(y)\)` são iguais a identidade, de forma que 
 
-\begin{equation}
+`\begin{equation}
 f(y; \theta) = h(y) \exp[\theta y - b(\theta)]. \label{eq:fam_exp_uni_2}
-\end{equation}
+\end{equation}`
 
 &gt; **Observação**:
 
@@ -171,9 +171,9 @@ class: animated, fadeIn
 
 A partir da família exponencial uniparamétrica na forma canônica (\ref{eq:fam_exp_uni_2}), podemos introduzir um parâmetro de perturbação `\(\phi &gt; 0\)`, fazendo com que seja possível incorporar  distribuições biparamétricas à família exponencial. Sendo assim, a função densidade (ou de probabilidade) na família exponencial será da forma (Paula, 2024).
 
-\begin{equation}
-f(y; \theta, \phi) = exp[\phi \{ \theta y - b(\theta)\} + c(y, \phi)]. \label{eq:fam_exp_uni_3}
-\end{equation}		
+`\begin{equation}
+f(y; \theta, \phi) = \exp[\phi\{\theta y - b(\theta)\} + c(y, \phi)].  \label{eq:fam_exp_uni_3}
+\end{equation}`
 
 em que `\(b(\cdot)\)` e `\(c(\cdot)\)` são funções conhecidas. Para o modelo em (\ref{eq:fam_exp_uni_3}), valem as seguintes relações:
 
@@ -220,7 +220,7 @@ Seja `\(Y\)` uma variável aleatória com distribuição Poisson de taxa média 
 
 A função de probabilidade de `\(Y\)` é expressa na forma
 
-`$$\frac{e^{-\mu} \mu^y}{y!}  = exp\left\{y \; \log \; \mu - \mu - \log \; y!\right\},$$`
+`$$\frac{e^{-\mu} \mu^y}{y!}  = \exp\left\{y \; \log \; \mu - \mu - \log \; y!\right\},$$`
 
 em que `\(\mu &gt; 0\)` e `\(y  = 0, 1, \cdots\)`.
 
@@ -246,7 +246,7 @@ A função densidade de `\(Y\)` é expressa na forma
 
  &lt;div class="math"&gt;
 \[\begin{align*}
-&amp;\frac{1}{\sigma \sqrt{2 \pi}} \exp\left\{-\frac{1}{2 \sigma^2} (y - \mu^2) \right\} \\
+&amp;\frac{1}{\sigma \sqrt{2 \pi}} \exp\left\{-\frac{1}{2 \sigma^2} (y - \mu)^2 \right\} \\
 &amp;=\exp \left\{ \frac{1}{\sigma^2} \left[\mu y - \frac{\mu^2}{2} \right]  - \frac{1}{2} \left[ \log(2 \pi \sigma^2) + \frac{y^2}{\sigma^2} \right] \right\},
 \end{align*}\]
 &lt;/div&gt;
@@ -314,16 +314,16 @@ class: animated, fadeIn
 ## Função geradora de momentos - I
 
 A função geradora de momentos (f.g.m.) da família exponencial em (\ref{eq:fam_exp_uni_3}) é dada por:
-\begin{equation}
+`\begin{equation}
 M_Y(t; \theta, \phi) = E(e^{tY}) = \exp\{\phi[b(\phi^{-1} t + \theta) - b(\theta)]\}.
-\end{equation}
+\end{equation}`
 
 &gt;**Prova**
 
 &gt;A prova será feita apenas para o caso de variáveis aleatórias contínuas. Lembrando-se que:
 $$ \int f(y; \theta, \phi) \; \partial y = 1, $$
 então
-$$ \int exp[\phi \{ \theta y - b(\theta)\} + c(y, \phi)] \; \partial y = 1, $$
+`$$\int \exp[\phi\left\{\theta y - b(\theta)\right\} + c(y, \phi)] \; \partial y = 1,$$`
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
@@ -332,10 +332,10 @@ class: animated, fadeIn
 ## Função geradora de momentos - II
 
 &gt;obtendo-se
-\begin{equation}
+`\begin{equation}
  \int \exp[\phi \; \theta \; y  + c(y, \phi)] \; \partial y = \exp[\phi \; b(\theta)].
  \label{eq:result}
-\end{equation}
+\end{equation}`
 Logo, 
 &lt;div class="math"&gt;
 \[\begin{align} 
@@ -353,13 +353,13 @@ class: animated, fadeIn
 ## Função geradora de momentos - III
 
 &gt;e, usando-se (\ref{eq:result}), tem-se que:
-\begin{equation}
+`\begin{equation}
 M_Y(t; \theta, \phi) = \frac{1}{\exp[\phi \; b(\theta)]} \exp[\phi \; b(\phi^{-1} t + \theta)],
-\end{equation}
+\end{equation}`
 ou ainda
-\begin{equation}
+`\begin{equation}
 M_Y(t; \theta, \phi) = \exp\{\phi \; [b(\phi^{-1} t + \theta) - b(\theta)]\}.
-\end{equation}
+\end{equation}`
 `\(\blacksquare\)`
 
 Vamos demonstrar a partir da f.g.m. que se uma variável aleatória `\(Y\)` pertence à família exponencial parametrizada com `\(\theta\)` e `\(\phi\)`, então 
@@ -431,9 +431,9 @@ class: animated, fadeIn
 
 Pelo Teorema de Fatoração de Neyman e supondo `\(\phi\)` conhecido, tem-se que `\(T =  \sum_{i = 1}^n y_i\)` é uma estatística suficiente para `\(\theta\)` pois
 
-\begin{equation}
+`\begin{equation}
  L(\theta; y) = g(t, \theta) h(y_1, y_2, \cdots, y_n),   
-\end{equation}
+\end{equation}`
 
 sendo que `\(g(t, \theta)\)` depende de `\(\theta\)` e dos `\(y's\)` apenas através de `\(t\)` e `\(h(y_1, \cdots, y_n)\)` independe de `\(\theta\)`. 
 
@@ -450,10 +450,10 @@ class: animated, fadeIn
 
 A família exponencial multiparamétrica de dimensão `\(k\)` é caracterizada por uma função (de probabilidade ou densidade) da forma
 
-\begin{equation}
+`\begin{equation}
 f(\mathrm{y}; \boldsymbol{\theta}) = h(\mathrm{y})\exp\left[ \sum_{i = 1}^k \eta_i(\boldsymbol{\theta})t_i(\mathrm{y}) - b(\boldsymbol{\theta})  \right],
 \label{eq:fam:exp:multi}
-\end{equation}
+\end{equation}`
 
 em que `\(\boldsymbol{\theta}\)` é um vetor de parâmetros, usualmente, de dimensão `\(k\)`, e as funções `\(\eta_i(\boldsymbol{\theta})\)`, `\(b(\boldsymbol{\theta})\)`, `\(t_i(\mathrm{y})\)` e `\(h(\mathrm{y})\)` assumem valores em subconjuntos dos reais. Obviamente, a forma dada em (\ref{eq:fam_exp_uni}) é um caso especial de (\ref{eq:fam:exp:multi}).
 
