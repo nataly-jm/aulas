@@ -1,0 +1,12 @@
+.scrollable-slide {
+    height: 800px;
+    overflow-y: auto !important;
+}
+
+.remark-slide-scaler {
+    overflow-y: auto;
+}
+
+#.remark-slide-number {
+#    display: none;
+#}

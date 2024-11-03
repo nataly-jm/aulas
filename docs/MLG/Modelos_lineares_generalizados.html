@@ -5,6 +5,24 @@
     <meta charset="utf-8" />
     <meta name="author" content="Nátaly A. Jiménez Monroy" />
     <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/htmltools-fill/fill.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="libs/jszip/jszip.min.js"></script>
+    <script src="libs/pdfmake/pdfmake.js"></script>
+    <script src="libs/pdfmake/vfs_fonts.js"></script>
+    <link href="libs/dt-ext-buttons/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="libs/dt-ext-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.html5.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.colVis.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.print.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         TeX: { equationNumbers: { autoNumber: "AMS" } },
@@ -18,6 +36,7 @@
     }
     </style>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
   </head>
   <body>
@@ -52,7 +71,6 @@ class: center, middle, inverse, title-slide
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight)
 
 class: animated, slideInRight
-
 
 
 
@@ -115,10 +133,10 @@ sendo `\(\phi&gt; 0\)` um parâmetro de dispersão e o parâmetro `\(\theta_i\)`
 
 --
 
-`\begin{equation}
+\begin{equation}
 f(y_i; \theta_i, \phi) = \exp[\phi \{ \theta_i y_i - b(\theta_i)\} + c(y_i, \phi)],
 \label{eq:fam_exp_uni_33}
-\end{equation}`
+\end{equation}
 
 em que `\(b(\cdot)\)` e `\(c(\cdot)\)` são funções conhecidas. 
 
@@ -272,7 +290,7 @@ class: animated, fadeIn
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-### Ligação de Aranda-Ordaz
+### Ligação de Aranda-Ordaz - I
 
 Uma outra transformação importante foi proposta por Aranda-Ordaz (1981) para dados binários. A transformação é dada por
 
@@ -291,6 +309,752 @@ em que `\(0 &lt; \mu &lt; 1\)` e `\(\alpha\)` é uma constante desconhecida posi
 --
 
 - Quando `\(\alpha \rightarrow 0\)` temos a função de ligação complemento log-log.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Ligação de Aranda-Ordaz - II
+
+A figura mostra o comportamento de `\(\mu\)` (probabilidade) para alguns valores de `\(\alpha\)`. Em muitas situações práticas o interesse pode ser testarmos se o modelo logístico é apropriado, `\(H_0: \alpha = 1\)`, contra a necessidade de uma transformação na ligação, `\(H_1: \alpha \neq 1\)`.
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Aran.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Função Desvio  - I
+
+Admitindo-se uma combinação satisfatória da distribuição da variável resposta e da função de ligação, o objetivo é determinar quantos termos são necessários na estrutura linear para uma descrição razoável dos dados. Um número grande de variáveis explanatórias pode conduzir a um modelo que explique bem os dados, mas com um aumento de complexidade na interpretação. Por outro lado, um número pequeno de variáveis explanatórias pode conduzir a um modelo de interpretação fácil, porém, que se ajuste pobremente aos dados. O que se deseja na realidade é um modelo intermediário, entre um modelo muito complicado e um modelo pobre em ajuste. A esse modelo denominamos **&lt;span style="color:orange"&gt;modelo parcimonioso&lt;/span&gt;**.
+
+--
+
+&gt; **Modelo Saturado**
+&gt;Segundo Agresti (2007), “Let Ls denote the maximized log-likelihood value for the most complex model possible. This model has a separate parameter for each observation, and it provides a perfect fit to the data. The model is said to be saturated.” 
+
+--
+
+O modelo saturado tem, então, `\(n\)` parâmetros, um para cada observação, e as estimativas de MV das médias são `\(\widetilde{\mu_i}  =  y_i\)`, para `\(i = 1, ..., n\)`. O *til* é colocado para diferir das estimativas de MV do modelo sob investigação, cuja matriz modelo `\(\boldsymbol{X}\)` tem dimensões `\(n \times p\)`, com `\(p &lt; n\)`.
+
+--
+
+&gt; Na prática, o modelo saturado é **pouco informativo** pois não sumariza os dados, mas, simplesmente, os repete.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Função Desvio  - II
+
+A fim de discriminar entre modelos, medidas de discrepância devem ser introduzidas para medir o ajuste de um modelo e identificar a utilidade de um parâmetro extra no modelo sob pesquisa ou, então, verificar a falta de ajuste induzida pela omissão dele.
+
+--
+
+Nelder e Wedderburn (1972) propuseram, como medida de discrepância, a **&lt;span style="color:orange"&gt;deviance&lt;/span&gt;** (traduzida como *desvio* por Cordeiro (1986)), que é uma distância entre o logaritmo da função de verossimilhança do modelo saturado (com `\(n\)` parâmetros) e do modelo sob investigação (com `\(p\)` parâmetros) avaliado na estimativa de máxima verossimilhança `\(\boldsymbol{\hat{\beta}}\)`.
+
+--
+
+Sem perda de generalidade, vamos supor que o logaritmo da função de verossimilhança seja agora definido por 
+
+`$$L(\boldsymbol{\mu}, \boldsymbol{y}) = \sum_{i = 1}^n L(\mu_i; y_i),$$` 
+
+em que `\(\mu_i = g^{-1}(\eta_i)\)` e `\(\eta_i = \boldsymbol{x}_i^T  \boldsymbol{\beta}\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Função Desvio  - III
+
+Para o modelo saturado `\((p = n)\)`, a função `\(L(\boldsymbol{\mu}, \boldsymbol{y})\)` é estimada por
+
+`$$L(\boldsymbol{y}, \boldsymbol{y}) = \sum_{i = 1}^n L(y_i; y_i).$$`
+
+Ou seja, a estimativa de máxima verossimilhança de `\(\mu_i\)` fica nesse caso dada por `\(\mu_i = y_i\)`. Quando `\(p &lt; n\)`, denotamos a estimativa de `\(L(\boldsymbol{\mu}, \boldsymbol{y})\)`  por `\(L(\boldsymbol{\hat{\mu}}, \boldsymbol{y})\)`. Aqui, a estimativa de máxima verossimilhança de `\(\mu_i\)` será dada por `\(\hat{\mu_i} = g^{-1}(\hat{\eta}_i)\)`, em que `\(\hat{\eta}_i = \boldsymbol{x}_i^T \hat{\boldsymbol{\beta}}\)`.
+
+--
+
+A qualidade do ajuste de um MLG é avaliada através da função desvio escalonado
+
+`$$D^*(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) = \phi D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) = 2 \{ L(\boldsymbol{y}, \boldsymbol{y}) - L(\hat{\boldsymbol{\mu}}, \boldsymbol{y}) \},$$` 
+
+que é uma distância entre o logaritmo da função de verossimilhança do modelo saturado (com `\(n\)` parâmetros) e do modelo sob investigação (com `\(p\)` parâmetros) avaliado na estimativa de máxima verossimilhança `\(\boldsymbol{\hat{\beta}}\)`. `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` é denominado *desvio não escalonado* ou, simplesmente, **&lt;span style="color:orange"&gt;desvio&lt;/span&gt;**. 
+
+--
+
+&gt; Um valor pequeno para a função desvio indica que, para um número menor de parâmetros, obtemos um ajuste tão bom quanto o ajuste com o modelo saturado.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Função Desvio  - IV
+
+Denotando por `\(\hat{\theta}_i = \theta_i(\hat{\mu}_i)\)` e `\(\tilde{\theta}_i = \theta_i(\tilde{\mu}_i)\)` as estimativas de máxima verossimilhança de `\(\theta\)` para os modelos com `\(p\)` parâmetros `\((p &lt; n)\)` e saturado `\((p = n)\)`, respectivamente, temos que a função `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)`  fica,  alternativamente, dada por:
+
+`$$D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) = 2 \sum_{i = 1}^n \{y_i(\tilde{\theta}_i - \hat{\theta}_i) + (b(\hat{\theta}_i) - b(\tilde{\theta}_i)) \}.$$`
+--
+
+ - Denotamos `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) =  \sum_{i = 1}^n d^2(y_i, \hat{\mu}_i)\)` em que `\(d^2(y_i, \hat{\mu}_i)\)` será denominado componente do desvio não-escalonado. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Casos particulares - I
+
+- **Normal**
+
+Aqui `\(\theta_i = \mu_i\)`, logo `\(\tilde{\theta}_i = y_i\)` e `\(\hat{\theta}_i = \hat{\mu}_i\)`. O desvio fica portanto dado por: 
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) &amp;= 2 \sum_{i = 1}^n \left\{y_i (y_i - \hat{\mu}_i) + \frac{\hat{\mu}_i^2}{2} - \frac{y_i^2}{2}\right\} \\
+ &amp;= \sum_{i = 1}^n (y_i - \hat{\mu}_i)^2.
+\end{align*}\]
+&lt;/div&gt;
+
+que coincide com a soma de quadrado de resíduos.  
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Casos particulares - II
+
+- **Poisson**
+
+Aqui `\(\theta_i = \log(\mu_i)\)`, logo `\(\tilde{\theta}_i = \log(y_i)\)`, para `\(y_i &gt; 0\)` e `\(\hat{\theta}_i = \log(\hat{\mu}_i)\)`. O desvio fica portanto dado por: 
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) = 2 \sum_{i = 1}^n 
+\left\{ y_i \log \left( \frac{y_i}{\hat{\mu}_i} \right)  - (y_i - \hat{\mu}_i)  \right\}.
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+Se `\(y_i = 0\)`, o i-ésimo termo de `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` vale `\(2 {\hat{\mu}_i}\)`. Resumindo, em relação ao componente do desvio do modelo Poisson, temos que: 
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+d^2(y_i, \hat{\mu}_i) = 
+ \left\{\begin{array}{ll}
+ 2 \left[ y_i \log \left(\frac{y_i}{\hat{\mu}_i}\right) - (y_i - \hat{\mu}_i) \right], &amp; \mbox{se} \quad  y_i &gt; 0;\\
+ 2 \; {\hat{\mu}_i}, &amp; \mbox{se} \quad y_i = 0. 
+  \end{array}
+  \right.
+\end{align*}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Casos particulares - III
+
+- **Binomial**
+
+Aqui assumimos `\(Y_i \sim  B(n_i, \mu_i)\)`, `\(i = 1, ..., k\)`. Lembrando que na família exponencial consideramos que `\(y_i^* = \frac{y_i}{n_i}\)` obtemos que  
+
+- `\(\theta_i = \log \left(\frac{\mu_i}{1-\mu_i}\right)\)` e `\(b(\theta_i) = \log (1 + e^{\theta_i})\)`
+
+--
+
+- `\(\hat{\theta}_i = \log \left(\frac{\hat{\mu}_i}{1-\hat{\mu}_i}\right)\)` e `\(b( \hat{\theta}_i) = - \log(1-\hat{\mu}_i)\)`
+
+--
+
+- `\(\tilde{\theta}_i = \log \left( \frac{y_i/n_i}{1-y_i/n_i}\right)\)` e `\(b(\tilde{\theta}_i) = -\log(1-y_i/n_i)\)`.
+
+--
+
+Logo, o desvio assume a forma:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) = 
+2 \sum_{i = 1}^n 
+y_i \log \left( \frac{y_i}{n_i \hat{\mu}_i} \right) + (n_i - y_i) \log \left( \frac{1 - y_i/n_i}{1 - \hat{\mu}_i}  \right), \quad \mbox{se} \quad 0 &lt; y_i &lt; n_i.
+\end{align*}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Casos particulares - IV
+
+No entanto, nos casos em que `\(y_i = 0\)` ou `\(y_i = n\)`, o i-ésimo termo do `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` pode ser reescrito de uma maneira mais simples, sendo assim, 
+
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+d^2(y_i, \hat{\mu}_i) = 
+ \left\{\begin{array}{ll}
+ 2 y_i \log \left( \frac{y_i}{n_i \hat{\mu}_i} \right) + (n_i - y_i) \log \left( \frac{1 - y_i/n_i}{1 - \hat{\mu}_i}  \right), &amp; \mbox{se} \quad 0 &lt; y_i &lt; n_i; \\
+ -2 \; n_i \log(1-{\hat{\mu}_i}), &amp; \mbox{se} \quad y_i = 0;\\
+ -2 \; n_i \log({\hat{\mu}_i}), &amp; \mbox{se} \quad y_i = n_i.
+  \end{array}
+  \right.
+\end{align*}\]
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Observações:
+
+ - Um valor pequeno para a função desvio indica que, para um número menor de parâmetros, obtém-se um ajuste tão bom quanto o ajuste com o modelo saturado. 
+
+--
+
+ - Embora seja usual compararmos os valores observados da função desvio com os percentis da distribuição qui-quadrado com `\(n\)` − `\(p\)` graus de liberdade, em geral `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` não segue assintoticamente uma `\(\chi_{n-p}^2\)`.
+
+--
+
+ - No caso binomial, quando `\(k\)` é fixo e `\(n_i \rightarrow \infty\)`, para cada `\(i\)`, `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` segue, sob a hipótese de que o modelo é verdadeiro, uma `\(\chi_{k-p}^2\)`. Isso não vale quando `\(n \rightarrow \infty\)` e `\(n_i \mu_i (1 - \mu_i)\)` permanece limitado. 
+
+--
+
+ - Em geral, para os casos em que `\(D^*(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` depende do parâmetro de dispersão, `\(\phi^{-1}\)`, o seguinte resultado (Jørgensen, 1987) para a distribuição nula da função desvio pode ser utilizado:
+    
+\begin{equation}
+    D^*(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) \sim \chi_{n-p}^2, \;\;\; \mbox{quando} \;\;\; \phi \rightarrow \infty
+\end{equation}  
+
+ Isto é, quando a dispersão é pequena, fica razoável compararmos os valores observados de `\(D^*(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` com os percentis da `\(\chi_{n-p}^2\)`.
+
+--
+
+ - Em particular, para o modelo normal linear, o resultado acima nos diz `\(\sum_{i = 1}^n \frac{(y_i -\hat{\mu}_i)^2}{\sigma^2}\)`, quando `\(\sigma^2 \rightarrow 0\)`. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Análise do desvio - I
+
+Vamos supor para o vetor de parâmetros `\(\boldsymbol{\beta}\)` a partição `\(\boldsymbol{\beta} = (\boldsymbol{\beta}_1^T, \boldsymbol{\beta}_2^T)^T\)`, em que `\(\boldsymbol{\beta}_1\)` é um vetor `\(q\)`-dimensional enquanto `\(\boldsymbol{\beta}_2\)` tem dimensão `\(p-q\)` e `\(\phi\)` é conhecido (ou fixo). Pdemos ter interesse em testar as hipóteses `\(\mbox{H}_0: \;\; \boldsymbol{\beta}_1 = 0\)` contra `\(\mbox{H}_1: \;\; \boldsymbol{\beta}_1 \neq 0\)`. 
+
+As funções desvio correspondentes aos modelos sob `\(\mbox{H}_0\)` e `\(\mbox{H}_1\)` serão denotadas por `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}^0)\)` e `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)`, respectivamente, em que `\(\hat{\boldsymbol{\mu}}^0\)` é a estimativa de máxima verossimilhança sob `\(\mbox{H}_0\)`.
+
+--
+
+A estatística da razão de verossimilhanças fica nesse caso dada por:
+
+\begin{equation}
+    \xi_{RV} = \phi \{ D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}^0) - D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) \}, \label{eq:TRV}
+\end{equation}
+
+isto é, a diferença entre dois desvios. Como é conhecido, sob a hipótese nula, `\(\xi_{RV} \sim \chi_{n-p}^2\)`, quando `\(n \rightarrow \infty\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Análise do desvio - II
+
+De forma similar, podemos definir a estatística
+
+\begin{equation}
+    F = \frac{\{D(\boldsymbol{y};\hat{\boldsymbol{\mu}}^0)-D(\boldsymbol{y};\hat{\boldsymbol{\mu}})\}/q}{D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})/(n-p)},  \label{eq:Ftest}
+\end{equation}
+
+cuja distribuição nula assintótica é uma `\(F_{q,(n-p)}\)` quando o denominador de (\ref{eq:Ftest}) é uma estimativa consistente de `\(\phi^{-1}\)` (ver, por exemplo, Jørgensen, 1987).
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Análise do desvio - III
+
+**Esquema da análise do desvio com dois fatores na parte sistemática**
+
+
+|   Modelo   |   Desvio    |  Diferença        |              G.L.            |        Testando          |
+|:----------:|:-----------:|:-----------------:|:----------------------------:|:------------------------:|
+| Constante  |   `\(D_0\)`     |                   |                              |                          |
+|            |             |     `\(D_0-D_A\)`     |            `\(n(A)-1\)`          |   `\(A\)` ignorando `\(B\)`      |
+|            |             |     `\(D_0-D_B\)`     |            `\(n(B)-1\)`          |   `\(B\)` ignorando `\(A\)`      |
+|       `\(+A\)` |   `\(D_A\)`     |                   |                              |                          |
+|            |             |     `\(D_A-D_{A+B}\)` |             `\(n(B)-1\)`         | `\(B\mid A\)` ignorando `\(AB\)` |
+|       `\(+B\)` |   `\(D_B\)`     |                   |                              |                          |
+|            |             |     `\(D_B-D_{A+B}\)` |             `\(n(A)-1\)`         | `\(A\mid B\)` ignorando `\(AB\)` |
+|   `\(+A+B\)`   |  `\(D_{A+B}\)`  |                   |                              |                          |
+|            |             | `\(D_{A+B}-D_{AB}\)`  |  `\(\{n(A)-1\}\times\{n(B)-1\}\)`|        `\(AB\mid A + B\)`    |
+|  `\(+A+B+AB\)` |   `\(D_{AB}\)`  |                   |                              |     .                    |
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Quando utilizar o teste da razão de verossimilhança, quando utilizar o teste F?
+
+ - A vantagem de utilizarmos (\ref{eq:Ftest}) em relação a  (\ref{eq:TRV}) é que a estatística F não depende do parâmetro de dispersão.
+
+--
+
+ - O resultado (\ref{eq:Ftest}) também é verificado quando `\(\phi \rightarrow \infty\)` e `\(n\)` é arbitrário.
+
+--
+
+- Quando `\(\phi\)` é desconhecido a estatística da razão de verossimilhanças assume uma expressão diferente de (\ref{eq:TRV}).
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - I
+
+Os dados se referem a um estudo de caso-controle realizado no Setor de Anatomia e Patologia do Hospital Heliópolis em São Paulo, no período de 1970 a 1982 (Paula e Tuder, 1986). Um total de 175 pacientes com processo infecioso pulmonar atendido no hospital no período acima foi classificado segundo as seguintes variáveis: 
+
+- Tipo, tipo de tumor (1: maligno, 0: benigno);
+
+- IDADE, idade em anos;
+
+- SEXO (0: masculino, 1: feminino);
+
+- HL, intensidade da célula histiócitos-linfócitos (1: ausente, 2: discreta, 3: moderada, 4: intensa);
+
+- FF, intensidade da célula fibrose-frouxa (1: ausente, 2: discreta, 3: moderada, 4: intensa).
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - II
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-36d11f6955eeb0fbbbb8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-36d11f6955eeb0fbbbb8">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[26,21,45,19,16,72,53,33,39,41,26,27,46,27,65,27,32,22,23,42,82,23,55,43,49,20,23,28,34,18,22,50,64,29,24,50,38,20,44,59,43,27,20,24,46,40,21,21,42,23,38,53,53,21,57,63,21,45,77,58,28,83,22,36,43,22,30,46,78,23,56,56,44,64,18,23,62,53,23,23,49,21,17,41,45,51,62,48,27,18,67,75,67,49,63,87,53,18,30,48,31,56,48,33,58,76,64,44,34,51,60,73,72,62,60,43,62,55,58,45,58,15,61,60,61,56,78,21,75,56,73,56,62,56,56,52,57,29,51,77,40,65,60,69,67,58,72,51,57,36,58,59,59,57,73,69,61,67,70,64,69,52,59,50,48,49,78,66,74,50,75,55,50,57,70],[1,1,1,2,2,2,1,1,1,1,2,2,1,1,1,1,2,2,1,2,2,2,1,1,1,2,1,1,1,1,1,2,1,2,2,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,1,1,1,2,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1,1,2,1,2,2,1,1,1,2,2,1,2,1,2,2,2,2,1,1,2,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,2,2,2,2,2],[3,3,3,4,4,4,3,4,3,3,3,3,3,3,3,4,4,3,4,4,3,3,3,3,3,2,4,3,3,3,3,3,2,4,3,2,2,3,3,3,3,4,2,3,3,2,3,3,3,3,3,3,3,1,3,3,3,3,2,3,3,3,2,2,3,3,3,2,3,3,2,3,2,2,3,2,1,2,3,3,3,3,3,3,3,2,3,2,3,3,3,2,2,2,3,2,2,2,4,3,3,2,3,4,3,3,2,2,2,3,3,4,3,2,2,1,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,3,2,3,2,2,1,2,3,3,2,2,3,3,2,3,2,3,2,3,3,1,2,2,2,3,2,2,2,3,2,3,2,2,1,2,2,2,1,1,3,2,3,2],[1,1,3,3,3,3,1,2,2,2,3,3,1,3,2,1,1,2,2,2,2,1,2,1,1,1,2,2,1,1,2,3,1,2,3,3,3,3,3,3,3,3,1,2,4,3,3,2,3,3,4,3,2,1,1,1,2,2,1,2,2,1,1,1,2,3,3,1,3,3,1,3,1,3,3,2,1,2,1,1,2,3,3,3,3,3,1,2,2,2,3,3,2,1,2,1,1,3,3,3,3,2,2,2,4,3,3,2,1,3,3,2,4,1,1,1,1,1,1,2,1,1,1,1,2,1,2,1,1,1,1,2,1,1,1,1,2,1,2,3,2,1,2,1,3,1,1,1,1,1,3,1,1,1,1,3,1,1,2,2,3,1,1,1,1,1,1,1,1,2,2,3,1,1,1]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Tipo<\/th>\n      <th>Idade<\/th>\n      <th>Sexo<\/th>\n      <th>HL<\/th>\n      <th>FF<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"cancer_pulmonar"},{"extend":"excel","filename":"cancer_pulmonar"},{"extend":"pdf","filename":"cancer_pulmonar"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]},{"name":"Tipo","targets":0},{"name":"Idade","targets":1},{"name":"Sexo","targets":2},{"name":"HL","targets":3},{"name":"FF","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - III
+
+
+``` r
+fit0 &lt;- glm(Tipo ~ 1, family = binomial, data = dados_cancer)
+
+summary(fit0)
+```
+
+```
+## 
+## Call:
+## glm(formula = Tipo ~ 1, family = binomial, data = dados_cancer)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)  
+## (Intercept)  -0.3817     0.1539  -2.479   0.0132 *
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 236.34  on 174  degrees of freedom
+## Residual deviance: 236.34  on 174  degrees of freedom
+## AIC: 238.34
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - IV
+
+
+``` r
+fit1 &lt;- glm(Tipo ~ Sexo, family = binomial, data = dados_cancer)
+
+summary(fit1)
+```
+
+```
+## 
+## Call:
+## glm(formula = Tipo ~ Sexo, family = binomial, data = dados_cancer)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)  
+## (Intercept)  -0.8484     0.4654  -1.823   0.0683 .
+## Sexo          0.3629     0.3400   1.067   0.2858  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 236.34  on 174  degrees of freedom
+## Residual deviance: 235.21  on 173  degrees of freedom
+## AIC: 239.21
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn, scrollable-slide
+
+### Exemplo de Análise do desvio - V
+
+
+``` r
+fit2 &lt;- glm(Tipo ~ Sexo + Idade, family = binomial, data = dados_cancer)
+
+summary(fit2)
+```
+
+```
+## 
+## Call:
+## glm(formula = Tipo ~ Sexo + Idade, family = binomial, data = dados_cancer)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -4.68726    0.88711  -5.284 1.27e-07 ***
+## Sexo         0.65520    0.40205   1.630    0.103    
+## Idade        0.06954    0.01201   5.791 7.01e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 236.34  on 174  degrees of freedom
+## Residual deviance: 188.22  on 172  degrees of freedom
+## AIC: 194.22
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - VI
+
+
+``` r
+fit3 &lt;- glm(Tipo ~ Sexo + Idade + factor(HL), family = binomial, data = dados_cancer)
+
+summary(fit3)
+```
+
+```
+## 
+## Call:
+## glm(formula = Tipo ~ Sexo + Idade + factor(HL), family = binomial, 
+##     data = dados_cancer)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -2.94989    1.21054  -2.437  0.01482 *  
+## Sexo         0.93736    0.45098   2.078  0.03767 *  
+## Idade        0.06534    0.01307   5.000 5.75e-07 ***
+## factor(HL)2 -1.06661    0.95171  -1.121  0.26240    
+## factor(HL)3 -2.64465    0.95431  -2.771  0.00558 ** 
+## factor(HL)4 -3.98225    1.48109  -2.689  0.00717 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 236.34  on 174  degrees of freedom
+## Residual deviance: 162.55  on 169  degrees of freedom
+## AIC: 174.55
+## 
+## Number of Fisher Scoring iterations: 5
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - VII
+
+
+``` r
+fit4 &lt;- glm(Tipo ~ Sexo + Idade + factor(HL) + factor(FF), family = binomial, data = dados_cancer)
+
+summary(fit4)
+```
+
+```
+## 
+## Call:
+## glm(formula = Tipo ~ Sexo + Idade + factor(HL) + factor(FF), 
+##     family = binomial, data = dados_cancer)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -2.63437    1.22220  -2.155   0.0311 *  
+## Sexo         0.78392    0.47066   1.666   0.0958 .  
+## Idade        0.06513    0.01328   4.906 9.31e-07 ***
+## factor(HL)2 -0.86926    0.94750  -0.917   0.3589    
+## factor(HL)3 -2.24903    0.97178  -2.314   0.0206 *  
+## factor(HL)4 -3.29561    1.47997  -2.227   0.0260 *  
+## factor(FF)2 -0.68718    0.50397  -1.364   0.1727    
+## factor(FF)3 -1.02472    0.52721  -1.944   0.0519 .  
+## factor(FF)4  0.43149    1.12452   0.384   0.7012    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 236.34  on 174  degrees of freedom
+## Residual deviance: 157.40  on 166  degrees of freedom
+## AIC: 175.4
+## 
+## Number of Fisher Scoring iterations: 5
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - VIII
+
+ANODEV
+
+
+``` r
+anova(fit0,fit1)
+```
+
+```
+## Analysis of Deviance Table
+## 
+## Model 1: Tipo ~ 1
+## Model 2: Tipo ~ Sexo
+##   Resid. Df Resid. Dev Df Deviance
+## 1       174     236.34            
+## 2       173     235.21  1   1.1354
+```
+
+``` r
+anova(fit1,fit2)
+```
+
+```
+## Analysis of Deviance Table
+## 
+## Model 1: Tipo ~ Sexo
+## Model 2: Tipo ~ Sexo + Idade
+##   Resid. Df Resid. Dev Df Deviance
+## 1       173     235.21            
+## 2       172     188.22  1   46.982
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - IX
+
+
+``` r
+anova(fit2,fit3)
+```
+
+```
+## Analysis of Deviance Table
+## 
+## Model 1: Tipo ~ Sexo + Idade
+## Model 2: Tipo ~ Sexo + Idade + factor(HL)
+##   Resid. Df Resid. Dev Df Deviance
+## 1       172     188.22            
+## 2       169     162.55  3   25.674
+```
+
+``` r
+anova(fit3,fit4)
+```
+
+```
+## Analysis of Deviance Table
+## 
+## Model 1: Tipo ~ Sexo + Idade + factor(HL)
+## Model 2: Tipo ~ Sexo + Idade + factor(HL) + factor(FF)
+##   Resid. Df Resid. Dev Df Deviance
+## 1       169     162.55            
+## 2       166     157.40  3   5.1476
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Exemplo de Análise do desvio - X
+
+Em resumo:
+
+
+|   Modelo   |   Desvio    |  Diferença        |    G.L.  |            Testando          |
+|:----------:|:-----------:|:-----------------:|:--------:|:----------------------------:|
+| Constante  |   236,34    |                   |          |                              |
+|    +SEXO   |   235,20    |      1,14         |      1   |   SEXO                       |
+|    +IDADE  |   188,22    |      46,98        |      1   |   IDADE `\(\mid\)` SEXO          |
+|    +HL     |   162,55    |      25,67        |      3   |   HL `\(\mid\)` SEXO + IDADE     |
+|    +FF     |   157,40    |       5,15        |      3   |   FF `\(\mid\)` SEXO + IDADE + HL|
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estimação dos parâmetros - I
+
+Considere a partição `\(\boldsymbol{\theta} = (\boldsymbol{\beta}^T, \phi)^T\)` e denote o logaritmo da função de verossimilhança por `\(L(\theta;y)\)`. Para obter a função escore para o parâmetro `\(\beta\)`, inicialmente calculamos as derivadas
+
+\begin{equation}
+\frac{\partial L(\boldsymbol{\theta})}{\partial \beta} = \sum_{i=1}^n\phi \left[y_i\frac{\partial \theta_i}{\partial \beta_j} - \frac{\partial b(\theta_i)}{\partial \beta_j}\right].
+\end{equation}
+
+--
+
+No entanto, note que
+
+`$$L(\boldsymbol{\theta}) = f(\theta_1, \theta_2,...,\theta_i,...,\theta_n)$$`
+`$$\downarrow$$`
+`$$\theta_i = \int V^{-1} _i d \mu_i = q(\mu_i)$$`
+`$$\downarrow$$`
+
+$$\mu_i = g^{-1}(\eta_i) $$
+
+`$$\downarrow$$`
+
+`$$\eta_i = \sum^p _{j=1} x_{ij}\beta_j$$`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estimação dos parâmetros - II
+
+Para obtermos a função escore para o parâmetro `\(\boldsymbol{\beta}\)` calculamos inicialmente as derivadas
+
+ &lt;div class="math"&gt;
+\[\begin{align*}
+U_j = \frac{\partial L(\boldsymbol{\theta})}{\partial\beta_j} &amp;= \sum^n_{i=1} \phi\left\{y_i\frac{d\theta_i}{d\mu_i}\frac{d\mu_i}{d\eta_i}\frac{\partial\eta_i}{\beta_j} -\frac{db(\theta_i)}{d\theta_i}\frac{d\theta_i}{d\mu_i}\frac{d\mu_i}{d\eta_i}\frac{\partial\eta_i}{\partial\beta_j}\right\}\\
+&amp;= \sum^n_{i=1}\phi \left\{y_i V^{-1}_i \left(\frac{d\mu_i}{d \eta_i}\right)x_{ij} - \mu_i V^{-1}_i\left(\frac{d \mu_i}{d \eta_i}\right)x_{ij}\right\}\\
+&amp;=\sum^n_{i=1} \phi \left\{\sqrt{\frac{\omega_i}{V_i}}(y_i - \mu_i)x_{ij}\right\},
+\end{align*}\]
+&lt;/div&gt;
+
+
+em que `\(\omega_i = (d\mu_i/d\eta_i)^2/V_i\)` e `\(j = 1, ..., p\)`. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estimação dos parâmetros - III
+
+Então, a função escore na forma matricial fica na forma
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+U_\beta(\theta) = \frac{\partial L(\theta)}{\partial \beta} = \phi X^T W^{1/2}V^{-1/2}(y-\mu),
+\end{align*}\]
+&lt;/div&gt;
+
+onde
+
+- `\(X\)` é uma matriz `\(n \times p\)` de posto completo, cujas linhas serão denotadas por `\(x^T_i\)`, $i = 1,\ldots,n $,
+
+- `\(W\)` = `\(diag \left\{\omega_i,\ldots,\omega_n\right\}\)`  é a matriz de pesos,
+
+- `\(V\)` = `\(diag \left\{V_i,\ldots,V_n\right\}\)`,
+
+- `\(\boldsymbol{y}\)` = `\((y_1,\ldots,y_n)^T\)` e
+
+- `\(\boldsymbol{\mu}\)` = `\((\mu_1,\ldots,\mu_n)^T\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estimação dos parâmetros - IV
+
+Na busca da matriz de informação de Fisher precisamos das derivadas
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\frac{\partial^2 L(\boldsymbol{\theta})}{\partial \beta_j \partial\beta_l} &amp;= \phi \sum^n_{i=1}(y_i -\mu_i)\frac{d^2\theta_i}{d\mu^2_i}\left(\frac{d\mu_i}{d \eta_i}\right)^2 x_{ij}x_{il}\\
+ &amp;+ \phi \sum^n_{i=1}(y_i - \mu_i)\frac{d\theta_i}{d\mu_i}\frac{d^2 \mu_i}{d \eta^2 _i} x_{ij}x_{il}\\
+&amp;- \phi \sum^n _{i=1}\frac{d\theta_i}{d\mu_i}\left(\frac{d\mu_i}{d \eta_i}\right)^2 x_{ij}x_{il},
+\end{align*}\]
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estimação dos parâmetros - V
+
+cujos valores esperados são dados por
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+E \left\{\frac{\partial^2 L(\boldsymbol{\theta})}{\partial\beta_j\partial\beta_l}\right\} &amp;= {-\phi}\sum^n_{i=1}\frac{d\theta_i}{d\mu_i}\left(\frac{d\mu_i}{d\eta_i}\right)^2 x_{ij}x_{il}\\
+&amp;= {-\phi}\sum^n _{i=1}\frac{\left(d\mu_i/d\eta_i\right)^2}{V_i} x_{ij}x_{il}\\
+&amp;= {-\phi}\sum^n _{i=1}\omega_i x_{ij}x_{il}.
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+Na forma matricial, a informação de Fisher é denotada por
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+K_{\beta\beta}(\boldsymbol{\theta}) = E \left\{-\frac{\partial^2 L(\theta)}{\partial\boldsymbol{\beta}\partial\boldsymbol{\beta}^T}\right\} = \phi X^T WX.
+\end{align*}\]
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Estimação dos parâmetros - VI
+
+Para ligação canônica, `\(\theta_i=\eta_i\)` e  
+
+`$$V_i = V(\mu_i) = \frac{\partial\mu_i}{\partial\theta_i} = \frac{\partial\mu_i}{\partial\eta_i}.$$`
+
+Assim, 
+
+`$$\omega_i  = \frac{(d\mu_i/d\eta_i)^2}{V_i}  = \frac{\partial\mu_i}{\partial\eta_i} = V_i.$$`
+--
+
+E, dessa forma, temos que 
+
+`$$U_\beta = \phi X^T (y - \mu)$$` e `$$K_{\beta\beta} = \phi X^T VX.$$` 
+
+
 
 ---
 class: animated, hide-logo, bounceInDown
@@ -327,7 +1091,8 @@ e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
 "ratio": "16:9",
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"scroll": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
