@@ -133,10 +133,10 @@ sendo `\(\phi&gt; 0\)` um parâmetro de dispersão e o parâmetro `\(\theta_i\)`
 
 --
 
-\begin{equation}
+`\begin{equation}
 f(y_i; \theta_i, \phi) = \exp[\phi \{ \theta_i y_i - b(\theta_i)\} + c(y_i, \phi)],
 \label{eq:fam_exp_uni_33}
-\end{equation}
+\end{equation}`
 
 em que `\(b(\cdot)\)` e `\(c(\cdot)\)` são funções conhecidas. 
 
@@ -531,11 +531,13 @@ class: animated, fadeIn
 
  - Em geral, para os casos em que `\(D^*(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` depende do parâmetro de dispersão, `\(\phi^{-1}\)`, o seguinte resultado (Jørgensen, 1987) para a distribuição nula da função desvio pode ser utilizado:
     
-\begin{equation}
+&lt;div class="math"&gt;
+\[\begin{align}
     D^*(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) \sim \chi_{n-p}^2, \;\;\; \mbox{quando} \;\;\; \phi \rightarrow \infty
-\end{equation}  
+\end{align}\]
+&lt;/div&gt; 
 
- Isto é, quando a dispersão é pequena, fica razoável compararmos os valores observados de `\(D^*(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` com os percentis da `\(\chi_{n-p}^2\)`.
+Isto é, quando a dispersão é pequena, fica razoável compararmos os valores observados de `\(D^*(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` com os percentis da `\(\chi_{n-p}^2\)`.
 
 --
 
@@ -556,9 +558,11 @@ As funções desvio correspondentes aos modelos sob `\(\mbox{H}_0\)` e `\(\mbox{
 
 A estatística da razão de verossimilhanças fica nesse caso dada por:
 
-\begin{equation}
-    \xi_{RV} = \phi \{ D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}^0) - D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) \}, \label{eq:TRV}
-\end{equation}
+&lt;div class="math"&gt;
+\[\begin{align}
+    \xi_{RV} = \phi \{D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}^0) - D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\}, \label{eq:TRV}
+\end{align}\]
+&lt;/div&gt;
 
 isto é, a diferença entre dois desvios. Como é conhecido, sob a hipótese nula, `\(\xi_{RV} \sim \chi_{n-p}^2\)`, quando `\(n \rightarrow \infty\)`.
 
@@ -571,9 +575,11 @@ class: animated, fadeIn
 
 De forma similar, podemos definir a estatística
 
-\begin{equation}
+&lt;div class="math"&gt;
+\[\begin{align}
     F = \frac{\{D(\boldsymbol{y};\hat{\boldsymbol{\mu}}^0)-D(\boldsymbol{y};\hat{\boldsymbol{\mu}})\}/q}{D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})/(n-p)},  \label{eq:Ftest}
-\end{equation}
+\end{align}\]
+&lt;/div&gt;
 
 cuja distribuição nula assintótica é uma `\(F_{q,(n-p)}\)` quando o denominador de (\ref{eq:Ftest}) é uma estimativa consistente de `\(\phi^{-1}\)` (ver, por exemplo, Jørgensen, 1987).
 
@@ -643,8 +649,8 @@ class: animated, fadeIn
 
 ### Exemplo de Análise do desvio - II
 
-<div class="datatables html-widget html-fill-item" id="htmlwidget-36d11f6955eeb0fbbbb8" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-36d11f6955eeb0fbbbb8">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[26,21,45,19,16,72,53,33,39,41,26,27,46,27,65,27,32,22,23,42,82,23,55,43,49,20,23,28,34,18,22,50,64,29,24,50,38,20,44,59,43,27,20,24,46,40,21,21,42,23,38,53,53,21,57,63,21,45,77,58,28,83,22,36,43,22,30,46,78,23,56,56,44,64,18,23,62,53,23,23,49,21,17,41,45,51,62,48,27,18,67,75,67,49,63,87,53,18,30,48,31,56,48,33,58,76,64,44,34,51,60,73,72,62,60,43,62,55,58,45,58,15,61,60,61,56,78,21,75,56,73,56,62,56,56,52,57,29,51,77,40,65,60,69,67,58,72,51,57,36,58,59,59,57,73,69,61,67,70,64,69,52,59,50,48,49,78,66,74,50,75,55,50,57,70],[1,1,1,2,2,2,1,1,1,1,2,2,1,1,1,1,2,2,1,2,2,2,1,1,1,2,1,1,1,1,1,2,1,2,2,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,1,1,1,2,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1,1,2,1,2,2,1,1,1,2,2,1,2,1,2,2,2,2,1,1,2,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,2,2,2,2,2],[3,3,3,4,4,4,3,4,3,3,3,3,3,3,3,4,4,3,4,4,3,3,3,3,3,2,4,3,3,3,3,3,2,4,3,2,2,3,3,3,3,4,2,3,3,2,3,3,3,3,3,3,3,1,3,3,3,3,2,3,3,3,2,2,3,3,3,2,3,3,2,3,2,2,3,2,1,2,3,3,3,3,3,3,3,2,3,2,3,3,3,2,2,2,3,2,2,2,4,3,3,2,3,4,3,3,2,2,2,3,3,4,3,2,2,1,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,3,2,3,2,2,1,2,3,3,2,2,3,3,2,3,2,3,2,3,3,1,2,2,2,3,2,2,2,3,2,3,2,2,1,2,2,2,1,1,3,2,3,2],[1,1,3,3,3,3,1,2,2,2,3,3,1,3,2,1,1,2,2,2,2,1,2,1,1,1,2,2,1,1,2,3,1,2,3,3,3,3,3,3,3,3,1,2,4,3,3,2,3,3,4,3,2,1,1,1,2,2,1,2,2,1,1,1,2,3,3,1,3,3,1,3,1,3,3,2,1,2,1,1,2,3,3,3,3,3,1,2,2,2,3,3,2,1,2,1,1,3,3,3,3,2,2,2,4,3,3,2,1,3,3,2,4,1,1,1,1,1,1,2,1,1,1,1,2,1,2,1,1,1,1,2,1,1,1,1,2,1,2,3,2,1,2,1,3,1,1,1,1,1,3,1,1,1,1,3,1,1,2,2,3,1,1,1,1,1,1,1,1,2,2,3,1,1,1]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Tipo<\/th>\n      <th>Idade<\/th>\n      <th>Sexo<\/th>\n      <th>HL<\/th>\n      <th>FF<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"cancer_pulmonar"},{"extend":"excel","filename":"cancer_pulmonar"},{"extend":"pdf","filename":"cancer_pulmonar"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]},{"name":"Tipo","targets":0},{"name":"Idade","targets":1},{"name":"Sexo","targets":2},{"name":"HL","targets":3},{"name":"FF","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-88d136b261b636dcbe95" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-88d136b261b636dcbe95">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[26,21,45,19,16,72,53,33,39,41,26,27,46,27,65,27,32,22,23,42,82,23,55,43,49,20,23,28,34,18,22,50,64,29,24,50,38,20,44,59,43,27,20,24,46,40,21,21,42,23,38,53,53,21,57,63,21,45,77,58,28,83,22,36,43,22,30,46,78,23,56,56,44,64,18,23,62,53,23,23,49,21,17,41,45,51,62,48,27,18,67,75,67,49,63,87,53,18,30,48,31,56,48,33,58,76,64,44,34,51,60,73,72,62,60,43,62,55,58,45,58,15,61,60,61,56,78,21,75,56,73,56,62,56,56,52,57,29,51,77,40,65,60,69,67,58,72,51,57,36,58,59,59,57,73,69,61,67,70,64,69,52,59,50,48,49,78,66,74,50,75,55,50,57,70],[1,1,1,2,2,2,1,1,1,1,2,2,1,1,1,1,2,2,1,2,2,2,1,1,1,2,1,1,1,1,1,2,1,2,2,1,1,2,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,1,1,1,2,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,1,2,1,1,1,2,1,2,2,1,1,1,2,2,1,2,1,2,2,2,2,1,1,2,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,2,2,2,2,2],[3,3,3,4,4,4,3,4,3,3,3,3,3,3,3,4,4,3,4,4,3,3,3,3,3,2,4,3,3,3,3,3,2,4,3,2,2,3,3,3,3,4,2,3,3,2,3,3,3,3,3,3,3,1,3,3,3,3,2,3,3,3,2,2,3,3,3,2,3,3,2,3,2,2,3,2,1,2,3,3,3,3,3,3,3,2,3,2,3,3,3,2,2,2,3,2,2,2,4,3,3,2,3,4,3,3,2,2,2,3,3,4,3,2,2,1,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,3,2,3,2,2,1,2,3,3,2,2,3,3,2,3,2,3,2,3,3,1,2,2,2,3,2,2,2,3,2,3,2,2,1,2,2,2,1,1,3,2,3,2],[1,1,3,3,3,3,1,2,2,2,3,3,1,3,2,1,1,2,2,2,2,1,2,1,1,1,2,2,1,1,2,3,1,2,3,3,3,3,3,3,3,3,1,2,4,3,3,2,3,3,4,3,2,1,1,1,2,2,1,2,2,1,1,1,2,3,3,1,3,3,1,3,1,3,3,2,1,2,1,1,2,3,3,3,3,3,1,2,2,2,3,3,2,1,2,1,1,3,3,3,3,2,2,2,4,3,3,2,1,3,3,2,4,1,1,1,1,1,1,2,1,1,1,1,2,1,2,1,1,1,1,2,1,1,1,1,2,1,2,3,2,1,2,1,3,1,1,1,1,1,3,1,1,1,1,3,1,1,2,2,3,1,1,1,1,1,1,1,1,2,2,3,1,1,1]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Tipo<\/th>\n      <th>Idade<\/th>\n      <th>Sexo<\/th>\n      <th>HL<\/th>\n      <th>FF<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"cancer_pulmonar"},{"extend":"excel","filename":"cancer_pulmonar"},{"extend":"pdf","filename":"cancer_pulmonar"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4]},{"name":"Tipo","targets":0},{"name":"Idade","targets":1},{"name":"Sexo","targets":2},{"name":"HL","targets":3},{"name":"FF","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
@@ -927,9 +933,11 @@ class: animated, fadeIn
 
 Considere a partição `\(\boldsymbol{\theta} = (\boldsymbol{\beta}^T, \phi)^T\)` e denote o logaritmo da função de verossimilhança por `\(L(\theta;y)\)`. Para obter a função escore para o parâmetro `\(\beta\)`, inicialmente calculamos as derivadas
 
-\begin{equation}
-\frac{\partial L(\boldsymbol{\theta})}{\partial \beta} = \sum_{i=1}^n\phi \left[y_i\frac{\partial \theta_i}{\partial \beta_j} - \frac{\partial b(\theta_i)}{\partial \beta_j}\right].
-\end{equation}
+&lt;div class="math"&gt;
+\[\begin{align}
+\frac{\partial L(\boldsymbol{\theta})}{\partial \beta} = \sum_{i=1}^n\phi \left\{y_i\frac{\partial \theta_i}{\partial \beta_j} - \frac{\partial b(\theta_i)}{\partial \beta_j}\right\}.
+\end{align}\]
+&lt;/div&gt;
 
 --
 
@@ -1027,7 +1035,7 @@ E \left\{\frac{\partial^2 L(\boldsymbol{\theta})}{\partial\beta_j\partial\beta_l
 
 --
 
-Na forma matricial, a informação de Fisher é denotada por
+Na forma matricial, a **&lt;span style="color:orange"&gt;informação de Fisher&lt;/span&gt;** é denotada por
 
 &lt;div class="math"&gt;
 \[\begin{align*}
@@ -1052,8 +1060,261 @@ Assim,
 
 E, dessa forma, temos que 
 
-`$$U_\beta = \phi X^T (y - \mu)$$` e `$$K_{\beta\beta} = \phi X^T VX.$$` 
+`$$U_\beta = \phi X^T (y - \mu)$$` 
 
+e 
+
+`$$K_{\beta\beta} = \phi X^T VX.$$` 
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Estimação de `\(\phi\)` - I
+
+A função escore para o parâmetro  `\(\phi\)` fica dada por
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+U_\phi &amp;= \frac{\partial L(\boldsymbol{\theta})}{\partial \phi}\\
+       &amp;= \sum^n _{i=1}\left\{y_i \theta_i - b(\theta_i)\right\} + \sum^n _{i=1} c'(y_i,\phi)
+\end{align*}\]
+&lt;/div&gt;
+
+em que `\(c'(y_i,\phi) = \partial c(y_i, \phi)/\partial \phi.\)`
+
+--
+
+Para obtermos a informação de Fisher para `\(\phi\)` temos que calcular
+
+`$$\frac{\partial^2 L(\boldsymbol{\theta})}{\partial \phi^2}  = \sum^n _{i=1} c''(y_i,\phi),$$`
+
+
+em que `\(c''(y_i,\phi) = \partial^2 c(y_i, \phi)/\partial \phi^2.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Estimação de `\(\phi\)` - II
+
+Assim, a informação de Fisher para  `\(\phi\)` fica dada por
+
+`$$K_{\phi\phi} = - \sum^n _{i=1} E\{c''(Y_i,\phi)\}.$$`
+
+--
+
+**Ortogonalidade**
+
+Temos que
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\frac{\partial^2  L(\boldsymbol{\theta})}{\partial\boldsymbol{\beta}\partial \phi} = \sum^n _{i=1} \phi \left\{\sqrt{\frac{\omega_i}{V_i}}(y_i - \mu_i){\mbox x}_{i}\right\}.
+\end{align*}\]
+&lt;/div&gt;
+
+Portanto, verificamos que `\(\boldsymbol{\beta}\)` e `\(\phi\)` são ortogonais, isto é, 
+
+`$$K_{\boldsymbol{\theta}\phi} = E\left[− \frac{\partial^2  L(\boldsymbol{\theta})}{\partial\boldsymbol{\beta}\partial\phi}\right] = 0.$$`
+
+Logo, segue que a matriz de informação de Fisher para `\(\boldsymbol{\theta}\)` é bloco diagonal, sendo dada por `\(K_{\boldsymbol{\theta}\boldsymbol{\theta}} =  diag\{K_{\beta\beta},K_{\phi\phi}\}\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Estimação de `\(\beta\)` - I
+
+O processo iterativo de Newton-Raphson para a obtenção da estimativa de máxima verossimilhança de `\(\boldsymbol{\beta}\)` é definido expandindo a função escore `\(U_{\boldsymbol{\beta}}\)` em torno de um valor inicial `\(\boldsymbol{\beta}^{(0)}\)`, tal que
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+   U_{\boldsymbol{\beta}} \cong {U}_{\boldsymbol{\beta}}^{(0)} + {U'}_{\boldsymbol{\beta}}^{(0)} (\boldsymbol{\beta} - \boldsymbol{\beta}^{(0)}), 
+\end{align*}\]
+&lt;/div&gt;
+
+em que `\({U'}_{\boldsymbol{\beta}}^{(0)}\)` denota a primeira derivada de `\(U_{\boldsymbol{\beta}}\)` com respeito a `\(\boldsymbol{\beta}^T\)`, sendo
+`\({U'}_{\boldsymbol{\beta}}^{(0)}\)` e `\({U}_{\boldsymbol{\beta}}^{(0)}\)`, respectivamente, essas quantidades avaliadas em `\(\boldsymbol{\beta}^{(0)}\)`. Assim, repetindo o procedimento acima, chegamos ao processo iterativo
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\boldsymbol{\beta}^{(m+1)} = \boldsymbol{\beta}^{(m)} + \{ {({-U'}_{\boldsymbol{\beta}}}^{-1}) \}^{(m)}  {U}_{\boldsymbol{\beta}}^{(m)},
+\end{align*}\]
+&lt;/div&gt;
+
+`\(m = 0, 1, \ldots\)`. Como a matriz `\({-U'}_{\boldsymbol{\beta}}\)` pode não ser positiva definida, a aplicação do método escore de Fisher substituindo a matriz `\({-U'}_{\boldsymbol{\beta}}\)` pelo correspondente valor esperado `\(K_{\beta\beta}\)` pode ser mais conveniente.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Estimação de `\(\beta\)` - II
+
+Isso resulta em 
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\boldsymbol{\beta}^{(m+1)} = \boldsymbol{\beta}^{(m)} + \{ {(K_{\beta\beta}}^{-1}) \}^{(m)}  {U}_{\boldsymbol{\beta}}^{(m)},
+\end{align*}\]
+&lt;/div&gt;
+
+`\(m = 0, 1, \ldots\)`. Se trabalharmos um pouco o lado direito da expressão acima, chegaremos a 
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\boldsymbol{\beta}^{(m+1)} = \boldsymbol{\beta}^{(m)} + \left({X^{'}} W^{(m)}X\right)^{-1}{X'} \left(W^{(m)}\right)^{1/2}\left(V^{(m)}\right)^{-1/2} (\boldsymbol{y} - \boldsymbol{\mu}^{(m)}),
+\end{align*}\]
+&lt;/div&gt;
+
+`\(m = 0, 1,\ldots\)`. É possível ainda provar que o processo acima pode ser escrito como
+
+&lt;div class="math"&gt;
+\[\begin{align}
+\boldsymbol{\beta}^{(m+1)} = \left({X'}W^{(m)}X\right)^{-1} {X'} W^{(m)} \boldsymbol{z}^{(m)},
+\label{eq:repond}
+\end{align}\]
+&lt;/div&gt;
+
+`\(m = 0, 1,\ldots\)`, em que `\(\boldsymbol{z} = \boldsymbol{\eta} + W^{-1/2} V^{-1/2} (\boldsymbol{y} - \boldsymbol{\mu})\)`. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Estimação de `\(\beta\)` - III
+
+A equação matricial (\ref{eq:repond}) é válida para qualquer MLG e mostra que a solução das equações de MV equivale a calcular repetidamente uma regressão linear ponderada de uma variável dependente ajustada `\(\boldsymbol{z}\)` sobre a matriz `\(X\)` usando uma função de peso `\(W\)` que se modifica no processo iterativo. As funções de variância e de ligação entram no processo iterativo através de `\(W\)` e `\(\boldsymbol{z}\)`.
+
+--
+
+A convergência de (\ref{eq:repond}) ocorre em geral em um número finito de passos, independente dos valores iniciais utilizados (Wedderburn, 1976). 
+
+--
+
+É usual iniciar  (\ref{eq:repond}) com `\(\eta_i^{(0)} = g(y_i)\)`, para `\(i = 1,\ldots, n\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Estimação de `\(\phi\)` - III
+
+Igualando a função escore `\(U_{\phi}\)` a zero chegamos à seguinte solução:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\sum^n _{i=1} c'(y_i,\hat{\phi}) = \frac{1}{2} D(\boldsymbol{y}; \hat{\boldsymbol{\mu}}) -  \sum^n_{i=1}\left\{y_i \tilde{\theta_i} - b(\tilde{\theta_i})\right\},
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+em que `\(D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})\)` denota o desvio do modelo sob investigação. Verificamos que a estimativa de máxima verossimilhança para `\({\phi}\)` nos casos normal e normal inversa, igualando  `\(U_{\phi}\)` a zero, é dada por
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\hat{\phi} = \frac{n}{D(\boldsymbol{y}; \hat{\boldsymbol{\mu}})}.
+\end{align*}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Propriedades dos Estimadores de um MLG
+
+- Por se tratarem de estimadores de máxima verossimilhança, os estimadores dos parâmetros de um MLG compartilham as propriedades gerais dos EMVs.
+
+--
+
+- Algo que será recorrente deste ponto em diante é que boa parte dos resultados são assintóticos, o que quer dizer que são rigorosamente válidos quando `\(n \rightarrow \infty\)`, mas aproximadamente válidos para grandes amostras.
+
+--
+
+- Condições adicionais para a validade dos resultados serão oportunamente relatadas, caso se apliquem.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distribuição assintótica dos estimadores
+
+- A distribuição dos estimadores é fundamental para se dimensionar o erro das estimativas, construir intervalos de confiança e testar hipóteses de interesse.
+
+--
+
+- Seja `\(\hat{\boldsymbol{\beta}}\)` o estimador de máxima verossimilhança do vetor de parâmetros `\(\boldsymbol{\beta}\)` de um MLG. A distribuição assintótica de `\(\hat{\boldsymbol{\beta}}\)` é dada por:
+    
+    `$$\hat{\boldsymbol{\beta}} \sim N(\boldsymbol{\beta}, K^{-1}_{\beta\beta}),$$`
+    
+sendo `\(K_{\beta\beta} (\boldsymbol{\theta}) = \phi X^T W X\)` e `\(W\)` a matriz diagonal com elementos `\(diag \left\{\omega_i,\ldots,\omega_n\right\}\)`. 
+
+--
+
+- Na prática, a matriz `\(K_{\beta\beta}\)` é estimada, usando-se alguma estimativa para `\(\phi\)` e a matriz `\(W\)` é avaliada com base nas estimativas obtidas no último passo do algoritmo de estimação. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Propriedades dos Estimadores de Máxima Verossimilhança - I
+
+Por se tratarem de estimadores de máxima verossimilhança, as seguintes propriedades são garantidas para cada `\(\hat{\beta}_j\)`, `\(j = 0, 1, \ldots, p\)`.
+
+- São assintoticamente não viciados:
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+    \lim_{n \rightarrow \infty} E(\hat{\beta}_j)  = \beta_j.
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+- São estimadores consistentes:
+ 
+&lt;div class="math"&gt;
+\[\begin{align*}
+    P( \mid \hat{\beta}_j - \beta_j \mid &lt; \epsilon) \xrightarrow{n \rightarrow \infty}  0, \quad \text{para qualquer } \epsilon &gt; 0.
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+- Apresentam distribuição assintótica normal.
+
+--
+
+- São eficientes (apresentam variância mínima) na classe dos estimadores (assintoticamente) não viciados.    
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Propriedades dos Estimadores de Máxima Verossimilhança - II
+
+Como `\(K_{\boldsymbol{\theta}\boldsymbol{\theta}} =  diag\{K_{\beta\beta},K_{\phi\phi}\}\)` (bloco diagonal), então assintoticamente segue que
+
+--
+
+- `\(\hat{\boldsymbol{\beta}} \sim N_{p+1}(\beta, K^{-1} _{\beta\beta})\)`,
+
+--
+
+- `\(\hat{\phi} \sim N(0,K^{-1} _{\phi\phi})\)` e
+
+--
+
+- `\(\hat{\boldsymbol{\beta}}\)` e `\(\hat{\phi}\)` são independentes. 
 
 
 ---
