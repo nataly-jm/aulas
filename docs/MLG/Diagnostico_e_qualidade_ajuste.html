@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>MODELOS LINEARES GENERALIZADOS STA13829</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# MODELOS LINEARES GENERALIZADOS STA13829
+]
+.subtitle[
+## Técnicas de Diagnóstico e Qualidade do Ajuste
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+# Métodos de diagnóstico - I
+
+Os objetivos são:
+
+- Verificar se há afastamentos sérios de suposições feitas para o modelo:
+  
+  - Da distribuição da variável resposta.
+  
+  - Ausência de alguma variável explicativa no modelo ou termos (quadrático, cúbico) de variáveis incluídas no modelo.
+  
+  - Se há indícios de correlação entre as observações.
+  
+  - Adequação da função de ligação.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Métodos de diagnóstico - II
+
+- Detectar observações atípicas que destoam do conjunto:
+
+  - **&lt;span style="color:orange"&gt;Aberrantes&lt;/span&gt;**: mal ajustadas com resíduos altos.
+
+--
+  
+  - **&lt;span style="color:orange"&gt;Alavanca&lt;/span&gt;**: posicionadas em regiões remotas no subespaço de X.
+
+--
+
+  - **&lt;span style="color:orange"&gt;Influentes&lt;/span&gt;**: com influência desproporcional nas estimativas dos coeficientes.
+
+--
+
+&gt;**Observação**: As observações atípicas podem ter mais de uma classificação (aberrante/alavanca/influente).
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Pontos aberrantes, influentes e de alavanca no modelo Normal - I
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Pontos.jpg" alt=" " width="55%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Pontos aberrantes, influentes e de alavanca no modelo Normal - II
+
+- Na Figura 1.4a temos os pontos alinhados sem nenhum tipo de perturbação.
+
+--
+
+- Na Figura 1.4b perturbamos o ponto  `\(\#3\)`  fazendo-o **&lt;span style="color:orange"&gt;aberrante&lt;/span&gt;**. Note que a exclusão do mesmo (reta pontilhada) altera apenas o intercepto, isto é, os valores ajustados. É um ponto que não está muito afastado dos demais, logo tem um valor para `\(h_{ii}\)` relativamente pequeno.
+
+--
+
+- Na Figura 1.4c, perturbamos o ponto `\(\#5\)` de modo que o mesmo fique mais afastado no subespaço gerado pelas colunas da matriz X. É um ponto de **&lt;span style="color:orange"&gt;alavanca&lt;/span&gt;**, todavia a eliminação do mesmo não muda praticamente nada nas estimativas dos parâmetros. Como é um ponto com `\(h_{ii}\)` relativamente alto, as variâncias dos valores ajustados dos pontos próximos ao mesmo serão maiores do que as variâncias dos valores ajustados  correspondentes aos demais pontos.
+
+--
+
+- Na Figura 1.4d, perturbamos novamente o ponto `\(\#5\)` fazendo-o agora **&lt;span style="color:orange"&gt;influente&lt;/span&gt;** e também alavanca. O mesmo, além de mudar a estimativa da inclinação da reta ajustada, continua mais afastado do que os demais.
+
+--
+
+&gt;**Observação**: Boa parte dos métodos de diagnóstico em MLGs configuram extensões dos procedimentos utilizados em regressão linear. No entanto, deve-se ter cautela quanto ao uso desses métodos em MLGs pois alguns resultados dependem fortemente das propriedades do modelo proposto.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Pontos de alavanca no modelo Normal - I
+
+No modelo de regressão linear normal
+
+`$$\hat{\boldsymbol{y}} = \hat{\boldsymbol{\mu}} = X\hat{\boldsymbol{\beta}}.$$`
+
+Como 
+
+`$$\hat{\boldsymbol{\beta}} = (X'X)^{-1} X' \boldsymbol{y},$$`
+
+então
+
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+\hat{\boldsymbol{y}} = \hat{\boldsymbol{\mu}} &amp;= X\hat{\boldsymbol{\beta}}\\
+&amp;= X (X'X)^{-1} X' \boldsymbol{y}\\
+&amp;= Hy,
+\end{align*}\]
+&lt;/div&gt;
+
+em que 
+
+`$$H = X (X'X)^{-1} X'.$$`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Pontos de alavanca no modelo Normal - II
+
+A matriz `\(H\)`, conhecida por **&lt;span style="color:orange"&gt;matriz hat&lt;/span&gt;**, é
+
+- simétrica,
+
+--
+
+- idempotente,
+
+--
+
+- a matriz de projeção ortogonal de vetores do `\(\mathbb{R}^n\)` no subespaço gerado pelas colunas da matriz `\(X\)`.
+
+--
+
+&gt;**Observação**: Por ser idempotente, temos que
+&lt;div class="math"&gt;
+\[\begin{align*}
+\text{posto}(H) &amp;= \text{tr}(H)\\
+&amp;= \sum_{i = 1}^n h_{ii}\\
+&amp;= p.
+\end{align*}\]
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Pontos de alavanca no modelo Normal - III
+
+Hoaglin e Welsch (1978), definiram o que chamaram de pontos de alavanca, àqueles que
+
+- estão associados à análise da matriz de projeção H.
+
+--
+
+- têm uma influência desproporcional no próprio valor ajustado `\(\hat{y}_i\)`,
+
+--
+
+- conhecida por matriz *hat*, 
+
+--
+
+- em geral têm um perfil diferente dos demais pontos no que se refere aos valores das variáveis explicativas.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Pontos de alavanca no modelo Normal - IV
+
+
+Supondo que todos os pontos exerçam a mesma influência sobre os valores ajustados, podemos esperar que  `\(h_{ii}\)` esteja próximo de  `$$\frac{tr(H)}{n} = \frac{p}{n}.$$`
+
+--
+
+Pontos tais que `\(h_{ii} &gt; 2\frac{p}{n}\)`, são conhecidos como pontos de alavanca ou de alto *leverage*. 
+
+--
+
+A influência de `\(y_i\)` sobre o próprio valor ajustado de `\(\hat{y}_i\)`, pode ser bem representada pela derivada 
+`$$\frac{\partial \hat{y}_i}{\partial y_i}$$`
+
+que coincide com `\(h_{ii}\)` no caso normal linear.  
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Extensão de ponto de alavanca no MLG - I
+
+- **Primeira sugestão:**
+  
+  Wei, Hu e Fung (1998) propuseram uma forma bastante geral para obtenção da matriz, que pode ser aplicada em diversas situações de estimação:
+  
+  `$$\frac{\partial \hat{\boldsymbol{y}}}{\partial \boldsymbol{y}}$$`
+  
+  quando a resposta é contínua. No caso dos MLGs para `\(\phi\)` conhecido, a matriz `\(\frac{\partial \hat{\boldsymbol{y}}}{\partial \boldsymbol{y}}\)` pode ser obtida de forma geral como
+  
+  `$$\widehat{GL} =  \frac{\partial \hat{\boldsymbol{y}}}{\partial \boldsymbol{y}}\propto \widehat{N} X(X^T \widehat{W} X)^{-1} X^T \widehat{V}^{-1} \hat{N},$$`
+
+--
+
+  em que `\(N = diag\{ \partial \mu_1/\partial \eta_1,\ldots,\partial \mu_n/\partial \eta_n\}\)`. Em particular, o elemento `\(\widehat{GL}_{ii}\)` pode ser expresso na forma
+
+$$ \widehat{GL}_{ii} = \hat{\omega}_i \boldsymbol{x}_i^T (X^T \widehat{W} X)^{-1} \boldsymbol{x}_i,$$
+
+em que `\({\omega}_i = (\partial \mu_i/\partial \eta_i)^2/V_i\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Extensão de ponto de alavanca no MLG - II
+
+- **Segunda sugestão:**
+  
+  Embora não coincida exatamente com a expressão anterior, exceto no caso de resposta contínua e ligação canônica, outra definição de pontos de alavanca é construída fazendo uma analogia entre a solução de máxima verossimilhança para `\(\boldsymbol{\hat{\beta}}\)` num MLG e a solução de mínimos quadrados de uma regressão normal linear ponderada.
+  
+--
+
+  No processo iterativo de MLGs, na convergência, temos
+
+  `$$\boldsymbol{\beta} = \left({X'}\widehat{W}X\right)^{-1} {X'} \widehat{W} \widehat{\boldsymbol{z}},$$`
+
+  com 
+
+  `$$\hat{\boldsymbol{z}} = \hat{\boldsymbol{\eta}} + \widehat{W}^{-1/2} \widehat{V}^{-1/2} (\boldsymbol{y} - \hat{\boldsymbol{\mu}})$$` 
+
+  é a solução de mínimos quadrados ponderados da regressão `\(\boldsymbol{z}\)` contra `\(X\)` com pesos `\(W^{1/2}\)`. Então, `\(H\)` é a matriz de projeção
+
+  `$$\widehat{H} = \widehat{W}^{1/2} X(X^T \widehat{W} X)^{-1} X^T \widehat{W}^{1/2}.$$`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Extensão de ponto de alavanca no MLG - III
+
+**Importante:** 
+
+- Pregibon (1981) sugere usar os elementos da diagonal `\(h_{ii}\)` de `\(H\)` e analisar os pontos que se destacam. 
+--
+
+- Para amostras grandes, `\(\widehat{h}_{ii} = \widehat{GL}_{ii}\)` e, portanto, `\(\widehat{H} = \widehat{GL}\)` coincidem.  
+
+--
+
+- No caso de ligação canônica essa igualdade vale para qualquer tamanho amostral.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Tipos de resíduos em Modelos Lineares Generalizados
+
+Um resíduo (denotado, genericamente, por `\(r_i\)`) é alguma medida de afastamento de uma observação `\((y_i)\)` para seu valor ajustado pelo modelo `\((\hat{\mu}_i)\)`:
+
+`$$r_i = q_i(y_i, \hat{\mu}_i),$$`
+
+sendo `\(q_i\)` alguma medida de diferença, usualmente escolhida para estabilizar a variância ou induzir simetria na distribuição amostral de `\(r_i\)`, a fim de garantir comparabilidade dos resíduos e possibilitar a
+detecção de resíduos discrepantes.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Resíduo ordinário
+
+O resíduo ordinário é simplesmente a diferença do valor observado para o valor ajustado para uma particular observação:
+
+`$$r_i = y_i - \hat{\mu}_i.$$`
+
+Os resíduos ordinários não têm variância constante, sendo de pouca serventia no diagnóstico de modelos lineares generalizados.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Resíduo de Pearson
+
+É o resíduo ordinário da solução de mínimos quadrados da regressão linear ponderada de `\(\hat{\boldsymbol{z}}\)` contra X, e define-se por:
+
+$$r_i^p = \frac{y_i - \hat{\mu}_i}{\sqrt{V(\hat{\mu}_i)}}, $$
+
+em que `\(V(\hat{\mu}_i)\)` representa a função de variância do modelo calculada em `\(\hat{\mu}_i\)`.
+
+--
+
+&gt;**Observação:**
+  - O resíduo de Pearson tem como desvantagem o fato de ter distribuição fortemente assimétrica para modelos não-normais.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Resíduo de Pearson Padronizado
+
+Define-se por:
+
+`$$r_i^{p^*} = t_{S_i} = \frac{\hat{\phi}^{1/2} (y_i - \hat{\mu}_i)}{\sqrt{V(\hat{\mu}_i) (1 - h_{ii})}},$$`
+
+sendo `\(h_{ii}\)` `\(i\)`-ésimo elemento da diagonal da matriz H:
+
+`$$\widehat{H} = \widehat{W}^{1/2} X(X^T \widehat{W} X)^{-1} X^T \widehat{W}^{1/2},$$`
+
+que é a solução matriz de projeção da solução de mínimos quadrados ponderados da regressão `\(\boldsymbol{z}\)` contra `\(X\)` com pesos `\(W^{1/2}\)`. 
+
+--
+
+&gt;**Observação:**
+  - Williams (1984) mostra através de estudos de Monte Carlo que a distribuição de `\(r_i^{p^*}\)` é em geral assimétrica, mesmo para grandes amostras.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Resíduo componente do desvio
+
+O resíduo componente do desvio para a `\(i\)`-ésima observação corresponde à contribuição dessa observação para a deviance do modelo. É uma medida de distância de `\(y_i\)` em relação a `\(\hat{\mu}_i\)` na escala do logaritmo da verossimilhança. 
+
+$$r_i^d = \text{sinal}(y_i - \hat{\mu}_i) \; d^*(y_i,  \hat{\mu}_i), $$
+
+`\(\text{sinal}(x) = -1\)`, se `\(x &lt; 0\)`, e `\(\text{sinal}(x) = +1\)`, se `\(x &gt; 0\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Resíduo componente do desvio padronizado
+
+O resíduo componente do desvio padronizado é dado por: 
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+r_i^{d^*} &amp;= \text{sinal}(y_i - \hat{\mu}_i) \frac{d^*(y_i,  \hat{\mu}_i)}{\sqrt{1-\hat{h}_{ii}}}\\
+&amp;= \text{sinal}(y_i - \hat{\mu}_i) \frac{\phi^{1/2} d(y_i,  \hat{\mu}_i)}{\sqrt{1-\hat{h}_{ii}}}.
+\end{align*}\]
+&lt;/div&gt;
+
+--
+
+&gt;**Observação:**
+  - Williams (1984) verificou através de simulações que a distribuição de `\(t_{D_i}\)` tende a estar mais próxima da normalidade do que as distribuições dos demais resíduos.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Resíduo quantílico aleatorizado - I
+
+- Diferentemente do que acontece para os modelos lineares com erros normais, nas situações em que se tem uma variável resposta sem distribuição Normal, os resíduos, muitas vezes, não têm boa aproximação à distribuição Normal, ainda que o modelo se ajuste bem aos dados;
+
+--
+
+- A falta de normalidade dos resíduos é particularmente notável na modelagem de dados discretos, sobretudo quando os dados assumem valores pequenos (Ex: Poisson, com taxa próxima de zero; Binomial, com probabilidade de sucesso próxima de zero ou um).
+
+--
+
+- Propostos por Dunn e Smith (1996), os resíduos quantílicos aleatorizados apresentam distribuição Normal, independente da distribuição da variável resposta.
+
+--
+
+- Os resíduos quantílicos aleatorizados baseiam-se no teorema da inversa da função de distribuição acumulada.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Resíduo quantílico aleatorizado - II
+
+No contexto de modelos lineares generalizados, seja `\(F(y; \mu , \phi)\)` a função distribuição acumulada de uma variável aleatória `\(Y\)`. 
+
+-  Se `\(Y\)` é contínua, o teorema da inversa da função distribuição acumulada garante que `\(U_i=F(y_i;\mu_i,\phi)\)` tem distribuição uniforme no intervalo `\((0,1)\)`.
+
+--
+
+- Ajustado um MLG, o resíduo quantílico fica definido por:
+  
+  `$$r_i^q = \Phi^{-1}\left( F(y_i; \mu_i, \phi) \right),$$`
+    
+    sendo `\(\Phi(\cdot)\)` a função de distribuição acumulada da distribuição normal padrão.
+
+--
+
+- Se os parâmetros do modelo são consistentemente estimados, então `\(r_i^q\)` converge para uma distribuição normal padrão.
+
+--
+
+- Se  `\(Y\)` é discreta, então um recurso de aleatorização é aplicado de tal forma que, também nesse caso, se os parâmetros do modelo são consistentemente estimados, então  `\(r_i^q\)` converge para uma distribuição normal padrão.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Pontos Influentes
+
+Pontos influentes são aqueles com influência desproporcional nas estimativas dos coeficientes, isto é, quando retirados do modelo mudam de forma substancial as estimativas ou mesmo a significância dos coeficientes. 
+
+--
+
+O método mais conhecido para detectar tais pontos é o de deleção de pontos, que consiste em retirar um ponto e verificar a variação nas estimativas. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distância de Cook: Modelo Normal - I
+
+Medida de influência da observação `\(i\)` sobre todos os valores ajustados. 
+
+Em outras palavras, os valores ajustados mudariam muito se a observação `\(i\)` fosse excluída? 
+
+`$$D_i = \frac{\sum_{j = 1}^n (\widehat{Y}_j - \widehat{Y}_{j(i)})^2}{p \; QME},$$`
+
+em que 
+
+- `\(\widehat{Y}_j\)`: valores ajustados;
+
+--
+
+- `\(\widehat{Y}_{j(i)}\)`: valores ajustados sem a observação `\(i\)`;
+
+--
+
+- `\(p\)`: número de parâmetros;
+
+--
+
+- QME: quadrado médio dos resíduos.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distância de Cook: Modelo Normal - II
+
+De maneira geral, 
+
+&lt;div class="math"&gt;
+\[\begin{align*}
+D_i &amp;= \frac{(\hat{\boldsymbol{\beta}} - \hat{\boldsymbol{\beta}}_{(i)})^T (X^T X)(\hat{\boldsymbol{\beta}} - \hat{\boldsymbol{\beta}}_{(i)})}{p s^2}\\
+&amp; =  \biggl\{ \frac{r_i}{s (1-h_{ii})^{1/2}} \biggl\}^2 \frac{h_{ii}}{(1-h_{ii})} \frac{1}{p}\\
+&amp; =  t_i^2 \frac{h_{ii}}{(1-h_{ii})} \frac{1}{p}, 
+\end{align*}\]
+&lt;/div&gt;
+
+em que `\(t_i\)` é o resíduo studentizado da observação `\(i\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distância de Cook: MLG - I
+
+Supondo `\(\phi\)` conhecido, o afastamento pela verossimilhança quando eliminamos a `\(i-\)`ésima observação é denotado por
+
+`$$\text{LD}_i=2\left\{L(\hat{\boldsymbol{\beta}})-L(\hat{\boldsymbol{\beta}}_{(i)})\right\},$$`
+
+sendo portanto uma medida que verifica a influência da retirada da `\(i-\)`ésima observação em `\(\hat{\boldsymbol{\beta}}\)`. Não sendo possível obtermos uma forma analítica para `\(\text{LD}_i\)`, é usual utilizarmos a segunda aproximação por série de Taylor em torno de `\(\hat{\boldsymbol{\beta}}\)`. Essa expansão leva ao seguinte resultado:
+
+`$$\text{LD}_i\approx (\boldsymbol{\beta}-\hat{\boldsymbol{\beta}})^T\left\{-L_{\beta\beta}(\hat{\boldsymbol{\beta}})\right\}(\boldsymbol{\beta}-\hat{\boldsymbol{\beta}}).$$`
+
+--
+
+Substituindo `\(-L_{\beta\beta}(\hat{\beta})\)` pelo correspondente valor esperado e `\(\boldsymbol{\beta}\)` por `\(\boldsymbol{\beta_{(i)}}\)`, obtemos
+
+`$$\text{LD}_i\approx \phi\left(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{(i)}\right)^T\left(X^T\widehat{W}X\right)\left(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{(i)}\right).$$`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distância de Cook: MLG - II
+
+
+Assim,
+
+`$$LD_i\approx \left\{\frac{h_{ii}}{(1-h_{ii})}\right\}t^2_{S_i},$$`
+
+em que `\(t^2_{S_i}\)` é o resíduo de Pearson padronizado.
+
+--
+
+&gt;**Observação:**
+  - Recomenda-se como critério olhar com mais atenção aqueles pontos com `\(LD_i\)` muito maior que os demais.
+  
+  
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
