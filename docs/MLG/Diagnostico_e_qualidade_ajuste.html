@@ -102,7 +102,7 @@ class: animated, fadeIn
 ### Pontos aberrantes, influentes e de alavanca no modelo Normal - I
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="images/Pontos.jpg" alt=" " width="55%" /&gt;
+&lt;img src="images/Pontos1.png" alt=" " width="50%" /&gt;
 &lt;p class="caption"&gt; &lt;/p&gt;
 &lt;/div&gt;
 
@@ -248,13 +248,13 @@ class: animated, fadeIn
   
   quando a resposta é contínua. No caso dos MLGs para `\(\phi\)` conhecido, a matriz `\(\frac{\partial \hat{\boldsymbol{y}}}{\partial \boldsymbol{y}}\)` pode ser obtida de forma geral como
   
-  `$$\widehat{GL} =  \frac{\partial \hat{\boldsymbol{y}}}{\partial \boldsymbol{y}}\propto \widehat{N} X(X^T \widehat{W} X)^{-1} X^T \widehat{V}^{-1} \hat{N},$$`
+  `$$\widehat{GL} =  \frac{\partial \hat{\boldsymbol{y}}}{\partial \boldsymbol{y}}\cong \widehat{N} X(X^T \widehat{W} X)^{-1} X^T \widehat{V}^{-1} \hat{N},$$`
 
 --
 
   em que `\(N = diag\{ \partial \mu_1/\partial \eta_1,\ldots,\partial \mu_n/\partial \eta_n\}\)`. Em particular, o elemento `\(\widehat{GL}_{ii}\)` pode ser expresso na forma
 
-$$ \widehat{GL}_{ii} = \hat{\omega}_i \boldsymbol{x}_i^T (X^T \widehat{W} X)^{-1} \boldsymbol{x}_i,$$
+$$ \widehat{GL}_{ii} \cong \hat{\omega}_i \boldsymbol{x}_i^T (X^T \widehat{W} X)^{-1} \boldsymbol{x}_i,$$
 
 em que `\({\omega}_i = (\partial \mu_i/\partial \eta_i)^2/V_i\)`.
 
@@ -377,7 +377,7 @@ class: animated, fadeIn
 
 O resíduo componente do desvio para a `\(i\)`-ésima observação corresponde à contribuição dessa observação para a deviance do modelo. É uma medida de distância de `\(y_i\)` em relação a `\(\hat{\mu}_i\)` na escala do logaritmo da verossimilhança. 
 
-$$r_i^d = \text{sinal}(y_i - \hat{\mu}_i) \; d^*(y_i,  \hat{\mu}_i), $$
+$$r_i^d = t_{D_i} = \text{sinal}(y_i - \hat{\mu}_i) \; d^*(y_i,  \hat{\mu}_i), $$
 
 `\(\text{sinal}(x) = -1\)`, se `\(x &lt; 0\)`, e `\(\text{sinal}(x) = +1\)`, se `\(x &gt; 0\)`.
 
@@ -392,7 +392,7 @@ O resíduo componente do desvio padronizado é dado por:
 
 &lt;div class="math"&gt;
 \[\begin{align*}
-r_i^{d^*} &amp;= \text{sinal}(y_i - \hat{\mu}_i) \frac{d^*(y_i,  \hat{\mu}_i)}{\sqrt{1-\hat{h}_{ii}}}\\
+r_i^{d^*} = t_{D_i^*}&amp;= \text{sinal}(y_i - \hat{\mu}_i) \frac{d^*(y_i,  \hat{\mu}_i)}{\sqrt{1-\hat{h}_{ii}}}\\
 &amp;= \text{sinal}(y_i - \hat{\mu}_i) \frac{\phi^{1/2} d(y_i,  \hat{\mu}_i)}{\sqrt{1-\hat{h}_{ii}}}.
 \end{align*}\]
 &lt;/div&gt;
@@ -400,7 +400,7 @@ r_i^{d^*} &amp;= \text{sinal}(y_i - \hat{\mu}_i) \frac{d^*(y_i,  \hat{\mu}_i)}{\
 --
 
 &gt;**Observação:**
-  - Williams (1984) verificou através de simulações que a distribuição de `\(t_{D_i}\)` tende a estar mais próxima da normalidade do que as distribuições dos demais resíduos.
+  - Williams (1984) verificou através de simulações que a distribuição de `\(t_{D_i^*}\)` tende a estar mais próxima da normalidade do que as distribuições dos demais resíduos.
 
 
 ---
@@ -417,7 +417,7 @@ class: animated, fadeIn
 
 --
 
-- Propostos por Dunn e Smith (1996), os resíduos quantílicos aleatorizados apresentam distribuição Normal, independente da distribuição da variável resposta.
+- Propostos por Dunn e Smyth (1996), os resíduos quantílicos aleatorizados apresentam distribuição Normal, independente da distribuição da variável resposta.
 
 --
 
@@ -524,13 +524,13 @@ Supondo `\(\phi\)` conhecido, o afastamento pela verossimilhança quando elimina
 
 sendo portanto uma medida que verifica a influência da retirada da `\(i-\)`ésima observação em `\(\hat{\boldsymbol{\beta}}\)`. Não sendo possível obtermos uma forma analítica para `\(\text{LD}_i\)`, é usual utilizarmos a segunda aproximação por série de Taylor em torno de `\(\hat{\boldsymbol{\beta}}\)`. Essa expansão leva ao seguinte resultado:
 
-`$$\text{LD}_i\approx (\boldsymbol{\beta}-\hat{\boldsymbol{\beta}})^T\left\{-L_{\beta\beta}(\hat{\boldsymbol{\beta}})\right\}(\boldsymbol{\beta}-\hat{\boldsymbol{\beta}}).$$`
+`$$\text{LD}_i\cong (\boldsymbol{\beta}-\hat{\boldsymbol{\beta}})^T\left\{-\ddot{L}_{\beta\beta}(\hat{\boldsymbol{\beta}})\right\}(\boldsymbol{\beta}-\hat{\boldsymbol{\beta}}).$$`
 
 --
 
-Substituindo `\(-L_{\beta\beta}(\hat{\beta})\)` pelo correspondente valor esperado e `\(\boldsymbol{\beta}\)` por `\(\boldsymbol{\beta_{(i)}}\)`, obtemos
+Substituindo `\(-\ddot{L}_{\beta\beta}(\hat{\beta})\)` pelo correspondente valor esperado e `\(\boldsymbol{\beta}\)` por `\(\boldsymbol{\beta_{(i)}}\)`, obtemos
 
-`$$\text{LD}_i\approx \phi\left(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{(i)}\right)^T\left(X^T\widehat{W}X\right)\left(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{(i)}\right).$$`
+`$$\text{LD}_i\cong \phi\left(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{(i)}\right)^T\left(X^T\widehat{W}X\right)\left(\hat{\boldsymbol{\beta}}-\hat{\boldsymbol{\beta}}_{(i)}\right).$$`
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
@@ -541,7 +541,7 @@ class: animated, fadeIn
 
 Assim,
 
-`$$LD_i\approx \left\{\frac{h_{ii}}{(1-h_{ii})}\right\}t^2_{S_i},$$`
+`$$LD_i\cong \left\{\frac{h_{ii}}{(1-h_{ii})}\right\}t^2_{S_i},$$`
 
 em que `\(t^2_{S_i}\)` é o resíduo de Pearson padronizado.
 
@@ -550,6 +550,156 @@ em que `\(t^2_{S_i}\)` é o resíduo de Pearson padronizado.
 &gt;**Observação:**
   - Recomenda-se como critério olhar com mais atenção aqueles pontos com `\(LD_i\)` muito maior que os demais.
   
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Análise Gráfica - I
+
+
+- **Pontos aberrantes**
+
+  - `\(t_{D_i}\)` ou `\(r_{q_i}\)` versus ordem das observações `\((i)\)`. O objetivo é localizar observações com medidas de diagnóstico grandes.
+
+--
+  
+  - Gráfico Normal e meio-normal (*half-normal*) de probabilidades dos resíduos com bandas de confiança. Construídos da mesma maneira que aqueles para o modelo clássico, usando-se porém a distribuição pertinente. Esses gráficos podem mostrar a falta de ajuste geral de um modelo.
+
+--
+
+- **Pontos influentes**
+  
+  - Gráfico de `\(LD_i\)` versus a ordem das observações `\((i)\)`. O objetivo é localizar observações com distância de Cook desproporcional, quando comparada às outras observações.
+
+--
+
+- **Correlação**
+  
+  - Valores observados ou resíduos versus tempo ou alguma ordem em que há suspeita de correlação entre observações. Este gráfico pode conduzir à detecção de padrões concebidos *a priori*, devido ao tempo ou, então, a alguma variável altamente correlacionada no tempo.
+  
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Análise Gráfica - II
+
+- **Variabilidade**
+  
+  - Resíduos versus alguma função dos valores ajustados. Recomenda-se o uso de algúm tipo de resíduo estudentizado versus `\(\hat{\eta}_i\)`, ou então versus os valores ajustados tranformados de forma a se ter variância constante para a distribuição usada. 
+  
+--
+
+  No eixo das abcissas usa-se:
+  
+      - `\(\hat{\mu}_i\)` para a Normal.
+      - `\(2\sqrt{\hat{\mu}_i}\)` para a Poisson.
+      - `\(2\text{arcsen}\sqrt{\hat{\mu}_i/m_i}\)` para a Binomial.
+      - `\(2\log(\hat{\mu}_i)\)` para a Gama.
+      - `\(-2\hat{\mu}_i^{-1/2}\)` para a Normal Inversa.
+
+--
+
+  &gt;Espera-se que os resíduos se distribuam aleatoriamente em torno do zero com amplitude constante.
+
+  
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Análise Gráfica - III
+  
+- **Falta de algum termo nas variáveis explicativas**
+  
+  - Resíduos versus variáveis explicativas não incluídas. Pode mostrar se existe uma relação entre os resíduos do modelo ajustado e uma variável ainda não adicionada no modelo. 
+  
+--
+
+ - Gráfico da variável adicionada ou da regressão parcial (*added variable plot*). Ajusta-se o MLG com preditor linear `\(\mathbf{\eta=X\beta}\)`. Faz-se o gráfico de `\(\widehat{\mathbf{W}}^{-1/2}\mathbf{s}\)` (resíduo de Pearson generalizado da regressão ponderada de `\(\mathbf{y}\)` em relação a `\(\mathbf{X}\)` com matriz de pesos estimada `\(\widehat{\mathbf{W}}\)`) versus `\((\mathbf{I}-\widehat{\mathbf{H}})\widehat{\mathbf{W}}^{1/2}\mathbf{u}\)` (resíduos da regressão ponderada de `\(\mathbf{u}\)` em relação a `\(\mathbf{X}\)` com matriz de pesos estimada `\(\widehat{\mathbf{W}}\)`), onde `\(\mathbf{s}\)` é o vetor com elementos 
+ 
+ $$
+   s_i=\frac{(y_i-\hat{\mu}_i)}{V(\mu_i)}\frac{\hat{\mu}_i}{d\eta_i}
+ $$
+  e `\(\mathbf{u}\)` é o vetor com os valores da variável a ser adicionada. Espera-se que os resíduos se distribuam aleatoriamente em torno do zero com amplitude constante. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Análise Gráfica - IV
+
+- **Adequação da função de ligação**
+  
+  - Gráfico de `\(\hat{z}_i\)` versus `\(\hat{\eta}_i\)`. Uma tendência linear indica adequação da função de ligação, exceto para o caso binomial. 
+  
+--
+
+  - Gráfico da variável adicionada. Este gráfico pode ser usado considerando-se `\(\mathbf{u}=\hat{\mathbf{\eta}}\odot \hat{\mathbf{\eta}}\)`, em que `\(\odot\)` significa produto termo a termo.
+  
+--
+
+  Para funções de ligação na família potência `\(\eta=\mu^{\lambda}\)`, uma curvatura para cima no gráfico indica que deve ser usada uma função de ligação com expoente maior. Uma curvatura para baixo indica um expoente menor. Este tipo de gráfico não é adequado para dados binários.
+  
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Análise Gráfica - V
+
+- **Distribuição postulada**
+  
+  - Gráficos Normal e meio-normal (*half-plot*) de probabilidades para resíduos. É o gráfico dos valores dos quantis amostrais `\(d_{(1)}\leq \ldots \leq d_{(n)}\)` contra os quantis teóricos da distribuião normal padrão `\((z_i)\)`. O gráfico de `\(d_{(i)}\)` versus `\(z_i\)` deve ser, aproximadamente, uma reta.
+  
+--
+
+  Formatos aproximados comuns para distribuições diferentes da normalidade:
+  
+      - **S**: Distribuições com caudas muito curtas, ou seja, distribuições com valores muito próximos da média.
+  
+      - **S invertido**: Distribuições com caudas muito longas e, portanto, presença de valores extremos.
+
+      - **J e J invertido**: Distribuições assimétricas, positivas e negativas, respectivamente.
+      
+--
+    &gt;Quando são plotados os valores `\(|d_{(i)}|\)` versus `\(z_i\)` obtem-se o gráfico *half-normal*.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Análise Gráfica - VI
+
+Para auxiliar na interpretação do gráfico *half-normal*, Atkinson (1985) propôs a adição e um **&lt;span style="color:orange"&gt;envelope simulado&lt;/span&gt;**, que é obtido seguindo as etapas:
+
+--
+
+- Ajustar um determinado modelo a um conjunto de dados e obter `\(d_{(i)}\)`, os valores absolutos ordenados de uma certa estatística de diagnóstico (resíduos, distância de Cook, etc).
+
+--
+
+- Simular 19 amostras da variável resposta (dessa forma, a probabilidade da maior estatística de um envelope particular exceder o limite superior será `\(\cong 1/20\)`), usando as estimativas obtidas após um determinado modelo ser ajustados aos dados e os mesmos valores para as variáveis explicativas.
+
+--
+
+- Ajustar o mesmo modelo a cada uma das 19 amostras e calcular os valores absolutos ordenados da estatística de diagnóstico de interesse `\(d^*_{j(i)}\)`, `\(j=1,\ldots,19, \, i=1,\ldots,n\)`.
+
+--
+
+- Para cada `\(i\)`, calcular a média, o mínimo e o máximo dos `\(d^*_{j(i)}\)`.
+
+--
+
+- Colocar as quantidades determinadas no item anterior em um gráfico de `\(|d_{(i)}|\)` versus `\(z_i\)`.
+
+--
+
+&gt;Este envelope é tal que, sob o modelo correto, as estatísticas (resíduos, distância de Cook, etc) obtidas a partir das observações ficam inseridas no envelope.
+
+
   
 ---
 class: animated, hide-logo, bounceInDown
