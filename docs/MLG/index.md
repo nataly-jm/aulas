@@ -12,6 +12,7 @@ description: Repositório exclusivo para a disciplina de modelos lineares genera
 * [Introdução](https://nataly-jm.github.io/aulas/MLG/Familia_exponencial.html)
 * [Modelos Lineares Generalizados](https://nataly-jm.github.io/aulas/MLG/Modelos_lineares_generalizados.html)
 * [Diagnóstico e Qualidade do ajuste](https://nataly-jm.github.io/aulas/MLG/Diagnostico_e_qualidade_ajuste.html)
+* [Regressão Logística Binária](https://nataly-jm.github.io/aulas/MLG/Modelo_logistico.html)
 
 
 
