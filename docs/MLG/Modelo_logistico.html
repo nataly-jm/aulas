@@ -5,6 +5,24 @@
     <meta charset="utf-8" />
     <meta name="author" content="Nátaly A. Jiménez Monroy" />
     <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/htmltools-fill/fill.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="libs/jszip/jszip.min.js"></script>
+    <script src="libs/pdfmake/pdfmake.js"></script>
+    <script src="libs/pdfmake/vfs_fonts.js"></script>
+    <link href="libs/dt-ext-buttons/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="libs/dt-ext-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.html5.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.colVis.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.print.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         TeX: { equationNumbers: { autoNumber: "AMS" } },
@@ -286,7 +304,7 @@ class: animated, fadeIn
 
 ## Relação entre a variável resposta e um preditor - I
 
-&lt;img src="images/logisticasimples.png" width="95%" style="display: block; margin: auto;" /&gt;
+&lt;img src="images/logisticasimples.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -513,6 +531,36 @@ Dado que `\(\textrm{P}(\chi^2_1&gt;29,31)=6,167658\times 10^{-8}\)`, rejeitamos 
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
+## Exemplo 1 - IX
+
+**Análise do devio no R**
+
+
+``` r
+anova(mod1.3)
+```
+
+```
+## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: chd
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##      Df Deviance Resid. Df Resid. Dev
+## NULL                    99     136.66
+## age   1    29.31        98     107.35
+```
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
 ## Teste de Wald
 
 Para `\(\beta_1=0\)`,
@@ -528,7 +576,7 @@ O valor-p é definido como `\(\textrm{P}(|Z|&gt;|W|)\)`, onde `\(Z\)` denota uma
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-## Exemplo 1 - IX
+## Exemplo 1 - X
 
 Verificamos se a variável "Age" é significativa para explicar "CHD" através do teste de razão Wald.
 
@@ -567,6 +615,60 @@ O p-valor é definido como sendo `\(\textrm{P}(|Z|&gt;ST)\)`, onde Z denota uma 
 **Exemplo**: No caso do exemplo CHD de Hosmer &amp; Lemeshow, 
 `$$ST=\dfrac{296,66}{\sqrt{3333,742}}=5,14.$$`
 `\(\textrm{P}(|Z|&gt;5,14)&lt;0,0001\)`. Logo, a variável "Age" é significante para o modelo.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - XI
+
+**Verificação da função de ligação**
+
+
+``` r
+eta2&lt;-(mod1.3$linear.predictors)^2
+chdage.1&lt;-cbind(chdage,eta2)
+mod1.4 &lt;- glm(chd ~ age + eta2, family = binomial, data = chdage.1)
+
+anova(mod1.3,mod1.4, test = "LRT")
+```
+
+```
+## Analysis of Deviance Table
+## 
+## Model 1: chd ~ age
+## Model 2: chd ~ age + eta2
+##   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)
+## 1        98     107.35                     
+## 2        97     107.29  1 0.065015   0.7987
+```
+
+--
+
+&gt;Não temos evidências que a função de ligação canônica está inadequada. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - XII
+
+**Diagnóstico do modelo: análise gráfica**
+
+&lt;img src="Modelo_logistico_files/figure-html/unnamed-chunk-9-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - XIII
+
+**Diagnóstico do modelo: envelope simulado**
+
+&lt;img src="images/envelope_logistico.png" width="45%" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -622,7 +724,8 @@ O intervalo de `\(100(1-\alpha)\%\)` de confiança para `\(\pi(x)\)` é dado por
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
-##Exemplo 1 - X
+
+## Exemplo 1 - XIV
 
 
 ``` r
@@ -665,7 +768,7 @@ exp(confint(mod1.3))[-1, ]
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-## Exemplo 1 - XI
+## Exemplo 1 - XV
 
 * Logit para uma pessoa de 50 anos:
 `$$\hat{g}(50)=-5,31 + 0,1111\times 50=0,240.$$`
@@ -685,7 +788,7 @@ class: animated, fadeIn
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-## Exemplo 1 - XII
+## Exemplo 1 - XVI
 
 Temos
 `$$\hat{\pi}(50)=\dfrac{e^{\hat{g}(50)}}{1+e^{\hat{g}(50)}}=\dfrac{e^{-5,31 + 0,1111\times 50}}{1+e^{-5,31 + 0,1111\times 50}}=0,56$$`
@@ -698,6 +801,7 @@ O intervalo de confiança para o valor ajustado é dado por
 
 `$$\left[\frac{\exp \left[-0,260\right]}{1+\exp \left[-0,260\right]};\frac{\exp \left[0,740\right]}{1+\exp \left[0,740\right]}\right]$$`
 `$$\left[0,435;0,677\right]$$`
+
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
@@ -761,15 +865,32 @@ class: animated, fadeIn
 
 ## Exemplo 2 - III
 
+<div class="datatables html-widget html-fill-item" id="htmlwidget-5933383a0b1ac63169bf" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5933383a0b1ac63169bf">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[33,35,6,60,18,26,6,31,26,37,23,23,27,9,37,22,67,8,6,15,21,32,16,11,14,9,18,2,61,20,16,9,35,4,44,11,3,6,17,1,53,13,24,70,16,12,20,65,40,38,68,74,14,27,31,18,39,50,31,61,18,5,2,16,59,22,24,30,46,28,27,27,28,52,11,6,46,20,3,18,25,6,65,51,39,8,8,14,6,6,7,4,8,9,32,19,11,35,16,1,6,27,25,18,37,33,27,2,8,5,1,32,25,15,15,26,42,7,2,65,33,8,30,5,15,60,13,70,5,3,50,6,12,39,15,35,2,17,43,30,11,39,32,17,3,7,2,64,13,15,48,23,48,25,12,46,79,56,8,29,35,11,69,21,13,21,32,24,24,73,42,34,30,7,29,22,38,13,12,42,17,21,34,1,14,16,9,53,27,15,9,4,10,31,85,24],[1,1,1,1,3,3,3,2,2,2,1,1,1,1,1,1,1,1,1,1,2,2,1,2,3,2,2,3,3,3,3,2,2,1,3,3,2,3,2,3,2,1,1,1,3,2,3,3,2,2,2,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,1,1,1,1,1,1,1,1,3,2,3,2,1,2,2,3,3,3,2,1,2,3,3,3,3,3,3,2,3,3,3,3,1,1,1,1,1,1,3,3,2,1,2,1,1,1,1,1,1,1,1,1,1,1,2,2,2,3,3,3,3,3,3,3,2,2,2,3,2,2,2,3,3,2,1,1,1,1,3,3,2,2,1,2,2,1,1,1,1,1,1,1,1,3,3,3,3,3,3,1,1,1,1,1,1,1,2,2,3,3,2,2,2,3,3,3,1,3,2,2,3,3,3,3,3,2,3,3,3,2],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[0,0,0,0,1,0,0,1,1,0,0,0,0,1,1,1,1,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1,1,0,1,1,0,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,1,0,0,0,0,0,0,1,0,1,0,0,1,0,0,1,0,0,0,0,0,1,1,1,0,0,1,0,0,1,0,0,0,1,1,1,0,1,0,0,1,1,0,0,0,1,0,0,1,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>X1<\/th>\n      <th>X2<\/th>\n      <th>X3<\/th>\n      <th>X4<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"Dengue"},{"extend":"excel","filename":"Dengue"},{"extend":"pdf","filename":"Dengue"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3]},{"name":"X1","targets":0},{"name":"X2","targets":1},{"name":"X3","targets":2},{"name":"X4","targets":3}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 2 - IV
+
 ####Modelo Ajustado
 
 `$$E(Y)=[1+\exp(-\beta^t \mathbf{X})]^{-1},$$`
 onde
 
 `$$\beta^t \mathbf{X}=\beta_0+\beta_1 X_1+\beta_2 X_2+\beta_3 X_3+\beta_4 X_4.$$`
+
 --
 
-&lt;img src="images/Estimativas_logistica.png" width="75%" style="display: block; margin: auto;" /&gt;
+  | Coeficientes |  Estimativas | Erro-padrão | Razões de chances | 
+  |:------------:|-------------:|:-----------:|:-----------------:|
+  |   `\(\beta_0\)`  |   `\(-2,313\)`   |    `\(0,645\)`  |                   |
+  |   `\(\beta_1\)`  |    `\(0,029\)`   |    `\(0,014\)`  |       `\(1,030\)`     |
+  |   `\(\beta_2\)`  |    `\(0,409\)`   |    `\(0,599\)`  |       `\(1,505\)`     |
+  |   `\(\beta_3\)`  |   `\(-0,306\)`   |    `\(0,604\)`  |       `\(0,737\)`     |
+  |   `\(\beta_4\)`  |    `\(1,575\)`   |    `\(0,502\)`  |       `\(4,829\)`     |
 
 
 ---
@@ -801,11 +922,11 @@ A função resposta logística estimada é dada por
 
 **Razões de chances**:
 
-* `\(\hat{\psi}=1,03\)` (A chance de uma pessoa estar doente aumenta cerca de 3\% com cada ano adicional de idade `\((X_1)\)`, para dado status sócio-econômico e setor da cidade (constantes).)
+* `\(\hat{\psi}=1,03\)` (A chance de uma pessoa estar doente aumenta cerca de 3% com cada ano adicional de idade `\((X_1)\)`, para dado status sócio-econômico e setor da cidade (constantes).)
 
 --
 
-* `\(\hat{\psi}=4,829\)` (A chance de uma pessoa no setor 2 `\((X_4)\)` que tenha contraído a doença é quase 5 vezes maior para uma pessoa do setor 1, dado a idade e o status sócio-econômico.)
+* `\(\hat{\psi}=4,829\)` (A chance de uma pessoa no setor 2 `\((X_4)\)` contrair a doença é quase 5 vezes maior que para uma pessoa do setor 1, dado a idade e o status sócio-econômico constantes.)
 
 
 ---
@@ -974,28 +1095,6 @@ class: animated, fadeIn
 ## Diagnóstico do modelo - Gráficos
 
 &lt;img src="images/atipicos_exemplo.png" width="45%" style="display: block; margin: auto;" /&gt;
-
-
----
-[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
-class: animated, fadeIn
-
-##Envelope Simulado
-
-* È um outro gráfico relevante na detecçao de pontos atípicos. É uma banda de confiança empírica para detectar afastamentos da distribuição postulada. Serve também para verificar a presença de valores discrepantes na amostra.
-
---
-
-* Útil para verificar se algum valor do desvio (deviance) residual é discrepante (outlier), e para verificar se a parte linear do modelo de regressão logístico é adequada.
-
-
----
-[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
-class: animated, fadeIn
-
-## Envelope Modelo Logístico
-
-&lt;img src="images/envelope_logistico.png" width="45%" style="display: block; margin: auto;" /&gt;
 
 
 ---
