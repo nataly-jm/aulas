@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>MODELOS LINEARES GENERALIZADOS STA13829</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/htmltools-fill/fill.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <script src="libs/jquery/jquery-3.6.0.min.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="libs/jszip/jszip.min.js"></script>
+    <script src="libs/pdfmake/pdfmake.js"></script>
+    <script src="libs/pdfmake/vfs_fonts.js"></script>
+    <link href="libs/dt-ext-buttons/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="libs/dt-ext-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.html5.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.colVis.min.js"></script>
+    <script src="libs/dt-ext-buttons/js/buttons.print.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# MODELOS LINEARES GENERALIZADOS STA13829
+]
+.subtitle[
+## Modelos para Dados de Contagem
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+
+# Modelo de Poisson
+ 
+* Adequado para os casos em que o interesse está na contagem do número de vezes que ocorre um evento em determinado espaço ou intervalo de tempo.
+
+--
+
+* A distribuição de Poisson é usada com frequência para modelar esses dados. Se `\(Y\)` representa o número de ocorrências, sua função de probabilidade pode ser escrita como
+
+$$
+  f(y)=\frac{\mu^ye^{-\mu}}{y!},\quad y=0,1,\ldots,
+$$
+onde `\(\mu\)` é o número médio de ocorrências. Pode mostrar-se que `\(\text{E}(Y)=\mu\)` e `\(\text{Var}(Y)=\mu\)`.
+
+--
+
+* O parâmetro `\(\mu\)` precisa de uma definição cuidadosa. Frequentemente é definido como uma **&lt;span style="color:orange"&gt;taxa&lt;/span&gt;**, por exemplo, número de clientes que compram um produto para cada 100 clientes que entram em uma loja. Para acidentes de carro, a taxa pode ser definida de diversas formas: acidentes por 1000 habitantes, acidentes por 1000 habilitados, acidentes por 1000 automóveis, acidentes por 1000 km percorridos, etc. A escala de tempo deve ser incluída na definição, por exemplo, acidentes por 1000 km percorridos por ano.
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## O Modelo
+
+Sejam `\(Y_1,\ldots,Y_n\)` variáveis aleatórias independentes distribuídas tais que `\(Y_i\sim \text{Po}(\mu_i)\)`, com componente sistemática dada por `\(g(\mu_i)=\eta_i\)`, em que `\(\eta_i=\mathbb{x}_i^t\mathbb{\beta}\)`,  `\(\mathbb{x}_i=(x_{i1},\ldots,x_{ip})^t\)` e `\(\mathbb{\beta}=(\beta_1,\ldots,\beta_p)^t\)`.
+
+As funções de ligação mais usadas são a logarítmica `\((g(\mu_i)=\log(\mu_i))\)`, raiz quadrada `\((g(\mu_i)=\sqrt\mu_i)\)` e identidade `\((g(\mu_i)=\mu_i)\)`.
+
+--
+
+No caso das unidades experimentais serem observadas em tempos distintos `\(t_i, i=1,\ldots,n\)` e for assumido que `\(Y_i\sim \text{Po}(\lambda_it_i)\)`, a componente sistemática do modelo de ligação logarítmica fica dada por
+
+$$
+  \log(\mu_i)=\log(t_i) + \mathbb{x}_i^t\mathbb{\beta},
+$$
+em que `\(\log(t_i)\)` desempenha o papel de **&lt;span style="color:orange"&gt;offset&lt;/span&gt;** e isto deve ser considerado no ajuste.
+
+--
+
+Os tempos `\(t_i, i=1,\ldots,n\)` também podem ser incluídos como valores da variável explicativa `\(\log(T_i)\)`. Neste caso, a componente sistemática é dada por
+
+$$
+  \log(\mu_i)=\theta \log(t_i) + \mathbb{x}_i^t\mathbb{\beta},
+$$
+O teste `\(\text{H}_0: \theta=0\)` vs. `\(\text{H}_1: \theta\neq 0\)` verifica se `\(\log(t_i)\)` deve ser considerado no modelo como *offset*.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - I
+
+Consideramos os dados apresentados em Neter *et al*. (1996, p. 613) sobre o perfil dos clientes de uma determinada loja, oriundos de 110 áreas de uma cidade. 
+
+O objetivo do estudo é relacionar o número esperado de clientes em cada área com as variáveis explicativas: número de domicílios (em mil), renda média anual (em mil USD), idade média dos domicílios (em anos), distância ao concorrente mais próximo (em milhas) e distância à loja (em milhas). 
+
+--
+
+**Unidade experimental**: área. 
+
+--
+
+**Modelo**: Seja `\(Y_i, i=1,\ldots,110\)` o número de clientes da `\(i-\)`ésima área que foram à loja no período determinado. Assumimos que `\(Y\sim \text{Po}(\mu_i)\)` com componente sistemática dada por
+
+--
+
+$$
+  \log(\mu_i)=\alpha+ \beta_1 \color{red}{\textbf{n.domicilios}_i} + \beta_2 \text{renda}_i + \beta_3 \text{idade}_i + \beta_4 \text{dist.concorrente}_i + \beta_5 \text{dist.loja}_i.
+$$
+
+&gt; A variável número de domicílios (n.domicilios) deve ser incluída no modelo dado que as áreas têm diferentes números de domicílios.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - II
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-1a0e657602a9b6348cfd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1a0e657602a9b6348cfd">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[[9,6,28,11,4,4,0,14,16,13,9,14,5,9,9,7,4,26,32,26,11,12,3,15,12,9,14,10,22,8,3,11,2,6,11,10,0,15,9,16,29,6,26,13,0,8,8,21,12,26,3,7,5,9,13,28,10,12,6,11,12,11,9,8,9,8,6,6,15,15,12,10,8,3,10,10,15,6,9,21,13,8,6,8,21,7,19,13,24,7,3,8,9,18,12,8,16,5,8,11,12,14,17,17,6,15,10,6,4,6],[606,641,505,866,599,520,354,483,1034,456,19,530,337,586,1113,525,377,1127,877,1007,657,302,603,556,635,386,1011,925,898,731,584,439,153,1069,443,392,828,159,830,234,1004,643,741,306,180,644,109,809,722,1006,786,1041,524,725,482,666,450,667,921,412,526,523,1066,1001,669,582,872,758,782,551,201,730,738,469,898,780,622,391,531,566,410,719,684,865,1031,862,758,1141,1289,674,683,650,406,966,1103,312,787,416,528,919,482,781,120,693,348,780,752,817,268,519],[41393,23635,55475,64646,31972,41755,46014,34626,85207,33021,39198,38794,30855,28852,120065,32229,36828,90302,51707,89860,60513,42191,28736,49129,29308,26734,57862,70030,46027,32202,32871,29564,46806,59805,42555,36998,85664,21238,47972,33246,45927,58315,69177,40886,44588,47347,31791,42740,59175,48862,54678,59835,51756,34817,29942,68684,64790,58535,42919,40722,42120,28647,61464,70136,34595,30878,39366,61563,38412,41045,23864,38647,58387,37242,38337,68201,41066,40873,54655,49826,29013,78082,57506,47118,72373,67787,40305,50026,98701,58195,47991,63123,39051,114633,55773,43393,61765,33348,44541,40795,55972,33140,19673,36190,25768,53974,71814,54429,34022,52850],[3,18,27,31,7,23,26,1,13,32,22,5,1,7,9,3,15,26,27,55,32,54,41,33,42,14,54,36,44,43,13,18,21,22,53,7,4,4,40,26,24,8,9,27,14,35,9,17,35,48,20,40,39,18,14,25,3,25,13,32,30,43,40,29,38,58,52,31,26,2,43,9,13,40,32,5,46,19,40,1,50,31,51,46,48,1,15,45,8,54,57,15,29,38,44,41,53,48,31,8,9,30,21,6,42,47,1,47,54,43],[3.04,1.95,6.54,1.67,0.72,2.24,0.77,3.51,4.23,3.07,2.96,2.77,1.33,2.98,3.58,1.27,1.92,5.83,5.19,5.03,4.38,3.41,0.34,4.78,2.53,4.99,4.6,4.58,3.03,5.15,1.47,3.67,0.84,2.5,2.62,1.03,1.3,2.98,2.28,3.95,4.9,0.78,6.61,4.53,0.88,2.94,4.37,4.1,2.38,5.04,3.59,1.68,0.57,1.88,3.17,5.78,4.35,2.78,2.48,2.47,4.29,2.69,1.15,2.58,4.06,1.91,0.73,3.08,2.72,3.62,4.8,0.67,2.01,1.42,2.63,4.12,4.48,1.67,2.32,3.06,2.68,2.7,2.13,2.17,6.27,2.1,3.95,2.79,5.87,4.3,1.54,3.17,3.11,6.33,4.58,2.25,5.39,1.48,4.91,2.97,2.91,1.42,2.65,4.7,1.43,4.21,3.13,1.9,1.2,2.92],[6.32,8.890000000000001,2.05,5.81,8.109999999999999,6.81,9.27,7.92,4.4,6.03,6.09,6.08,9.859999999999999,8.640000000000001,5.26,7.56,8.91,1.74,3.66,2.03,8.300000000000001,5.21,8.289999999999999,3.89,6.17,9.699999999999999,3.94,8.66,5.6,9.67,8.02,5.1,9.18,9.43,5.75,7.74,9.66,8.66,9.26,4.61,2.69,6.26,0.87,2.68,9.380000000000001,7.69,9.31,4.75,5.09,2.21,8.52,7.59,9.1,7.96,6.91,2.55,6.03,5.59,7.69,9.43,6.15,7.54,8.25,9.67,8.779999999999999,6.86,8.67,8.33,6.71,7.45,8.74,7.92,6.6,8.369999999999999,9.56,6.69,4.1,6.9,5.69,4.03,7.58,4.89,8.31,9.06,1.75,8.630000000000001,5.58,6.18,2.73,6.4,9.52,9.460000000000001,9.619999999999999,2.22,8.68,6.43,3.37,7.66,9.67,7.79,5.85,5.71,6.25,9.539999999999999,7.11,6.41,5.47,9.9,9.51,8.619999999999999]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>n.clientes<\/th>\n      <th>n.domic<\/th>\n      <th>renda<\/th>\n      <th>idade<\/th>\n      <th>dist.concorr<\/th>\n      <th>dist.loja<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"Stores"},{"extend":"excel","filename":"Stores"},{"extend":"pdf","filename":"Stores"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":[0,1,2,3,4,5]},{"name":"n.clientes","targets":0},{"name":"n.domic","targets":1},{"name":"renda","targets":2},{"name":"idade","targets":3},{"name":"dist.concorr","targets":4},{"name":"dist.loja","targets":5}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - III
+
+&lt;img src="Modelos_poisson_files/figure-html/unnamed-chunk-2-1.png" width="47%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - IV
+
+**Modelo**
+
+
+```
+## 
+## Call:
+## glm(formula = n.clientes ~ n.domic + renda + idade + dist.concorr + 
+##     dist.loja, family = poisson(log), data = store)
+## 
+## Coefficients:
+##                Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)   2.942e+00  2.072e-01  14.198  &lt; 2e-16 ***
+## n.domic       6.058e-04  1.421e-04   4.262 2.02e-05 ***
+## renda        -1.169e-05  2.112e-06  -5.534 3.13e-08 ***
+## idade        -3.726e-03  1.782e-03  -2.091   0.0365 *  
+## dist.concorr  1.684e-01  2.577e-02   6.534 6.39e-11 ***
+## dist.loja    -1.288e-01  1.620e-02  -7.948 1.89e-15 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 422.22  on 109  degrees of freedom
+## Residual deviance: 114.99  on 104  degrees of freedom
+## AIC: 571.02
+## 
+## Number of Fisher Scoring iterations: 4
+```
+
+```
+## Analysis of Deviance Table
+## 
+## Model: poisson, link: log
+## 
+## Response: n.clientes
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##              Df Deviance Resid. Df Resid. Dev
+## NULL                           109     422.22
+## n.domic       1   42.662       108     379.56
+## renda         1    0.807       107     378.75
+## idade         1    0.316       106     378.43
+## dist.concorr  1  195.949       105     182.49
+## dist.loja     1   67.500       104     114.99
+```
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - V
+
+**Observações:**
+
+* O desvio do modelo foi 114,99 com 104 graus de liberdade, o que resulta em um nível descritivo de 0,22 indicando um bom ajuste do modelo.
+
+--
+
+* O número esperado de clientes na loja cresce com o aumento do número de domicílios na área e da distância ao concorrente mais próximo.
+
+--
+
+* O número esperado de clientes na loja diminui com o aumento da renda média e da idade média dos domicílios, bem como da distância da área à loja.
+
+--
+
+* Se a distância ao concorrente mais próximo aumentar uma milha, esperamos um aumento relativo no número de clientes de `\(\exp(0,168) = 1,2\)`. Ou seja, uma aumento em média de 20%.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - VI
+
+**Diagnóstico do modelo: Análise gráfica de resíduos.** Código diponível em https://www.ime.usp.br/~giapaula/diag_pois.
+
+&lt;img src="Modelos_poisson_files/figure-html/unnamed-chunk-4-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - VII
+
+**Diagnóstico do modelo: envelope simulado.** Código disponível em https://www.ime.usp.br/~giapaula/envel_pois.
+
+&lt;img src="Modelos_poisson_files/figure-html/unnamed-chunk-5-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 1 - VIII
+
+&gt;**Observações:**
+
+&gt;* Dentre as observações destacadas pelos gráficos de diagnóstico, duas apresentam algumas variações desproporcionais nas estimativas dos parâmetros, porém sem mudança inferencial.
+
+--
+
+&gt;* Não há indícios de que a ligação usada seja inapropriada (Figura 4 da análise de resíduos).
+
+--
+
+&gt;* O gráfico de envelope não mostra indícios de afastamentos relevantes da suposição de distribuição de Poisson para o número de clientes.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 2 - I
+
+Consideramos dados apresentados em Venables &amp; Ripley (1999, Caps 6 e 7) sobre um estudo sociológico desenvolvido na Austrália com 146 estudantes de `\(8^a\)` série e ensino médio com o objetivo de comparar a ausência na escola segundo os fatores: ano que o estudante está cursando (F0: `\(8^a\)` série, F1: `\(1^o\)` ano do ensino médio, F2: `\(2^o\)` ano do ensino médio, F3: `\(3^o\)` ano do ensino médio), etnia (A: aborígine, N: não aborígine), desempenho escolar (SL: insuficiente, AL: suficiente) e sexo (M: masculino, F: feminino). 
+
+--
+
+**Modelo**: Seja `\(Y_ijklm\)`, `\(i=1,\ldots,4\)`; `\(j,k,l=1,2\)` e `\(m=1,\ldots,146\)` o número de faltas em um determinado período referentes ao `\(i-\)`ésimo ano, da etnia `\(j\)`, com desempenho escolar `\(k\)` e pertencente ao `\(l-\)`ésimo sexo. Assumimos que `\(Y\sim \text{Po}(\mu_{ijkl})\)` com componente sistemática dada por
+
+--
+
+$$
+  \log(\mu_{ijklm})=\alpha+ \beta_1 \text{ano}_i + \beta_2 \text{etnia}_j + \beta_3 \text{desempenho}_k + \beta_4 \text{sexo}_l
+$$
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 2 - II
+
+<div class="datatables html-widget html-fill-item" id="htmlwidget-4a8bb8eb92f319bd080b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4a8bb8eb92f319bd080b">{"x":{"filter":"none","vertical":false,"extensions":["Buttons"],"data":[["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N"],["M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F"],["F0","F0","F0","F0","F0","F0","F0","F0","F1","F1","F1","F1","F1","F2","F2","F2","F2","F2","F2","F2","F2","F2","F2","F2","F3","F3","F3","F3","F3","F3","F3","F0","F0","F0","F0","F0","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F2","F2","F2","F2","F2","F2","F2","F2","F2","F3","F3","F3","F3","F3","F3","F3","F3","F3","F0","F0","F0","F0","F0","F0","F0","F0","F0","F1","F1","F1","F1","F1","F1","F1","F1","F1","F2","F2","F2","F2","F2","F2","F2","F2","F2","F2","F3","F3","F3","F3","F3","F3","F3","F0","F0","F0","F0","F0","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F1","F2","F2","F2","F2","F2","F2","F2","F2","F2","F2","F3","F3","F3","F3","F3","F3","F3","F3","F3","F3"],["SL","SL","SL","AL","AL","AL","AL","AL","SL","SL","SL","AL","AL","SL","SL","SL","SL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","SL","AL","AL","AL","AL","SL","SL","SL","SL","SL","SL","SL","SL","SL","SL","AL","AL","AL","AL","AL","SL","SL","SL","SL","SL","SL","SL","SL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","SL","SL","SL","AL","AL","AL","AL","AL","AL","SL","SL","SL","SL","SL","SL","SL","AL","AL","SL","SL","SL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","SL","AL","AL","AL","AL","SL","SL","SL","SL","SL","SL","SL","SL","SL","SL","SL","AL","AL","AL","AL","AL","AL","SL","SL","SL","SL","SL","SL","SL","SL","SL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL","AL"],[2,11,14,5,5,13,20,22,6,6,15,7,14,6,32,53,57,14,16,16,17,40,43,46,8,23,23,28,34,36,38,3,5,11,24,45,5,6,6,9,13,23,25,32,53,54,5,5,11,17,19,8,13,14,20,47,48,60,81,2,0,2,3,5,10,14,21,36,40,6,17,67,0,0,2,7,11,12,0,0,5,5,5,11,17,3,4,22,30,36,8,0,1,5,7,16,27,0,30,10,14,27,41,69,25,10,11,20,33,5,7,0,1,5,5,5,5,7,11,15,5,14,6,6,7,28,0,5,14,2,2,3,8,10,12,1,1,9,22,3,3,5,15,18,22,37]],"container":"<table class=\"compact\">\n  <thead>\n    <tr>\n      <th>Etnia<\/th>\n      <th>Sexo<\/th>\n      <th>Ano<\/th>\n      <th>Desempenho<\/th>\n      <th>Faltas<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"tBp","buttons":[{"extend":"csv","filename":"Ausencias"},{"extend":"excel","filename":"Ausencias"},{"extend":"pdf","filename":"Ausencias"}],"pageLength":12,"columnDefs":[{"className":"dt-right","targets":4},{"name":"Etnia","targets":0},{"name":"Sexo","targets":1},{"name":"Ano","targets":2},{"name":"Desempenho","targets":3},{"name":"Faltas","targets":4}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,12,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 2 - III
+
+&lt;img src="Modelos_poisson_files/figure-html/unnamed-chunk-7-1.png" width="47%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 2 - IV
+
+**Modelo**
+
+
+```
+## 
+## Call:
+## glm(formula = Faltas ~ Etnia + Sexo + Ano + Desempenho, family = poisson(log), 
+##     data = ausencia)
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)   2.71538    0.06468  41.980  &lt; 2e-16 ***
+## EtniaN       -0.53360    0.04188 -12.740  &lt; 2e-16 ***
+## SexoM         0.16160    0.04253   3.799 0.000145 ***
+## AnoF1        -0.33390    0.07009  -4.764 1.90e-06 ***
+## AnoF2         0.25783    0.06242   4.131 3.62e-05 ***
+## AnoF3         0.42769    0.06769   6.319 2.64e-10 ***
+## DesempenhoSL  0.34894    0.05204   6.705 2.02e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 2073.5  on 145  degrees of freedom
+## Residual deviance: 1696.7  on 139  degrees of freedom
+## AIC: 2299.2
+## 
+## Number of Fisher Scoring iterations: 5
+```
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 2 - V
+
+**Diagnóstico do modelo: Análise gráfica de resíduos.** Código diponível em https://www.ime.usp.br/~giapaula/diag_pois.
+
+&lt;img src="Modelos_poisson_files/figure-html/unnamed-chunk-9-1.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 2 - VI
+
+**Diagnóstico do modelo: envelope simulado.** Código disponível em https://www.ime.usp.br/~giapaula/envel_pois.
+
+&lt;img src="Modelos_poisson_files/figure-html/unnamed-chunk-10-1.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Exemplo 2 - VII
+
+&gt;**Observações:**
+
+&gt;* Embora haja ganho no poder explicativo do modelo com as variáveis explicativas, o ajuste do modelo não foi satisfatório (Desvio muito próximo do desvio nulo).
+
+
+```
+## Analysis of Deviance Table
+## 
+## Model 1: Faltas ~ 1
+## Model 2: Faltas ~ Etnia + Sexo + Ano + Desempenho
+##   Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    
+## 1       145     2073.5                          
+## 2       139     1696.7  6   376.83 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+--
+
+&gt;* Há fortes indícios de que a ligação usada é inapropriada.
+
+--
+
+&gt;* O gráfico de envelope mostra que a distribuição assumida não é adequada. Isto pode ser devido à suposição restritiva de que a média e a variância são iguais.
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+&lt;br&gt;&lt;/br&gt;
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/) &amp;emsp; &amp;emsp;  &amp;emsp; &amp;emsp; [https://analytics.ufes.br](https://analytics.ufes.br)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
