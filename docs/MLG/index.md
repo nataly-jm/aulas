@@ -14,7 +14,7 @@ description: Repositório exclusivo para a disciplina de modelos lineares genera
 * [Diagnóstico e Qualidade do ajuste](https://nataly-jm.github.io/aulas/MLG/Diagnostico_e_qualidade_ajuste.html)
 * [Regressão Logística Binária](https://nataly-jm.github.io/aulas/MLG/Modelo_logistico.html)
 * [Modelos de Dose-Resposta](https://nataly-jm.github.io/aulas/MLG/Modelos_dose_resposta.html)
-* [Modelos para Dados de Contagem](https://nataly-jm.github.io/aulas/MLG/Modelos_poisson.html)
+* [Modelos para Dados de Contagem](https://nataly-jm.github.io/aulas/MLG/Modelos_dados_de_contagem.html)
 
 
 
