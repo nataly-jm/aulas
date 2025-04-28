@@ -11,6 +11,8 @@ description: Repositório exclusivo para as disciplinas do curso de Estatística
 
 # [Modelos Lineares Generalizados](https://nataly-jm.github.io/aulas/MLG){:target="_blank"}
 
+# [Estatística I](https://nataly-jm.github.io/aulas/EstatisticaI){:target="_blank"}
+
 
 
 
