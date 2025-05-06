@@ -10,6 +10,7 @@ description: Repositório exclusivo para a disciplina de Estatística I.
   
 * [Programa da disciplina](https://nataly-jm.github.io/aulas/EstatisticaI/Plano_Ensino.html)
 * [Introdução](https://nataly-jm.github.io/aulas/EstatisticaI/Introducao.html)
+* [Estatística Descritiva](https://nataly-jm.github.io/aulas/EstatisticaI/Estatística_Descritiva.html)
 
 
 
