@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ESTATISTICA I STA13813</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# ESTATISTICA I STA13813
+]
+.subtitle[
+## Estatística Descritiva
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+# Classificação de Variáveis - I
+
+#### Motivação:
+
+- **Fato**: uma pesquisa `\(\rightarrow\)` grande quantidade de dados;
+
+- **Problema**: nenhuma conclusão sem o correto tratamento dos dados;
+
+--
+
+- **Solução**: &lt;span style="color:orange"&gt;estatística descritiva&lt;/span&gt;.
+
+--
+
+#### Objetivos:
+
+- resumo;
+
+- visualização;
+
+- e descrição.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Classificação de Variáveis - II
+
+&gt; **Interesse**: alguma característica (numérica, ou não) que TODOS elementos da amostra possuem.
+
+--
+
+| 📝 Definição 10            |
+|:---------------------------|
+|Uma &lt;span style="color:purple"&gt;&lt;b&gt;Variável&lt;/b&gt;&lt;/span&gt; é qualquer característica numérica, ou não, compartilhada por TODOS indivíduos de uma população.   |
+
+--
+
+As variáveis são classificadas de acordo com os valores que assumem. Elas podem ser:
+
+- Qualitativas (ou categóricas), se seus valores são categorias, qualidades ou atributos dos indivíduos. Ainda se subdividem em:
+
+--
+
+ * ordinais - quando essas categorias admitem alguma **ordenação** lógica;
+ 
+ * nominais - quando esses atributos não podem ser ordenados logicamente;
+ 
+---
+
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Classificação de Variáveis - III
+
+- Quantitativas, se seus valores são números, geralmente resultados de contagens ou medições. Ainda se subdividem em:
+
+--
+
+ * discretas - seus possíveis valores formam um conjunto finito, ou infinito **enumerável**;
+ 
+ * contínuas - seus possíveis valores formam um conjunto não enumerável.
+ 
+--
+
+| 📝 Definição 11            |
+|:---------------------------|
+|Um conjunto é &lt;span style="color:purple"&gt;&lt;b&gt;enumerável&lt;/b&gt;&lt;/span&gt; se é possível estabelecer uma bijeção entre seus elementos e um subconjunto de `\(\mathbb{Z}\)`.   |
+
+--
+`$$\,$$`
+
+| ✍️ Nota            |
+|:-------------------|
+|Um conjunto é enumerável quando os seus elementos podem ser contados. `\(\phantom{*******************}\)` |
+
+
+---
+
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Classificação de Variáveis - IV
+
+**Esquemáticamente**
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Esquema_variaveis1.png" alt=" " width="75%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Gráficos e Tabelas
+
+**Quando utilizar a distribuição de frequências?**
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Esquema_frequencias1.png" alt=" " width="60%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distribuição de frequências - Casos qualitativo e quantitativo discreto (poucas observações diferentes) - I
+
+Seja `\(X\)` uma variável. Suponha que `\(x_1,x_2,\ldots,x_n\)` são observações de `\(X\)`. &lt;span style="color:orange"&gt;As observações `\(x_1,x_2,\ldots,x_n\)` podem ser os valores de `\(X\)` para a população completa ou apenas uma amostra de `\(X\)`. &lt;/span&gt;  Agora, considere que: 
+
+--
+
+- dos valores `\(x_1,x_2,\ldots,x_n\)`, apenas `\(k\leq n\)` são diferentes;
+
+--
+
+- o restante são apenas repetições desses valores;
+
+--
+
+- sejam `\(x_1^*,x_2^*,\ldots,x_k^*\)` as observações diferentes;
+
+--
+
+- suponha que o valor `\(x_i^*\)` se repetiu `\(n_i\)` vezes, `\(i=1,2,\ldots,k\)`.
+
+--
+
+| 📝 Definição 12            |
+|:---------------------------|
+| A distribuição de frequências de `\(X\)` em `\(x_1,x_2,\ldots,x_n\)` é dada por `\(\phantom{*************************}\)`  |
+|&lt;table align="center" width="690px" bgcolor="#F5F5DC" border="1"&gt; &lt;thead&gt; &lt;tr&gt; &lt;th scope="col"&gt; `\(X\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_1^*\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_2^*\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(\ldots\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_k^*\)` &lt;/th&gt; &lt;th scope="col"&gt; Total &lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt; &lt;th scope="row"&gt; Frequência &lt;/th&gt; &lt;td&gt; `\(n_1\)` &lt;/td&gt; &lt;td&gt; `\(n_2\)` &lt;/td&gt; &lt;td&gt; `\(\ldots\)` &lt;/td&gt; &lt;td&gt; `\(n_k\)` &lt;/td&gt; &lt;td&gt; `\(\sum_{i=1}^k n_i=n\)` &lt;/td&gt; &lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;|
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distribuição de frequências - Casos qualitativo e quantitativo discreto (poucas observações diferentes) - II
+
+&gt; Ressalta-se que:
+
+&gt;* Se `\(X\)` for ordinal ou discreta, devemos dispor os `\(x_i^*\)` de forma que `\(x_1^*&lt;x_2^*&lt;\cdots&lt;x_k^*\)`;
+
+--
+
+&gt;* a distribuição de frequências fornece um resumo considerável dos dados;
+
+--
+
+&gt;* não há perda de informação ao utilizar essa técnica neste caso;
+
+--
+
+&gt;* a frequência com que os valores de `\(X\)` ocorrem fica evidente;
+
+--
+
+&gt;* utiliza-se esse tipo de distribuição de frequências no caso discreto quando `\(k\ll n\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 1
+
+Seja `\(X=\)` "Tipo de música preferida". Neste caso `\(X\in\{p,r,s\}\)`, onde `\(p=\)` pagode, `\(r=\)` rock e `\(s=\)` sertanejo. Suponha que `\(n=40\)` pessoas foram entrevistadas e o valor de `\(X\)` para cada uma delas foi verificado. Os dados são
+
+$$
+\begin{array}{ccccccccccc}
+ s &amp; \color{red}{p} &amp; \color{red}{p} &amp; \color{red}{p} &amp; s &amp; \color{red}{p} &amp; s &amp; s &amp; r &amp; \color{red}{p} \newline
+ s &amp; r &amp; \color{red}{p} &amp; s &amp; r &amp; \color{red}{p} &amp; s &amp; s &amp; \color{red}{p} &amp; \color{red}{p} \newline
+ \color{red}{p} &amp; s &amp; r &amp; s &amp; s &amp; \color{red}{p} &amp; \color{red}{p} &amp; \color{red}{p} &amp; s &amp; s \newline
+ \color{red}{p} &amp; r &amp; s &amp; s &amp; r &amp; s &amp; \color{red}{p} &amp; \color{red}{p} &amp; \color{red}{p} &amp; s \newline
+\end{array}
+$$
+
+`\(n_p=17.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 1
+
+Seja `\(X=\)` "Tipo de música preferida". Neste caso `\(X\in\{p,r,s\}\)`, onde `\(p=\)` pagode, `\(r=\)` rock e `\(s=\)` sertanejo. Suponha que `\(n=40\)` pessoas foram entrevistadas e o valor de `\(X\)` para cada uma delas foi verificado. Os dados são
+
+$$
+\begin{array}{ccccccccccc}
+ \color{blue}{s} &amp; p &amp; p &amp; p &amp; \color{blue}{s} &amp; p &amp; \color{blue}{s} &amp; \color{blue}{s} &amp; r &amp; p \newline
+ \color{blue}{s} &amp; r &amp; p &amp; \color{blue}{s} &amp; r &amp; p &amp; \color{blue}{s} &amp; \color{blue}{s} &amp; p &amp; p \newline
+ p &amp; \color{blue}{s} &amp; r &amp; \color{blue}{s} &amp; \color{blue}{s} &amp; p &amp; p &amp; p &amp; \color{blue}{s} &amp; \color{blue}{s} \newline
+ p &amp; r &amp; \color{blue}{s} &amp; \color{blue}{s} &amp; r &amp; \color{blue}{s} &amp; p &amp; p &amp; p &amp; \color{blue}{s} \newline
+\end{array}
+$$
+`\(n_s=17.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 1
+
+Seja `\(X=\)` "Tipo de música preferida". Neste caso `\(X\in\{p,r,s\}\)`, onde `\(p=\)` pagode, `\(r=\)` rock e `\(s=\)` sertanejo. Suponha que `\(n=40\)` pessoas foram entrevistadas e o valor de `\(X\)` para cada uma delas foi verificado. Os dados são
+
+$$
+\begin{array}{ccccccccccc}
+ s &amp; p &amp; p &amp; p &amp; s &amp; p &amp; s &amp; s &amp; \color{orange}{r} &amp; p \newline
+ s &amp; \color{orange}{r} &amp; p &amp; s &amp; \color{orange}{r} &amp; p &amp; s &amp; s &amp; p &amp; p \newline
+ p &amp; s &amp; \color{orange}{r} &amp; s &amp; s &amp; p &amp; p &amp; p &amp; s &amp; s \newline
+ p &amp; \color{orange}{r} &amp; s &amp; s &amp; \color{orange}{r} &amp; s &amp; p &amp; p &amp; p &amp; s \newline
+\end{array}
+$$
+
+`\(n_r=6.\)`
+
+--
+
+Assim, a distribuição de frequências de `\(X\)` é
+
+| `\(X\)`  |  `\(p\)` | `\(r\)` | `\(s\)` |  Total |
+|:----:|:----:|:---:|:---:|:------:|
+|Freq. |  17  | 6   | 17  |   40   |   
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - I
+
+O RH de uma empresa com `\(600\)` funcionários deseja fazer um levantamento com respeito à escolaridade e número de filhos (variáveis `\(E\)` e `\(N\)`, respectivamente) dos mesmos. Uma amostra de `\(n=30\)` funcionários forneceu:
+
+| `\(i\)`	 | `\(E_i\)` | `\(N_i\)` || `\(i\)`	 | `\(E_i\)`	| `\(N_i\)`	|| `\(i\)` 	| `\(E_i\)`	| `\(N_i\)` |
+|:----:|:-----:|:-----:||:----:|:------:|:-----:||:----:|:-----:|:-----:|
+| `\(1\)`	 |  `\(f\)`	 |  `\(3\)`	 || `\(11\)` | `\(f\)`	  | `\(2\)`	  || `\(21\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(2\)`	 |  `\(s\)`	 |  `\(2\)`	 || `\(12\)` | `\(s\)`	  | `\(0\)`	  || `\(22\)`	| `\(s\)`	  | `\(2\)`	  |
+| `\(3\)`	 |  `\(f\)`	 |  `\(2\)`	 || `\(13\)` | `\(f\)`	  | `\(2\)`	  || `\(23\)`	| `\(f\)`	  | `\(1\)`	  |
+| `\(4\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(14\)` | `\(s\)`	  | `\(1\)`	  || `\(24\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(5\)`	 |  `\(s\)`	 |  `\(1\)`	 || `\(15\)` | `\(f\)`	  | `\(3\)`	  || `\(25\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(6\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(16\)` | `\(s\)`	  | `\(0\)`	  || `\(26\)`	| `\(s\)`	  | `\(1\)`	  |
+| `\(7\)`	 |  `\(f\)`	 |  `\(2\)`	 || `\(17\)` | `\(m\)`	  | `\(1\)`	  || `\(27\)`	| `\(s\)`	  | `\(2\)`	  |
+| `\(8\)`	 |  `\(s\)`	 |  `\(3\)`	 || `\(18\)` | `\(f\)`	  | `\(1\)`	  || `\(28\)`	| `\(s\)`	  | `\(1\)`	  |
+| `\(9\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(19\)` | `\(m\)`	  | `\(1\)`	  || `\(29\)`	| `\(f\)`	  | `\(3\)`	  |
+| `\(10\)` |  `\(m\)`	 |  `\(2\)`	 || `\(20\)` | `\(m\)`	  | `\(2\)`	  || `\(30\)`	| `\(m\)`	  | `\(3\)`	  |
+
+&gt; `\(f=\)` "fundamental", `\(m=\)` "médio" e `\(s=\)` "superior"
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - II
+
+O RH de uma empresa com `\(600\)` funcionários deseja fazer um levantamento com respeito à escolaridade e número de filhos (variáveis `\(E\)` e `\(N\)`, respectivamente) dos mesmos. Uma amostra de `\(n=30\)` funcionários forneceu:
+
+| `\(i\)`	 | `\(E_i\)` | `\(N_i\)` || `\(i\)`	 | `\(E_i\)`	| `\(N_i\)`	|| `\(i\)` 	| `\(E_i\)`	| `\(N_i\)` |
+|:----:|:-----:|:-----:||:----:|:------:|:-----:||:----:|:-----:|:-----:|
+| `\(1\)`	 |  `\(f\)`	 |  `\(3\)`	 || `\(11\)` | `\(f\)`	  | `\(2\)`	  || `\(21\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(2\)`	 |  `\(s\)`	 |  `\(2\)`	 || `\(12\)` | `\(s\)`	  | `\(0\)`	  || `\(22\)`	| `\(s\)`	  | `\(2\)`	  |
+| `\(3\)`	 |  `\(f\)`	 |  `\(2\)`	 || `\(13\)` | `\(f\)`	  | `\(2\)`	  || `\(23\)`	| `\(f\)`	  | `\(1\)`	  |
+| `\(4\)`	 |  `\(\color{blue}{m}\)`	 |  `\(1\)`	 || `\(14\)` | `\(s\)`	  | `\(1\)`	  || `\(24\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(5\)`	 |  `\(s\)`	 |  `\(1\)`	 || `\(15\)` | `\(f\)`	  | `\(3\)`	  || `\(25\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(6\)`	 |  `\(\color{blue}{m}\)`	 |  `\(1\)`	 || `\(16\)` | `\(s\)`	  | `\(0\)`	  || `\(26\)`	| `\(s\)`	  | `\(1\)`	  |
+| `\(7\)`	 |  `\(f\)`	 |  `\(2\)`	 || `\(17\)` | `\(\color{blue}{m}\)`	  | `\(1\)`	  || `\(27\)`	| `\(s\)`	  | `\(2\)`	  |
+| `\(8\)`	 |  `\(s\)`	 |  `\(3\)`	 || `\(18\)` | `\(f\)`	  | `\(1\)`	  || `\(28\)`	| `\(s\)`	  | `\(1\)`	  |
+| `\(9\)`	 |  `\(\color{blue}{m}\)`	 |  `\(1\)`	 || `\(19\)` | `\(\color{blue}{m}\)`	  | `\(1\)`	  || `\(29\)`	| `\(f\)`	  | `\(3\)`	  |
+| `\(10\)` |  `\(\color{blue}{m}\)`	 |  `\(2\)`	 || `\(20\)` | `\(\color{blue}{m}\)`	  | `\(2\)`	  || `\(30\)`	| `\(\color{blue}{m}\)`	  | `\(3\)`	  |
+
+&gt; `\(\color{blue}{n_m}=8.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - II
+
+O RH de uma empresa com `\(600\)` funcionários deseja fazer um levantamento com respeito à escolaridade e número de filhos (variáveis `\(E\)` e `\(N\)`, respectivamente) dos mesmos. Uma amostra de `\(n=30\)` funcionários forneceu:
+
+| `\(i\)`	 | `\(E_i\)` | `\(N_i\)` || `\(i\)`	 | `\(E_i\)`	| `\(N_i\)`	|| `\(i\)` 	| `\(E_i\)`	| `\(N_i\)` |
+|:----:|:-----:|:-----:||:----:|:------:|:-----:||:----:|:-----:|:-----:|
+| `\(1\)`	 |  `\(\color{red}{f}\)`	 |  `\(3\)`	 || `\(11\)` | `\(\color{red}{f}\)`	  | `\(2\)`	  || `\(21\)`	| `\(\color{red}{f}\)`	  | `\(2\)`	  |
+| `\(2\)`	 |  `\(s\)`	 |  `\(2\)`	 || `\(12\)` | `\(s\)`	  | `\(0\)`	  || `\(22\)`	| `\(s\)`	  | `\(2\)`	  |
+| `\(3\)`	 |  `\(\color{red}{f}\)`	 |  `\(2\)`	 || `\(13\)` | `\(\color{red}{f}\)`	  | `\(2\)`	  || `\(23\)`	| `\(\color{red}{f}\)`	  | `\(1\)`	  |
+| `\(4\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(14\)` | `\(s\)`	  | `\(1\)`	  || `\(24\)`	| `\(\color{red}{f}\)`	  | `\(2\)`	  |
+| `\(5\)`	 |  `\(s\)`	 |  `\(1\)`	 || `\(15\)` | `\(\color{red}{f}\)`	  | `\(3\)`	  || `\(25\)`	| `\(\color{red}{f}\)`	  | `\(2\)`	  |
+| `\(6\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(16\)` | `\(s\)`	  | `\(0\)`	  || `\(26\)`	| `\(s\)`	  | `\(1\)`	  |
+| `\(7\)`	 |  `\(\color{red}{f}\)`	 |  `\(2\)`	 || `\(17\)` | `\(m\)`	  | `\(1\)`	  || `\(27\)`	| `\(s\)`	  | `\(2\)`	  |
+| `\(8\)`	 |  `\(s\)`	 |  `\(3\)`	 || `\(18\)` | `\(\color{red}{f}\)`	  | `\(1\)`	  || `\(28\)`	| `\(s\)`	  | `\(1\)`	  |
+| `\(9\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(19\)` | `\(m\)`	  | `\(1\)`	  || `\(29\)`	| `\(\color{red}{f}\)`	  | `\(3\)`	  |
+| `\(10\)` |  `\(m\)`	 |  `\(2\)`	 || `\(20\)` | `\(m\)`	  | `\(2\)`	  || `\(30\)`	| `\(m\)`	  | `\(3\)`	  |
+
+&gt; `\(\color{blue}{n_m}=8 \qquad \color{red}{n_f}=12.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - II
+
+O RH de uma empresa com `\(600\)` funcionários deseja fazer um levantamento com respeito à escolaridade e número de filhos (variáveis `\(E\)` e `\(N\)`, respectivamente) dos mesmos. Uma amostra de `\(n=30\)` funcionários forneceu:
+
+| `\(i\)`	 | `\(E_i\)` | `\(N_i\)` || `\(i\)`	 | `\(E_i\)`	| `\(N_i\)`	|| `\(i\)` 	| `\(E_i\)`	| `\(N_i\)` |
+|:----:|:-----:|:-----:||:----:|:------:|:-----:||:----:|:-----:|:-----:|
+| `\(1\)`	 |  `\(f\)`	 |  `\(3\)`	 || `\(11\)` | `\(f\)`	  | `\(2\)`	  || `\(21\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(2\)`	 |  `\(\color{orange}{s}\)`	 |  `\(2\)`	 || `\(12\)` | `\(\color{orange}{s}\)`	  | `\(0\)`	  || `\(22\)`	| `\(\color{orange}{s}\)`	  | `\(2\)`	  |
+| `\(3\)`	 |  `\(f\)`	 |  `\(2\)`	 || `\(13\)` | `\(f\)`	  | `\(2\)`	  || `\(23\)`	| `\(f\)`	  | `\(1\)`	  |
+| `\(4\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(14\)` | `\(\color{orange}{s}\)`	  | `\(1\)`	  || `\(24\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(5\)`	 |  `\(\color{orange}{s}\)`	 |  `\(1\)`	 || `\(15\)` | `\(f\)`	  | `\(3\)`	  || `\(25\)`	| `\(f\)`	  | `\(2\)`	  |
+| `\(6\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(16\)` | `\(\color{orange}{s}\)`	  | `\(0\)`	  || `\(26\)`	| `\(\color{orange}{s}\)`	  | `\(1\)`	  |
+| `\(7\)`	 |  `\(f\)`	 |  `\(2\)`	 || `\(17\)` | `\(m\)`	  | `\(1\)`	  || `\(27\)`	| `\(\color{orange}{s}\)`	  | `\(2\)`	  |
+| `\(8\)`	 |  `\(\color{orange}{s}\)`	 |  `\(3\)`	 || `\(18\)` | `\(f\)`	  | `\(1\)`	  || `\(28\)`	| `\(\color{orange}{s}\)`	  | `\(1\)`	  |
+| `\(9\)`	 |  `\(m\)`	 |  `\(1\)`	 || `\(19\)` | `\(m\)`	  | `\(1\)`	  || `\(29\)`	| `\(f\)`	  | `\(3\)`	  |
+| `\(10\)` |  `\(m\)`	 |  `\(2\)`	 || `\(20\)` | `\(m\)`	  | `\(2\)`	  || `\(30\)`	| `\(m\)`	  | `\(3\)`	  |
+
+&gt; `\(\color{blue}{n_m}=8\qquad\color{red}{n_f}=12\qquad\color{orange}{n_s}=10.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - III
+
+O RH de uma empresa com `\(600\)` funcionários deseja fazer um levantamento com respeito à escolaridade e número de filhos (variáveis `\(E\)` e `\(N\)`, respectivamente) dos mesmos. Uma amostra de `\(n=30\)` funcionários forneceu:
+
+| `\(i\)`	 | `\(E_i\)` | `\(N_i\)` || `\(i\)`	 | `\(E_i\)`	| `\(N_i\)`	|| `\(i\)` 	| `\(E_i\)`	| `\(N_i\)` |
+|:----:|:-----:|:-----:||:----:|:------:|:-----:||:----:|:-----:|:-----:|
+| `\(1\)`	 |  `\(f\)`	 |  `\(\color{blue}{3}\)`	 || `\(11\)` | `\(f\)`	  | `\(\color{red}{2}\)`	  || `\(21\)`	| `\(f\)`	  | `\(\color{red}{2}\)`	  |
+| `\(2\)`	 |  `\(s\)`	 |  `\(\color{red}{2}\)`	 || `\(12\)` | `\(s\)`	  | `\(0\)`	  || `\(22\)`	| `\(s\)`	  | `\(\color{red}{2}\)`	  |
+| `\(3\)`	 |  `\(f\)`	 |  `\(\color{red}{2}\)`	 || `\(13\)` | `\(f\)`	  | `\(\color{red}{2}\)`	  || `\(23\)`	| `\(f\)`	  | `\(\color{orange}{1}\)`	  |
+| `\(4\)`	 |  `\(m\)`	 |  `\(\color{orange}{1}\)`	 || `\(14\)` | `\(s\)`	  | `\(\color{orange}{1}\)`	  || `\(24\)`	| `\(f\)`	  | `\(\color{red}{2}\)`	  |
+| `\(5\)`	 |  `\(s\)`	 |  `\(\color{orange}{1}\)`	 || `\(15\)` | `\(f\)`	  | `\(\color{blue}{3}\)`	  || `\(25\)`	| `\(f\)`	  | `\(\color{red}{2}\)`	  |
+| `\(6\)`	 |  `\(m\)`	 |  `\(\color{orange}{1}\)`	 || `\(16\)` | `\(s\)`	  | `\(0\)`	  || `\(26\)`	| `\(s\)`	  | `\(\color{orange}{1}\)`	  |
+| `\(7\)`	 |  `\(f\)`	 |  `\(\color{red}{2}\)`	 || `\(17\)` | `\(m\)`	  | `\(\color{orange}{1}\)`	  || `\(27\)`	| `\(s\)`	  | `\(\color{red}{2}\)`	  |
+| `\(8\)`	 |  `\(s\)`	 |  `\(\color{blue}{3}\)`	 || `\(18\)` | `\(f\)`	  | `\(\color{orange}{1}\)`	  || `\(28\)`	| `\(s\)`	  | `\(\color{orange}{1}\)`	  |
+| `\(9\)`	 |  `\(m\)`	 |  `\(\color{orange}{1}\)`	 || `\(19\)` | `\(m\)`	  | `\(\color{orange}{1}\)`	  || `\(29\)`	| `\(f\)`	  | `\(\color{blue}{3}\)`	  |
+| `\(10\)` |  `\(m\)`	 |  `\(\color{red}{2}\)`	 || `\(20\)` | `\(m\)`	  | `\(\color{red}{2}\)`	  || `\(30\)`	| `\(m\)`	  | `\(\color{blue}{3}\)`	  |
+
+&gt; `\(n_0=2\qquad \color{orange}{n_1}=11 \qquad \color{red}{n_2}=12 \qquad \color{blue}{n_3}=5.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - IV
+
+Assim, as distribuições de frequências de `\(E\)` e `\(N\)` são dadas por
+
+| `\(E\)` |  `\(f\)` | `\(m\)` | `\(s\)`  | Total |
+|:---:|:----:|:---:|:----:|:-----:|
+|Freq.| `\(12\)` | `\(8\)` | `\(10\)` | `\(30\)`  |
+
+e
+
+|  `\(N\)`  |  `\(0\)` |  `\(1\)` | `\(2\)`  |  `\(3\)` | Total |
+|:-----:|:----:|:----:|:----:|:----:|:-----:|
+| Freq. |  `\(2\)` | `\(11\)` | `\(12\)` |  `\(5\)` | `\(30\)`  |
+
+--
+
+`\(\phantom{*******************}\)`
+
+| ✍️ Nota            |
+|:-------------------|
+|Em muitos livros as frequências aqui consideradas são denominadas frequências absolutas pois representam apenas uma contagem de casos. |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distribuição de frequências relativas - I
+
+Considere o seguinte esquema:
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Esquema_frequencias_relativas.png" alt=" " width="60%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distribuição de frequências relativas - II
+
+| 📝 Definição 13            |
+|:---------------------------|
+| Suponha `\(X\)` uma variável aleatória com a seguinte distribuição de frequências `\(\phantom{*************************}\)`  |
+|&lt;table align="center" width="690px" bgcolor="#F5F5DC" border="1"&gt; &lt;thead&gt; &lt;tr&gt; &lt;th scope="col"&gt; `\(X\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_1^*\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_2^*\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(\ldots\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_k^*\)` &lt;/th&gt; &lt;th scope="col"&gt; Total &lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt; &lt;th scope="row"&gt; Frequência &lt;/th&gt; &lt;td&gt; `\(n_1\)` &lt;/td&gt; &lt;td&gt; `\(n_2\)` &lt;/td&gt; &lt;td&gt; `\(\ldots\)` &lt;/td&gt; &lt;td&gt; `\(n_k\)` &lt;/td&gt; &lt;td&gt; `\(\sum_{i=1}^k n_i=n\)` &lt;/td&gt; &lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;|
+|A frequência relativa do `\(i\)`-ésimo valor (`\(x_i^*\)`) é definida por `\(f_i=\frac{n_i}{n}\)`. A distribuição de frequências relativas é dada por |
+|&lt;table align="center" width="690px" bgcolor="#F5F5DC" border="1"&gt; &lt;thead&gt; &lt;tr&gt; &lt;th scope="col"&gt; `\(X\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_1^*\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_2^*\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(\ldots\)` &lt;/th&gt; &lt;th scope="col"&gt; `\(x_k^*\)` &lt;/th&gt; &lt;th scope="col"&gt; Total &lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt; &lt;th scope="row"&gt; Frequência Relativa &lt;/th&gt; &lt;td&gt; `\(f_1\)` &lt;/td&gt; &lt;td&gt; `\(f_2\)` &lt;/td&gt; &lt;td&gt; `\(\ldots\)` &lt;/td&gt; &lt;td&gt; `\(f_k\)` &lt;/td&gt; &lt;td&gt; `\(\sum_{i=1}^k f_i=1\)` &lt;/td&gt; &lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;|
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - V
+
+Suponha que todos `\(600\)` funcionários foram questionados e que as distribuições de frequências absolutas de `\(E\)` e `\(N\)` neste caso são:
+
+| `\(E\)` |  `\(f\)`  |  `\(m\)`  |  `\(s\)`  | Total |
+|:---:|:-----:|:-----:|:-----:|:-----:|
+|Freq.| `\(230\)` | `\(180\)` | `\(190\)` | `\(600\)` |
+
+--
+
+e
+
+| `\(N\)` |  `\(0\)`  |  `\(1\)`  |  `\(2\)` |  `\(3\)`  | Total |
+|:---:|:-----:|:-----:|:----:|:-----:|:-----:|
+|Freq.| `\(30\)` | `\(230\)` | `\(235\)` | `\(105\)` | `\(600\)` |
+
+--
+`\(\phantom{****}\)`
+
+| 📖 Exercício `\(\phantom{****************************************************}\)`      |
+|:--------------------------------------------------------|
+|Obtenha a distribuição de frequências relativas para esses dados. |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - VI
+
+Para a variável escolaridade (E), temos
+
+|   E   | Freq. Absoluta |    Freq. relativa         | Freq. relativa percentual  |
+|:-----:|:--------------:|:-------------------------:|:--------------------------:|
+|   f   |      230       | `\(\frac{230}{600} = 0.38\)`  |  `\(0.38 \times 100 = 38\%\)`  | 
+|   m   |      180       | `\(\frac{180}{600} = 0.30\)`  | `\(0.30 \times 100 = 30\%\)`   | 
+|   s   |      190       | `\(\frac{190}{600} = 0.32\)`  | `\(0.32 \times 100 = 32\%\)`   |
+| Total |      600       |   `\(1\)`                     |      `\(100\%\)`               |
+
+--
+
+`\(\phantom{*****}\)`
+
+| ✍️ Nota            |
+|:-------------------|
+|A frequência relativa percentual `\(f_i(\%)\)` é obtida multiplicando a frequência relativa por 100. `\(\phantom{**********}\)` |
+| `$$f_i(\%)  = f_i \times 100.$$` |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - VII
+
+Para a variável número de filhos (N), temos
+
+|   N    | Freq. Absoluta | Freq. relativa | Freq. relativa percentual  |
+|:------:|:--------------:|:--------------:|:--------------------------:|
+|  0     |           2    |                |                            | 
+|  1     |          11    |                |                            |
+|  2     |          12    |                |                            |
+|  3     |           5    |                |                            |
+|  Total |          30    |                |                            |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 2 - VII
+
+Para a variável número de filhos (N), temos
+
+|   N    | Freq. Absoluta |     Freq. relativa     | Freq. relativa percentual  |
+|:------:|:--------------:|:----------------------:|:--------------------------:|
+|  0     |           2    | `\(\frac{2}{30} = 0.07\)`  |  `\(0.07 \times 100 = 7\%\)`   | 
+|  1     |          11    | `\(\frac{11}{30} = 0.37\)` |  `\(0.37 \times 100 = 37\%\)`  |
+|  2     |          12    | `\(\frac{12}{30} = 0.40\)` |  `\(0.40 \times 100 = 40\%\)`  |
+|  3     |           5    | `\(\frac{5}{30} = 0.16\)`  |  `\(0.16 \times 100 = 16\%\)`  |
+|  Total |          30    |         `\(1\)`            |          `\(100\%\)`           |
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

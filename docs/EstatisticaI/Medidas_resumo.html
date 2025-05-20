@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ESTATISTICA I STA13813</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# ESTATISTICA I STA13813
+]
+.subtitle[
+## Medidas Resumo
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+# Medidas-resumo - I
+
+
+- **Principal objetivo**: resumir os dados através de medidas pontuais, que são alguns valores representativos da amostra.
+
+--
+
+ Principais tipos de medidas-resumo:
+
+ * posição e
+ * dispersão.
+
+--
+
+- **Vantagem**: há um único número para:
+
+ * resumir os dados; e
+
+ * representar características importantes.
+
+--
+
+- **Principal desvantagem**: Perda de **&lt;span style="color:orange"&gt;informação&lt;/span&gt;**.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Medidas-resumo - II
+
+&gt; **Medidas de posição**: mínimo, máximo, moda, média, mediana e os percentis.
+
+--
+
+&gt; **Medidas de dispersão**: amplitude, intervalo-interquartil, variância, desvio-padrão e coeficiente de variação.
+
+--
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Esquema_medidas_resumo1.png" alt=" " width="33%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Medidas de posição
+
+- **Mínimo** (min ou `\(x_{(1)}\)`): o menor valor observado na amostra.
+
+--
+
+- **Máximo** (max ou `\(x_{(n)}\)`): o maior observado na amostra.
+
+--
+
+**Exemplo 3**:
+
+Dados: 4, 5, 4, 6, 5, 8, 4 `\(\Longrightarrow n = 7\)`
+
+`\(x_1 = 4, \quad x_2 = 5, \quad x_3 = 4, \quad x_4 = 6, \quad x_5 = 5, \quad x_6 = 8, \quad x_7 = 4\)`  
+
+--
+
+| ✍️ Nota            |
+|:-------------------|
+|É interessante tomar por hábito ordenar de maneira crescente o conjunto de dados observados. `\(\phantom{*********}\)` |
+
+--
+
+**Dados ordenados**: 4, 4, 4, 5, 5, 6, 8.
+
+`\(x_{(1)} = 4, \quad x_{(2)} = 4, \quad x_{(3)} = 4, \quad x_{(4)} = 5, \quad x_{(5)} = 5, \quad x_{(6)} = 6, \quad x_{(7)} = 8\)`.
+
+--
+
+| Max = `\(x_{(7)}\)` = 8 ||    Min = `\(x_{(1)}\)` = 4 |
+|:-------------------:||:----------------------:|
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Medidas de tendência central
+
+- Buscam representar um valor "típico" dos dados em questão;
+
+O que seria valor "típico"?
+ 
+  * Principais:
+  
+    * ponto de equilíbrio dos dados;
+    
+    * ponto central dos dados;
+    
+    * ponto de alta frequência;
+
+--
+  
+  * Diferentes medidas de tendência central:
+  
+    * média;
+    
+    * mediana;
+    
+    * moda.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - I
+
+| 📝 Definição 14            |
+|:---------------------------|
+| Dadas as observações `\(x_1,\ldots,x_n\)`, a **&lt;span style="color:orange"&gt;média&lt;/span&gt;** é definida por `\(\phantom{******************************}\)` |
+| `$$\bar{x}=\frac{1}{n}\sum_{i=1}^nx_i=\frac{x_1+\cdots+x_n}{n}.$$`  |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - II 
+
+Suponha que os valores são apresentados na forma da seguinte distribuição de frequências:
+
+|           `\(X\)`   |  `\(x_1^*\)`  |  `\(x_2^*\)`  |  `\(\ldots\)`  |  `\(x_k^*\)`  |       Total         |
+|:---------------:|:---------:|:---------:|:----------:|:---------:|:-------------------:|
+|  Freq. Absoluta |   `\(n_1\)`   |   `\(n_2\)`   |  `\(\ldots\)`  |    `\(n_k\)`  | `\(\sum_{i=1}^kn_i=n\)` |
+
+--
+
+A média pode ser calculada como
+
+`$$\bar{x}=\frac{1}{n}\sum_{j=1}^kn_jx_j^*=\sum_{j=1}^k{f}_jx_j^*,$$`
+onde `\({f}_j=\frac{n_j}{n}\)` é a frequência relativa do `\(j\)`-ésimo valor.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - III
+
+#### Exemplo 4 - I
+
+Dados: 1, 2, 3, 6, 1, 2, 2, 1, 1, 1. 
+
+`\begin{eqnarray}
+\bar{x}&amp;=&amp;\frac{1}{10}\sum_{i=1}^{10}x_i\nonumber\\
+       &amp;=&amp;\frac{x_1+\cdots+x_{10}}{10}\nonumber\\
+       &amp; = &amp;  \frac{1 + 2 + 3 + 6 + 1 + 2 + 2 + 1 + 1 + 1}{10}\nonumber\\ 
+       &amp; = &amp; \frac{20}{10}\nonumber\\
+       &amp; = &amp; 2 \nonumber
+\end{eqnarray}`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - IV
+
+#### Exemplo 4 - II
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Diagrama_media_pesos1.png" alt=" " width="75%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - IV
+
+#### Exemplo 4 - II
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Diagrama_media_pesos2.png" alt=" " width="73%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+--
+
+**Interpretação física**: Se cada observação da amostra fosse representada por um peso de 1Kg e colocada sob um eixo horizontal com escala definida, o único ponto em que se poderia colocar um apoio para equilibrar o sistema de pesos é correspondente ao valor de `\(\bar{x}\)`.  
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - V
+
+#### Exemplo 4 - III
+
+Resolvendo agora via tabela de frequências.
+
+|       `\(X\)`       |   1   |    2  |   3   |   6   | Total |
+|:---------------:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| Freq. Absoluta  |  `\(5\)`  |  `\(3\)`  |  `\(1\)`  |  `\(1\)`  |  `\(10\)` |
+| Freq. Relativa  | `\(0.5\)` | `\(0.3\)` | `\(0.1\)` | `\(0.1\)` |   `\(1\)` |
+
+--
+
+Observando os dados brutos, vemos apenas 4 diferentes tipo de resultados da variável (1, 2, 3 e 6). Dessa forma, 
+
+* k = 4 `\(\quad\)` e `\(\quad\)` `\(x_1^* = 1\)`, `\(x_2^* = 2\)`, `\(x_3^* = 3\)` e `\(x_4^* = 6\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - VI
+
+#### Exemplo 4 - IV
+
+Assim, a média pode ser calculada fazendo uso da frequência absoluta calculamos a média fazendo
+
+`\begin{eqnarray}
+\bar{x}&amp;=&amp;\frac{1}{n}\sum_{j=1}^kn_jx_j^*\nonumber\\
+       &amp;=&amp;\frac{1}{10}\sum_{j=1}^4n_jx_j^*\nonumber\\
+       &amp;=&amp; \frac{1}{10} (5 \times 1 + 3 \times 2 + 1 \times 3 + 1 \times 6) \nonumber\\ 
+       &amp;=&amp; 2. \nonumber
+\end{eqnarray}`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - VII
+
+#### Exemplo 4 - V
+
+Ou, fazendo uso da frequência relativa, por
+
+`\begin{eqnarray}
+\bar{x}&amp;=&amp; \sum_{j=1}^k{f}_jx_j^*\nonumber\\
+       &amp;=&amp; \sum_{j=1}^4{f}_jx_j^*\nonumber\\
+       &amp;=&amp; 0.5 \times 1 + 0.3 \times 2 + 0.1 \times 3 + 0.1 \times 6 \nonumber\\
+       &amp;=&amp; 2 \nonumber 
+\end{eqnarray}`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - VIII
+
+Suponha que as observações são dadas na forma da seguinte distribuição de frequências intervalar:
+
+|  `\(X\)`  | `\([a_0,a_1)\)` | `\([a_1,a_2)\)` | `\(\ldots\)` | `\([a_{k-1},a_k)\)` |        Total        |
+|:-----:|:-----------:|:-----------:|:--------:|:---------------:|:-------------------:|
+| Freq. |     `\(f_1\)`   |      `\(f_2\)`  | `\(\ldots\)` |       `\(f_k\)`     | `\(\sum_{i=1}^kf_i=n\)` |
+
+--
+
+&gt; **Problema**: desconhecemos os valores observados. 
+
+--
+
+Para `\(i=1,\ldots,k\)`, devemos **&lt;span style="color:orange"&gt;aproximar&lt;/span&gt;** os valores do intervalo `\([a_{i-1},a_i)\)` pelo ponto médio `\(x_i^m=\frac{a_{i-i}+a_i}{2}\)` desse intervalo. Agora, a média é aproximada por
+
+`$$\bar{x}\approx\frac{1}{n}\sum_{j=1}^kn_jx_j^m=\sum_{j=1}^k{f}_jx_j^m,$$`
+onde `\(f_j=\frac{n_j}{n}\)` é a frequência relativa do `\(j\)`-ésimo intervalo.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - IX
+
+#### Exemplo 5 - I
+
+| Classes de salário | Freq. | Ponto médio do intervalo |
+|:------------------:|:-----:|:------------------------:|
+|      `\([4, 8)\)`      |   10  |              6           |
+|      `\([8, 12)\)`     |   12  |             10           |
+|      `\([12, 16)\)`    |    8  |             14           |
+|      `\([16, 20)\)`    |    5  |             18           |
+|      `\([20, 24)\)`    |    1  |             22           |
+|      Total         |   36  |             --           |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - X
+
+#### Exemplo 5 - II
+
+`\begin{eqnarray}
+\bar{x}&amp;\approx&amp;\frac{1}{n}\sum_{j=1}^kn_jx_j^m = \frac{1}{36}\sum_{j=1}^5 n_jx_j^m \nonumber\\
+       &amp;=&amp; \frac{1}{36}(10 \times 6 + 12 \times 10 + 8 \times 14 + 5 \times 18 + 1 \times 22) \nonumber\\
+       &amp;=&amp; \frac{404}{36} = 11,22  \nonumber
+\end{eqnarray}`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Média - XI
+
+A média possui as seguintes características:
+
+  * tem propriedades "boas";
+  
+  * é influenciada por valores atípicos;
+  
+  * não recomendada em dados assimétricos;
+  
+  * só é calculada em variáveis quantitativas;
+  
+  * no caso intervalar `\(\downarrow k\Rightarrow\)` aproximação ruim para a média.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Mediana - I
+
+| 📝 Definição 15            |
+|:---------------------------|
+| A **&lt;span style="color:orange"&gt;mediana&lt;/span&gt;** é o valor da variável que ocupa a posição central de um conjunto de `\(n\)` dados **ordenados** de maneira crescente. Note que `\(50\%\)` das observações ficam acima da mediana e `\(50\%\)` ficam abaixo dessa medida. |
+| `\(\phantom{*************************}\)` Posição da mediana: `\(\frac{n+1}{2}.\)`  |
+
+--
+
+#### Exemplo 6
+
+Dados: 20, 60, 30, 70, 80 `\(\longrightarrow\)` `\(n = 5\)` (ímpar)
+
+**&lt;span style="color:orange"&gt;Dados ordenados&lt;/span&gt;**:  `\(20 \quad 30 \quad 60 \quad 70 \quad 80\)`
+
+--
+
+Posição da Mediana `\(\frac{n+1}{2} = \frac{5 + 1}{2} = 3\)` 
+
+
+--
+
+Mediana = 60
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Mediana - II
+
+#### Exemplo 7
+
+Dados:40, 80, 20, 10, 90, 60 `\(\longrightarrow\)` `\(n = 6\)` (par)
+
+**&lt;span style="color:orange"&gt;Dados ordenados&lt;/span&gt;**: `\(10 \quad 20 \quad 40 \quad 60 \quad 80 \quad 90\)`
+
+--
+
+Posição da Mediana `\(\frac{n+1}{2} = \frac{6 + 1}{2} = 3,5\)` 
+
+--
+
+Mediana = `\(\frac{40 + 60}{2} = 50.\)`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Mediana - III
+
+| 📝 Definição 16            |
+|:---------------------------|
+| Dadas as observações `\(x_1,\ldots,x_n\)`, sejam `\(x_{(1)},\ldots,x_{(n)}\)` esses valores ordenados, isto é, `\(x_{(1)}\leq\cdots\leq x_{(n)}\)`. A mediana é definida por  |
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Mediana.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+--
+
+**Desvantagens**
+
+- sem interpretação física;
+
+- depende apenas da posição e não do valor;
+
+- menos influência de dados atípicos;
+
+- pode ser usada em variáveis qualitatitvas ordinais.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Moda - I
+
+| 📝 Definição 17            |
+|:---------------------------|
+| Dadas as observações `\(x_1,\ldots,x_n\)`, se `\(x_1^*,\ldots,x_k^*\)` denotarem os `\(k\)` valores diferentes, a moda é dada pelo valor com maior frequência.  |
+
+--
+
+&gt; Um conjunto de dados pode ser amodal, unimodal, bimodal, `\(\ldots\)`.
+
+--
+
+**Problema**: em variáveis contínuas, frequentemente, observamos poucos valores repetidos. Assim, na maioria dos casos, esse tipo de dado é amodal.
+
+--
+
+**Alternativa**: utilizar a classe com maior densidade, ou **&lt;span style="color:orange"&gt;classe modal&lt;/span&gt;**. Assim, a moda pode ser aproximada pelo valor médio da classe modal.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Moda - II
+
+#### Exemplo 5 - III
+
+| Classes de salário | Freq. | Ponto médio do intervalo |
+|:------------------:|:-----:|:------------------------:|
+|      `\([4, 8)\)`      |   10  |              6           |
+|      `\([8, 12)\)`     |   12  |             10           |
+|      `\([12, 16)\)`    |    8  |             14           |
+|      `\([16, 20)\)`    |    5  |             18           |
+|      `\([20, 24)\)`    |    1  |             22           |
+|      Total         |   36  |             --           |
+
+--
+
+**Classe Modal**: `\([8,12)\)`.
+
+--
+
+**Valor modal**: `\(\frac{12+8}{2}=10\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Moda - III
+
+A moda de um conjunto de dados:
+
+
+- representa o(s) valor(es) mais provável(eis);
+
+- é muito indicada em dados multimodais;
+
+- não é afetada por dados atípicos;
+
+- pode ser usada em variáveis qualitativas.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Medidas de dispersão - I
+
+Suponhamos que quatro grupos de alunos submeteram-se a um teste, obtendo-se as seguintes notas:
+
+
+* Grupo A: 3, 4, 5, 6, 7
+
+* Grupo B: 1, 3, 5, 7, 9
+
+* Grupo C: 5, 5, 5, 5, 5
+
+* Grupo D: 3, 5, 5, 7
+
+--
+
+Observemos que 
+
+$$\bar{x}_A  = \bar{x}_B = \bar{x}_C = \bar{x}_D = 5 $$
+
+e
+
+$${m_d}_A  = {m_d}_B = {m_d}_C = {m_d}_D = 5 $$
+
+--
+
+| O que diferencia os 4 grupos de notas? |
+|:--------------------------------------:|
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Medidas de dispersão - II
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Dispersao_grupos_AB1.png" alt=" " width="30%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Dispersao_grupos_CD1.png" alt=" " width="30%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Medidas de dispersão - III
+
+**Finalidade**: Encontrar um valor que resuma a variabilidade de um conjunto de dados.
+
+
+Quatro medidas apresentadas:
+
+- amplitude amostral;
+
+- variância;
+
+- desvio-padrão;
+
+- coeficiente de variação.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Amplitude
+
+| `$$A = max-min$$` |
+|:---------------:|
+
+Para os grupos anteriores, temos:
+
+- Grupo A: 3, 4, 5, 6, 7 `\(\longrightarrow\)` A = 4
+
+- Grupo B: 1, 3, 5, 7, 9 `\(\longrightarrow\)` A = 8
+
+- Grupo C: 5, 5, 5, 5, 5 `\(\longrightarrow\)` A = 0
+
+- Grupo D: 3, 5, 5, 7  `\(\longrightarrow\)` A = 4
+
+--
+
+&gt; **Vantagens**:
+&gt;
+&gt; - cálculo rápido;
+&gt;
+&gt; - fácil interpretação;
+
+--
+
+&gt; **Desvantagem**:
+&gt;
+&gt; sofre alto impacto na presença de dados atípicos.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Variância - I
+
+**Objetivo**: Medir a  variabilidade através da dispersão de todos os dados em torno de sua média.
+
+--
+
+| 📝 Definição 18            |
+|:---------------------------|
+| Variância populacional: `\(\phantom{**********************************************}\)`
+$$
+\sigma^2=\frac{1}{N}\sum_{i=1}^N(x_i-\mu)^2.
+$$ 
+
+
+| 📝 Definição 19            |
+|:---------------------------|
+| Variância amostral: `\(\phantom{***********************************************}\)`
+$$
+s^2=\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2.
+$$ 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Variância - II
+
+#### Exemplo 6 - I
+
+Um levantamento dos preços à vista (R$) do litro de álcool em gel em alguns postos de venda de uma cidade está mostrado abaixo:
+
+$$ 4,61 \qquad   4,64 \qquad   4,56 \qquad   4,61 \qquad    4,60 \qquad  4,58$$
+
+Obtenha a média e variância dessa amostra de preços. 
+
+`\begin{eqnarray}
+\bar{x}&amp;=&amp;\frac{\sum_{i=1}^{6}x_i}{6}\nonumber\\ 
+       &amp;=&amp;\frac{x_1+\cdots+x_{6}}{6}\nonumber\\
+       &amp; = &amp;  \frac{4,61 + ... + 4,58}{6}\nonumber\\ 
+       &amp; = &amp; \frac{27,60}{6}\nonumber\\
+       &amp; = &amp; 4,60 \nonumber
+\end{eqnarray}`
+
+Ou seja, o preço médio por litro de álcool em gel é de R$ 4,60.  
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Variância - III
+
+#### Exemplo 6 - II
+
+Para o cálculo da variância, temos que:
+
+`\begin{eqnarray}
+s^2 = Var(X)  &amp;= &amp; \frac{\sum_{i=1}^n(x_i-\bar{x})^2}{n-1} \nonumber\\
+    &amp;= &amp; \frac{\sum_{i=1}^6(x_i-4,60)^2}{5} \nonumber\\
+    &amp;= &amp; \frac{(x_1-4,60)^2 + (x_2-4,60)^2 + .... + (x_6-4,60)^2}{5} \nonumber\\
+    &amp;= &amp; \frac{(4,61-4,60)^2 + (4,64-4,60)^2 + .... + (4,58-4,60)^2}{5} \nonumber\\
+    &amp;= &amp; \frac{0,0038}{5} \nonumber\\
+    &amp;= &amp; 0,00076. \nonumber
+\end{eqnarray}`
+
+--
+
+&gt; **Pergunta**: Qual a unidade dimensional da variância nesse exemplo? 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Variância - IV
+
+**Fórmula alternativa para o cálculo da variância amostral**
+
+`\begin{eqnarray}
+s^2 = Var(X) &amp;= &amp; \frac{\sum_{i=1}^n x_i^2 \; -\;  n \; \bar{x}^2}{n-1} \nonumber
+\end{eqnarray}`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Variância - V
+
+#### Exemplo 6 - III
+
+Refazendo o cálculo da variância do exemplo anterior através da fórmula alternativa:
+
+`\begin{eqnarray}
+s^2 = Var(x)  &amp;= &amp; \frac{\sum_{i=1}^n x_i^2 \; - \; n \; \bar{x}^2}{n-1} \nonumber\\
+              &amp;= &amp; \frac{\sum_{i=1}^6 x_i^2 \; - \; 6 \times 4,60^2}{5} \nonumber\\
+              &amp;= &amp; \frac{x_1^2 + \ldots + x_6^2 \; - \; 126,96}{5} \nonumber\\
+              &amp;= &amp; \frac{4,61^2 + 4,64^2 + ... + 4,58^2 \; - \; 126,96}{5} \nonumber\\
+              &amp;= &amp; \frac{126,9638 \; - \; 126,96}{5} = \frac{0,0038}{5} = 0,00076. \nonumber
+\end{eqnarray}`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Variância - V
+
+**Observações:**
+
+* mais robusta a dados atípicos do que a amplitude;
+
+--
+
+* se os dados, por exemplo, são expressos em `\(cm\)` a variância é em `\(cm^2\)`;
+
+--
+
+* para dados apresentados em frequências intervalares, temos que
+  $$
+  s^2=\frac{\sum_{i=1}^kn_i(x_i^m)^2 \; - \; n \bar{x}^2}{n-1},
+  $$
+  onde `\(x_i^m\)` é o ponto médio do `\(i\)`-ésimo intervalo.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Variâcia - VI
+
+#### Exemplo 5 - IV
+
+| Classes de salário | `\(n_i\)` | `\(x_i^m\)` | `\((x_i^m)^2\)` | `\(n_i\times (x_i^m)^2\)` | 
+|:------------------:|:-----:|:--------|:-----------:|:---------------------:|
+|      `\([4, 8)\)`      |   10  |  6      |    36       |           360         |   
+|      `\([8, 12)\)`     |   12  | 10      |   100       |          1200         |
+|      `\([12, 16)\)`    |    8  | 14      |   196       |          1568         |
+|      `\([16, 20)\)`    |    5  | 18      |   324       |          1620         |
+|      `\([20, 24)\)`    |    1  | 22      |   484       |           484         |
+|      Total         |   36  |  --     |   --        |          5232         |
+
+--
+
+`\(k\)`: o número de classes;
+
+`\(x_i^m\)`: ponto médio do `\(i\)`-ésimo intervalo.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Variâcia - VII
+
+#### Exemplo 5 - V
+
+
+Já havíamos calculado que `\(\bar{x} = 11,22\)`. Assim, 
+
+`\begin{eqnarray}
+  s^2 &amp;=&amp; \frac{\sum_{i=1}^kn_i \; (x_i^m)^2 \; - \; n \; \bar{x}^2}{n-1} \nonumber\\
+     %&amp;=&amp;  \frac{5232 \; - \; 36 \times 11,22}{35} \nonumber\\
+     &amp;=&amp;  \frac{5232 \; - \; 36 \times 11,22^2}{35} = \frac{700,02}{35} = 20 \nonumber
+\end{eqnarray}`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Desvio Padrão - I
+
+Para remediar o fato de a variância ser expressa na unidade de medida da variável ao quadrado, podemos calcular o **&lt;span style="color:orange"&gt;desvio padrão&lt;/span&gt;**.
+
+| 📝 Definição 20            |
+|:---------------------------|
+| O desvio-padrão populacional é dado por `\(\phantom{*************************************}\)`
+$$
+\sigma=\sqrt{\sigma^2}=\sqrt{\frac{1}{N}\sum_{i=1}^N(x_i-\mu)^2}.
+$$
+
+| 📝 Definição 21            |
+|:---------------------------|
+| O desvio-padrão amostral é dado por `\(\phantom{*************************************}\)`
+$$
+s=\sqrt{s^2}=\sqrt{\frac{1}{n-1}\sum_{i=1}^n(x_i-\bar{x})^2}.
+$$
+|
+
+
+&gt; A grande vantagem do desvio-padrão é que ele é expresso na mesma unidade de medida dos dados.
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Desvio Padrão - II
+
+#### Exemplo 5 - VI
+
+Desvio-padrão dos salários de 36 empregados organizados via tabela de frequências.
+
+$$ s=\sqrt{s^2} = \sqrt{20} = 4,47$$ salários mínimos
+
+--
+
+#### Exemplo 6 - IV
+
+Desvio-padrão dos preços do litro de álcool em gel.
+
+$$ s=\sqrt{s^2} = \sqrt{0,00076} = 0,02767$$ reais.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Coeficiente de variação - I
+
+
+&gt; **Observação**: As medidas de dispersão apresentadas são influenciadas pela "grandeza" da variável estudada.
+
+--
+
+É comum então representar o desvio-padrão como percentual da média. Denomina-se essa medida de coeficiente de variação.
+
+--
+
+| 📝 Definição 22           |
+|:---------------------------|
+| O coeficiente de variação populacional é dado por `\(\phantom{********************************}\)`
+$$
+CV(\%) =\frac{\sigma}{\mu} \times 100,
+$$
+onde `\(\mu\)` é a média populacional. O coeficiente de variação amostral é dado por
+$$
+CV(\%) =\frac{s}{\bar{x}} \times 100,
+$$
+onde `\(\bar{x}\)` é a média amostral.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Coeficiente de variação - II
+
+&gt;**Vantagens**:
+
+- Duas populações com médias muito diferentes podem ter suas dispersões comparadas através do coeficiente de variação.
+
+- É adimensional
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Coeficiente de variação - III
+
+#### Exemplo 7 - I
+
+Altura e peso dos alunos
+
+|        | Média | Desvio-padrão |
+|:------:|:-----:|:-------------:|
+| Altura | 1,50 m | 0,0825 m     |
+|  Peso  |  50 Kg |  6 Kg        | 
+
+--
+
+&gt; Os alunos são mais dispersos com respeito a altura ou o peso? 
+
+--
+
+|        | Média | Desvio-padrão | Coeficiente de variação |
+|:------:|:-----:|:-------------:|:-----------------------:|
+| Altura | 1,50 m | 0,0825 m     |         5,5%            |
+|  Peso  |  50 Kg |  6 Kg        |          12%            |
+
+--
+
+Os alunos são, aproximadamente, duas vezes mais dispersos quanto ao peso do que quanto à altura. 
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
