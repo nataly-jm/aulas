@@ -156,7 +156,7 @@ class: animated, fadeIn
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-# Gráficos e Tabelas
+# Tabelas
 
 **Quando utilizar a distribuição de frequências?**
 
@@ -166,7 +166,6 @@ class: animated, fadeIn
 &lt;/div&gt;
 
 ---
-
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
@@ -229,7 +228,7 @@ class: animated, fadeIn
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-#### Exemplo 1
+#### Exemplo 1 - I
 
 Seja `\(X=\)` "Tipo de música preferida". Neste caso `\(X\in\{p,r,s\}\)`, onde `\(p=\)` pagode, `\(r=\)` rock e `\(s=\)` sertanejo. Suponha que `\(n=40\)` pessoas foram entrevistadas e o valor de `\(X\)` para cada uma delas foi verificado. Os dados são
 
@@ -249,7 +248,7 @@ $$
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-#### Exemplo 1
+#### Exemplo 1 - I
 
 Seja `\(X=\)` "Tipo de música preferida". Neste caso `\(X\in\{p,r,s\}\)`, onde `\(p=\)` pagode, `\(r=\)` rock e `\(s=\)` sertanejo. Suponha que `\(n=40\)` pessoas foram entrevistadas e o valor de `\(X\)` para cada uma delas foi verificado. Os dados são
 
@@ -268,7 +267,7 @@ $$
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
 class: animated, fadeIn
 
-#### Exemplo 1
+#### Exemplo 1 - I
 
 Seja `\(X=\)` "Tipo de música preferida". Neste caso `\(X\in\{p,r,s\}\)`, onde `\(p=\)` pagode, `\(r=\)` rock e `\(s=\)` sertanejo. Suponha que `\(n=40\)` pessoas foram entrevistadas e o valor de `\(X\)` para cada uma delas foi verificado. Os dados são
 
@@ -552,6 +551,701 @@ Para a variável número de filhos (N), temos
 |  2     |          12    | `\(\frac{12}{30} = 0.40\)` |  `\(0.40 \times 100 = 40\%\)`  |
 |  3     |           5    | `\(\frac{5}{30} = 0.16\)`  |  `\(0.16 \times 100 = 16\%\)`  |
 |  Total |          30    |         `\(1\)`            |          `\(100\%\)`           |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distribuição de frequências - Casos quantitativos contínuo e discreto (muitas observações diferentes) - I
+
+Neste caso: `\(x_1,\ldots,x_n\)` tem muitas (ou todas) observações diferentes; o método anterior nem resume e nem extrai informação dos dados.
+
+--
+
+&gt;**Alternativa** - Agrupar valores próximos em intervalos (classes). 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 3 - I
+
+Suponha que em uma determinada empresa foram considerados os salários de 36 funcionários (em salários mínimos). Observou-se que os 36 funcionários possuem salários diferentes. Como construir tabelas de frequência nesse caso?
+
+| Classes de salário | `\(n_i\)` | `\(f_i\)` | `\(f_i(\%)\)` | `\(\Delta_i\)` |       `\(d_i\)`        |
+|:------------------:|:-----:|:-----:|:---------:|:----------:|:------------------:|
+| `\([4, 8)\)`           |   10  |       |           |            |                    |
+| `\([8, 12)\)`          |   12  |       |           |            |                    | 
+| `\([12, 16)\)`         |    8  |       |           |            |                    |
+| `\([16, 20)\)`         |    5  |       |           |            |                    |
+| `\([20, 24)\)`         |    1  |       |           |            |                    |
+|  Total             |   36  |       |           |            | `\(\phantom{*}\)`      |
+
+--
+
+&gt;**Notações**:
+&gt;
+&gt; `\(\Delta_i\)`: comprimento do intervalo (amplitude) da `\(i\)`-ésima classe.
+&gt;
+&gt; `\(d_i\)`: `\(\frac{f_i}{\Delta_i}:\)` densidade de frequência da `\(i\)`-ésima classe.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 3 - II
+
+Por exemplo,  para a 1ª classe, dada pelo intervalo `\([4, 8)\)`, temos que
+
+- Frequência relativa: `\(f_1 = \frac{n_1}{n} = \frac{10}{36} = 0.2778\)`
+
+--
+
+- Frequência percentual: `\(f_1(\%) = 100 \times f_1 = 100 \times 0.2778 = 27.78 \%\)`
+
+--
+
+- Amplitude:  `\(\Delta_1 = 8 - 4 = 4\)` 
+
+--
+
+- Densidade: `\(d_1 = \frac{f_1}{\Delta_1} = \frac{0.2778}{4} = 0.069\)` 
+    
+--
+
+| Classes de salário | `\(n_i\)` |  `\(f_i\)` | `\(f_i(\%)\)` | `\(\Delta_i\)` |       `\(d_i\)`        |
+|:------------------:|:-----:|:------:|:---------:|:----------:|:------------------:|
+| `\([4, 8)\)`           |   10  | 0.2778 |   27.78   |   4        |  0.069             |
+| `\([8, 12)\)`          |   12  |        |           |            |                    | 
+| `\([12, 16)\)`         |    8  |        |           |            |                    |
+| `\([16, 20)\)`         |    5  |        |           |            |                    |
+| `\([20, 24)\)`         |    1  |        |           |            |                    |
+|  Total             |   36  |        |           |            | `\(\phantom{*}\)`      |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 3 - II
+
+Por exemplo,  para a 1ª classe, dada pelo intervalo `\([4, 8)\)`, temos que
+
+- Frequência relativa: `\(f_1 = \frac{n_1}{n} = \frac{10}{36} = 0.2778\)`
+
+- Frequência percentual: `\(f_1(\%) = 100 \times f_1 = 100 \times 0.2778 = 27.78 \%\)`
+
+- Amplitude:  `\(\Delta_1 = 8 - 4 = 4\)` 
+
+- Densidade: `\(d_1 = \frac{f_1}{\Delta_1} = \frac{0.2778}{4} = 0.069\)` 
+
+
+| Classes de salário | `\(n_i\)` |  `\(f_i\)` | `\(f_i(\%)\)` | `\(\Delta_i\)` |       `\(d_i\)`      |
+|:------------------:|:-----:|:------:|:---------:|:----------:|:----------------:|
+| `\([4, 8)\)`           |   10  | 0.2778 |   27.78   |   4        |  0.069           |
+| `\([8, 12)\)`          |   12  | 0.3330 |   33.33   |   4        |  0.083           |
+| `\([12, 16)\)`         |    8  | 0.2220 |   22.22   |   4        |  0.056           |
+| `\([16, 20)\)`         |    5  | 0.1389 |   13.89   |   4        |  0.035           |
+| `\([20, 24)\)`         |    1  | 0.0278 |    2.78   |   4        |  0.007           |
+|  Total             |   36  |  1     |   100     |   --       |   --             |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Distribuição de frequências - Casos quantitativos contínuo e discreto (muitas observações diferentes) - II
+
+**Observações**:
+
+- Ao se resumir dados referentes a uma variável quantitativa em classes, perde-se alguma informação. 
+
+--
+
+- Notação `\([a, b):\)` intervalos que contém o extremo `\(a\)`, mas não contém o extremo `\(b\)`. 
+
+--
+
+- A escolha dos intervalos é arbitrária. Sugere-se, no entanto, o uso de 5 a 20 classes de mesma amplitude.  Por exemplo, 
+
+\begin{equation}
+\Delta_{total} = 24 - 4 = 20  \longmapsto 20/5 = 4.\nonumber
+\end{equation}
+
+--
+
+\phantom{***}
+
+| Sturges (1926) sugere a utilização de `\(k=1+3.322\log_{10} n\)`.|
+|:------------------------------------------------------------:|
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Gráficos
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Diagrama_graficos1.png" alt=" " width="45%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Gráfico de Setores
+
+É construído da seguinte maneira:
+
+1. suponha que os valores diferentes da variável são `\(x_1^*,\ldots,x_k^*\)`;
+
+2. sejam `\(f_1,\ldots,f_k\)` as frequências relativas desses valores;
+
+3. desenhe um círculo de raio arbitrário;
+
+4. representamos no círculo desenhado o valor `\(x_i^*\)` através de um arco de circunferência de ângulo proporcional a sua frequência relativa. 
+
+--
+
+Esquematicamente,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Grafico_setores1.png" alt=" " width="25%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 1 - II
+
+| `\(X\)`  |     `\(p\)`  |    `\(r\)`  |    `\(s\)`  |  Total  |
+|:-----:|:-------:|:-------:|:-------:|:-------:|
+| Freq. | `\(0.425\)` | `\(0.150\)` | `\(0.425\)` | `\(1.000\)` |
+
+--
+
+O gráfico de setores de `\(X\)` para a amostra observada é dado por
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Setores_ex1b1.png" alt=" " width="25%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 1 - II
+
+| `\(X\)`  |     `\(p\)`  |    `\(r\)`  |    `\(s\)`  |  Total  |
+|:-----:|:-------:|:-------:|:-------:|:-------:|
+| Freq. | `\(0.425\)` | `\(0.150\)` | `\(0.425\)` | `\(1.000\)` |
+
+
+O gráfico de setores de `\(X\)` para a amostra observada é dado por
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Setores_ex1c1.png" alt=" " width="25%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 1 - II
+
+| `\(X\)`  |     `\(p\)`  |    `\(r\)`  |    `\(s\)`  |  Total  |
+|:-----:|:-------:|:-------:|:-------:|:-------:|
+| Freq. | `\(0.425\)` | `\(0.150\)` | `\(0.425\)` | `\(1.000\)` |
+
+
+O gráfico de setores de `\(X\)` para a amostra observada é dado por
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Setores_ex1d1.png" alt=" " width="25%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Gráfico de Barras - I
+
+É construído da seguinte maneira:
+
+1. suponha que os valores diferentes da variável são `\(x_1^*&lt;\cdots&lt;x_k^*\)`;
+
+2. sejam `\(f_1,\ldots,f_k\)` as frequências relativas desses valores;
+
+3. desenhe o eixo cartesiano;
+
+4. no eixo das abscissas, em cima dos valores `\(x_1^*,\ldots,x_k^*\)`, posicione retângulos (barras);
+
+5. as bases de todos retângulos devem ter o mesmo comprimento escolhido arbitrariamente;
+
+6. a altura de um retângulo é dada pela frequência relativa do valor de `\(X\)` que é representado por ele. Isto é, a altura da barra que representa o valor `\(x_i^*\)` é dada por `\(f_i\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+### Gráfico de Barras - II
+
+Esquematicamente,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Grafico_barras_a1.png" alt=" " width="55%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+### Gráfico de Barras - II
+
+Esquematicamente,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Grafico_barras_b1.png" alt=" " width="55%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+### Gráfico de Barras - II
+
+Esquematicamente,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Grafico_barras_c1.png" alt=" " width="55%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+### Gráfico de Barras - II
+
+Esquematicamente,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Grafico_barras_d1.png" alt=" " width="55%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+### Gráfico de Barras - II
+
+Esquematicamente,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Grafico_barras_e1.png" alt=" " width="55%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+#### Exemplo 2 - VIII
+
+Relembrando a distribuição de frequências relativas de `\(E\)`:
+
+| `\(E\)`  |  `\(f\)`  |  `\(m\)`   |  `\(s\)`   |  Total  |
+|:----:|:-----:|:------:|:------:|:-------:|
+| Freq.| `\(0.4\)` | `\(0.27\)` | `\(0.33\)` |  `\(1\)`    |
+
+--
+
+O gráfico de barras para a variável `\(E\)` nesta amostra é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2a1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 2 - VIII
+
+Relembrando a distribuição de frequências relativas de `\(E\)`:
+
+| `\(E\)`  |  `\(f\)`  |  `\(m\)`   |  `\(s\)`   |  Total  |
+|:----:|:-----:|:------:|:------:|:-------:|
+| Freq.| `\(0.4\)` | `\(0.27\)` | `\(0.33\)` |  `\(1\)`    |
+
+
+O gráfico de barras para a variável `\(E\)` nesta amostra é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2b1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 2 - VIII
+
+Relembrando a distribuição de frequências relativas de `\(E\)`:
+
+| `\(E\)`  |  `\(f\)`  |  `\(m\)`   |  `\(s\)`   |  Total  |
+|:----:|:-----:|:------:|:------:|:-------:|
+| Freq.| `\(0.4\)` | `\(0.27\)` | `\(0.33\)` |  `\(1\)`    |
+
+
+O gráfico de barras para a variável `\(E\)` nesta amostra é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2c1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 2 - VIII
+
+Relembrando a distribuição de frequências relativas de `\(E\)`:
+
+| `\(E\)`  |  `\(f\)`  |  `\(m\)`   |  `\(s\)`   |  Total  |
+|:----:|:-----:|:------:|:------:|:-------:|
+| Freq.| `\(0.4\)` | `\(0.27\)` | `\(0.33\)` |  `\(1\)`    |
+
+
+O gráfico de barras para a variável `\(E\)` nesta amostra é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2d1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+#### Exemplo 2 - IX
+
+&gt; **Observação**: Em um gráfico de barras, um valor que teve frequência `\(0\)` deve ser representado.
+
+Suponha que a variável número de filhos (`\(N\)`) tivesse a seguinte distribuição de frequências relativas:
+
+|  `\(N\)`  |  `\(0\)`   |  `\(1\)`   |   `\(2\)`  |  `\(3\)`   |  Total |
+|:-----:|:------:|:------:|:------:|:------:|:------:|
+| Freq. | `\(0.27\)` | `\(0.57\)` | `\(0.00\)` | `\(0.16\)` |    `\(1\)` |
+
+--
+
+O gráfico de barras neste caso é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2filhosa1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 2 - IX
+
+&gt; **Observação**: Em um gráfico de barras, um valor que teve frequência `\(0\)` deve ser representado.
+
+Suponha que a variável número de filhos (`\(N\)`) tivesse a seguinte distribuição de frequências relativas:
+
+|  `\(N\)`  |  `\(0\)`   |  `\(1\)`   |   `\(2\)`  |  `\(3\)`   |  Total |
+|:-----:|:------:|:------:|:------:|:------:|:------:|
+| Freq. | `\(0.27\)` | `\(0.57\)` | `\(0.00\)` | `\(0.16\)` |    `\(1\)` |
+
+
+O gráfico de barras neste caso é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2filhosb1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 2 - IX
+
+&gt; **Observação**: Em um gráfico de barras, um valor que teve frequência `\(0\)` deve ser representado.
+
+Suponha que a variável número de filhos (`\(N\)`) tivesse a seguinte distribuição de frequências relativas:
+
+|  `\(N\)`  |  `\(0\)`   |  `\(1\)`   |   `\(2\)`  |  `\(3\)`   |  Total |
+|:-----:|:------:|:------:|:------:|:------:|:------:|
+| Freq. | `\(0.27\)` | `\(0.57\)` | `\(0.00\)` | `\(0.16\)` |    `\(1\)` |
+
+
+O gráfico de barras neste caso é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2filhosc1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 2 - IX
+
+&gt; **Observação**: Em um gráfico de barras, um valor que teve frequência `\(0\)` deve ser representado.
+
+Suponha que a variável número de filhos (`\(N\)`) tivesse a seguinte distribuição de frequências relativas:
+
+|  `\(N\)`  |  `\(0\)`   |  `\(1\)`   |   `\(2\)`  |  `\(3\)`   |  Total |
+|:-----:|:------:|:------:|:------:|:------:|:------:|
+| Freq. | `\(0.27\)` | `\(0.57\)` | `\(0.00\)` | `\(0.16\)` |    `\(1\)` |
+
+
+O gráfico de barras neste caso é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2filhosd1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+#### Exemplo 2 - IX
+
+&gt; **Observação**: Em um gráfico de barras, um valor que teve frequência `\(0\)` deve ser representado.
+
+Suponha que a variável número de filhos (`\(N\)`) tivesse a seguinte distribuição de frequências relativas:
+
+|  `\(N\)`  |  `\(0\)`   |  `\(1\)`   |   `\(2\)`  |  `\(3\)`   |  Total |
+|:-----:|:------:|:------:|:------:|:------:|:------:|
+| Freq. | `\(0.27\)` | `\(0.57\)` | `\(0.00\)` | `\(0.16\)` |    `\(1\)` |
+
+
+O gráfico de barras neste caso é dado por,
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Barras_ex2filhose1.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+### Histograma - I
+
+É construído da seguinte maneira:
+
+- suponha que a variável `\(X\)` forneceu a seguinte distribuição de densidades:
+
+|  `\(X\)`    |    `\([a_0,a_1]\)`    |    `\((a_1,a_2]\)`    |    `\(\ldots\)`    |    `\((a_{k-1},a_k]\)`    |
+|:-------:|:-----------------:|:-----------------:|:--------------:|:---------------------:|
+|  Dens.  |       `\(d_1\)`       |        `\(d_2\)`      |   `\(\ldots\)`     |         `\(d_k\)`         |
+
+- desenhe o eixo cartesiano;
+
+- no eixo das abscissas, em cima do intervalo `\(I_i=(a_{i-1},a_i]\)` posicione um retângulo;
+
+- a base desse retângulo deve corresponder ao intervalo `\(I_i\)`. Portanto, **não deve haver espaço entre as barras**;
+
+- a altura desse retângulo é dada pela densidade do `\(i\)`-ésimo intervalo, `\(d_i\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+### Histograma - II
+
+Esquematicamente
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Histograma_a1.png" alt=" " width="50%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+### Histograma - II
+
+Esquematicamente
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Histograma_b1.png" alt=" " width="50%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+### Histograma - II
+
+Esquematicamente
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Histograma_c1.png" alt=" " width="50%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+### Histograma - II
+
+Esquematicamente
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Histograma_d1.png" alt=" " width="50%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated
+
+### Histograma - II
+
+Esquematicamente
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Histograma_e1.png" alt=" " width="50%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+#### Exemplo 4 - I
+
+Assuma que a distribuição da idade de um grupo de indivíduos fumantes pode ser representada por
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Hist_ex4a.png" alt=" " width="70%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+#### Exemplo 4 - II
+
+| ✍️ Nota            |
+|:-------------------|
+|Como as classes são de mesmo tamanho podemos fazer o histograma de frequências absolutas, relativas ou de densidades e a interpretação será equivalente.  |
+
+--
+
+Vamos supor que as duas últimas faixas fossem agrupadas:
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Hist_ex4b.png" alt=" " width="60%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+#### Exemplo 4 - III
+
+A distribuição de frequências é dada por
+
+| Faixas de idade | `\(n_i\)` | `\(f_i\)` | `\(f_i(\%)\)` | `\(\Delta_i\)` | `\(d_i\)`  |
+|:---------------:|:-----:|:-----:|:---------:|:----------:|:------:|
+|     `\([30, 35)\)`  |    1  | 0.005 |    0.5    |     5      |  0.001 |
+|     `\([35, 40)\)`  |   15  | 0.075 |    7.5    |     5      |  0.015 |
+|     `\([40, 45)\)`  |   44  | 0.220 |    22     |     5      |  0.044 |
+|     `\([45, 50)\)`  |   77  | 0.385 |    38.5   |     5      |  0.077 |
+|     `\([50, 55)\)`  |   48  | 0.240 |     24    |     5      |  0.048 |
+|     `\([55, 65)\)`  |   15  | 0.075 |     7.5   |    10      | 0.0075 |
+|        Total    |  200  |  1    |    100    | --         | --     |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+#### Exemplo 4 - IV
+
+O histograma de **densidades** é dado por
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Hist_ex4c.png" alt=" " width="70%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, FadeIn
+
+### Histograma - III
+
+**Observações**
+
+ * A área de cada barra corresponde a frequência relativa de cada classe.
+
+ * Note que a área total do histograma é igual a 1 `\((100\%)\)`.
+
+--
+
+`\(\phantom{***}\)`
+
+| ❗ Importante        |
+|:-------------------|
+|**&lt;span style="color:orange"&gt;SEMPRE&lt;/span&gt;** utilizar o gráfico de densidades quando as classes tiverem amplitudes diferentes! |
+
 
 
 ---
