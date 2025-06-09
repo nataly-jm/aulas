@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ESTATISTICA I STA13813</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# ESTATISTICA I STA13813
+]
+.subtitle[
+## Análise Combinatória
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+# Análise Combinatória - I
+
+
+| ✍️ **O que é análise combinatória?** |            |
+|:-------------------------------------:|
+| É um ramo da Matemática que permite resolver problemas envolvendo contagem, como o número de possibilidades de ocorrência de um evento, o número de subconjuntos de um conjunto finito, mas sem que seja necessário recorrer a contagem direta; em outras palavras, sem enumerar seus elementos. |
+
+--
+
+`\(\phantom{****}\)`
+
+Dois tipos de problemas que frequentemente aparecem em análise combinatória: 
+
+ * Demonstrar a existência de conjuntos finitos.
+ 
+ * Contar e classificar os subconjuntos de um conjunto finito.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Análise Combinatória - II
+
+
+|❗  Importante   |
+|:--------------------------|
+| Embora a Análise Combinatória disponha de técnicas gerais que permitam atacar alguns problemas, é verdade que a solução de um problema de Análise Combinatória exige, quase sempre, engenhosidade e a compreensão plena da situação descrita pelo problema. |
+
+--
+
+`\(\phantom{***}\)`
+
+
+| 📝 Definição 23           |
+|:---------------------------|
+| A primeira técnica matemática que aprendemos é a **&lt;span style="color:orange"&gt;contagem&lt;/span&gt;**. Em outras palavras, enumerar os elementos de um conjunto de forma a determinar quantos elementos ele possui.|
+
+--
+
+`\(\phantom{***}\)`
+
+| ✍️ Nota            |
+|:-------------------|
+| O símbolo **&lt;span style="color:orange"&gt;#A&lt;/span&gt;** será usado para representar o número de elementos de um conjunto `\(A\)`, isto é, a *cardinalidade* de A.  |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Princípio Aditivo
+
+| 📝 Definição 24           |
+|:---------------------------|
+| Se **&lt;span style="color:orange"&gt;A&lt;/span&gt;** e **&lt;span style="color:orange"&gt;B&lt;/span&gt;** são dois conjuntos disjuntos (intersecção vazia), com *&lt;span style="color:orange"&gt;p&lt;/span&gt;* e *&lt;span style="color:orange"&gt;q&lt;/span&gt;* elementos, respectivamente, então a cardinalidade de `\(A\cup B\)` é dada por  *&lt;span style="color:orange"&gt;p + q&lt;/span&gt;* elementos.|
+
+#### Exemplo 10
+
+Numa classe existem 18 rapazes e 12 garotas. De quantas maneiras podemos selecionar 1 estudante?
+
+--
+
+#### Exemplo 11
+
+Em uma viagem, podemos escolher entre os meios de transporte de ônibus ou de trem. Se existem 3 rodovias e 2 ferrovias, quantos caminhos disponíveis há para a viagem?
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Princípio Fundamental da Contagem ou Princípio Multiplicativo - I
+
+| 📝 Definição 25            |
+|:---------------------------|
+| Se uma decisão `\(\bf\color{orange}{D_1}\)` pode ser tomada de `\(\color{orange}{x}\)` maneiras e se, uma vez tomada a decisão `\(\bf\color{orange}{D_1}\)`, a decisão `\(\bf\color{orange}{D_2}\)` puder ser tomada de `\(\color{orange}{y}\)` maneiras, então o número de maneiras de se tomarem as decisões `\(\bf\color{orange}{D_1}\)` e `\(\bf\color{orange}{D_2}\)` é `\(\color{orange}{x y}\)`. |
+
+--
+
+#### Exemplo 12 - I
+
+Maria vai sair com suas amigas e, para escolher a roupa que usará, separou 2 saias e 3 blusas. De quantas maneiras ela pode se arrumar?
+
+--
+
+Duas decisões precisam ser tomadas: qual blusa `\(({\bf\color{orange}{D_1}})\)` e qual saia `\(({\bf\color{orange}{D_2}})\)` usar: 
+
+- `\(\bf\color{orange}{D_1}\)`: escolher uma dentre as 3 blusas
+
+- `\(\bf\color{orange}{D_2}\)`: escolher uma dentre as 2 saias.
+
+--
+
+Assim, Maria dispõe de `\(3 \times  2 = 6\)` maneiras de tomar as decisões `\(\bf\color{orange}{D_1}\)` e `\(\bf\color{orange}{D_2}\)`, ou seja, 6 possibilidades diferentes de se vestir.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Princípio Fundamental da Contagem ou Princípio Multiplicativo - II
+
+#### Exemplo 12 - II
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Blusas_saias.jpg" alt=" " width="55%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Princípio Fundamental da Contagem ou Princípio Multiplicativo - III
+
+#### Exemplo 12 - III
+
+Diagrama de árvore:
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Diagrama_arvore.png" alt=" " width="45%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+#### Exemplo 13
+
+Numa sala há 3 homens e 4 mulheres. De quantos modos é possível selecionar um casal homem-mulher?
+
+--
+
+#### Exemplo 14
+
+Uma bandeira é formada por 7 listras que devem ser coloridas usando-se apenas as cores verde, azul e cinza. Se cada listra deve ter apenas uma cor e não podem ser usadas cores iguais em listras adjacentes, de quantos modos se pode colorir a bandeira?
+
+--
+
+#### Exemplo 15
+
+Quantos são os números de 3 dígitos distintos?
+
+--
+
+#### Exemplo 16
+
+De quantos modos 3 pessoas podem sentar em 5 cadeiras colocadas em fila?
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Princípio Fundamental da Contagem ou Princípio Multiplicativo - IV
+
+|❗  Importante   |
+|:--------------------------|
+| Você deve ter percebido que a estratégia adotada é a essência dos problemas de combinatória; para isso é preciso quase sempre de:|
+|    |
+| **Postura**: devemos sempre nos colocar no papel da pessoa que deve fazer a ação. No exemplo 12, no lugar da pessoa que irá se vestir; no exemplo 14 no lugar da pessoa que irá colorir as listras da bandeira, por exemplo. **Divisão**:  sempre que possível, dividir as decisões a serem tomadas em decisões mais simples. Formar um casal foi dividido em escolher o homem e escolher a mulher. |
+
+--
+
+&gt; Alguns problemas de Análise Combinatória aparecem com bastante frequência na literatura.
+&gt;
+&gt; * Embora eles sejam meras aplicações do Princípio Multiplicativo, vale a pena saber como esses procedimentos funcionam particularmente. 
+&gt;
+&gt; * São eles: permutação/arranjo e combinação 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Permutações e arranjos - I
+
+Suponha que nós temos `\(n\)` objetos **&lt;span style="color:orange"&gt;diferentes&lt;/span&gt;**. De quantas maneiras podemos ordenar estes objetos? 
+
+--
+
+Para os objetos **&lt;span style="color:orange"&gt;a&lt;/span&gt;**, **&lt;span style="color:orange"&gt;b&lt;/span&gt;** e **&lt;span style="color:orange"&gt;c&lt;/span&gt;** temos as seguintes ordenações: 
+
+--
+
+`$$\begin{equation*}
+\left\{
+\begin{array}{cccc}
+a &amp; b &amp; c  &amp; \\
+a &amp; c &amp; b  &amp; \\
+b &amp; a &amp; c  &amp; \\
+b &amp; c &amp; a  &amp; \\
+c &amp; a &amp; b  &amp; \\
+c &amp; b &amp; a  &amp; 
+\end{array}
+\right.
+\end{equation*}$$`
+
+--
+
+Portanto, há **&lt;span style="color:orange"&gt;6&lt;/span&gt;** ordenações.
+
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Permutações e arranjos - II
+
+O número de modos de ordenar `\(n\)` objetos **&lt;span style="color:orange"&gt;distintos&lt;/span&gt;** chama-se **Permutação Simples**. Veja que temos:
+
+- `\(n\)` opções para o 1º objeto que irá compor o conjunto.
+
+--
+
+- `\(n - 1\)` opções para o 2º objeto que irá compor o conjunto.
+
+--
+
+- `\(n - 2\)` opções para o 3º objeto que irá compor o conjunto, e assim por diante. 
+
+--
+
+Pelo princípio multiplicativo temos que: 
+
+`$$n \times (n-1) \times (n-2) \times \cdots \times 1$$`
+
+--
+
+| 📝 Definição 26            |
+|:---------------------------|
+| O número de permutações de `\(n\)` objetos **&lt;span style="color:orange"&gt;distintos&lt;/span&gt;** é dado por `\(n!\)` `\(\phantom{*************************}\)`|
+
+--
+
+&gt; * `\(n! = n (n-1) (n-2) \cdots 1\)`.
+&gt;
+&gt; * Uma notação adotada para fatorial é `\({}_n \mathrm{ P }_n\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Permutações e arranjos - III
+
+#### Exemplo 17
+
+Quantos são os anagramas da palavra "PRÁTICO"?
+
+--
+
+#### Exemplo 18
+
+Quantos são os anagramas da palavra "PRÁTICO" que começam e terminam por consoante?
+
+--
+
+#### Exemplo 19
+
+De quantos modos 5 rapazes e 5 moças podem se sentar em 5 bancos de dois lugares cada, de modo que em cada banco fiquem um rapaz e uma moça?
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Permutação de elementos nem todos distintos - I
+
+Vamos começar com um exemplo. Quantos anagramas tem a palavra "JACA"?
+
+--
+
+&lt;p align="center"&gt; AAJC AACJ JCAA CJAA AJCA ACJA JAAC CAAJ JACA CAJA AJAC ACAJ &lt;/p&gt;
+
+--
+
+Analisando caso a caso, obtemos 12 anagramas. O que aconteceria se usássemos a fórmula de permutação? 
+
+--
+
+`$${}_4 \mathrm{ P }_4 = 4! = 4 \cdot 3 \cdot 2 \cdot 1 = 24.$$`
+
+--
+
+**Observações:**
+
+ * A letra "A" aparece duas vezes e não há distinção entre esses “A”.
+
+--
+
+ * A formula da permutação faz a contagem como se tivéssemos 4 letras **&lt;span style="color:orange"&gt;distintas&lt;/span&gt;**.
+
+--
+
+ * Sabemos que na troca de um "A" por outro "A" na mesma posição não fornece uma nova composição de palavras. Então existem 2! = 2 trocas que não resultam em nada, logo o número de anagramas da palavra "JACA" é:
+
+--
+
+$$ \frac{4!}{2!} = \frac{4 \cdot 3 \cdot 2!}{2!} = 12.$$
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Permutação de elementos nem todos distintos - II
+
+| 📝 Definição 27            |
+|:---------------------------|
+| **Permutações com elementos repetidos**: Temos `\(n\)` objetos tais que `\(n_1\)` são do tipo 1, `\(n_2\)` são do tipo 2, ..., `\(n_k\)` são do tipo `\(k\)`, tal que `\(n_1 + n_2 + \cdots + n_k = n\)`. O número de permutações possíveis é dado por: `$${}_n \mathrm{ P }_n^{n_1, n_2, \cdots, n_k} = \frac{n!}{n_1! n_2! \cdots n_k!}.$$`|
+
+--
+
+#### Exemplo 20
+
+Quantos são os anagramas da palavra "MATEMÁTICA", desconsiderando o acento na letra "A"?
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Arranjo
+
+Considere novamente `\(n\)` objetos **&lt;span style="color:orange"&gt;distintos&lt;/span&gt;** do conjunto. Agora desejamos escolher  *&lt;span style="color:orange"&gt;r&lt;/span&gt;* desses objetos, `\(0 \leq r \leq n\)` e ordenar os *&lt;span style="color:orange"&gt;r&lt;/span&gt;* escolhidos.
+
+--
+
+`\(\phantom{*********}\)`
+
+| 📝 Definição 28            |
+|:---------------------------|
+| Um arranjo de `\(n\)` objetos distintos tomados *&lt;span style="color:orange"&gt;distintas&lt;/span&gt;* a *&lt;span style="color:orange"&gt;distintas&lt;/span&gt;* é dado por:  `\(\phantom{**********************}\)`
+`$${}_r \mathrm{ P }_n = n \times (n-1) \times (n-2) \times \cdots \times (n - r + 1) = \frac{n!}{(n-r)!}.$$`|
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Combinação - I
+
+* A palavra combinação refere-se a seleção de  **&lt;span style="color:orange"&gt;r&lt;/span&gt;** objetos dentre  **&lt;span style="color:orange"&gt;n&lt;/span&gt;** objetos  **&lt;span style="color:orange"&gt;distintos&lt;/span&gt;**, **&lt;span style="color:orange"&gt;sem considerarmos a ordem&lt;/span&gt;**.
+
+--
+
+* Por exemplo, considere os objetos **&lt;span style="color:orange"&gt;a&lt;/span&gt;**, **&lt;span style="color:orange"&gt;b&lt;/span&gt;**, **&lt;span style="color:orange"&gt;c&lt;/span&gt;** e **&lt;span style="color:orange"&gt;d&lt;/span&gt;**. Seja `\(r = 2\)` 
+
+--
+
+`$$\begin{equation*}
+\left\{
+    \begin{array}{lll}
+    a &amp; b &amp; \\
+    a &amp; c &amp; \\
+    a &amp; d &amp; \\
+    b &amp; c &amp; \\
+    b &amp; d &amp; \\
+    c &amp; d &amp; \\
+    \end{array}
+\right.
+\end{equation*}$$`
+
+--
+
+Como a ordem não importa, **&lt;span style="color:orange"&gt;a b&lt;/span&gt;** = **&lt;span style="color:orange"&gt;b a&lt;/span&gt;** e, portanto, contamos uma única vez! Logo, há 6 possibilidades.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Combinação - II
+
+| 📝 Definição 29            |
+|:---------------------------|
+| O número de maneiras de se escolher  *&lt;span style="color:orange"&gt;r&lt;/span&gt;* objetos dentre *&lt;span style="color:orange"&gt;n&lt;/span&gt;* objetos diferentes, sem se considerar a ordem, é chamado de combinação de `\(n\)` objetos tomados `\(r\)` a `\(r\)`, e é dado por: `$$\binom{n}{r} = \frac{n!}{r! (n - r)!}$$`|
+
+--
+
+#### Exemplo 21
+
+Há 10 estudantes em uma sala. De quantas maneiras pode o professor formar um comitê com 4 estudantes?
+
+--
+
+#### Exemplo 22
+
+Dos 10 alunos, 6 são homens e 4 são mulheres. De quantas maneiras o comitê pode possuir dois homens e duas mulheres?
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Combinação - III
+
+
+#### Exemplo 23
+
+J, S, R , D e M foram ao cinema. Eles escolheram uma fileira onde haviam exatamente 5 lugares vazios próximos um ao outro.
+
+ * De quantas maneiras os amigos podem sentar juntos?
+ 
+ * J e M querem se sentar um ao lado do outro. Quantas são as possibilidades?
+
+--
+
+#### Exemplo 24
+
+De quantas maneiras podemos escolher 6 pessoas, incluindo pelo menos duas mulheres, em um grupo de 7 homens e 4 mulheres?
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
