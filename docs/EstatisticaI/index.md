@@ -1,18 +1,18 @@
 ---
 layout: default
-title: Estat??stica I - STA13813
-author: Laborat??rio de Estat??stica e Computa????o Natural - LECON
-description: Reposit??rio exclusivo para a disciplina de Estat??stica I.
+title: Estatistica I - STA13813
+author: Laboratorio de Estatistica e Computacao Natural - LECON
+description: Repositorio exclusivo para a disciplina de Estatistica I.
 ---
 
 
 # Slides
   
 * [Programa da disciplina](https://nataly-jm.github.io/aulas/EstatisticaI/Plano_Ensino.html)
-* [Introdu????o](https://nataly-jm.github.io/aulas/EstatisticaI/Introducao.html)
-* [Estat??stica Descritiva](https://nataly-jm.github.io/aulas/EstatisticaI/Estatistica_Descritiva.html)
+* [Introducao](https://nataly-jm.github.io/aulas/EstatisticaI/Introducao.html)
+* [Estatistica Descritiva](https://nataly-jm.github.io/aulas/EstatisticaI/Estatistica_Descritiva.html)
 * [Medidas Resumo](https://nataly-jm.github.io/aulas/EstatisticaI/Medidas_resumo.html)
-* [An??lise Combinat??ria](https://nataly-jm.github.io/aulas/EstatisticaI/Analise_combinatoria.html)
+* [Analise Combinatoria](https://nataly-jm.github.io/aulas/EstatisticaI/Analise_combinatoria.html)
 
 
 
