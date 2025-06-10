@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ESTATISTICA I STA13813</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Nátaly A. Jiménez Monroy" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { equationNumbers: { autoNumber: "AMS" } },
+      });
+    </script>
+    <style>
+    .mjx-mrow a {
+      color: black;
+      pointer-events: none;
+      cursor: default;
+    }
+    </style>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# ESTATISTICA I STA13813
+]
+.subtitle[
+## Probabilidade
+]
+.author[
+### Nátaly A. Jiménez Monroy
+]
+.institute[
+### LECON/DEST - UFES
+]
+
+---
+
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/extra-awesome-xaringan/intro/index.html#1)
+[//]: &lt;&gt; (https://pkg.garrickadenbuie.com/xaringanthemer/articles/xaringanthemer.html)
+[//]: &lt;&gt; (https://www.biostatistics.dk/talks/CopenhagenRuseRs-2019/index.html#1)
+[//]: &lt;&gt; (https://rstudio-education.github.io/sharing-short-notice/#1)
+[//]: &lt;&gt; (https://www.kirenz.com/slides/xaringan-demo-slides.html#1)
+[//]: &lt;&gt; (https://github.com/yihui/xaringan/issues/26)
+[//]: &lt;&gt; (https://github.com/emitanaka/anicon)
+[//]: &lt;&gt; (https://github.com/mitchelloharawild/icons)
+[//]: &lt;&gt; (https://slides.yihui.org/2020-genentech-rmarkdown.html#1)
+[//]: &lt;&gt; (https://github.com/gadenbuie/xaringanExtra)
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight)
+
+class: animated, slideInRight
+
+
+
+
+
+&lt;style&gt; body {text-align: justify} &lt;/style&gt; &lt;!-- Justify text. --&gt;
+
+# Experimentos Aleatórios e Eventos - I
+
+
+**&lt;span style="color:orange"&gt;Experimento aleatório&lt;/span&gt;**: fenômeno cujo resultado não pode ser antecipado com absoluta certeza, mesmo que sob o máximo controle possível.
+
+
+--
+
+**Exemplos**:
+
+* choverá até o fim do dia,
+
+* a ação de uma empresa fechará em alta, 
+
+* temperatura média do mês, 
+
+* precipitação total de um mês
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+# Experimentos Aleatórios e Eventos - II
+
+
+| 📝 Definição 30            |
+|:---------------------------|
+| Dizemos que um experimento é **&lt;span style="color:orange"&gt;aleatório&lt;/span&gt;** se, mesmo quando repetido sob condições idênticas, não é possível predizer com absoluta certeza o seu resultado. Frequentemente, experimentos aleatórios são denotados pela letra `\(E\)`. |
+
+--
+
+`\(\phantom{**********}\)`
+
+| 📝 Definição 31            |
+|:---------------------------|
+| Um experimento é denominado **&lt;span style="color:orange"&gt;determinístico&lt;/span&gt;** se, quando repetido sob as mesmas condições, conduz a resultados idênticos, sempre. |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Espaço Amostral - I
+
+Uma vez identificado que um experimento realizado é aleatório, voltamos a nossa atenção aos possíveis resultados que esse experimento pode fornecer. Note que, embora não saibamos o resultado que um experimento fornecerá, devemos poder listar todos os seus possíveis resultados.
+
+--
+
+`\(\phantom{*****}\)`
+
+| 📝 Definição 32            |
+|:---------------------------|
+| O CONJUNTO de TODOS os possíveis resultados de um experimento aleatório é denominado **&lt;span style="color:orange"&gt;espaço amostral&lt;/span&gt;** do experimento. Frequentemente, o espaço amostral é denotado pela letra `\(\Omega\)`. |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Espaço Amostral - II
+
+
+#### Exemplo 25
+
+Arremessamos um dado e observamos a face voltada para cima. Nesse caso, temos que `\(\Omega = \{1, 2, 3, 4, 5, 6\}\)`.
+
+--
+
+#### Exemplo 26
+
+Verificar se um morador de um bairro sorteado ao acaso é favorável a determinado projeto de lei. Dependendo do problema, podemos atribuir `\(\Omega\)` = \{sim, não\} ou `\(\Omega^*\)` = \{sim, não, não conhece o projeto\}. 
+
+--
+
+#### Exemplo 27
+
+Avaliar a renda de uma família de determinado bairro sorteada ao acaso. Podemos atribuir `\(\Omega = \{r, \; \mbox{tal que} \; r \geq 0 \} = [0, \infty)\)`, onde os valores `\(r\)` são em reais.
+
+--
+
+#### Exemplo 28
+
+Nota de um aluno numa prova,  `\(\Omega = \{x, \; \mbox{tal que} \; 0 \leq x \leq 10 \} = [0, 10]\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Espaço Amostral - III
+
+Podemos classificar o espaço amostral de um experimento aleatório em:
+
+
+ * **Discreto**: quando podemos listar ou enumerar os seus possíveis resultados. Se o espaço amostral for numérico, há ideia de elemento sucessor, isto é, dado um elemento, sabemos dizer o elemento do conjunto que o sucede;
+
+--
+
+ *  **Contínuo**: não há a ideia de sucessor, isto é, quando os possíveis resultados não podem ser enumerados, como por exemplo em um intervalo dos números reais. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Espaço Amostral - IV
+
+#### Exemplo 25
+
+Arremessamos um dado e observamos a face voltada para cima. Nesse caso, temos que `\(\Omega = \{1, 2, 3, 4, 5, 6\}\)`. **&lt;span style="color:orange"&gt;Discreto!&lt;/span&gt;**
+
+--
+
+#### Exemplo 26
+
+Verificar se um morador de um bairro sorteado ao acaso é favorável a determinado projeto de lei. Dependendo do problema, podemos atribuir `\(\Omega\)` = \{sim, não\} ou `\(\Omega^*\)` = \{sim, não, não conhece o projeto\}. **&lt;span style="color:orange"&gt;Discreto!&lt;/span&gt;**
+
+--
+
+#### Exemplo 27
+
+Avaliar a renda de uma família de determinado bairro sorteada ao acaso. Podemos atribuir `\(\Omega = \{r, \; \mbox{tal que} \; r \geq 0 \} = [0, \infty)\)`, onde os valores `\(r\)` são em reais. **&lt;span style="color:orange"&gt;Contínuo!&lt;/span&gt;**
+
+--
+
+#### Exemplo 28
+
+Nota de um aluno numa prova,  `\(\Omega = \{x, \; \mbox{tal que} \; 0 \leq x \leq 10 \} = [0, 10]\)`. **&lt;span style="color:orange"&gt;Contínuo!&lt;/span&gt;**
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Eventos - I
+
+Em geral, quando conduzimos um experimento, não estamos interessados apenas em um resultado em particular, mas sim em uma coleção destes. Isto é, em um **&lt;span style="color:orange"&gt;subconjunto&lt;/span&gt;** do espaço amostral. 
+
+--
+
+`\(\phantom{*****}\)`
+
+| 📝 Definição 33            |
+|:---------------------------|
+| Um **&lt;span style="color:orange"&gt;evento&lt;/span&gt;** é qualquer subconjunto do espaço amostral de um experimento aleatório. `\(\phantom{************}\)`|
+|  |
+| - Frequentemente, eventos são denotados por letras iniciais do alfabeto maiúsculas: `\(A,B,C,\ldots\)`
+|  |
+| - Um evento `\(A\)` é um subconjunto do espaço amostral `\(\Omega\)`, isto é, `\(A\)` está contido em `\(\Omega\)`: `\(A\subset \Omega\)`.  |
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Eventos - II
+
+#### Exemplo 25
+
+ * Vimos que `\(\Omega = \{1, 2, 3, 4, 5, 6\}\)`.
+ 
+ * Sejam os eventos `\(A\)` = "ocorrer uma face par" e `\(B\)` = "ocorrer face &gt; 6". `$$A = \{2, 4, 6\} \;\; \mbox{e} \;\; B = \{ \; \} = \emptyset \; \mbox{(conjunto vazio)}.$$`    
+ 
+ * Note que `\(A\subset \Omega\)` e `\(B\subset \Omega\)`.
+
+--
+
+#### Exemplo 26
+
+ * Vimos que  `\(\Omega^*\)` = \{sim, não, não conhece o projeto\}. 
+ 
+ * Sejam o evento C = “a pessoa sorteada ter opinião formada sobre a lei”.  `$$C = \{\mbox{sim, não}\}\subset \Omega^*$$`    
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Eventos - III
+
+#### Exemplo 27
+
+ * Vimos que `\(\Omega = \{x, \; \mbox{tal que} \; 0 \leq x \leq 10 \} = [0, 10]\)`. 
+ 
+ * Sejam o evento D = “aluno é aprovado com nota maior ou igual a 7". `$$D  = [7, 10] \subset \Omega$$`    
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Operações com Eventos - I
+
+Um evento é essencialmente um conjunto, de forma que as relações e resultados da teoria elementar dos conjuntos podem ser usados para o estudo dos eventos. 
+
+--
+
+| 📝 Definição 34            |
+|:---------------------------|
+| Sejam `\(A,B\)` eventos de `\(\Omega\)`, dizemos que `\(A\)` está contido em `\(B\)` se todos elementos de `\(A\)` pertencem a `\(B\)`, ou seja, `$$\omega\in A\Rightarrow\omega\in B.$$` Neste caso, escrevemos `\(A\subset B\)`. Alternativamente, podemos dizer que o evento `\(B\)` contém `\(A\)` `\((B\supset A)\)`.|
+
+--
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/A_in_B.png" alt=" " width="35%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Operações com Eventos - II
+
+Sejam `\(A,B\subset\Omega\)` dois eventos. Podemos criar novos eventos a partir de `\(A\)` e `\(B\)` através de operações de conjuntos. Operações básicas:
+
+- A **&lt;span style="color:orange"&gt;intersecção&lt;/span&gt;** de `\(A\)` e `\(B\)` é denotada por `\(A\cap B\)` e representa a ocorrência **&lt;span style="color:orange"&gt;simultânea&lt;/span&gt;** dos eventos `\(A\)` **&lt;span style="color:red"&gt;e&lt;/span&gt;** `\(B\)`;
+
+--
+
+- A **&lt;span style="color:orange"&gt;união&lt;/span&gt;** de `\(A\)` e `\(B\)` é denotada por `\(A\cup B\)` e representa a ocorrência dos eventos `\(A\)` **&lt;span style="color:red"&gt;ou&lt;/span&gt;** `\(B\)`, **&lt;span style="color:red"&gt;ou&lt;/span&gt;** de ambos;
+
+--
+
+- O **&lt;span style="color:orange"&gt;complementar&lt;/span&gt;** de `\(A\)` é denotado por `\(A^c\)` e representa a **&lt;span style="color:red"&gt;não&lt;/span&gt;** ocorrência do evento `\(A\)`.
+
+--
+
+Formalmente, temos que:
+
+ * `\(A\cap B=\{\omega\in\Omega:\omega\in A \hbox{ e } \omega\in B, \hbox{simultaneamente}\}\)`;
+
+--
+
+ * `\(A\cup B=\{\omega\in\Omega:\omega\in A, \hbox{ ou } \omega\in B, \hbox{ ou } \omega\in A\cap B\}\)`;
+
+--
+
+ * `\(A^c=\{\omega\in\Omega:\omega\not\in A\}\)`.
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Operações com Eventos - III
+
+| 📝 Definição 35            |
+|:---------------------------|
+| Dois eventos `\(A,B\subset\Omega\)` são **&lt;span style="color:orange"&gt;disjuntos&lt;/span&gt;** ou **&lt;span style="color:orange"&gt;mutuamente exclusivos&lt;/span&gt;** se, e somente se, eles não puderem ocorrer simultaneamente, ou seja, `\(A\cap B=\emptyset\)`. |
+
+--
+
+Na figura a seguir, a área sombreada no Diagrama de Venn representa o evento resultante da operação entre dois eventos `\(A\)` e `\(B\)`, ambos contidos em `\(\Omega\)`. 
+
+--
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/Operacoes_conjuntos.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Operações com Eventos - IV
+
+
+#### Exemplo 29
+
+Arremessamos um dado e observamos a face voltada para cima. Vimos que `\(\Omega = \{1, 2, 3, 4, 5, 6\}\)`. Sejam os eventos `\(A\)` = "ocorrer uma face par", `\(B\)` = "ocorrer face &gt; 4" e `\(C\)` = "ocorrer uma face ímpar". Obtenha:
+
+- `\(A\cap B\)`, `\(A\cup B\)`. 
+- `\(A^C\)`, `\(A\cap C\)`.
+
+--
+
+**Solução**:
+$$ A = \{2, 4, 6\}, \;\;\ B = \{5, 6\} \;\; \mbox{e} \;\; C = \{1, 3, 5\}$$
+- `\(A\cap B  = \{2, 4, 6\} \cap \{5, 6\} = \{ 6 \}\)`.
+
+- `\(A\cup B  = \{2, 4, 6\} \cup \{5, 6\} = \{2, 4, 5, 6 \}\)`.
+
+- `\(A^C =  \{2, 4, 6\}^C =  \{1, 3, 5\}\)`.]
+
+- `\(A\cap C = \{2, 4, 6\} \cap  \{1, 3, 5\} = \emptyset\)`. 
+
+
+---
+class: animated, hide-logo, bounceInDown
+## Política de proteção aos direitos autorais
+
+&gt; &lt;span style="color:grey"&gt;O conteúdo disponível consiste em material protegido pela legislação brasileira, sendo certo que, por ser
+o detentor dos direitos sobre o conteúdo disponível na plataforma, o **LECON** e o **NEAEST** detém direito
+exclusivo de usar, fruir e dispor de sua obra, conforme Artigo 5&lt;sup&gt;o&lt;/sup&gt;, inciso XXVII, da Constituição Federal
+e os Artigos 7&lt;sup&gt;o&lt;/sup&gt; e 28&lt;sup&gt;o&lt;/sup&gt;, da Lei 9.610/98.
+A divulgação e/ou veiculação do conteúdo em sites diferentes à plataforma e sem a devida autorização do
+**LECON** e o **NEAEST**, pode configurar violação de direito autoral, nos termos da Lei 9.610/98, inclusive podendo
+caracterizar conduta criminosa, conforme Artigo 184&lt;sup&gt;o&lt;/sup&gt;, §1&lt;sup&gt;o&lt;/sup&gt; a 3&lt;sup&gt;o&lt;/sup&gt;, do Código Penal.
+É considerada como contrafação a reprodução não autorizada, integral ou parcial, de todo e qualquer
+conteúdo disponível na plataforma.&lt;/span&gt;
+
+.pull-left[
+&lt;img src="images/logo_lecon.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="images/logo_neaest.png" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+.center[
+[https://lecon.ufes.br](https://lecon.ufes.br/)
+]
+
+&lt;font size="2"&gt;&lt;span style="color:grey"&gt;Material elaborado pela equipe LECON/NEAEST: 
+Alessandro J. Q. Sarnaglia, Bartolomeu Zamprogno, Fabio A. Fajardo, Luciana G. de Godoi 
+e Nátaly A. Jiménez.&lt;/span&gt;&lt;/font&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(images/logo_neaest.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 150px;
+  height: 168px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
