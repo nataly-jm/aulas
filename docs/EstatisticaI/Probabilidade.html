@@ -794,7 +794,7 @@ class: animated, fadeIn
 
 ## Independência - IV
 
-#### Exemplo 35 - I
+#### Exemplo 35
 
 Em uma empresa de informática, `\(2\%\)` dos equipamentos produzidos têm problemas elétricos, `\(0.8\%\)` têm defeitos na carcaça e `\(0.4\%\)` têm defeitos na carcaça e elétricos, simultaneamente. Os eventos problemas elétricos e defeitos na carcaça são independentes?
 
@@ -821,7 +821,9 @@ class: animated, fadeIn
 
 Antes de apresentarmos formalmente o teorema da probabilidades total, vejamos um problema cuja a solução nos ajudará a entender intuitivamente o teorema.  
 
-**Problema**: Um hospital recebe `\(20\%\)` de todo o insumo que utiliza da distribuidora `\(D_1\)`, `\(30\%\)` da distribuidora `\(D_2\)` e `\(50\%\)` da distribuidora `\(D_3\)`. Admita que as 3 distribuidoras são distintas e não têm relação umas com as outras. Em um fiscalização da prefeitura, observou-se que `\(20\%\)` dos insumos da distribuidora `\(D_1\)` estavam adulterados, enquanto que para `\(D_2\)` e `\(D_3\)` essa proporção era de `\(5\%\)` e `\(2\%\)`, respectivamente. Se selecionar ao acaso um insumo, qual a probabilidade de ele estar adulterado? 
+#### Exemplo 36 - I
+
+Um hospital recebe `\(20\%\)` de todo o insumo que utiliza da distribuidora `\(D_1\)`, `\(30\%\)` da distribuidora `\(D_2\)` e `\(50\%\)` da distribuidora `\(D_3\)`. Admita que as 3 distribuidoras são distintas e não têm relação umas com as outras. Em um fiscalização da prefeitura, observou-se que `\(20\%\)` dos insumos da distribuidora `\(D_1\)` estavam adulterados, enquanto que para `\(D_2\)` e `\(D_3\)` essa proporção era de `\(5\%\)` e `\(2\%\)`, respectivamente. Se selecionar ao acaso um insumo, qual a probabilidade de ele estar adulterado? 
 
 --
 
@@ -922,7 +924,7 @@ Então
 
 ---
 [//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
-class: animated, fadeIn
+class: animated
 
 ## Teorema da Probabilidade Total - IV
 
@@ -930,6 +932,149 @@ class: animated, fadeIn
 &lt;img src="images/Diagrama_arvore_prob_total.png" alt=" " width="35%" /&gt;
 &lt;p class="caption"&gt; &lt;/p&gt;
 &lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Teorema da Probabilidade Total - V
+
+| 📝 Definição 40            |
+|:---------------------------|
+| Seja `\(A\)` um evento não-vazio. Uma família de eventos `\(A_1, A_2, \ldots, A_k\)`, todos não-vazios, é uma **&lt;span style="color:orange"&gt;partição&lt;/span&gt;** de `\(A\)` se, e somente se, satisfaz as seguintes condições: |
+|                            |
+|  * `\(A_1 \cup A_2 \cup \ldots \cup A_k= A\)` (eventos exaustivos) e |
+|                            |
+|  * `\(A_1 \cap A_j = \emptyset, \forall \; i \neq j\)` (eventos mutuamente exclusivos).   |
+
+--
+
+`\(\phantom{********}\)`
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="images/particao_exemplo.png" alt=" " width="40%" /&gt;
+&lt;p class="caption"&gt; &lt;/p&gt;
+&lt;/div&gt;
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Teorema da Probabilidade Total - VI
+
+| 📝 Definição 41            |
+|:---------------------------|
+| **&lt;span style="color:orange"&gt;Teorema da Probabilidade Total&lt;/span&gt;**: Considere o espaço amostral `\(\Omega\)` particionado em K eventos `\(D_1, D_2, \ldots, D_k\)` e que `\(P(D_i) &gt; 0\)`, `\(\forall i = 1, \ldots, k\)`. Então, para qualquer evento A referente ao espaço amostral `\(\Omega\)`, temos que: $$ P(A) = \sum_{i = 1}^{k} P(A \mid D_i) P(D_i).$$   |
+
+--
+
+&gt;**Idéia da demonstração**: Considere `\(A = (A \cap D_1) \cup (A \cap D_2) \cup \ldots \cup (A \cap D_k)\)`}, observe que os eventos `\((A \cup D_i)\)`, `\(i = 1, \ldots, k\)` são disjuntos e aplique a regra do produto, de maneira similar ao procedimento realizado para resolver o exemplo anterior. 
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Teorema da Probabilidade Total - VII
+
+#### Exemplo 37
+
+Num total de `\(25\)` peças, `\(5\)` delas sofreram excessivo encolhimento. Se duas peças são selecionadas ao acaso, qual será a probabilidade de que a segunda tenha sofrido excessivo encolhimento?
+
+--
+
+**Solução:**
+
+Seja `\(E_i=\)` "i-ésima peça ter sofrido excessivo encolhimento", `\(i=1,2\)`. Note que
+$$ P(E_1)=5/25, P(E_1^c)=20/25, P(E_2|E_1)=4/24 \hbox{ e } P(E_2|E_1^c)=5/24. $$
+
+--
+
+Além disso, `\(E_1,E_1^c\)` formam uma partição de `\(\Omega\)`, portanto o teorema anterior pode ser utilizado para encontrar `\(P(E_2)\)` e fornece
+
+--
+
+
+`$$\begin{align*}
+P(E_2)&amp;=P(E_2|E_1)P(E_1)+P(E_2|E_1^c)P(E_1^c)=\frac{5}{25}\frac{4}{24}+\frac{20}{25}\frac{5}{24}\\
+&amp;=\frac{1}{30}+\frac{1}{6}=\frac{1}{5}.
+\end{align*}$$`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Teorema de Bayes - I
+
+Em muitas situações, precisamos calcular a probabilidade condicional de um evento, por exemplo, `\(P(A \mid B)\)`, quando conhecemos a `\(P(B \mid A)\)`.
+
+--
+
+#### Exemplo 36 - II
+
+Sabendo que o insumo escolhido é adulterado, qual a probabilidade de que tenha sido fornecido pela distribuidora `\(D_1\)`?
+
+--
+
+Queremos obter a `\(P(D_1 \mid A)\)`. 
+
+--
+
+Vimos que
+
+`$$P(A \mid D_1) = 0.2 \qquad  P(A \mid D_2) = 0.05 \qquad  P(A \mid D_3) = 0.02$$`
+
+`$$P(D_1) = 0.2 \qquad P(D_2) = 0.3 \qquad  P(D_3) = 0.5$$`
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Teorema de Bayes - II
+
+#### Exemplo 36 - III
+
+Da teoria de probabilidade condicional, sabemos que: 
+
+`$$P(D_1 \mid A) =  \frac{P(D_1 \cap A)}{P(A)}.$$` 
+
+--
+
+Por outro lado, pela regra do produto de probabilidades, temos que
+
+$$ P(D_1 \cap A) = P(A \mid D_1) P(D_1) = 0.2 \times 0.2 = 0.04$$
+
+--
+
+e, pelo teorema da probabilidade total, a `\(P(A) = 0.065\)`, pois, como visto, 
+
+`$$P(A) = P(A \mid D_1) P(D_1) + P (A \mid D_2) P(D_2) + P(A \mid D_3) P(D_3).$$`
+
+--
+
+Sendo assim, 
+
+`$$P(D_1 \mid A) =  \frac{P(D_1 \cap A)}{P(A)} = \frac{0.04}{0.065} = 0.615.$$`
+
+
+---
+[//]: &lt;&gt; (class: center, middle, animated, slideInRight/ class: animated slideInRight fadeOutLeft)
+class: animated, fadeIn
+
+## Teorema de Bayes - III
+
+| 📝 Definição 42            |
+|:---------------------------|
+| **&lt;span style="color:orange"&gt;Teorema de Bayes&lt;/span&gt;**: Considere o espaço amostral `\(\Omega\)` particionado em k eventos `\(D_1, D_2, \ldots, D_k\)` e que `\(P(D_i) &gt;0\)`, `\(\forall i = 1, \ldots, k\)`, seja conhecida. Suponha ainda que para um evento A referente ao espaço amostral `\(\Omega\)` se conheçam as probabilidades `\(P(A \mid D_i)\)`, `\(\forall i = 1, \ldots, k\)`. Então, `$$P(D_i \mid A) = \frac{P(A \mid D_i)P(D_i)}{\sum_{i = 1}^{k} P(A \mid D_i) P(D_i)}, i = 1, \ldots, k.$$`  |
+
+--
+
+`\(\phantom{********}\)`
+
+&gt;A demonstração desse teorema é similar aos passos executados para resolver `\(P(D_1 \mid A)\)` no problema dos insumos do hospital e itens adulterados e, portanto, será deixado como exercício.   
 
 
 ---
