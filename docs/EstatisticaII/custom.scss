@@ -1,0 +1,78 @@
+/*-- scss:defaults --*/
+/*-- fonts --*/
+$presentation-heading-font: 'TTchocolates-reg', serif;
+$mainFont: 'TTchocolates-reg', serif;
+$font-family-monospace: 'TTchocolates-reg';
+
+/*-- scss:rules --*/
+
+#title-slide .subtitle {
+  text-align: center;
+  font-family: TTchocolates-reg;
+}
+
+#title-slide .title{
+  text-align: center;
+  font-family: TTchocolates-reg;
+}
+
+*{
+  font-family: TTchocolates-reg;
+}
+
+.reveal .slide *{
+  text-align: justify;
+  font-family: TTchocolates-reg;
+}
+
+.quarto-figure {
+    margin-bottom: .1em;
+}
+
+.quarto-layout-panel>figure>figcaption, .quarto-layout-panel>.panel-caption {
+    margin-top: 0;
+}
+
+.reveal img {
+    margin: 0;
+}
+
+figure>figcaption {
+    margin-top: 0;
+}
+
+.reveal .slide ul li, .reveal .slide ol li {
+    margin-top: 0.0em !important;
+    margin-bottom: 0.2em;
+}
+
+.reveal .slide table th {
+    padding: .2em .5em .2em .5em;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+}
+
+.reveal .slide table td {
+    padding: .2em .5em .2em .5em;
+    border-bottom: 0px none;
+}
+
+.reveal .slide table tbody tr:last-child {
+  border-bottom: 1px solid;
+}
+
+.reveal .slide .table-with-total-row tbody td {
+  border-bottom: 0px none;
+}
+
+.reveal .slide .table-with-total-row tbody tr:last-child {
+  border-top: 1px solid;
+}
+
+.reveal .slide .gt_column_spanner {
+    text-align: center;
+}
+
+.reveal .panel-tabset [role=tab] {
+    padding: 0.1em .4em;
+}
