@@ -1,22 +1,15 @@
-/*-- scss:defaults --*/
 /*-- fonts --*/
 $presentation-heading-font: 'TTchocolates-reg', serif;
 $mainFont: 'TTchocolates-reg', serif;
 $font-family-monospace: 'TTchocolates-reg';
 
-/*-- scss:rules --*/
-
 #title-slide .subtitle {
   text-align: center;
   font-family: TTchocolates-reg;
-}
+  }
 
 #title-slide .title{
   text-align: center;
-  font-family: TTchocolates-reg;
-}
-
-*{
   font-family: TTchocolates-reg;
 }
 
@@ -24,6 +17,8 @@ $font-family-monospace: 'TTchocolates-reg';
   text-align: justify;
   font-family: TTchocolates-reg;
 }
+
+/*-- scss:defaults --*/
 
 .quarto-figure {
     margin-bottom: .1em;
@@ -43,7 +38,11 @@ figure>figcaption {
 
 .reveal .slide ul li, .reveal .slide ol li {
     margin-top: 0.0em !important;
-    margin-bottom: 0.2em;
+    margin-bottom: 0.2em !important;
+}
+
+.reveal .slide ul, .reveal .slide ol {
+    margin-bottom: 0.2em !important;
 }
 
 .reveal .slide table th {
@@ -76,3 +75,18 @@ figure>figcaption {
 .reveal .panel-tabset [role=tab] {
     padding: 0.1em .4em;
 }
+
+.reveal .slide .v-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reveal div.callout-caution.callout-style-default .callout-title {
+    background-color: #fffb8c;
+}
+
+.reveal div.callout-caution {
+    border-left-color: #d3d100 !important;
+}
+
