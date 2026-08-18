@@ -10,10 +10,7 @@ description: Repositorio exclusivo para a disciplina de Estatistica II.
   
 * [Programa da disciplina](https://nataly-jm.github.io/aulas/EstatisticaII/Plano_Ensino.html)
 * [Amostragem](https://nataly-jm.github.io/aulas/EstatisticaII/Amostragem.html)
-* [Estimação](https://nataly-jm.github.io/aulas/EstatisticaII/Estimacao.html)
-* [Testes de Hipóteses](https://nataly-jm.github.io/aulas/EstatisticaII/Testes_hipoteses.html)
-* [Analise de Variância](https://nataly-jm.github.io/aulas/EstatisticaII/Analise_variancia.html)
-* [Probabilidade](https://nataly-jm.github.io/aulas/EstatisticaI/Probabilidade.html)
+
 
 
 
