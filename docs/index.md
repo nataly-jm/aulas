@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Material de aula
-author: Laboratório de Estatística e Computação Natural - LECON -
-description: Repositório exclusivo para as disciplinas do curso de Estatística
+author: Laboratório de Estatística e Computação Natural - LECON
+description: Repositório exclusivo para as disciplinas do curso de Estatística e Ciência de Dados
 ---
 
 # [Planejamento de Experimentos](https://nataly-jm.github.io/aulas/planejamento){:target="_blank"}
@@ -12,6 +12,8 @@ description: Repositório exclusivo para as disciplinas do curso de Estatística
 # [Modelos Lineares Generalizados](https://nataly-jm.github.io/aulas/MLG){:target="_blank"}
 
 # [Estatística I](https://nataly-jm.github.io/aulas/EstatisticaI){:target="_blank"}
+
+# [Estatística II](https://nataly-jm.github.io/aulas/EstatisticaII){:target="_blank"}
 
 
 
