@@ -8,7 +8,7 @@ description: Repositorio exclusivo para a disciplina de Estatistica II.
 
 # Slides
   
-* [Programa da disciplina](https://nataly-jm.github.io/aulas/EstatisticaII/Plano_Ensino.html)
+* [Plano de Ensino](https://nataly-jm.github.io/aulas/EstatisticaII/Plano_Ensino.html)
 * [Amostragem](https://nataly-jm.github.io/aulas/EstatisticaII/Amostragem.html)
 
 
